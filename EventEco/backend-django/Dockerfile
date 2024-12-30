@@ -11,13 +11,13 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copiar el archivo de requerimientos al contenedor
-# COPY requirements.txt ./
+COPY requirements.txt ./
 
 # Instalar dependencias de Python
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar el código del proyecto al contenedor
-COPY . .
+COPY . /app
 
 # Exponer el puerto 8000
 EXPOSE 8010
