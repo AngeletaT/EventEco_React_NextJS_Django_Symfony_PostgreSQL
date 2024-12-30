@@ -16,40 +16,29 @@ services:
 
   react:
     build:
-      context: ./frontend-react
-    container_name: react-container
+      context: ./frontend-react-ts
+      dockerfile: Dockerfile
+    container_name: react-ts-container
     ports:
       - "8096:8096"
     volumes:
-      - ./frontend-react:/app
+      - ./frontend-react-ts:/app
       - /app/node_modules
-      - /app/public
-    depends_on:
-      - symfony
-      - django
-      - postgres
-      - redis
     environment:
-      PORT: 8096
+      NODE_ENV: development
+    command: npm run dev
 
   django:
     build:
       context: ./backend-django
       dockerfile: Dockerfile
-    container_name: django-container
-    restart: always
+    container_name: django_container
     ports:
       - "8010:8010"
     volumes:
-      - .:/app
+      - ./backend-django:/app
     environment:
-      DATABASE_NAME: EventEco
-      DATABASE_USER: postgres
-      DATABASE_PASSWORD: 12345678
-      DATABASE_HOST: postgres
-      DATABASE_PORT: 5432
-    depends_on:
-      - postgres
+      DEBUG: "true"
 
   resend:
     build:
@@ -164,7 +153,7 @@ services:
       POSTGRES_DB: EventEco
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./database/EventEco.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database/EventEco.sql:/docker-entrypoint-initdb.d/1-init.sql
 
 volumes:
   postgres_data:
