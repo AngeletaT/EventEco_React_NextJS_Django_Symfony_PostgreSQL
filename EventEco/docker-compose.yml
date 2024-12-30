@@ -1,0 +1,171 @@
+services:
+  nextjs:
+    build:
+      context: ./full-stack-nextjs
+      dockerfile: Dockerfile
+    container_name: nextjs_container
+    ports:
+      - "3015:3015"
+    volumes:
+      - ./full-stack-nextjs:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+    command: >
+      npm run dev
+
+  react:
+    build:
+      context: ./frontend-react
+    container_name: react-container
+    ports:
+      - "8096:8096"
+    volumes:
+      - ./frontend-react:/app
+      - /app/node_modules
+      - /app/public
+    depends_on:
+      - symfony
+      - django
+      - postgres
+      - redis
+    environment:
+      PORT: 8096
+
+  django:
+    build:
+      context: ./backend-django
+      dockerfile: Dockerfile
+    container_name: django-container
+    restart: always
+    ports:
+      - "8010:8010"
+    volumes:
+      - .:/app
+    environment:
+      DATABASE_NAME: EventEco
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: 12345678
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+    depends_on:
+      - postgres
+
+  resend:
+    build:
+      context: ./resend-express
+    container_name: resend-container
+    ports:
+      - "3010:3010"
+    volumes:
+      - ./resend-express:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      RESEND_API_KEY: ${RESEND_API_KEY}
+    command: >
+      sh -c "npm install && node app/server.js"
+
+  ultramsg:
+    build:
+      context: ./ultramsg-fastify
+    container_name: ultramsg-container
+    ports:
+      - "3011:3011"
+    volumes:
+      - ./ultramsg-fastify:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      ULTRAMSG_INSTANCE_ID: ${ULTRAMSG_INSTANCE_ID}
+      ULTRAMSG_TOKEN: ${ULTRAMSG_TOKEN}
+      REDIS_HOST: redis-container
+      REDIS_PORT: 6380
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    command: >
+      sh -c "npm install && npm run dev"
+
+  redis:
+    image: redis:latest
+    container_name: redis-container
+    ports:
+      - "6380:6380"
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    command: [ "redis-server", "--requirepass", "${REDIS_PASSWORD}" ]
+    volumes:
+      - redis_data:/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-container
+    restart: always
+    ports:
+      - "8094:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres
+
+  nginx-proxy:
+    image: nginx:1.27.3
+    container_name: nginx-proxy
+    ports:
+      - "8099:80"
+    volumes:
+      - ./nginx-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - symfony
+      - django
+  
+  stripe:
+    build:
+      context: ./stripe-payment
+    container_name: stripe-container
+    ports:
+      - "3012:3012"
+    volumes:
+      - ./stripe-payment:/app
+      - /app/node_modules
+    environment:
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+    command: >
+      sh -c "npm install && node server.js"
+
+  symfony:
+    build:
+      context: ./backend-symfony
+      dockerfile: Dockerfile
+    container_name: symfony-container
+    restart: always
+    ports:
+      - "8091:80"
+    volumes:
+      - ./backend-symfony:/var/www/html
+      - ./wait-for-it.sh:/usr/local/bin/wait-for-it.sh
+    environment:
+      DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/EventEco?serverVersion=16&charset=utf8"
+    depends_on:
+      - postgres
+    command: >
+      bash -c "/usr/local/bin/wait-for-it.sh postgres 5432 postgres 12345678 EventEco apache2-foreground"
+      
+  postgres:
+    image: postgres:17
+    container_name: postgres-container
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: EventEco
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/EventEco.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
+  redis_data:
