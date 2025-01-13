@@ -137,7 +137,7 @@ services:
     depends_on:
       - postgres
     command: >
-      bash -c "/usr/local/bin/wait-for-it.sh postgres 5432 postgres 12345678 EventEco apache2-foreground"
+      sh -c "/usr/local/bin/wait-for-it.sh postgres 5432 postgres 12345678 EventEco apache2-foreground"
     
   springboot:
     build:
