@@ -91,7 +91,7 @@ services:
     ports:
       - "8094:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     depends_on:
       - postgres
@@ -138,7 +138,24 @@ services:
       - postgres
     command: >
       bash -c "/usr/local/bin/wait-for-it.sh postgres 5432 postgres 12345678 EventEco apache2-foreground"
-      
+    
+  springboot:
+    build:
+      context: ./backend-springboot
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend-springboot/src:/app/src
+      - ./backend-springboot/build:/app/build
+    container_name: springboot-container
+    ports:
+      - "9090:9090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/EventEco
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 12345678
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:17
     container_name: postgres-container
