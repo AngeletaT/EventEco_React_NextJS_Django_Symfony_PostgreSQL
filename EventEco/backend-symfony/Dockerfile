@@ -12,31 +12,59 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install intl pdo_pgsql \
     && docker-php-ext-enable pdo_pgsql
 
+# Crear un usuario no root
+
+RUN useradd -ms /bin/bash appuser
+
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 COPY . .
 
-#Convertir terminaciones de línea a formato Unix en todos los archivos del proyecto
+# Cambiar el propietario de los archivos al usuario no root
+
+RUN chown -R appuser:appuser /app
+
+# Convertir terminaciones de línea a formato Unix en todos los archivos del proyecto
+
 RUN find . -type f -exec dos2unix {} +
 
+# Cambiar al usuario no root
+
+USER appuser
+
 RUN composer install --no-dev --optimize-autoloader
+
+# Volver al usuario root para completar la configuración de la etapa de construcción
+
+USER root
 RUN php -m | grep pdo_pgsql
 
-#Etapa 2: Imagen final
+# Etapa 2: Imagen final
+
 FROM php:8.2-apache
+
+# Instalar dependencias para PostgreSQL y dos2unix
 
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     postgresql-client \
-    dos2unix \ 
-    # Instala dos2unix en la etapa final también
+    dos2unix \
     && docker-php-ext-install pdo_pgsql \
     && docker-php-ext-enable pdo_pgsql
 
+# Crear un usuario no root en la etapa final
+
+RUN useradd -ms /bin/bash appuser
+
 COPY --from=builder /app /var/www/html
 
-#Convertir terminaciones de línea a formato Unix en los scripts copiados
+# Cambiar el propietario de los archivos al usuario no root
+
+RUN chown -R appuser:appuser /var/www/html
+
+# Convertir terminaciones de línea a formato Unix en los scripts copiados
+
 RUN find /var/www/html -type f -exec dos2unix {} +
 
 RUN a2enmod rewrite
@@ -52,8 +80,9 @@ RUN printf '<VirtualHost *:80>\n\
 RUN a2ensite 000-default.conf
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 755 /var/www/html
+
+USER appuser
 
 EXPOSE 8091
 
