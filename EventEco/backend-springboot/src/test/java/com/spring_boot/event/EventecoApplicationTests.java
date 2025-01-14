@@ -1,4 +1,4 @@
-package com.spring_boot.eventeco;
+package com.spring_boot.event;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

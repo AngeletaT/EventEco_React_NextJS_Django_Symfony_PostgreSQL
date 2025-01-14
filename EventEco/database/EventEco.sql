@@ -2,8 +2,8 @@
 DO
 $do$
 BEGIN
-   IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'EventEco') THEN
-      CREATE DATABASE "EventEco";
+   IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'Event') THEN
+      CREATE DATABASE "Event";
    END IF;
 END
 $do$;
@@ -19,4 +19,4 @@ END
 $do$;
 
 -- Asignar permisos al usuario para la base de datos
-GRANT ALL PRIVILEGES ON DATABASE "EventEco" TO postgres;
+GRANT ALL PRIVILEGES ON DATABASE "Event" TO postgres;

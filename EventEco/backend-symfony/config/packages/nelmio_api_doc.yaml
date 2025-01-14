@@ -2,7 +2,7 @@ nelmio_api_doc:
     documentation:
         info:
             title: 'API Documentation'
-            description: 'This is the API documentation for the EventEco project.'
+            description: 'This is the API documentation for the Event project.'
             version: 1.0.0
     areas: # to filter documented areas
         path_patterns:

@@ -1,4 +1,5 @@
-// package com.spring_boot.eventeco.testing.integration;
+package com.spring_boot.event.testing.integration;
+// package com.spring_boot.event.testing.integration;
 
 // import org.junit.jupiter.api.Test;
 // import org.springframework.beans.factory.annotation.Autowired;

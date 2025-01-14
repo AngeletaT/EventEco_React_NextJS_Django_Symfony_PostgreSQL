@@ -1,4 +1,4 @@
-package com.spring_boot.eventeco.testing.functional;
+package com.spring_boot.event.testing.functional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
