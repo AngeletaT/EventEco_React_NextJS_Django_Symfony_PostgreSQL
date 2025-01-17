@@ -1,4 +1,3 @@
-package com.spring_boot.event.testing.integration;
 // package com.spring_boot.event.testing.integration;
 
 // import org.junit.jupiter.api.Test;
