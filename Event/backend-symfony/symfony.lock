@@ -26,6 +26,9 @@
             "migrations/.gitignore"
         ]
     },
+    "intentsolutions/symfony-lombok-bumbu": {
+        "version": "dev-main"
+    },
     "nelmio/api-doc-bundle": {
         "version": "4.33",
         "recipe": {
@@ -145,6 +148,18 @@
         "files": [
             "config/packages/twig.yaml",
             "templates/base.html.twig"
+        ]
+    },
+    "symfony/validator": {
+        "version": "6.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "c32cfd98f714894c4f128bb99aa2530c1227603c"
+        },
+        "files": [
+            "config/packages/validator.yaml"
         ]
     },
     "twig/extra-bundle": {
