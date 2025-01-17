@@ -1,25 +1,23 @@
 DO
 $do$
 BEGIN
-   IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'Event') THEN
-      CREATE DATABASE "Event";
-   END IF;
+    IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'Event') THEN
+        CREATE DATABASE "Event";
+    END IF;
 END
 $do$;
 
 DO
 $do$
 BEGIN
-   IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'postgres') THEN
-      CREATE ROLE postgres WITH LOGIN PASSWORD '12345678';
-   END IF;
+    IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'postgres') THEN
+        CREATE ROLE postgres WITH LOGIN PASSWORD '12345678';
+    END IF;
 END
 $do$;
 
 GRANT ALL PRIVILEGES ON DATABASE "Event" TO postgres;
-
-\c Event
-
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 DO
 $do$
 BEGIN
@@ -300,7 +298,8 @@ DO
 $do$
 BEGIN
 CREATE TYPE orderStatusEnum AS ENUM ('pendingNomination', 'completed', 'cancelled', 'inClaim', 'refunded');
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -316,7 +315,8 @@ CREATE TABLE E_Order (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -332,13 +332,15 @@ CREATE TABLE P_Order (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
 BEGIN
 CREATE TYPE orderLineStatusEnum AS ENUM ('active', 'inClaim', 'refunded');
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -346,7 +348,7 @@ BEGIN
 CREATE TABLE E_OrderLine (
     idOrderLine SERIAL PRIMARY KEY,
     idOrder INT,
-    idTicket INT,
+    idTicketInfo INT,
     quantity INT NOT NULL,
     unitPrice DECIMAL(10, 2) NOT NULL,
     subtotal DECIMAL(10, 2) NOT NULL,
@@ -354,7 +356,8 @@ CREATE TABLE E_OrderLine (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -362,7 +365,7 @@ BEGIN
 CREATE TABLE P_OrderLine (
     idOrderLine SERIAL PRIMARY KEY,
     idOrder INT,
-    idTicket INT,
+    idTicketInfo INT,
     quantity INT NOT NULL,
     unitPrice DECIMAL(10, 2) NOT NULL,
     subtotal DECIMAL(10, 2) NOT NULL,
@@ -370,13 +373,15 @@ CREATE TABLE P_OrderLine (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
 BEGIN
 CREATE TYPE ticketUnitStatusEnum AS ENUM ('active', 'used', 'inClaim', 'refunded');
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -387,11 +392,12 @@ CREATE TABLE E_TicketUnit (
     code VARCHAR(50) UNIQUE NOT NULL,
     nameAssistant VARCHAR(100),
     dniAssistant VARCHAR(20),
-    status ticketUnitStatusEnum DEFAULT 'activa',
+    status ticketUnitStatusEnum DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -402,11 +408,12 @@ CREATE TABLE P_TicketUnit (
     code VARCHAR(50) UNIQUE NOT NULL,
     nameAssistant VARCHAR(100),
     dniAssistant VARCHAR(20),
-    status ticketUnitStatusEnum DEFAULT 'activa',
+    status ticketUnitStatusEnum DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -419,7 +426,8 @@ CREATE TABLE E_Complements (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -432,13 +440,15 @@ CREATE TABLE P_Complements (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
 BEGIN
 CREATE TYPE ticketComplementsStatusEnum AS ENUM ('pending', 'used', 'inClaim', 'refunded');
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -453,7 +463,8 @@ CREATE TABLE E_TicketComplements (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -468,13 +479,15 @@ CREATE TABLE P_TicketComplements (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
 BEGIN
 CREATE TYPE notificationStatus AS ENUM ('pending', 'send', 'failed', 'read');
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -489,7 +502,8 @@ CREATE TABLE E_Notificacions (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -505,13 +519,15 @@ CREATE TABLE P_Notificacions (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
 BEGIN
 CREATE TYPE incidentsStatus AS ENUM ('pending', 'send', 'failed', 'read');
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -527,7 +543,8 @@ CREATE TABLE E_Incidents (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -543,66 +560,126 @@ CREATE TABLE P_Incidents (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
 BEGIN
 CREATE TYPE petGender AS ENUM ('male', 'female');
-END $do$;
+END
+$do$;
 
 DO
 $do$
 BEGIN
 CREATE TYPE petStatus AS ENUM ('available', 'sponsored');
-END $do$;
+END
+$do$;
 
 DO
 $do$
 BEGIN
 CREATE TABLE P_Pets (
-    petId SERIAL PRIMARY KEY,
-    petUuid UUID DEFAULT uuid_generate_v4() UNIQUE NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    species VARCHAR(50) NOT NULL,
+    idPet SERIAL PRIMARY KEY,
+    uidPet UUID DEFAULT uuid_generate_v4() UNIQUE NOT NULL,
+    name VARCHAR(100),
+    species VARCHAR(50),
     breed VARCHAR(100),
-    gender petGender NOT NULL,
+    gender petGender,
     birthDate DATE,
     description TEXT,
-    status petStatus DEFAULT 'available' NOT NULL,
-    orgId INT NOT NULL,
+    status petStatus DEFAULT 'available',
+    orgId INT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    isActive BOOLEAN DEFAULT TRUE,
+    isActive BOOLEAN DEFAULT TRUE
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
 BEGIN
 CREATE TABLE P_Adoptions (
-    adoptionId SERIAL PRIMARY KEY,
-    customerId INT NOT NULL,
-    petId INT NOT NULL,
-    adoptionDate DATE DEFAULT CURRENT_DATE NOT NULL,
+    idAdoption SERIAL PRIMARY KEY,
+    idClient INT,
+    idPet INT,
+    adoptionDate DATE DEFAULT CURRENT_DATE,
     lastReviewDate DATE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    isActive BOOLEAN DEFAULT TRUE,
+    isActive BOOLEAN DEFAULT TRUE
 );
-END $do$;
+END
+$do$;
 
 DO
 $do$
 BEGIN
 CREATE TABLE P_Sponsorships (
-    sponsorshipId SERIAL PRIMARY KEY,
-    customerId INT NOT NULL,
-    petId INT NOT NULL,
+    idSponsorship SERIAL PRIMARY KEY,
+    idClient INT,
+    idPet INT,
     startDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    endDate TIMESTAMP DEFAULT NULL,
+    endDate TIMESTAMP,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    isActive BOOLEAN DEFAULT TRUE,
+    isActive BOOLEAN DEFAULT TRUE
 );
-END $do$;
+END
+$do$;
+
+DO
+$do$
+BEGIN
+CREATE TABLE E_Blacklist (
+    idBlacklist SERIAL PRIMARY KEY,
+    refreshToken VARCHAR(255) NOT NULL,
+    expiryDate TIMESTAMP NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+END
+$do$;
+
+DO
+$do$
+BEGIN
+CREATE TABLE P_Blacklist (
+    idBlacklist SERIAL PRIMARY KEY,
+    token VARCHAR(255) NOT NULL,
+    expiryDate TIMESTAMP NOT NULL,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+END
+$do$;
+
+DO
+$do$
+BEGIN
+CREATE TABLE E_TicketHistory(
+    idTicketHistory SERIAL PRIMARY KEY,
+    idOrder INT,
+    idEvent INT,
+    idTicketUnit INT,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+END
+$do$;
+
+DO
+$do$
+BEGIN
+CREATE TABLE P_TicketHistory(
+    idTicketHistory SERIAL PRIMARY KEY,
+    idOrder INT,
+    idEvent INT,
+    idTicketUnit INT,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+END
+$do$;
