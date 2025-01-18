@@ -170,6 +170,16 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./database/Event.sql:/docker-entrypoint-initdb.d/1-init.sql
 
+  phpdoc:
+    image: phpdoc/phpdoc:latest
+    container_name: phpdoc-container
+    volumes:
+      - .:/app
+    working_dir: /app
+    entrypoint: ["phpdoc"]
+    depends_on:
+      - symfony
+    
 volumes:
   postgres_data:
   redis_data:
