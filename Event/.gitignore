@@ -5,3 +5,4 @@ package-lock.json
 .phpdoc
 .phpdoc/build
 .phpdoc/cache
+/vendor/
