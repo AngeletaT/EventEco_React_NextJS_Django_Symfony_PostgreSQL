@@ -32,6 +32,7 @@ CREATE TABLE E_Client (
     dni VARCHAR(20) UNIQUE NOT NULL,
     bio VARCHAR(255),
     avatarUrl VARCHAR(255),
+    refreshToken VARCHAR(255),
     isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -52,6 +53,7 @@ CREATE TABLE E_Organizer (
     address VARCHAR(200),
     urlLogo VARCHAR(255),
     description VARCHAR(255),
+    refreshToken VARCHAR(255),
     urlWeb VARCHAR(255),
     urlImage VARCHAR(255),
     isActive BOOLEAN DEFAULT TRUE,
@@ -94,6 +96,7 @@ CREATE TABLE P_Client (
     dni VARCHAR(20) UNIQUE NOT NULL,
     bio VARCHAR(255),
     avatarUrl VARCHAR(255),
+    refreshToken VARCHAR(255),
     isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -116,6 +119,7 @@ CREATE TABLE P_Organizer (
     description VARCHAR(255),
     urlWeb VARCHAR(255),
     urlImage VARCHAR(255),
+    refreshToken VARCHAR(255),
     isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -496,6 +500,7 @@ CREATE TABLE E_Notifications (
     idNotifications SERIAL PRIMARY KEY,
     idAdmin INT,
     idClient INT,
+    idOrg INT,
     type VARCHAR(20) NOT NULL,
     message TEXT,
     status notificationStatus DEFAULT 'pending',
