@@ -37,6 +37,13 @@ services:
       - ./backend-django:/app
     environment:
       DEBUG: "true"
+      DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event"
+      REDIS_HOST: "redis-container"
+      REDIS_PORT: 6380
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    depends_on:
+      - postgres
+      - redis
 
   resend:
     build:

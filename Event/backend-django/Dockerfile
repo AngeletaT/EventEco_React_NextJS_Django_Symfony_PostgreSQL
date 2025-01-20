@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     gcc \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
+RUN pip install --upgrade pip 
 
 # Copiar el archivo de requerimientos al contenedor
 COPY requirements.txt ./
@@ -18,6 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar el código del proyecto al contenedor
 COPY . /app
+
+# Crear el directorio de logs y archivo debug.log
+RUN mkdir -p /app/logs && touch /app/logs/debug.log && chmod -R 777 /app/logs
 
 # Exponer el puerto 8000
 EXPOSE 8010
