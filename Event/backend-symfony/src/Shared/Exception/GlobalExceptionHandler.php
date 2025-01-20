@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\Infrastructure\Exception;
+namespace App\Shared\Exception;
 
 use App\Organizer\Domain\Exception\DuplicateOrganizerException;
 use Symfony\Component\HttpFoundation\JsonResponse;
