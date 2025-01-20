@@ -1,5 +1,3 @@
 controllers:
-    resource:
-        path: ../src/Organizer/Presentation/Controller/
-        namespace: App\Controller
-    type: attribute
+    resource: '../src/'
+    type: annotation

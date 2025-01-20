@@ -25,3 +25,8 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    
+    # Asegúrate de que los controladores están configurados correctamente
+    App\Organizer\Presentation\Controller\:
+        resource: '../src/Organizer/Presentation/Controller'
+        tags: ['controller.service_arguments']
