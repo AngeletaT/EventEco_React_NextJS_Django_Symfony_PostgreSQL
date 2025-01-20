@@ -7,6 +7,7 @@ use App\Organizer\Application\DTO\Response\CreateOrganizerResponse;
 use App\Organizer\Domain\Entity\Organizer;
 use App\Organizer\Domain\Repository\OrganizerRepositoryInterface;
 use Symfony\Component\Uid\Uuid;
+use App\Organizer\Domain\Exception\DuplicateOrganizerException;
 
 /**
  * Handles the creation of an organizer.
@@ -31,12 +32,19 @@ class CreateOrganizerHandler
      * @param CreateOrganizerCommand $command
      * @return CreateOrganizerResponse
      */
+
     public function handle(CreateOrganizerCommand $command): CreateOrganizerResponse
     {
-        // Generate a UUID for the organizer
-        $uuid = Uuid::v4();
+        if ($this->repository->existsByEmail($command->getEmail())) {
+            throw new DuplicateOrganizerException('The provided email already exists.');
+        }
 
-        // Create the Organizer entity
+        if ($this->repository->existsByNif($command->getNif())) {
+            throw new DuplicateOrganizerException('The provided NIF already exists.');
+        }
+
+        // Crear la entidad Organizer
+        $uuid = Uuid::v4();
         $organizer = new Organizer(
             $uuid,
             $command->getName(),
@@ -50,10 +58,10 @@ class CreateOrganizerHandler
             $command->getUrlImage()
         );
 
-        // Persist the Organizer entity
+        // Persistir la entidad
         $this->repository->save($organizer);
 
-        // Create the response DTO
+        // Retornar el DTO de respuesta
         return new CreateOrganizerResponse(
             $organizer->getIdOrg(),
             (string) $organizer->getUuid(),

@@ -38,4 +38,14 @@ class OrganizerRepository implements OrganizerRepositoryInterface
     {
         return $this->entityManager->getRepository(Organizer::class)->findOneBy(['uuid' => $uuid]);
     }
+
+    public function existsByEmail(string $email): bool
+    {
+        return $this->entityManager->getRepository(Organizer::class)->findOneBy(['email' => $email]) !== null;
+    }
+
+    public function existsByNif(string $nif): bool
+    {
+        return $this->entityManager->getRepository(Organizer::class)->findOneBy(['nif' => $nif]) !== null;
+    }
 }

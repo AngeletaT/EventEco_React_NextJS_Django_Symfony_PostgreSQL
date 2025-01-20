@@ -14,4 +14,8 @@ interface OrganizerRepositoryInterface
     public function findById(int $idOrg): ?Organizer;
 
     public function findByUuid(string $uuid): ?Organizer;
+
+    public function existsByEmail(string $email): bool;
+
+    public function existsByNif(string $nif): bool;
 }
