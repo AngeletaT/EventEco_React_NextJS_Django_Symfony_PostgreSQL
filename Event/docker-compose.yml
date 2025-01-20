@@ -111,7 +111,6 @@ services:
     volumes:
       - ./nginx-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - symfony
       - django
   
   stripe:
@@ -128,16 +127,34 @@ services:
     command: >
       sh -c "npm install && node server.js"
 
-  symfony:
+  symfony-p:
     build:
-      context: ./backend-symfony
+      context: ./backend-symfony-Pawnity
       dockerfile: Dockerfile
-    container_name: symfony-container
+    container_name: p-symfony-container
     restart: always
     ports:
       - "8091:80"
     volumes:
-      - ./backend-symfony:/var/www/html
+      - ./backend-symfony-Pawnity:/var/www/html
+      - ./wait-for-it.sh:/usr/local/bin/wait-for-it.sh
+    environment:
+      DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
+    depends_on:
+      - postgres
+    command: >
+      sh -c "/usr/local/bin/wait-for-it.sh postgres 5432 postgres 12345678 Event apache2-foreground"
+
+  symfony-e:
+    build:
+      context: ./backend-symfony-EventEco
+      dockerfile: Dockerfile
+    container_name: e-symfony-container
+    restart: always
+    ports:
+      - "9091:80"
+    volumes:
+      - ./backend-symfony-EventEco:/var/www/html
       - ./wait-for-it.sh:/usr/local/bin/wait-for-it.sh
     environment:
       DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
@@ -184,8 +201,6 @@ services:
       - .:/app
     working_dir: /app
     entrypoint: ["phpdoc"]
-    depends_on:
-      - symfony
     
 volumes:
   postgres_data:
