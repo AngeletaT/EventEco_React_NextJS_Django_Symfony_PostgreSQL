@@ -34,7 +34,7 @@ CREATE TABLE E_Client (
     avatarUrl VARCHAR(255),
     isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -56,7 +56,7 @@ CREATE TABLE E_Organizer (
     urlImage VARCHAR(255),
     isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -75,7 +75,7 @@ CREATE TABLE E_Admin (
     isActive BOOLEAN DEFAULT TRUE,
     bio VARCHAR(255),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -96,7 +96,7 @@ CREATE TABLE P_Client (
     avatarUrl VARCHAR(255),
     isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -118,7 +118,7 @@ CREATE TABLE P_Organizer (
     urlImage VARCHAR(255),
     isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -137,7 +137,7 @@ CREATE TABLE P_Admin (
     isActive BOOLEAN DEFAULT TRUE,
     bio VARCHAR(255),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -165,7 +165,7 @@ CREATE TABLE E_Events (
     orgId INT,
     idCategory INT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -186,7 +186,7 @@ CREATE TABLE P_Events (
     orgId INT,
     idCategory INT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -213,7 +213,7 @@ CREATE TABLE E_SubEvents (
     status statusSubEvents DEFAULT 'Confirmed',
     isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -233,7 +233,7 @@ CREATE TABLE P_SubEvents (
     status statusSubEvents DEFAULT 'Confirmed',
     isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -245,7 +245,7 @@ CREATE TABLE E_EventCategories (
     idCategory SERIAL PRIMARY KEY,
     categoryName VARCHAR(100) NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -257,7 +257,7 @@ CREATE TABLE P_EventCategories (
     idCategory SERIAL PRIMARY KEY,
     categoryName VARCHAR(100) NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -273,7 +273,7 @@ CREATE TABLE E_TicketInfo (
     capacity INT,
     descripcion VARCHAR(255),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -289,7 +289,7 @@ CREATE TABLE P_TicketInfo (
     capacity INT,
     descripcion VARCHAR(255),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -313,7 +313,7 @@ CREATE TABLE E_Order (
     payment VARCHAR(50),
     status orderStatusEnum DEFAULT 'pendingNomination',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -330,7 +330,7 @@ CREATE TABLE P_Order (
     payment VARCHAR(50),
     status orderStatusEnum DEFAULT 'pendingNomination',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -354,7 +354,7 @@ CREATE TABLE E_OrderLine (
     subtotal DECIMAL(10, 2) NOT NULL,
     status orderLineStatusEnum DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -371,7 +371,7 @@ CREATE TABLE P_OrderLine (
     subtotal DECIMAL(10, 2) NOT NULL,
     status orderLineStatusEnum DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -387,14 +387,14 @@ DO
 $do$
 BEGIN
 CREATE TABLE E_TicketUnit (
-    id SERIAL PRIMARY KEY,
+    idTicketUnit SERIAL PRIMARY KEY,
     idOrder INT,
     code VARCHAR(50) UNIQUE NOT NULL,
     nameAssistant VARCHAR(100),
     dniAssistant VARCHAR(20),
     status ticketUnitStatusEnum DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -403,14 +403,14 @@ DO
 $do$
 BEGIN
 CREATE TABLE P_TicketUnit (
-    id SERIAL PRIMARY KEY,
+    idTicketUnit SERIAL PRIMARY KEY,
     idOrder INT,
     code VARCHAR(50) UNIQUE NOT NULL,
     nameAssistant VARCHAR(100),
     dniAssistant VARCHAR(20),
     status ticketUnitStatusEnum DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -424,7 +424,7 @@ CREATE TABLE E_Complements (
     description TEXT,
     price DECIMAL(10, 2),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -438,7 +438,7 @@ CREATE TABLE P_Complements (
     description TEXT,
     price DECIMAL(10, 2),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -454,14 +454,14 @@ DO
 $do$
 BEGIN
 CREATE TABLE E_TicketComplements (
-    id SERIAL PRIMARY KEY,
+    idTicketComplements SERIAL PRIMARY KEY,
     idTicketUnit INT,
     idComplements INT,
     quantity INT NOT NULL,
     subtotal DECIMAL(10, 2),
     status ticketComplementsStatusEnum DEFAULT 'pending',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -470,14 +470,14 @@ DO
 $do$
 BEGIN
 CREATE TABLE P_TicketComplements (
-    id SERIAL PRIMARY KEY,
+    idTicketComplements SERIAL PRIMARY KEY,
     idTicketUnit INT,
     idComplements INT,
     quantity INT NOT NULL,
     subtotal DECIMAL(10, 2),
     status ticketComplementsStatusEnum DEFAULT 'pending',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -492,15 +492,15 @@ $do$;
 DO
 $do$
 BEGIN
-CREATE TABLE E_Notificacions (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE E_Notifications (
+    idNotifications SERIAL PRIMARY KEY,
     idAdmin INT,
     idClient INT,
     type VARCHAR(20) NOT NULL,
     message TEXT,
     status notificationStatus DEFAULT 'pending',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -508,8 +508,8 @@ $do$;
 DO
 $do$
 BEGIN
-CREATE TABLE P_Notificacions (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE P_Notifications (
+    idNotifications SERIAL PRIMARY KEY,
     idAdmin INT,
     idClient INT,
     idOrg INT,
@@ -517,7 +517,7 @@ CREATE TABLE P_Notificacions (
     message TEXT,
     status notificationStatus DEFAULT 'pending',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -541,7 +541,7 @@ CREATE TABLE E_Incidents (
     message TEXT,
     status incidentsStatus DEFAULT 'pending',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -558,7 +558,7 @@ CREATE TABLE P_Incidents (
     message TEXT,
     status incidentsStatus DEFAULT 'pending',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updateAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
 $do$;
@@ -582,7 +582,7 @@ $do$
 BEGIN
 CREATE TABLE P_Pets (
     idPet SERIAL PRIMARY KEY,
-    uidPet UUID DEFAULT uuid_generate_v4() UNIQUE NOT NULL,
+    uuidPet UUID DEFAULT uuid_generate_v4() UNIQUE NOT NULL,
     name VARCHAR(100),
     species VARCHAR(50),
     breed VARCHAR(100),
