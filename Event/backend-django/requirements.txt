@@ -7,12 +7,26 @@ whitenoise==6.5.0
 django-taggit==4.0.0
 markdown==3.4.3
 django-filter==24.2
+cerberus==1.3.5
+
+# Documentation
 drf-yasg==1.21.6
 coreapi==2.3.3
+mkdocs==1.5.0
+sphinx==7.2.5
+
+# Database
 psycopg2==2.9.6
+
+# Utils
 mixer==7.2.2
+
+# Images
 pillow==10.3.0
+
+# Linting
 ruff==0.3.7
+flake8==6.0.0
 
 # Testing
 pytest==7.4.0

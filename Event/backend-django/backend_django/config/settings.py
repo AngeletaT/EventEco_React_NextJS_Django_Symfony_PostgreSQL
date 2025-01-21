@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(spulc2d$rztf$saqw++li$6v!w%m0^36s6)5yx@j(behe7&z7'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'backend_django.app.accounts',
     'backend_django.app.dashboards',
+    'backend_django.app.events',
+    'backend_django.app.categories',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'backend_django.urls'
@@ -149,4 +154,28 @@ LOGGING = {
         },
     },
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# Configuración de SIMPLEJWT
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Duración del token de acceso
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Duración del token de actualización
+    'ROTATE_REFRESH_TOKENS': True,  # Generar un nuevo refresh token con cada solicitud
+    'BLACKLIST_AFTER_ROTATION': True,  # Inhabilitar tokens antiguos al rotar
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,  # Usa la clave secreta de Django para firmar los tokens
+    'AUTH_HEADER_TYPES': ('Bearer',),  # Prefijo del token en el header de autorización
+}
+
+# Modelo de usuario personalizado
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
