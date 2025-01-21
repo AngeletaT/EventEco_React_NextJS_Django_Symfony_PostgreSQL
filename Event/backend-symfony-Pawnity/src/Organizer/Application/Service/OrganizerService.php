@@ -26,41 +26,23 @@ class OrganizerService
     /**
      * Creates a new Organizer entity and persists it.
      *
-     * @param string $name
      * @param string $email
      * @param string $password
      * @param string $nif
-     * @param string|null $address
-     * @param string|null $urlLogo
-     * @param string|null $description
-     * @param string|null $urlWeb
-     * @param string|null $urlImage
      * @return Organizer
      */
     public function createOrganizer(
-        string $name,
         string $email,
         string $password,
-        string $nif,
-        ?string $address,
-        ?string $urlLogo,
-        ?string $description,
-        ?string $urlWeb,
-        ?string $urlImage
+        string $nif
     ): Organizer {
         $uuid = Uuid::v4();
 
         $organizer = new Organizer(
             $uuid,
-            $name,
             $email,
             $password,
-            $nif,
-            $address,
-            $urlLogo,
-            $description,
-            $urlWeb,
-            $urlImage
+            $nif
         );
 
         $this->repository->save($organizer);

@@ -61,7 +61,6 @@ class OrganizerController
         }
 
         $command = new CreateOrganizerCommand(
-            $dto->name,
             $dto->email,
             $dto->password,
             $dto->nif
@@ -72,14 +71,8 @@ class OrganizerController
         $response = new CreateOrganizerResponse(
             $organizer->getIdOrg(),
             $organizer->getUuid(),
-            $organizer->getName(),
             $organizer->getEmail(),
             $organizer->getNif(),
-            $organizer->getAddress(),
-            $organizer->getUrlLogo(),
-            $organizer->getDescription(),
-            $organizer->getUrlWeb(),
-            $organizer->getUrlImage(),
             $organizer->isActive(),
             $organizer->getCreatedAt(),
             $organizer->getUpdatedAt()

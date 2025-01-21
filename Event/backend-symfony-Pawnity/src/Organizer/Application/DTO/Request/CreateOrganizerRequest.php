@@ -9,12 +9,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class CreateOrganizerRequest
 {
     /**
-     * @Assert\NotBlank(message="El campo 'name' es obligatorio.")
-     * @Assert\Length(max=100, maxMessage="El campo 'name' no puede tener más de 100 caracteres.")
-     */
-    public string $name;
-
-    /**
      * @Assert\NotBlank(message="El campo 'email' es obligatorio.")
      * @Assert\Email(message="El campo 'email' debe tener un formato válido (ejemplo: text@text.com).")
      */

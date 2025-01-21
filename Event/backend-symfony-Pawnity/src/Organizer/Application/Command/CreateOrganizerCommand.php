@@ -13,22 +13,14 @@ class CreateOrganizerCommand
     private array $data;
 
     public function __construct(
-        string $name,
         string $email,
         string $password,
-        string $nif,
-        ?string $address = null,
-        ?string $urlLogo = null,
-        ?string $description = null
+        string $nif
     ) {
         $this->data = [
-            'name' => $name,
             'email' => $email,
             'password' => $password,
-            'nif' => $nif,
-            'address' => $address,
-            'urlLogo' => $urlLogo,
-            'description' => $description,
+            'nif' => $nif
         ];
     }
 
