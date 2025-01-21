@@ -24,16 +24,28 @@ BEGIN
 CREATE TABLE E_Client (
     idClient SERIAL PRIMARY KEY,
     clientUuid UUID DEFAULT uuid_generate_v4() NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    refreshToken VARCHAR(255),
+    isActive BOOLEAN DEFAULT TRUE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+END
+$do$;
+
+DO
+$do$
+BEGIN
+CREATE TABLE E_ProfileClient (
+    idProfileClient SERIAL PRIMARY KEY,
+    idClient INT,
     firstName VARCHAR(100) NOT NULL,
     lastName VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
     phoneNumber VARCHAR(20),
-    password VARCHAR(255) NOT NULL,
     dni VARCHAR(20) UNIQUE NOT NULL,
     bio VARCHAR(255),
     avatarUrl VARCHAR(255),
-    refreshToken VARCHAR(255),
-    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -46,17 +58,29 @@ BEGIN
 CREATE TABLE E_Organizer (
     idOrg SERIAL PRIMARY KEY,
     orgUuid UUID DEFAULT uuid_generate_v4() NOT NULL,
-    name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     NIF VARCHAR(20) UNIQUE NOT NULL,
+    refreshToken VARCHAR(255),
+    isActive BOOLEAN DEFAULT TRUE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+END
+$do$;
+
+DO
+$do$
+BEGIN
+CREATE TABLE E_ProfileOrganizer (
+    idProfileOrg SERIAL PRIMARY KEY,
+    idOrg INT,
+    name VARCHAR(100) NOT NULL,
     address VARCHAR(200),
     urlLogo VARCHAR(255),
     description VARCHAR(255),
-    refreshToken VARCHAR(255),
     urlWeb VARCHAR(255),
     urlImage VARCHAR(255),
-    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -69,12 +93,24 @@ BEGIN
 CREATE TABLE E_Admin (
     idAdmin SERIAL PRIMARY KEY,
     adminUuid UUID DEFAULT uuid_generate_v4() NOT NULL,
-    username VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    isActive BOOLEAN DEFAULT TRUE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+END
+$do$;
+
+DO
+$do$
+BEGIN
+CREATE TABLE E_ProfileAdmin (
+    idProfileAdmin SERIAL PRIMARY KEY,
+    idAdmin INT,
+    username VARCHAR(100) NOT NULL,
     phoneNumber VARCHAR(20),
     avatarUrl VARCHAR(255),
-    isActive BOOLEAN DEFAULT TRUE,
     bio VARCHAR(255),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -107,20 +143,50 @@ $do$;
 DO
 $do$
 BEGIN
+CREATE TABLE P_ProfileClient (
+    idProfileClient SERIAL PRIMARY KEY,
+    idClient INT,
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(100) NOT NULL,
+    phoneNumber VARCHAR(20),
+    dni VARCHAR(20) UNIQUE NOT NULL,
+    bio VARCHAR(255),
+    avatarUrl VARCHAR(255),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+END
+$do$;
+
+DO
+$do$
+BEGIN
 CREATE TABLE P_Organizer (
     idOrg SERIAL PRIMARY KEY,
     orgUuid UUID DEFAULT uuid_generate_v4() NOT NULL,
-    name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     NIF VARCHAR(20) UNIQUE NOT NULL,
+    refreshToken VARCHAR(255),
+    isActive BOOLEAN DEFAULT TRUE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+END
+$do$;
+
+DO
+$do$
+BEGIN
+CREATE TABLE P_ProfileOrganizer (
+    idProfileOrg SERIAL PRIMARY KEY,
+    idOrg INT,
+    name VARCHAR(100) NOT NULL,
     address VARCHAR(200),
     urlLogo VARCHAR(255),
     description VARCHAR(255),
     urlWeb VARCHAR(255),
     urlImage VARCHAR(255),
-    refreshToken VARCHAR(255),
-    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -133,12 +199,24 @@ BEGIN
 CREATE TABLE P_Admin (
     idAdmin SERIAL PRIMARY KEY,
     adminUuid UUID DEFAULT uuid_generate_v4() NOT NULL,
-    username VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    isActive BOOLEAN DEFAULT TRUE,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+END
+$do$;
+
+DO
+$do$
+BEGIN
+CREATE TABLE P_ProfileAdmin (
+    idProfileAdmin SERIAL PRIMARY KEY,
+    idAdmin INT,
+    username VARCHAR(100) NOT NULL,
     phoneNumber VARCHAR(20),
     avatarUrl VARCHAR(255),
-    isActive BOOLEAN DEFAULT TRUE,
     bio VARCHAR(255),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
