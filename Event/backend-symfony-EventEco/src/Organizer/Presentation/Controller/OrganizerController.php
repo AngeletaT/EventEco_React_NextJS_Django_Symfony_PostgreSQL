@@ -64,12 +64,7 @@ class OrganizerController
             $dto->name,
             $dto->email,
             $dto->password,
-            $dto->nif,
-            $dto->address,
-            $dto->urlLogo,
-            $dto->description,
-            $dto->urlWeb,
-            $dto->urlImage
+            $dto->nif
         );
 
         $organizer = $this->handler->handle($command);

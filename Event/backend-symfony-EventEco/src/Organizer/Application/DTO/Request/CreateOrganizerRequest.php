@@ -40,37 +40,6 @@ class CreateOrganizerRequest
     public string $nif;
 
     /**
-     * @Assert\Length(
-     *     max=200,
-     *     maxMessage="El campo 'address' no puede tener más de 200 caracteres."
-     * )
-     */
-    public ?string $address = null;
-
-    /**
-     * @Assert\Url(message="El campo 'urlLogo' debe tener un formato de URL válido.")
-     */
-    public ?string $urlLogo = null;
-
-    /**
-     * @Assert\Length(
-     *     max=255,
-     *     maxMessage="El campo 'description' no puede tener más de 255 caracteres."
-     * )
-     */
-    public ?string $description = null;
-
-    /**
-     * @Assert\Url(message="El campo 'urlWeb' debe tener un formato de URL válido.")
-     */
-    public ?string $urlWeb = null;
-
-    /**
-     * @Assert\Url(message="El campo 'urlImage' debe tener un formato de URL válido.")
-     */
-    public ?string $urlImage = null;
-
-    /**
      * Constructor
      */
     public function __construct(array $data)

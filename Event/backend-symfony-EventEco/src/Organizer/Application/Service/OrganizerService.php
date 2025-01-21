@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Organizer\Domain\Service;
+namespace App\Organizer\Application\Service;
 
 use App\Organizer\Domain\Entity\Organizer;
 use App\Organizer\Domain\Repository\OrganizerRepositoryInterface;

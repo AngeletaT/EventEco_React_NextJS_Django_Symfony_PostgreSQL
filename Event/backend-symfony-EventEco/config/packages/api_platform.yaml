@@ -1,0 +1,11 @@
+api_platform:
+    title: EventEco API
+    version: 0.4.13
+    mapping:
+        paths: ['%kernel.project_dir%/src']
+    defaults:
+        normalization_context: { groups: ['read'] }
+        denormalization_context: { groups: ['write'] }
+        stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']

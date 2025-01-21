@@ -5,9 +5,23 @@ namespace App\Organizer\Domain\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 use DateTimeImmutable;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
 
 #[ORM\Entity]
 #[ORM\Table(name: "p_organizer")]
+#[ApiResource(
+    operations: [
+        new Post(
+            name: 'create_organizer',
+            uriTemplate: '/organizers',
+            description: 'Add a new organizer to the system.',
+            denormalizationContext: [
+                'groups' => ['organizer_write']
+            ]
+        )
+    ]
+)]
 class Organizer
 {
     #[ORM\Id]
@@ -45,6 +59,9 @@ class Organizer
     #[ORM\Column(name: "urlimage", type: "string", nullable: true)]
     private ?string $urlImage = null;
 
+    #[ORM\Column(name: "refreshtoken", type: "string", length: 255, nullable: true)]
+    private ?string $refreshToken = null;
+
     #[ORM\Column(name: "isactive", type: "boolean", options: ["default" => true])]
     private bool $isActive = true;
 
@@ -64,7 +81,8 @@ class Organizer
         ?string $urlLogo = null,
         ?string $description = null,
         ?string $urlWeb = null,
-        ?string $urlImage = null
+        ?string $urlImage = null,
+        ?string $refreshToken = null
     ) {
         $this->uuid = $uuid->toRfc4122();
         $this->name = $name;
@@ -76,6 +94,7 @@ class Organizer
         $this->description = $description;
         $this->urlWeb = $urlWeb;
         $this->urlImage = $urlImage ?? "https://i.pravatar.cc/150?u=" . md5($name);
+        $this->refreshToken = $refreshToken;
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
     }
@@ -92,6 +111,7 @@ class Organizer
     public function getDescription(): ?string { return $this->description; }
     public function getUrlWeb(): ?string { return $this->urlWeb; }
     public function getUrlImage(): ?string { return $this->urlImage; }
+    public function getRefreshToken(): ?string { return $this->refreshToken; }
     public function isActive(): bool { return $this->isActive; }
     public function getCreatedAt(): DateTimeImmutable { return $this->createdAt; }
     public function getUpdatedAt(): DateTimeImmutable { return $this->updatedAt; }
