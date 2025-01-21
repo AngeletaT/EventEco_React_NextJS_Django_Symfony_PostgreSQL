@@ -17,7 +17,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,11 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'backend_django.app.accounts',
-    'backend_django.app.dashboards',
-    'backend_django.app.events',
-    'backend_django.app.categories',
     'corsheaders',
+    'backend_django.app.categories.E_categories',
+    'backend_django.app.categories.P_categories',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +53,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-ROOT_URLCONF = 'backend_django.urls'
+ROOT_URLCONF = 'backend_django.config.urls'
 
 TEMPLATES = [
     {
@@ -75,8 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend_django.wsgi.application'
-
+WSGI_APPLICATION = 'backend_django.config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -87,12 +82,10 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB', 'Event'),
         'USER': os.getenv('POSTGRES_USER', 'postgres'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', '12345678'),
-        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+        'HOST': os.getenv('POSTGRES_HOST', 'postgres'), 
         'PORT': os.getenv('POSTGRES_PORT', '5432'),
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -112,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -124,18 +116,16 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
+# Logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -155,15 +145,9 @@ LOGGING = {
     },
 }
 
+# CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 # Configuración de SIMPLEJWT
 SIMPLE_JWT = {
@@ -176,6 +160,15 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),  # Prefijo del token en el header de autorización
 }
 
-# Modelo de usuario personalizado
-AUTH_USER_MODEL = 'accounts.CustomUser'
+# Disable migrations
+class DisableMigrations:
+    def __contains__(self, item):
+        return True
 
+    def __getitem__(self, item):
+        return None
+
+MIGRATION_MODULES = DisableMigrations()
+
+# # Modelo de usuario personalizado
+# AUTH_USER_MODEL = 'accounts.CustomUser'
