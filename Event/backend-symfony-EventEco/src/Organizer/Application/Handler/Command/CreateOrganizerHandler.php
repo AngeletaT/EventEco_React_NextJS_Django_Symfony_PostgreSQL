@@ -47,15 +47,9 @@ class CreateOrganizerHandler
         $uuid = Uuid::v4();
         $organizer = new Organizer(
             $uuid,
-            $command->getName(),
             $command->getEmail(),
             $command->getPassword(),
-            $command->getNif(),
-            $command->getAddress(),
-            $command->getUrlLogo(),
-            $command->getDescription(),
-            $command->getUrlWeb(),
-            $command->getUrlImage()
+            $command->getNif()
         );
 
         // Persistir la entidad
@@ -65,14 +59,8 @@ class CreateOrganizerHandler
         return new CreateOrganizerResponse(
             $organizer->getIdOrg(),
             (string) $organizer->getUuid(),
-            $organizer->getName(),
             $organizer->getEmail(),
             $organizer->getNif(),
-            $organizer->getAddress(),
-            $organizer->getUrlLogo(),
-            $organizer->getDescription(),
-            $organizer->getUrlWeb(),
-            $organizer->getUrlImage(),
             $organizer->isActive(),
             $organizer->getCreatedAt()->format('Y-m-d H:i:s'),
             $organizer->getUpdatedAt()->format('Y-m-d H:i:s')

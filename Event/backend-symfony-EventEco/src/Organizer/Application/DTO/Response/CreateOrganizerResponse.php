@@ -13,14 +13,8 @@ use JsonSerializable;
      *
      * @param string $idOrg
      * @param string $uuid
-     * @param string $name
      * @param string $email
      * @param string $nif
-     * @param string|null $address
-     * @param string|null $urlLogo
-     * @param string|null $description
-     * @param string|null $urlWeb
-     * @param string|null $urlImage
      * @param bool $isActive
      * @param string $createdAt
      * @param string $updatedAt
@@ -32,14 +26,8 @@ class CreateOrganizerResponse implements JsonSerializable
     public function __construct(
         string $idOrg,
         string $uuid,
-        string $name,
         string $email,
         string $nif,
-        ?string $address = null,
-        ?string $urlLogo = null,
-        ?string $description = null,
-        ?string $urlWeb = null,
-        ?string $urlImage = null,
         bool $isActive = true,
         string $createdAt,
         string $updatedAt
@@ -47,14 +35,8 @@ class CreateOrganizerResponse implements JsonSerializable
         $this->data = [
             'idOrg' => $idOrg,
             'uuid' => $uuid,
-            'name' => $name,
             'email' => $email,
             'nif' => $nif,
-            'address' => $address,
-            'urlLogo' => $urlLogo,
-            'description' => $description,
-            'urlWeb' => $urlWeb,
-            'urlImage' => $urlImage,
             'isActive' => $isActive,
             'createdAt' => $createdAt,
             'updatedAt' => $updatedAt,
