@@ -141,13 +141,12 @@ services:
       - "9091:80"
     volumes:
       - ./backend-symfony-Pawnity:/var/www/html
-      - ./wait-for-it.sh:/usr/local/bin/wait-for-it.sh
     environment:
       DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
     depends_on:
       - postgres
     command: >
-      sh -c "/usr/local/bin/wait-for-it.sh postgres 5432 postgres 12345678 Event apache2-foreground"
+      apache2-foreground
 
   symfony-e:
     build:
@@ -159,13 +158,12 @@ services:
       - "8091:80"
     volumes:
       - ./backend-symfony-EventEco:/var/www/html
-      - ./wait-for-it.sh:/usr/local/bin/wait-for-it.sh
     environment:
       DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
     depends_on:
       - postgres
     command: >
-      sh -c "/usr/local/bin/wait-for-it.sh postgres 5432 postgres 12345678 Event apache2-foreground"
+      apache2-foreground
     
   springboot:
     build:
