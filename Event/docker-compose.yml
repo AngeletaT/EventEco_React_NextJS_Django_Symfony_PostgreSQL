@@ -9,8 +9,7 @@ services:
     volumes:
       - ./full-stack-nextjs:/app
       - /app/node_modules
-    command: >
-      npm run dev
+    command: npm run dev -- -p 5173
 
   # react:
   #   build:
