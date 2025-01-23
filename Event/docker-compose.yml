@@ -89,10 +89,6 @@ services:
     command: [ "redis-server", "--requirepass", "${REDIS_PASSWORD}" ]
     volumes:
       - redis_data:/data
-    deploy:
-      resources:
-        limits:
-          memory: 512m
 
   pgadmin:
     image: dpage/pgadmin4
@@ -134,34 +130,6 @@ services:
     command: >
       sh -c "npm install && node server.js"
 
-  symfony-e:
-    build:
-      context: ./backend-symfony-EventEco
-      dockerfile: Dockerfile
-    container_name: e-symfony-container
-    restart: always
-    ports:
-      - "8091:80"
-    volumes:
-      - ./backend-symfony-EventEco:/var/www/html:cached
-      - symfony_cache:/var/www/html/var/cache
-      - symfony_log:/var/www/html/var/log
-    environment:
-      APP_ENV: prod
-      APP_DEBUG: 0
-      DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
-      REDIS_URL: "redis://:12345678@redis:6380/1"
-    depends_on:
-      - postgres
-      - redis
-    deploy:
-      resources:
-        limits:
-          memory: 1g
-          cpus: "0.5"
-    command: >
-      sh -c "php /var/www/html/bin/console cache:clear --env=prod && php /var/www/html/bin/console cache:warmup && apache2-foreground"
-
   symfony-p:
     build:
       context: ./backend-symfony-Pawnity
@@ -171,25 +139,31 @@ services:
     ports:
       - "9091:80"
     volumes:
-      - ./backend-symfony-Pawnity:/var/www/html:cached
-      - symfony_cache:/var/www/html/var/cache
-      - symfony_log:/var/www/html/var/log
+      - ./backend-symfony-Pawnity:/var/www/html
     environment:
-      APP_ENV: prod
-      APP_DEBUG: 0
       DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
-      REDIS_URL: "redis://:12345678@redis:6380/1"
     depends_on:
       - postgres
-      - redis
-    deploy:
-      resources:
-        limits:
-          memory: 1g
-          cpus: "0.5"
     command: >
-      sh -c "php /var/www/html/bin/console cache:clear --env=prod && php /var/www/html/bin/console cache:warmup && apache2-foreground"
+      apache2-foreground
 
+  symfony-e:
+    build:
+      context: ./backend-symfony-EventEco
+      dockerfile: Dockerfile
+    container_name: e-symfony-container
+    restart: always
+    ports:
+      - "8091:80"
+    volumes:
+      - ./backend-symfony-EventEco:/var/www/html
+    environment:
+      DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
+    depends_on:
+      - postgres
+    command: >
+      apache2-foreground
+    
   springboot:
     build:
       context: ./backend-springboot
@@ -220,11 +194,6 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./database/Event.sql:/docker-entrypoint-initdb.d/1-init.sql
-    deploy:
-      resources:
-        limits:
-          memory: 1g
-          cpus: "0.5"
 
   phpdoc:
     image: phpdoc/phpdoc:latest
@@ -237,5 +206,3 @@ services:
 volumes:
   postgres_data:
   redis_data:
-  symfony_cache:
-  symfony_log:
