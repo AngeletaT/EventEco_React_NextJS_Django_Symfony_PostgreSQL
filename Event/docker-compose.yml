@@ -11,20 +11,6 @@ services:
       - /app/node_modules
     command: npm run dev -- -p 5173
 
-  # react:
-  #   build:
-  #     context: ./frontend-react-ts
-  #     dockerfile: Dockerfile
-  #   container_name: react-ts-container
-  #   ports:
-  #     - "8096:8096"
-  #   volumes:
-  #     - ./frontend-react-ts:/app
-  #     - /app/node_modules
-  #   environment:
-  #     NODE_ENV: development
-  #   command: npm run dev
-
   django:
     build:
       context: ./backend-django
