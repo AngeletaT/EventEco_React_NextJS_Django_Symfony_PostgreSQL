@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "primereact/button";
+import { Button } from "@/utils/PrimeReactComponents";
 import Link from "next/link";
 import React from "react";
 

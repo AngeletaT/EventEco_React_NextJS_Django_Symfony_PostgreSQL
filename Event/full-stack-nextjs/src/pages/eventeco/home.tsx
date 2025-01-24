@@ -1,43 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { GetServerSideProps } from "next";
 import { fetchCategories } from "@/services/eventeco/actions/getCategories";
-import CategoryList from "@/components/shared/CategoryList";
+import { fetchEvents } from "@/services/eventeco/actions/getEvents";
+import EventecoHomeClient from "@/components/eventeco/home/EventecoHomeClient";
 import { Category } from "@/types/Category";
+import { Event } from "@/types/Event";
 
-const EventecoHomePage: React.FC = () => {
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+interface EventecoHomePageProps {
+    categories: Category[];
+    events: Event[];
+}
 
-    useEffect(() => {
-        const loadCategories = async () => {
-            try {
-                const fetchedCategories = await fetchCategories();
-                console.log(fetchedCategories);
-                setCategories(fetchedCategories);
-            } catch (err) {
-                setError("Failed to fetch categories.");
-            } finally {
-                setLoading(false);
-            }
-        };
+const EventecoHomePage: React.FC<EventecoHomePageProps> = ({ categories, events }) => {
+    return <EventecoHomeClient categories={categories} events={events} />;
+};
 
-        loadCategories();
-    }, []);
+export const getServerSideProps: GetServerSideProps = async () => {
+    const categories = await fetchCategories();
+    const events = await fetchEvents();
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>{error}</div>;
-    }
-
-    return (
-        <div>
-            <h1>Bienvenido a EventEco</h1>
-            <CategoryList categories={categories} />
-        </div>
-    );
+    return {
+        props: {
+            categories,
+            events,
+        },
+    };
 };
 
 export default EventecoHomePage;
