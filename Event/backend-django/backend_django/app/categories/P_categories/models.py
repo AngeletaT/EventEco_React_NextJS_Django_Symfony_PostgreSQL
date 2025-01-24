@@ -9,6 +9,8 @@ class P_EventCategory(models.Model):
 
      class Meta:
           db_table = 'p_eventcategories'
+          verbose_name = 'PaWnity Event Category'
+          verbose_name_plural = 'PaWnityP Event Categories'
 
      def __str__(self):
-          return self.categoryName
+          return self.categoryname

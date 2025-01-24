@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# from backend_django.utils.redis import test_redis
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('e_django/api/', include('backend_django.app.categories.E_categories.urls')),
     path('p_django/api/', include('backend_django.app.categories.P_categories.urls')),
+    path('e_django/api/events/', include('backend_django.app.events.E_events.urls')),
+    path('p_django/api/events/', include('backend_django.app.events.P_events.urls')),
+    # path('redis/test/', test_redis, name='test-redis'),
 ]

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'backend_django.app.categories.E_categories',
     'backend_django.app.categories.P_categories',
+    'backend_django.app.events.E_events',
+    'backend_django.app.events.P_events',
 ]
 
 MIDDLEWARE = [
@@ -86,6 +88,22 @@ DATABASES = {
         'PORT': os.getenv('POSTGRES_PORT', '5432'),
     }
 }
+
+# # Redis Configuration
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://redis-container:6380/1",  
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#             "PASSWORD": os.getenv("REDIS_PASSWORD", "12345678"), 
+#         }
+#     }
+# }
+
+# # Opcional: Configuración de sesión en Redis
+# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+# SESSION_CACHE_ALIAS = "default"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

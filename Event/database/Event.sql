@@ -227,7 +227,7 @@ $do$;
 DO
 $do$
 BEGIN
-CREATE TYPE statusEvent AS ENUM ('Preparing', 'Created', 'InProgress', 'Finished');
+CREATE TYPE statusEvent AS ENUM ('Preparing', 'Created', 'InProgress', 'Finished', 'Cancelled');
 END
 $do$;
 

@@ -9,6 +9,8 @@ class E_EventCategory(models.Model):
 
      class Meta:
           db_table = 'e_eventcategories'  
+          verbose_name = 'EventEco Event Category'
+          verbose_name_plural = 'EventEco Event Categories'
 
      def __str__(self):
-          return self.categoryName
+          return self.categoryname
