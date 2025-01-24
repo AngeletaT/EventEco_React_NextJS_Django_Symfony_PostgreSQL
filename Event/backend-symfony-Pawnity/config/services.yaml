@@ -27,6 +27,10 @@ services:
     # please note that last definitions always *replace* previous ones
     
     # Asegúrate de que los controladores están configurados correctamente
-    App\Organizer\Presentation\Controller\:
-        resource: '../src/Organizer/Presentation/Controller'
+    App\Organizer\Presentation\InAdapter\:
+        resource: '../src/Organizer/Presentation/InAdapter/'
         tags: ['controller.service_arguments']
+        
+    App\Shared\Exception\GlobalExceptionHandler:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 255 }
