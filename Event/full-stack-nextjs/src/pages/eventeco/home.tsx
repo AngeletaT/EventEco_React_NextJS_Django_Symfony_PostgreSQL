@@ -1,11 +1,14 @@
 import React from "react";
+import { fetchCategories } from "@/services/eventeco/actions/getCategories";
 
-const EventEcoHome: React.FC = () => {
+const EventecoHomePage = async () => {
+    const categories = await fetchCategories();
+    console.log(categories);
     return (
-        <div style={{ textAlign: "center", marginTop: "50px" }}>
-            <h1>Bienvenido a EventEco</h1>
+        <div>
+            <h1>Eventeco Home Page</h1>
         </div>
     );
 };
 
-export default EventEcoHome;
+export default EventecoHomePage;

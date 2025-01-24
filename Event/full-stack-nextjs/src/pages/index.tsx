@@ -7,8 +7,8 @@ const WebPage: React.FC = () => {
         <div className={styles.container}>
             <h1 className={styles.title}>Bienvenido a nuestras plataformas</h1>
             <div className={styles.buttons}>
-                <ButtonLink label="Pawnity" href="/pawnity/home" styleClass="p-button-primary" />
-                <ButtonLink label="EventEco" href="/eventeco/home" styleClass="p-button-success" />
+                <ButtonLink label="Pawnity" href="/pawnity/home" styleClass="p-button" />
+                <ButtonLink label="EventEco" href="/eventeco/home" styleClass="p-button" />
             </div>
         </div>
     );
