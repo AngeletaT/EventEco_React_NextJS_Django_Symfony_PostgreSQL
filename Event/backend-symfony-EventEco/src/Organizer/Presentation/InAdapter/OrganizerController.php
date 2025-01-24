@@ -3,7 +3,7 @@
 namespace App\Organizer\Presentation\InAdapter;
 
 use App\Organizer\Application\UseCase\Command\CreateOrganizerService;
-use App\Organizer\Presentation\DTO\Request\CreateOrganizerRequest;
+use App\Organizer\Presentation\Assembler\Request\CreateOrganizerRequestAssembler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,10 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class OrganizerController
 {
     private CreateOrganizerService $service;
+    private CreateOrganizerRequestAssembler $requestAssembler;
 
-    public function __construct(CreateOrganizerService $service)
-    {
+    public function __construct(
+        CreateOrganizerService $service,
+        CreateOrganizerRequestAssembler $requestAssembler
+    ) {
         $this->service = $service;
+        $this->requestAssembler = $requestAssembler;
     }
 
     /**
@@ -25,12 +29,10 @@ class OrganizerController
      */
     public function create(Request $request): JsonResponse
     {
-        $data = json_decode($request->getContent(), true);
-        $dto = new CreateOrganizerRequest($data);
+        $dto = $this->requestAssembler->fromHttpRequest($request);
 
-        return new JsonResponse(
-            $this->service->execute($dto)->jsonSerialize(),
-            JsonResponse::HTTP_CREATED
-        );
+        $response = $this->service->execute($dto);
+
+        return new JsonResponse($response->jsonSerialize(), JsonResponse::HTTP_CREATED);
     }
 }

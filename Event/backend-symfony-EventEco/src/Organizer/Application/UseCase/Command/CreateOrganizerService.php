@@ -2,24 +2,36 @@
 
 namespace App\Organizer\Application\UseCase\Command;
 
-use App\Organizer\Application\InPort\CreateOrganizer;
-use App\Organizer\Presentation\DTO\Request\CreateOrganizerRequest;
-use App\Organizer\Presentation\DTO\Response\CreateOrganizerResponse;
+use App\Organizer\Application\DTO\Request\CreateOrganizerRequest;
+use App\Organizer\Application\DTO\Response\CreateOrganizerResponse;
+use App\Organizer\Presentation\Assembler\Response\CreateOrganizerResponseAssembler;
 
-/**
- * Service for CreateOrganizer Use Case
- */
 class CreateOrganizerService
 {
-    private CreateOrganizer $handler;
+    private CreateOrganizerHandler $handler;
+    private CreateOrganizerResponseAssembler $responseAssembler;
 
-    public function __construct(CreateOrganizer $handler)
-    {
+    public function __construct(
+        CreateOrganizerHandler $handler,
+        CreateOrganizerResponseAssembler $responseAssembler
+    ) {
         $this->handler = $handler;
+        $this->responseAssembler = $responseAssembler;
     }
 
     public function execute(CreateOrganizerRequest $request): CreateOrganizerResponse
     {
-        return $this->handler->handle($request);
+        $command = new CreateOrganizerCommand(
+            $request->email,
+            $request->password,
+            $request->nif
+        );
+
+        $this->handler->handle($command);
+
+        // Buscar el Organizer para armar la respuesta (esto podría optimizarse si ya tienes el Organizer)
+        $organizer = $this->handler->getRepository()->findByEmail($request->email);
+
+        return $this->responseAssembler->toHttpResponse($organizer);
     }
 }

@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Organizer\Presentation\DTO\Request;
+namespace App\Organizer\Application\DTO\Request;
 
 use Symfony\Component\Validator\Constraints as Assert;
-/**
- * DTO for Create Organizer Request
- */
+
 class CreateOrganizerRequest
 {
     /**
@@ -32,9 +30,6 @@ class CreateOrganizerRequest
      */
     public string $nif;
 
-    /**
-     * Constructor
-     */
     public function __construct(array $data)
     {
         foreach ($data as $key => $value) {

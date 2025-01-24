@@ -33,6 +33,11 @@ class OrganizerRepositoryAdapter implements OrganizerRepositoryInterface
     {
         return $this->entityManager->getRepository(Organizer::class)->findOneBy(['uuid' => $uuid]);
     }
+    
+    public function findByEmail(string $email): ?Organizer
+    {
+        return $this->entityManager->getRepository(Organizer::class)->findOneBy(['email' => $email]);
+    }
 
     public function existsByEmail(string $email): bool
     {

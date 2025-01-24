@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Organizer\Application\InPort;
+namespace App\Organizer\Application\UseCase\InPort;
 
-use App\Organizer\Presentation\DTO\Request\CreateOrganizerRequest;
-use App\Organizer\Presentation\DTO\Response\CreateOrganizerResponse;
+use App\Organizer\Application\DTO\Request\CreateOrganizerRequest;
+use App\Organizer\Application\DTO\Response\CreateOrganizerResponse;
 
 /**
  * InPort for creating an organizer.
