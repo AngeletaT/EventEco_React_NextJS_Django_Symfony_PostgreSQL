@@ -1,30 +1,125 @@
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+/* Hero Section */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+    background-color: black;
 }
 
-.header {
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(50%);
+}
+
+.overlay {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    margin-bottom: 2rem;
+    color: white;
+    padding-top: 10%;
 }
 
-.header h1 {
+.slogan {
     font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-weight: bold;
 }
 
-.header p {
+.subtitle {
     font-size: 1.2rem;
-    color: #555;
+    margin-top: 0.5rem;
 }
 
-.section {
-    margin-bottom: 2rem;
+.search {
+    margin-top: 2rem;
+    width: 25rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+/* Cards Section */
+.cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.card {
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 1rem;
+}
+
+.icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+/* Carousel Section */
+.carousel {
+    position: relative;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 2rem;
+}
+
+.carouselTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.categoryCard {
+    position: relative;
+    text-align: center;
+    width: 300px;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    gap: 10px;
+}
+
+.categoryImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.categoryName {
+    position: absolute;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem;
+    border-radius: 0 0 8px 8px;
+    width: 100%;
 }

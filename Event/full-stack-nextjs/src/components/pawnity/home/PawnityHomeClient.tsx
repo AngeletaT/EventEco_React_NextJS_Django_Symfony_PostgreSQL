@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import CategoryGrid from "@/components/shared/CategoryGrid";
+// import CategoryGrid from "@/components/shared/CategoryGrid";
 import EventGrid from "@/components/shared/EventGrid";
 import { Category } from "@/types/Category";
 import { Event } from "@/types/Event";
@@ -22,7 +22,7 @@ const PawnityHomeClient: React.FC<PawnityHomeClientProps> = ({ categories, event
             <main>
                 <section className={styles.section}>
                     <h2>Categorías</h2>
-                    <CategoryGrid categories={categories} />
+                    {/* <CategoryGrid categories={categories} /> */}
                 </section>
                 <section className={styles.section}>
                     <h2>Eventos</h2>
