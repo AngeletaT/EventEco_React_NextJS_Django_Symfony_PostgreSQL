@@ -1,0 +1,44 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f5fff5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.link:hover {
+    color: #388e3c;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
