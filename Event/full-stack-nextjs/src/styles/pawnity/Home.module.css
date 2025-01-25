@@ -1,30 +1,123 @@
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+/* Hero Section */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
 }
 
-.header {
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(70%);
+}
+
+.overlay {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    margin-bottom: 2rem;
+    color: white;
+    padding-top: 10%;
 }
 
-.header h1 {
+.title {
     font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-weight: bold;
 }
 
-.header p {
+.subtitle {
     font-size: 1.2rem;
-    color: #555;
+    margin-top: 0.5rem;
 }
 
-.section {
-    margin-bottom: 2rem;
+.search {
+    margin-top: 2rem;
+    width: 25rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
 }
 
-.grid {
+/* Pet Gallery */
+.petGallery {
+    padding: 2rem;
+}
+
+.petGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
+}
+
+.petCard {
+    text-align: center;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.petImage {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+
+/* Carousel Section */
+.carousel {
+    position: relative;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 2rem;
+}
+
+.carouselTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.categoryCard {
+    position: relative;
+    text-align: center;
+    width: 300px;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    gap: 10px;
+}
+
+.categoryImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.categoryName {
+    position: absolute;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem;
+    border-radius: 0 0 8px 8px;
+    width: 100%;
 }
