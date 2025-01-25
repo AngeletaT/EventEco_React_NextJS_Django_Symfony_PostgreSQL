@@ -1,0 +1,45 @@
+.footer {
+    background-color: #007bff;
+    color: white;
+    padding: 2rem 1rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.about,
+.links,
+.social {
+    flex: 1;
+}
+
+.about p,
+.links a,
+.social a {
+    font-size: 0.9rem;
+    color: #ddd;
+    text-decoration: none;
+}
+
+.links a:hover,
+.social a:hover {
+    color: #ffecb3;
+}
+
+.social .icons {
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.copy {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #444;
+    font-size: 0.8rem;
+}
