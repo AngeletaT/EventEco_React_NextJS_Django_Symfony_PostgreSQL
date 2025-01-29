@@ -6,6 +6,6 @@ router = DefaultRouter()
 router.register(r'events', E_EventViewSet, basename='e_event')
 
 urlpatterns = [
-     path('listAll/', E_EventViewSet.as_view({'get': 'list_all_events'})),
+     path('listAll/', E_EventViewSet.as_view({'get': 'list_all_events'}), name='events-listAll'),
 ] + router.urls
 

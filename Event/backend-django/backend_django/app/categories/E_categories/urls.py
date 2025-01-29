@@ -6,5 +6,5 @@ router = DefaultRouter()
 router.register(r'categories', E_EventCategoryViewSet, basename='eventcategory')
 
 urlpatterns = [
-     path('listAll/', E_EventCategoryViewSet.as_view({'get': 'list_all_categories'})),
+     path('listAll/', E_EventCategoryViewSet.as_view({'get': 'list_all_categories'}), name='eventcategory-listAll'),
 ] + router.urls
