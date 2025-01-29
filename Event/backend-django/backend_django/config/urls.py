@@ -14,15 +14,40 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
 from django.urls import path, include
-# from backend_django.utils.redis import test_redis
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from django.conf import settings
+from django.conf.urls.static import static
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Event API",
+        default_version="v1",
+        description="Documentación de la API para EventEco y Pawnity",
+        terms_of_service="https://www.EventEco&PaWnity.com/terms/",
+        contact=openapi.Contact(email="support@tusitio.com"),
+        license=openapi.License(name="MIT License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('e_django/api/', include('backend_django.app.categories.E_categories.urls')),
-    path('p_django/api/', include('backend_django.app.categories.P_categories.urls')),
+    # Swagger UI
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    # Redoc
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    # Esquema en JSON
+    path('swagger.json', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    # Rutas de las apps
+    path('e_django/api/categories/', include('backend_django.app.categories.E_categories.urls')),
+    path('p_django/api/categories/', include('backend_django.app.categories.P_categories.urls')),
     path('e_django/api/events/', include('backend_django.app.events.E_events.urls')),
     path('p_django/api/events/', include('backend_django.app.events.P_events.urls')),
-    # path('redis/test/', test_redis, name='test-redis'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

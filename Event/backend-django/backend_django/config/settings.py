@@ -14,6 +14,7 @@ from pathlib import Path
 from datetime import timedelta
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,12 +38,30 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd Party Packages,
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'django_extensions',
+    'taggit',
+    'django_filters',
+    'drf_yasg',
     'corsheaders',
+    # Local Apps
     'backend_django.app.categories.E_categories',
     'backend_django.app.categories.P_categories',
     'backend_django.app.events.E_events',
     'backend_django.app.events.P_events',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}
+
+# DRF-YASG (Swagger) settings
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'DEFAULT_INFO': 'backend_django.config.urls.schema_view',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -135,10 +154,19 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'backend_django', 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'backend_django', 'static'),
+]
+
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)
+
+    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

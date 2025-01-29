@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     gcc \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
+
 RUN pip install --upgrade pip 
 
 # Copiar el archivo de requerimientos al contenedor
@@ -21,10 +22,16 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app
 
 # Crear el directorio de logs y archivo debug.log
-RUN mkdir -p /app/logs && touch /app/logs/debug.log && chmod -R 777 /app/logs
+RUN mkdir -p /app/backend_django/logs && touch /app/backend_django/logs/debug.log && chmod -R 777 /app/backend_django/logs
 
-# Exponer el puerto 8000
+# Crear la carpeta staticfiles dentro del contenedor
+RUN mkdir -p /app/backend_django/staticfiles
+
+# Ejecutar collectstatic para recopilar archivos estáticos
+RUN python manage.py collectstatic --noinput
+
+# Exponer el puerto 8010
 EXPOSE 8010
 
 # Comando por defecto para iniciar el servidor de desarrollo
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8010"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8010", "--insecure"]
