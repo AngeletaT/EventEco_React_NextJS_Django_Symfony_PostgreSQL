@@ -29,12 +29,12 @@ doctrine:
         controller_resolver:
             auto_mapping: false
         mappings:
-            App:
+            DomainEntities:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Organizer/Domain/Entity'
-                prefix: 'App\Organizer\Domain\Entity'
-                alias: App
+                dir: '%kernel.project_dir%/src'
+                prefix: 'App'
+                alias: DomainEntities
 when@test:
     doctrine:
         dbal:

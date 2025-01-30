@@ -30,6 +30,10 @@ services:
     App\Organizer\Presentation\InAdapter\:
         resource: '../src/Organizer/Presentation/InAdapter/'
         tags: ['controller.service_arguments']
+
+    App\Event\Presentation\InAdapter\:
+        resource: '../src/Event/Presentation/InAdapter/'
+        tags: ['controller.service_arguments']
         
     App\Shared\Exception\GlobalExceptionHandler:
         tags:
