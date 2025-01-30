@@ -1,15 +1,15 @@
 services:
-  nextjs:
-    build:
-      context: ./full-stack-nextjs
-      dockerfile: Dockerfile
-    container_name: nextjs-container
-    ports:
-      - "5173:5173"
-    volumes:
-      - ./full-stack-nextjs:/app
-      - /app/node_modules
-    command: npm run dev -- -p 5173
+  # nextjs:
+  #   build:
+  #     context: ./full-stack-nextjs
+  #     dockerfile: Dockerfile
+  #   container_name: nextjs-container
+  #   ports:
+  #     - "5173:5173"
+  #   volumes:
+  #     - ./full-stack-nextjs:/app
+  #     - /app/node_modules
+  #   command: npm run dev -- -p 5173
 
   django:
     build:
@@ -30,40 +30,40 @@ services:
       - postgres
       - redis
 
-  resend:
-    build:
-      context: ./resend-express
-    container_name: resend-container
-    ports:
-      - "3010:3010"
-    volumes:
-      - ./resend-express:/app
-      - /app/node_modules
-    depends_on:
-      - postgres
-      - redis
-    environment:
-      RESEND_API_KEY: ${RESEND_API_KEY}
-    command: >
-      sh -c "npm install && node app/server.js"
+  # resend:
+  #   build:
+  #     context: ./resend-express
+  #   container_name: resend-container
+  #   ports:
+  #     - "3010:3010"
+  #   volumes:
+  #     - ./resend-express:/app
+  #     - /app/node_modules
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #   environment:
+  #     RESEND_API_KEY: ${RESEND_API_KEY}
+  #   command: >
+  #     sh -c "npm install && node app/server.js"
 
-  ultramsg:
-    build:
-      context: ./ultramsg-fastify
-    container_name: ultramsg-container
-    ports:
-      - "3011:3011"
-    volumes:
-      - ./ultramsg-fastify:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      ULTRAMSG_INSTANCE_ID: ${ULTRAMSG_INSTANCE_ID}
-      ULTRAMSG_TOKEN: ${ULTRAMSG_TOKEN}
-      REDIS_HOST: redis-container
-      REDIS_PORT: 6380
-      REDIS_PASSWORD: ${REDIS_PASSWORD}
-    command: >
-      sh -c "npm install && npm run dev"
+  # ultramsg:
+  #   build:
+  #     context: ./ultramsg-fastify
+  #   container_name: ultramsg-container
+  #   ports:
+  #     - "3011:3011"
+  #   volumes:
+  #     - ./ultramsg-fastify:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   environment:
+  #     ULTRAMSG_INSTANCE_ID: ${ULTRAMSG_INSTANCE_ID}
+  #     ULTRAMSG_TOKEN: ${ULTRAMSG_TOKEN}
+  #     REDIS_HOST: redis-container
+  #     REDIS_PORT: 6380
+  #     REDIS_PASSWORD: ${REDIS_PASSWORD}
+  #   command: >
+  #     sh -c "npm install && npm run dev"
 
   redis:
     image: redis:latest
@@ -96,76 +96,72 @@ services:
     volumes:
       - ./nginx-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - symfony-e
-      - symfony-p
-      - springboot
-      - nextjs
       - django
   
-  stripe:
-    build:
-      context: ./stripe-payment
-    container_name: stripe-container
-    ports:
-      - "3012:3012"
-    volumes:
-      - ./stripe-payment:/app
-      - /app/node_modules
-    environment:
-      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
-    command: >
-      sh -c "npm install && node server.js"
+  # stripe:
+  #   build:
+  #     context: ./stripe-payment
+  #   container_name: stripe-container
+  #   ports:
+  #     - "3012:3012"
+  #   volumes:
+  #     - ./stripe-payment:/app
+  #     - /app/node_modules
+  #   environment:
+  #     STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+  #   command: >
+  #     sh -c "npm install && node server.js"
 
-  symfony-p:
-    build:
-      context: ./backend-symfony-Pawnity
-      dockerfile: Dockerfile
-    container_name: p-symfony-container
-    restart: always
-    ports:
-      - "9091:80"
-    volumes:
-      - ./backend-symfony-Pawnity:/var/www/html
-    environment:
-      DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
-    depends_on:
-      - postgres
-    command: >
-      apache2-foreground
+  # symfony-p:
+  #   build:
+  #     context: ./backend-symfony-Pawnity
+  #     dockerfile: Dockerfile
+  #   container_name: p-symfony-container
+  #   restart: always
+  #   ports:
+  #     - "9091:80"
+  #   volumes:
+  #     - ./backend-symfony-Pawnity:/var/www/html
+  #   environment:
+  #     DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
+  #   depends_on:
+  #     - postgres
+  #   command: >
+  #     apache2-foreground
 
-  symfony-e:
-    build:
-      context: ./backend-symfony-EventEco
-      dockerfile: Dockerfile
-    container_name: e-symfony-container
-    restart: always
-    ports:
-      - "8091:80"
-    volumes:
-      - ./backend-symfony-EventEco:/var/www/html
-    environment:
-      DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
-    depends_on:
-      - postgres
-    command: >
-      apache2-foreground
+  # symfony-e:
+  #   build:
+  #     context: ./backend-symfony-EventEco
+  #     dockerfile: Dockerfile
+  #   container_name: e-symfony-container
+  #   restart: always
+  #   ports:
+  #     - "8091:80"
+  #   volumes:
+  #     - ./backend-symfony-EventEco:/var/www/html
+  #   environment:
+  #     DATABASE_URL: "postgresql://postgres:12345678@postgres:5432/Event?serverVersion=16&charset=utf8"
+  #   depends_on:
+  #     - postgres
+  #   command: >
+  #     apache2-foreground
     
-  springboot:
-    build:
-      context: ./backend-springboot
-      dockerfile: Dockerfile
-    volumes:
-      - ./backend-springboot/src:/app/src
-      - ./backend-springboot/build:/app/build
-    container_name: springboot-container
-    ports:
-      - "9090:9090"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/Event
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: 12345678
-    depends_on:
-      - postgres
+  # springboot:
+  #   build:
+  #     context: ./backend-springboot
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./backend-springboot/src:/app/src
+  #     - ./backend-springboot/build:/app/build
+  #   container_name: springboot-container
+  #   ports:
+  #     - "9090:9090"
+  #   environment:
+  #     SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/Event
+  #     SPRING_DATASOURCE_USERNAME: postgres
+  #     SPRING_DATASOURCE_PASSWORD: 12345678
+  #   depends_on:
+  #     - postgres
 
   postgres:
     image: postgres:17
@@ -181,13 +177,13 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./database/Event.sql:/docker-entrypoint-initdb.d/1-init.sql
 
-  phpdoc:
-    image: phpdoc/phpdoc:latest
-    container_name: phpdoc-container
-    volumes:
-      - .:/app
-    working_dir: /app
-    entrypoint: ["phpdoc"]
+  # phpdoc:
+  #   image: phpdoc/phpdoc:latest
+  #   container_name: phpdoc-container
+  #   volumes:
+  #     - .:/app
+  #   working_dir: /app
+  #   entrypoint: ["phpdoc"]
     
 volumes:
   postgres_data:
