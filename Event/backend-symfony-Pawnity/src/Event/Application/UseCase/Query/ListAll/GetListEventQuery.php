@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Event\Application\UseCase\Query;
+namespace App\Event\Application\UseCase\Query\ListAll;
 
 /**
  * Query to get the list of events.

@@ -7,7 +7,7 @@ use App\Event\Application\DTO\Response\GetListEventResponse;
 /**
  * Interface for retrieving a list of events.
  */
-interface GetListEventInterface
+interface ListAllEventsInterface
 {
     /**
      * Retrieves a list of events.

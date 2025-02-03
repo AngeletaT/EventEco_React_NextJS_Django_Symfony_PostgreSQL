@@ -7,9 +7,6 @@ use App\Event\Domain\OutPort\EventRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
-/**
- * Doctrine repository for Event entity
- */
 class EventRepositoryAdapter implements EventRepositoryInterface
 {
     private EntityRepository $repository;
@@ -19,13 +16,13 @@ class EventRepositoryAdapter implements EventRepositoryInterface
         $this->repository = $this->entityManager->getRepository(Event::class);
     }
 
-    /**
-     * Get all events from the database.
-     *
-     * @return Event[]
-     */
     public function findAll(): array
     {
         return $this->repository->findAll();
+    }
+
+    public function findByCategory(int $categoryId): array
+    {
+        return $this->repository->findBy(['idCategory' => $categoryId]);
     }
 }

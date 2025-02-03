@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Event\Presentation\InAdapter;
+namespace App\Event\Presentation\InAdapter\Providers;
 
-use App\Event\Application\UseCase\Query\GetListEventService;
+use App\Event\Application\UseCase\Query\ListAll\GetListEventService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Controller for handling Event-related operations.
  */
-class EventController
+class ListAllEventsProvider
 {
     private GetListEventService $service;
 
@@ -27,4 +27,5 @@ class EventController
 
         return new JsonResponse($events, JsonResponse::HTTP_OK);
     }
+    
 }

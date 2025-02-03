@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Event\Application\UseCase\Query;
+namespace App\Event\Application\UseCase\Query\ListAll;
 
 use App\Event\Application\DTO\Response\GetListEventResponse;
-use App\Event\Application\UseCase\InPort\GetListEventInterface;
+use App\Event\Application\UseCase\InPort\ListAllEventsInterface;
 use App\Event\Domain\OutPort\EventRepositoryInterface;
 use App\Event\Presentation\Assembler\Response\GetListEventResponseAssembler;
 
 /**
  * Handler for retrieving a list of events.
  */
-class GetListEventHandler implements GetListEventInterface
+class GetListEventHandler implements ListAllEventsInterface
 {
     private EventRepositoryInterface $repository;
 

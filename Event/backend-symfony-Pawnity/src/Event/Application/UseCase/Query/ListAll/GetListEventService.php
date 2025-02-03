@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Event\Application\UseCase\Query;
+namespace App\Event\Application\UseCase\Query\ListAll;
 
 use App\Event\Application\DTO\Response\GetListEventResponse;
 use App\Event\Application\Mapper\EventMapper;
