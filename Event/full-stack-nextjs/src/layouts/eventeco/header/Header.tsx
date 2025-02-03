@@ -20,7 +20,7 @@ const Header: React.FC = () => {
                     <a href="/eventeco/home" className={styles.link}>
                         Inicio
                     </a>
-                    <a href="/eventeco/events" className={styles.link}>
+                    <a href="/eventeco/shop" className={styles.link}>
                         Eventos
                     </a>
                     <a href="/eventeco/about" className={styles.link}>

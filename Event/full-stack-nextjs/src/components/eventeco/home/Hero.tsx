@@ -14,13 +14,7 @@ const Hero: React.FC = () => {
             <div className={styles.overlay}>
                 <h1 className={styles.slogan}>Donde la música y la sostenibilidad se encuentran</h1>
                 <p className={styles.subtitle}>Música, deporte, cultura y mucho más</p>
-                <div className={`p-inputgroup ${styles.search}`}>
-                    <span className="p-inputgroup-addon">
-                        <i className="pi pi-search"></i>
-                    </span>
-                    <InputText placeholder="Encuentra tu ciudad" />
-                </div>
-                <Button label="Explorar Eventos" className="p-button-success" />
+                <Button label="Explorar Eventos" className="p-button-success" onClick={() => (window.location.href = "/eventeco/shop")} />
             </div>
         </section>
     );

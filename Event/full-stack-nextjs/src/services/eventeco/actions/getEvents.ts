@@ -6,7 +6,6 @@ export const fetchEvents = async (): Promise<Event[]> => {
         const response = await djangoAPI_E.get("/events/listAll");
         return response.data as Event[];
     } catch (error) {
-        return [];
         console.error("Error fetching events:", error);
         throw new Error("Failed to fetch events.");
     }

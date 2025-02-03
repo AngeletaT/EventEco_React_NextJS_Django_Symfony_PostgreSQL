@@ -76,7 +76,7 @@
 /* Carousel Section */
 .carousel {
     position: relative;
-    height: 400px;
+    height: 550px;
     background-size: cover;
     background-position: center;
     color: #333;
@@ -98,15 +98,15 @@
 .categoryCard {
     position: relative;
     text-align: center;
-    width: 300px;
-    height: 250px;
+    width: 440px;
+    height: 350px;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
-    gap: 10px;
+    gap: 15px;
 }
 
 .categoryImage {

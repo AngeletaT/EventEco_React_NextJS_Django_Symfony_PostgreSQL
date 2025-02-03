@@ -24,11 +24,16 @@ const PopularEvents: React.FC<PopularEventsProps> = ({ events }) => {
                 {popularEvents.map((event) => (
                     <div key={event.idevent} className={styles.eventcard}>
                         <img src={event.urlposter} alt={event.name} className={styles.eventimage} />
-                        <h3>{event.name}</h3>
-                        <p>
-                            {new Date(event.startdate).toLocaleDateString("es-ES")} - {event.location}
-                        </p>
-                        <Button label="Ver más" className="p-button-success" />
+                        <div className={styles.eventinfo}>
+                            <h3>{event.name}</h3>
+                            <p>{new Date(event.startdate).toLocaleDateString("es-ES")}</p>
+                            <p>{event.location}</p>
+                        </div>
+                        <Button
+                            label="Ver más"
+                            onClick={() => (window.location.href = `/eventeco/shop/event/${event.name}`)}
+                            className="p-button-success"
+                        />
                     </div>
                 ))}
             </div>
