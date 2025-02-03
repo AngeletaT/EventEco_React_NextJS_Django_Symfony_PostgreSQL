@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Organizer\Application\UseCase\Command;
+namespace App\Organizer\Application\UseCase\Command\Register;
 
 use App\Organizer\Application\Mapper\OrganizerMapper;
 use App\Organizer\Domain\Exception\DuplicateOrganizerException;
 use App\Organizer\Domain\OutPort\OrganizerRepositoryInterface;
-use App\Organizer\Domain\Entity\Organizer;
 
-class CreateOrganizerHandler
+class RegisterOrganizerHandler
 {
     private OrganizerRepositoryInterface $repository;
     private OrganizerMapper $mapper;
@@ -20,7 +19,7 @@ class CreateOrganizerHandler
         $this->mapper = $mapper;
     }
 
-    public function handle(CreateOrganizerCommand $command): void
+    public function handle(RegisterOrganizerCommand $command): void
     {
         // Validar duplicados
         if ($this->repository->existsByEmail($command->getEmail())) {

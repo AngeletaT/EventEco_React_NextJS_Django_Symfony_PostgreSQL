@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Organizer\Presentation\InAdapter;
+namespace App\Organizer\Presentation\InAdapter\Processors;
 
-use App\Organizer\Application\UseCase\Command\CreateOrganizerService;
-use App\Organizer\Presentation\Assembler\Request\CreateOrganizerRequestAssembler;
+use App\Organizer\Application\UseCase\Command\Register\RegisterOrganizerService;
+use App\Organizer\Presentation\Assembler\Request\RegisterOrganizerRequestAssembler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,14 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Controller for handling Organizer-related operations.
  */
-class OrganizerController
+class RegisterOrganizerProcesor
 {
-    private CreateOrganizerService $service;
-    private CreateOrganizerRequestAssembler $requestAssembler;
+    private RegisterOrganizerService $service;
+    private RegisterOrganizerRequestAssembler $requestAssembler;
 
     public function __construct(
-        CreateOrganizerService $service,
-        CreateOrganizerRequestAssembler $requestAssembler
+        RegisterOrganizerService $service,
+        RegisterOrganizerRequestAssembler $requestAssembler
     ) {
         $this->service = $service;
         $this->requestAssembler = $requestAssembler;

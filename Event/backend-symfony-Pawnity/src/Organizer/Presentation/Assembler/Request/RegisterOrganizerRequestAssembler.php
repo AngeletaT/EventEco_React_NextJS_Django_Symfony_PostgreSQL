@@ -2,12 +2,12 @@
 
 namespace App\Organizer\Presentation\Assembler\Request;
 
-use App\Organizer\Application\DTO\Request\CreateOrganizerRequest;
+use App\Organizer\Application\DTO\Request\RegisterOrganizerRequest;
 use Symfony\Component\HttpFoundation\Request;
 
-class CreateOrganizerRequestAssembler
+class RegisterOrganizerRequestAssembler
 {
-    public function fromHttpRequest(Request $request): CreateOrganizerRequest
+    public function fromHttpRequest(Request $request): RegisterOrganizerRequest
     {
         $data = json_decode($request->getContent(), true);
 
@@ -15,6 +15,6 @@ class CreateOrganizerRequestAssembler
             throw new \InvalidArgumentException('Invalid request payload. Expected JSON object.');
         }
 
-        return new CreateOrganizerRequest($data);
+        return new RegisterOrganizerRequest($data);
     }
 }

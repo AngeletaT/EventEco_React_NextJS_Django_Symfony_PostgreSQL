@@ -2,14 +2,14 @@
 
 namespace App\Organizer\Presentation\Assembler\Response;
 
-use App\Organizer\Application\DTO\Response\CreateOrganizerResponse;
+use App\Organizer\Application\DTO\Response\RegisterOrganizerResponse;
 use App\Organizer\Domain\Entity\Organizer;
 
-class CreateOrganizerResponseAssembler
+class RegisterOrganizerResponseAssembler
 {
-    public function toHttpResponse(Organizer $organizer): CreateOrganizerResponse
+    public function toHttpResponse(Organizer $organizer): RegisterOrganizerResponse
     {
-        return new CreateOrganizerResponse(
+        return new RegisterOrganizerResponse(
             idOrg: (string) $organizer->getIdOrg(),
             uuid: $organizer->getUuid(),
             email: $organizer->getEmail(),

@@ -4,7 +4,7 @@ namespace App\Organizer\Application\DTO\Response;
 
 use JsonSerializable;
 
-class CreateOrganizerResponse implements JsonSerializable
+class RegisterOrganizerResponse implements JsonSerializable
 {
     private array $data;
 

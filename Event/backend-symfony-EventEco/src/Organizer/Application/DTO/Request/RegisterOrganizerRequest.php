@@ -4,7 +4,7 @@ namespace App\Organizer\Application\DTO\Request;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateOrganizerRequest
+class RegisterOrganizerRequest
 {
     /**
      * @Assert\NotBlank(message="El campo 'email' es obligatorio.")

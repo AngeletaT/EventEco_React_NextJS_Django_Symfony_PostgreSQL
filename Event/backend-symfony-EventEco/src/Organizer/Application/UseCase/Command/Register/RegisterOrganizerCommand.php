@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Organizer\Application\UseCase\Command;
+namespace App\Organizer\Application\UseCase\Command\Register;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -8,7 +8,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * Command to handle the creation of an Organizer.
  */
 
-class CreateOrganizerCommand
+class RegisterOrganizerCommand
 {
     private array $data;
 
