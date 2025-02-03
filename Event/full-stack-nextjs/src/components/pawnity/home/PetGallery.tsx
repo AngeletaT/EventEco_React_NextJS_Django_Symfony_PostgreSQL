@@ -13,7 +13,7 @@ const pets = [
 const PetGallery: React.FC = () => {
     return (
         <section className={styles.petGallery}>
-            <h2 className={styles.sectionTitle}>Conoce a las Mascotas</h2>
+            <h2>Conoce a las Mascotas</h2>
             <div className={styles.petGrid}>
                 {pets.map((pet) => (
                     <div key={pet.id} className={styles.petCard}>

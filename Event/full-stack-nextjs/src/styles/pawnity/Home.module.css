@@ -4,6 +4,7 @@
     width: 100%;
     height: 60vh;
     overflow: hidden;
+    background-color: #f0f8ff;
 }
 
 .background {
@@ -44,7 +45,8 @@
 
 /* Pet Gallery */
 .petGallery {
-    padding: 2rem;
+    padding: 2rem 1rem;
+    text-align: center;
 }
 
 .petGrid {
@@ -56,7 +58,7 @@
 .petCard {
     text-align: center;
     padding: 1rem;
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -67,21 +69,23 @@
     border-radius: 8px;
 }
 
-
 /* Carousel Section */
 .carousel {
     position: relative;
     height: 400px;
     background-size: cover;
     background-position: center;
-    color: white;
+    color: #333333;
     padding: 2rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .carouselTitle {
     font-size: 2rem;
     font-weight: bold;
-    color: black;
+    color: #ff6f61;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,4 +124,41 @@
     padding: 0.5rem;
     border-radius: 0 0 8px 8px;
     width: 100%;
+    color: #ffffff;
+}
+
+/* Event Cards */
+.popularSection {
+    padding: 2rem 1rem;
+    background-color: #ffecb3;
+    text-align: center;
+}
+
+.eventgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.eventcard {
+    background-color: #ffffff;
+    border: 2px solid #ffecb3;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.eventcard:hover {
+    transform: translateY(-8px);
+}
+
+.eventimage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
 }

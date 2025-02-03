@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #eaf7fe;
+    background-color: #f0f8ff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
@@ -28,13 +28,13 @@
 
 .link {
     text-decoration: none;
-    color: #444;
+    color: #333333;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .link:hover {
-    color: #0056b3;
+    color: #ff6f61;
 }
 
 .actions {

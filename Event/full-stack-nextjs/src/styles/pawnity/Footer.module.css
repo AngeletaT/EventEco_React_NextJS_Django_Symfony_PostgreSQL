@@ -1,6 +1,6 @@
 .footer {
-    background-color: #007bff;
-    color: white;
+    background-color: #f0f8ff;
+    color: #444;
     padding: 2rem 1rem;
 }
 
@@ -23,13 +23,13 @@
 .links a,
 .social a {
     font-size: 0.9rem;
-    color: #ddd;
+    color: #444;
     text-decoration: none;
 }
 
 .links a:hover,
 .social a:hover {
-    color: #ffecb3;
+    color: #ff6f61;
 }
 
 .social .icons {
