@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
                     </span>
                     <InputText placeholder="Encuentra tu ciudad" />
                 </div>
-                <Button label="Explorar Eventos" className="p-button-primary" />
+                <Button label="Explorar Eventos" className="p-button-success" />
             </div>
         </section>
     );
