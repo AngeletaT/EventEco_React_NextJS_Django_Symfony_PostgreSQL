@@ -30,7 +30,7 @@ const ListEvents: React.FC<ListEventsProps> = ({ events }) => {
                         <Button
                             label="Ver más"
                             onClick={() => (window.location.href = `/eventeco/shop/event/${event.name}`)}
-                            className={`p-button-success ${styles.eventbutton}`}
+                            className={`p-button-info ${styles.eventbutton}`}
                         />
                     </div>
                 ))}

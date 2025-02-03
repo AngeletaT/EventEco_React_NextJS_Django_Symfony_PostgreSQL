@@ -17,10 +17,10 @@ const Header: React.FC = () => {
 
                 {/* Navigation Menu */}
                 <nav className={styles.nav}>
-                    <a href="/" className={styles.link}>
+                    <a href="/pawnity/home" className={styles.link}>
                         Inicio
                     </a>
-                    <a href="/pawnity/events" className={styles.link}>
+                    <a href="/pawnity/shop" className={styles.link}>
                         Eventos
                     </a>
                     <a href="/pawnity/adoptions" className={styles.link}>

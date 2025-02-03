@@ -11,13 +11,7 @@ const Hero: React.FC = () => {
             <div className={styles.overlay}>
                 <h1 className={styles.title}>Haz la Diferencia, Adopta una Vida</h1>
                 <p className={styles.subtitle}>Explora eventos que promueven la adopción y el apadrinamiento de mascotas.</p>
-                <div className={`p-inputgroup ${styles.search}`}>
-                    <span className="p-inputgroup-addon">
-                        <i className="pi pi-search"></i>
-                    </span>
-                    <InputText placeholder="Encuentra tu ciudad" />
-                </div>
-                <Button label="Explorar Eventos" className="p-button-primary" />
+                <Button label="Explorar Eventos" className="p-button-info" onClick={() => (window.location.href = "/pawnity/shop")} />
             </div>
         </section>
     );
