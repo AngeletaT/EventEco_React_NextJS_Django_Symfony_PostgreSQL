@@ -4,10 +4,11 @@ namespace App\Event\Presentation\InAdapter\Providers;
 
 use App\Event\Application\UseCase\Query\ListAll\GetListEventService;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Controller for handling Event-related operations.
+ * Provider for listing all events with pagination.
  */
 class ListAllEventsProvider
 {
@@ -19,13 +20,15 @@ class ListAllEventsProvider
     }
 
     /**
-     * @Route("/api/events", name="get_events", methods={"GET"})
+     * @Route("/api/events", name="get_all_events", methods={"GET"})
      */
-    public function getList(): JsonResponse
+    public function getList(Request $request): JsonResponse
     {
-        $events = $this->service->execute();
+        $page = max(1, (int) $request->query->get('page', 1));
+        $limit = max(1, (int) $request->query->get('limit', 5));
 
-        return new JsonResponse($events, JsonResponse::HTTP_OK);
+        $paginationResult = $this->service->execute($page, $limit);
+
+        return new JsonResponse($paginationResult, JsonResponse::HTTP_OK);
     }
-    
 }

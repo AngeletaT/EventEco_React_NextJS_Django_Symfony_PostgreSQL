@@ -9,16 +9,16 @@ use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity]
 #[ORM\Table(name: "p_events")]
-#[ApiResource(
-    operations: [
-        new GetCollection(
-            name: 'get_events',
-            uriTemplate: '/events',
-            description: 'Retrieve the list of events.',
-            normalizationContext: ['groups' => ['event_read']]
-        )
-    ]
-)]
+// #[ApiResource(
+//     operations: [
+//         new GetCollection(
+//             name: 'get_events',
+//             uriTemplate: '/events',
+//             description: 'Retrieve the list of events.',
+//             normalizationContext: ['groups' => ['event_read']]
+//         )
+//     ]
+// )]
 class Event
 {
     #[ORM\Id]

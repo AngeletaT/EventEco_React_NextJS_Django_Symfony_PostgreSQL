@@ -26,8 +26,8 @@ class GetListEventResponseAssembler
             'location' => $event->getLocation(),
             'description' => $event->getDescription(),
             'status' => $event->getStatus(),
-            'urlimage' => self::fixUrlImage($event->getUrlImage()), // ✅ Se normaliza URL array
-            'urlposter' => str_replace('/', '\\', $event->getUrlPoster()), // ✅ Se normaliza
+            'urlimage' => self::fixUrlImage($event->getUrlImage()),
+            'urlposter' => str_replace('/', '\\', $event->getUrlPoster()),
             'orgid' => $event->getOrgId(),
             'idcategory' => $event->getIdCategory(),
             'createdat' => $event->getCreatedAt()->format('Y-m-d\TH:i:s.u\Z'),
@@ -36,15 +36,23 @@ class GetListEventResponseAssembler
     }
 
     /**
-     * Convert an array of Event entities into a GetListEventResponse DTO.
+     * Convert an array of Event entities into a paginated response.
      *
      * @param Event[] $events
-     * @return GetListEventResponse
+     * @param int $page
+     * @param int $limit
+     * @param int $total
+     * @return array
      */
-    public static function toHttpResponseCollection(array $events): GetListEventResponse
+    public static function toPaginatedResponse(array $eventDTOs, int $page, int $limit, int $total): array
     {
-        $mappedEvents = array_map(fn(Event $event) => self::toArray($event), $events);
-        return new GetListEventResponse($mappedEvents);
+        return [
+            'page' => $page,
+            'per_page' => $limit,
+            'total' => $total,
+            'total_pages' => ceil($total / $limit),
+            'data' => $eventDTOs
+        ];
     }
 
     /**
@@ -56,13 +64,11 @@ class GetListEventResponseAssembler
     private static function fixUrlImage($urlImage): array
     {
         if (is_string($urlImage)) {
-            // Decodificamos si viene como string JSON
             $decoded = json_decode($urlImage, true);
             if (json_last_error() === JSON_ERROR_NONE) {
                 return array_map(fn($path) => str_replace('/', '\\', $path), $decoded);
             }
         } elseif (is_array($urlImage)) {
-            // Convertimos los elementos del array
             return array_map(fn($path) => str_replace('/', '\\', $path), $urlImage);
         }
         return [];

@@ -25,4 +25,25 @@ class EventRepositoryAdapter implements EventRepositoryInterface
     {
         return $this->repository->findBy(['idCategory' => $categoryId]);
     }
+
+    public function findAllPaginated(int $offset, int $limit): array
+    {
+        return $this->entityManager->createQueryBuilder()
+            ->select('e')
+            ->from(Event::class, 'e')
+            ->orderBy('e.startDate', 'ASC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countAll(): int
+    {
+        return $this->entityManager->getRepository(Event::class)
+            ->createQueryBuilder('e')
+            ->select('COUNT(e.idEvent)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
