@@ -7,7 +7,7 @@ use Doctrine\DBAL\Types\Type;
 
 class StatusEventEnumType extends Type
 {
-    public const NAME = 'statusEvent';
+    public const NAME = 'statusevent';
 
     public const VALUES = [
         'Preparing',

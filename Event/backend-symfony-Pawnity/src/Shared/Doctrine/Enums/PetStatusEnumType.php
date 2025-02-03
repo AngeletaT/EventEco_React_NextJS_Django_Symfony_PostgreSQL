@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\Type;
  */
 class PetStatusEnumType extends Type
 {
-    public const NAME = 'petStatus';
+    public const NAME = 'petstatus';
 
     private const VALUES = [
         'available',
