@@ -12,6 +12,7 @@ class E_Event(models.Model):
 
      idevent = models.AutoField(primary_key=True)
      name = models.CharField(max_length=100, unique=True)
+     eventslug = models.CharField(max_length=100, unique=True)
      startdate = models.DateField()
      enddate = models.DateField()
      location = models.CharField(max_length=255, null=True, blank=True)

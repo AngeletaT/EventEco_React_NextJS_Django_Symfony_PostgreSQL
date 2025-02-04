@@ -8,6 +8,7 @@ class P_EventSerializer(serializers.ModelSerializer):
           fields = [
                'idevent',
                'name',
+               'eventslug',
                'startdate',
                'enddate',
                'location',
