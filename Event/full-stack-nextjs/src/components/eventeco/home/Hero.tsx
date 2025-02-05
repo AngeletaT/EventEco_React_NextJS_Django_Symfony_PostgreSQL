@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "@/styles/eventeco/Home.module.css";
-import { InputText, Button } from "@/utils/PrimeReactComponents";
+import { Button } from "@/utils/PrimeReactComponents";
 
 const Hero: React.FC = () => {
     return (

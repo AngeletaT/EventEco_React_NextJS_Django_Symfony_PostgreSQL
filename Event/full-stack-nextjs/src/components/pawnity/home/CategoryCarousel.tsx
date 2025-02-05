@@ -10,6 +10,24 @@ interface CategoryCarouselProps {
 }
 
 const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ categories }) => {
+    const responsiveOptions = [
+        {
+            breakpoint: "1024px",
+            numVisible: 3,
+            numScroll: 1,
+        },
+        {
+            breakpoint: "768px",
+            numVisible: 2,
+            numScroll: 1,
+        },
+        {
+            breakpoint: "560px",
+            numVisible: 1,
+            numScroll: 1,
+        },
+    ];
+
     return (
         <section className={styles.carousel}>
             <h3 className={styles.carouselTitle}>Las mejores experiencias con mascotas</h3>
@@ -19,6 +37,7 @@ const CategoryCarousel: React.FC<CategoryCarouselProps> = ({ categories }) => {
                 numScroll={1}
                 circular={true}
                 autoplayInterval={3000}
+                responsiveOptions={responsiveOptions}
                 itemTemplate={(category) => (
                     <div className={styles.categoryCard}>
                         <img src={category.imageurl} alt={category.categoryname} className={styles.categoryImage} />

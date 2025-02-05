@@ -1,30 +1,13 @@
-import React from "react";
-import { GetServerSideProps } from "next";
-import { fetchCategories } from "@/services/pawnity/actions/getCategories";
-import { fetchEvents } from "@/services/pawnity/actions/getEvents";
+import { Metadata } from "next";
 import PawnityHomeClient from "@/components/pawnity/home/PawnityHomeClient";
-import { Category } from "@/types/Category";
-import { Event } from "@/types/Event";
 
-interface PawnityHomePageProps {
-    categories: Category[];
-    events: Event[];
-}
-
-const PawnityHomePage: React.FC<PawnityHomePageProps> = ({ categories, events }) => {
-    return <PawnityHomeClient categories={categories} events={events} />;
+export const metadata: Metadata = {
+    title: "Pawnity - Eventos Sostenibles",
+    description: "Descubre y participa en eventos eco-friendly que marcan la diferencia.",
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-    const categories = await fetchCategories();
-    const events = await fetchEvents();
-
-    return {
-        props: {
-            categories,
-            events,
-        },
-    };
+const PawnityHomePage = () => {
+    return <PawnityHomeClient />;
 };
 
 export default PawnityHomePage;

@@ -4,7 +4,6 @@
     width: 100%;
     height: 60vh;
     overflow: hidden;
-    background-color: #f0f8ff;
 }
 
 .background {
@@ -12,8 +11,9 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 95%;
     object-fit: cover;
+    object-position: top;
     filter: brightness(70%);
 }
 
@@ -25,7 +25,7 @@
     padding-top: 10%;
 }
 
-.title {
+.slogan {
     font-size: 2.5rem;
     font-weight: bold;
 }
@@ -35,57 +35,51 @@
     margin-top: 0.5rem;
 }
 
-.search {
-    margin-top: 2rem;
-    width: 25rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-}
-
-/* Pet Gallery */
-.petGallery {
-    padding: 2rem 1rem;
-    text-align: center;
-}
-
-.petGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+/* Category Skeleton */
+.categorySkeletonContainer {
+    display: flex;
     gap: 1rem;
-}
-
-.petCard {
-    text-align: center;
     padding: 1rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.petImage {
-    width: 100px;
-    height: auto;
+.categorySkeletonContainer {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.categorySkeleton {
+    width: 150px;
+    height: 150px;
     border-radius: 8px;
+    background-color: #f0f0f0;
 }
 
 /* Carousel Section */
 .carousel {
     position: relative;
-    height: 400px;
+    height: 550px;
+    min-height: 60vh;
     background-size: cover;
     background-position: center;
-    color: #333333;
+    color: #333;
     padding: 2rem;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
 }
 
 .carouselTitle {
     font-size: 2rem;
     font-weight: bold;
-    color: #ff6f61;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,15 +90,15 @@
 .categoryCard {
     position: relative;
     text-align: center;
-    width: 300px;
-    height: 250px;
+    width: 90%;
+    height: 350px;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
-    gap: 10px;
+    gap: 15px;
 }
 
 .categoryImage {
@@ -127,11 +121,101 @@
     color: #ffffff;
 }
 
+
+/* Pet Gallery */
+.petGallery {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.petGallery h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: black;
+}
+
+.petGallery h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+}
+
+.petGallery p {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 0.5rem;
+}
+
+.petGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.petCard {
+    text-align: center;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.petImage {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Event Skeleton */
+.eventSkeletonContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.eventSkeletonContainer {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.eventSkeleton {
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    height: 200px;
+}
+
 /* Event Cards */
 .popularSection {
     padding: 2rem 1rem;
-    background-color: #ffecb3;
     text-align: center;
+}
+
+.popularSection h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: black;
+}
+
+.popularSection h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+}
+
+.popularSection p {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 0.5rem;
 }
 
 .eventgrid {
@@ -143,13 +227,12 @@
 }
 
 .eventcard {
-    background-color: #ffffff;
-    border: 2px solid #ffecb3;
-    border-radius: 16px;
+    border: 2px solid #00008bbb;
+    background-color: #f0f0f0;
+    border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     transition: transform 0.2s;
-    position: relative;
 }
 
 .eventcard:hover {
@@ -161,4 +244,61 @@
     height: 150px;
     object-fit: cover;
     border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        height: 40vh;
+    }
+
+    .slogan {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .carousel {
+        height: 300px;
+    }
+
+    .categoryCard {
+        height: 300px;
+    }
+
+    .petGallery h2 {
+        font-size: 1.5rem;
+    }
+
+    .petCard {
+        padding: 0.5rem;
+    }
+
+    .petImage {
+        width: 80px;
+    }
+
+    .eventgrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .categoryCard {
+        height: 250px;
+    }
+
+    .petGallery h2 {
+        font-size: 1.2rem;
+    }
+
+    .petCard {
+        padding: 0.5rem;
+    }
+
+    .petImage {
+        width: 60px;
+    }
 }

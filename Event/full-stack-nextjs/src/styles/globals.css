@@ -21,10 +21,18 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  background-color: #d4f5d4;
+  background-color: #f0f0f0;
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body.eventeco {
+  background-color: #d4f5d4;
+}
+
+body.pawnity {
+  background-color: #c0a8e65e;
 }
 
 /* * {
