@@ -30,7 +30,7 @@ class P_EventViewSet(ListModelMixin, GenericViewSet):
           operation_description="Obtiene la lista de todos los eventos disponibles en Pawnity con filtros y paginación.",
           responses={200: P_EventSerializer(many=True)},
           manual_parameters=[
-               openapi.Parameter('categoryId', openapi.IN_QUERY, description="ID de la categoría de los eventos", type=openapi.TYPE_INTEGER),
+               openapi.Parameter('categorySlug', openapi.IN_QUERY, description="Slug de la categoría de los eventos", type=openapi.TYPE_STRING),
                openapi.Parameter('location', openapi.IN_QUERY, description="Ubicación de los eventos", type=openapi.TYPE_STRING),
                openapi.Parameter('order_by_date', openapi.IN_QUERY, description="Ordenar por fecha (asc/desc)", type=openapi.TYPE_STRING),
                openapi.Parameter('page', openapi.IN_QUERY, description="Número de página para la paginación", type=openapi.TYPE_INTEGER),
@@ -41,7 +41,7 @@ class P_EventViewSet(ListModelMixin, GenericViewSet):
           Devuelve una lista de eventos registrados en Pawnity, con filtros y paginación.
 
           **Parámetros de consulta:**
-          - **categoryId**: ID de la categoría para filtrar.
+          - **categorySlug**: Slug de la categoría para filtrar.
           - **location**: Filtra por ubicación de los eventos.
           - **order_by_date**: Ordena los eventos por fecha (ascendente o descendente).
           - **page**: Número de página para la paginación (por defecto página 1).
@@ -49,22 +49,19 @@ class P_EventViewSet(ListModelMixin, GenericViewSet):
           **Retorna:**
           - 200 OK: Lista de eventos en formato JSON con información de paginación.
           """
-          # Filtramos según los parámetros de la URL
-          category_id = request.query_params.get('categoryId')
+          category_slug = request.query_params.get('categorySlug')
           location = request.query_params.get('location')
           order_by_date = request.query_params.get('order_by_date')
           page = request.query_params.get('page', 1)  # Valor por defecto 1
 
-          # Filtrar por categoría si categoryId está presente
+          # Filtramos los eventos
           queryset = self.get_queryset()
-          if category_id:
-               queryset = queryset.filter(idcategory=category_id)
+          if category_slug:
+               queryset = queryset.filter(idcategory__categoryslug=category_slug)  # Cambio aquí
 
-          # Filtrar por ubicación si location está presente
           if location:
                queryset = queryset.filter(location__icontains=location)
 
-          # Ordenar por fecha si order_by_date está presente
           if order_by_date:
                if order_by_date.lower() == 'asc':
                     queryset = queryset.order_by('startdate')
@@ -76,5 +73,5 @@ class P_EventViewSet(ListModelMixin, GenericViewSet):
           result_page = paginator.paginate_queryset(queryset, request)
           serializer = self.get_serializer(result_page, many=True)
 
-          # Retornar los resultados con la paginación
           return paginator.get_paginated_response(serializer.data)
+
