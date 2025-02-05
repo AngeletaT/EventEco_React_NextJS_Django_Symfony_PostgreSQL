@@ -1,10 +1,13 @@
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import ListModelMixin
 from rest_framework.pagination import PageNumberPagination
 from .models import E_Event
-from .serializers import E_EventSerializer
+from .serializers import E_EventSerializer, E_EventDetailSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
@@ -75,3 +78,35 @@ class E_EventViewSet(ListModelMixin, GenericViewSet):
 
           return paginator.get_paginated_response(serializer.data)
 
+class E_EventDetailViewSet(ListModelMixin, GenericViewSet):
+     """
+     API ViewSet para obtener los detalles de un evento en Eventeco.
+
+     - **Obtener detalles de un evento:** `retrieve_event_details()`
+     """
+     queryset = E_Event.objects.all()
+     serializer_class = E_EventDetailSerializer
+     lookup_field = 'eventslug'
+
+     @swagger_auto_schema(
+          operation_description="Obtiene los detalles de un evento específico en Eventeco basado en su slug.",
+          responses={200: E_EventDetailSerializer()},
+          manual_parameters=[
+               openapi.Parameter('eventslug', openapi.IN_PATH, description="Slug del evento", type=openapi.TYPE_STRING),
+          ]
+     )
+     @action(detail=True, methods=['get'], url_path='details')
+     def retrieve_event_details(self, request, eventslug=None):
+          """
+          Devuelve los detalles de un evento específico basado en su slug.
+
+          **Parámetros:**
+          - **eventslug**: Identificador único del evento.
+
+          **Retorna:**
+          - 200 OK: Detalles del evento en formato JSON.
+          - 404 Not Found: Si el evento no existe.
+          """
+          event = get_object_or_404(E_Event, eventslug=eventslug)
+          serializer = self.get_serializer(event)
+          return Response(serializer.data, status=status.HTTP_200_OK)

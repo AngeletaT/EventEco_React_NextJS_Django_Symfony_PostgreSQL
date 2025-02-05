@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'backend_django.app.categories.P_categories',
     'backend_django.app.events.E_events',
     'backend_django.app.events.P_events',
+    'backend_django.app.subEvents.E_subEvents',
+    'backend_django.app.subEvents.P_subEvents',
 ]
 
 REST_FRAMEWORK = {
