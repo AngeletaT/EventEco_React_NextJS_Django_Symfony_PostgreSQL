@@ -31,7 +31,7 @@ const PopularEvents: React.FC<PopularEventsProps> = ({ events }) => {
                         </div>
                         <Button
                             label="Ver más"
-                            onClick={() => (window.location.href = `/eventeco/shop/event/${event.name}`)}
+                            onClick={() => (window.location.href = `/eventeco/shop/event/${event.eventslug}`)}
                             className="p-button-success"
                         />
                     </div>

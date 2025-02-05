@@ -1,18 +1,16 @@
-"use client";
+import { Metadata } from "next";
 
-import { useParams } from "next/navigation";
-import React from "react";
-
-const EventDetailPage: React.FC = () => {
-    const params = useParams();
-    const eventName = params.name;
-
-    return (
-        <div style={{ padding: "2rem" }}>
-            <h1>Detalles del Evento: {eventName}</h1>
-            <p>Aquí se mostrarán los detalles del evento seleccionado.</p>
-        </div>
-    );
+export const metadata: Metadata = {
+    title: "Details Event",
 };
 
-export default EventDetailPage;
+export default async function Page(props: { params: Promise<{ eventslug: string }> }) {
+    const params = await props.params;
+    const eventslug = params.eventslug;
+
+    return (
+        <section>
+            <h1>event Details {eventslug}</h1>
+        </section>
+    );
+}

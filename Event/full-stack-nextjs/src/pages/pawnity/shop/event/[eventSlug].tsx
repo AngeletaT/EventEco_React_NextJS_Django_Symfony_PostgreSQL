@@ -5,11 +5,11 @@ import React from "react";
 
 const EventDetailPage: React.FC = () => {
     const params = useParams();
-    const eventName = params.name;
+    const eventSlug = params.eventSlug;
 
     return (
         <div style={{ padding: "2rem" }}>
-            <h1>Detalles del Evento: {eventName}</h1>
+            <h1>Detalles del Evento: {eventSlug}</h1>
             <p>Aquí se mostrarán los detalles del evento seleccionado.</p>
         </div>
     );

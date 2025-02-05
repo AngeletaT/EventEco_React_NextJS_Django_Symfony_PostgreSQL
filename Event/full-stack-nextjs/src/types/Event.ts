@@ -1,5 +1,6 @@
 export interface Event {
     idevent: number;
+    eventslug: string;
     name: string;
     startdate: string;
     enddate: string;
