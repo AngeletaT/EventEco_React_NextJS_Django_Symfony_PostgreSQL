@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from backend_django.app.categories.P_categories.models import P_EventCategory
 
 class P_Event(models.Model):
      STATUS_CHOICES = [
@@ -21,7 +22,7 @@ class P_Event(models.Model):
      urlimage = ArrayField(models.URLField(max_length=255), null=True, blank=True)
      urlposter = models.URLField(max_length=255, null=True, blank=True)
      orgid = models.IntegerField() 
-     idcategory = models.IntegerField() 
+     idcategory = models.ForeignKey(P_EventCategory, on_delete=models.CASCADE, db_column='idcategory')
      createdat = models.DateTimeField(auto_now_add=True)
      updatedat = models.DateTimeField(auto_now=True)
 
