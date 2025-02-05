@@ -1,7 +1,7 @@
 export interface Event {
     idevent: number;
-    eventslug: string;
     name: string;
+    eventslug: string;
     startdate: string;
     enddate: string;
     location: string;
@@ -11,6 +11,7 @@ export interface Event {
     urlposter: string;
     orgid: number;
     idcategory: number;
+    category: object;
     createdat: string;
     updatedat: string;
 }

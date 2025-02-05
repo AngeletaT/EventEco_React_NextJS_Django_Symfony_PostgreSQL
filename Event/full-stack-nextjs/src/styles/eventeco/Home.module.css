@@ -4,7 +4,6 @@
     width: 100%;
     height: 60vh;
     overflow: hidden;
-    background-color: black;
 }
 
 .video {
@@ -73,21 +72,51 @@
     color: #388e3c;
 }
 
+/* Category Skeleton */
+.categorySkeletonContainer {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.categorySkeletonContainer {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.categorySkeleton {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+}
+
 /* Carousel Section */
 .carousel {
     position: relative;
     height: 550px;
+    min-height: 60vh;
     background-size: cover;
     background-position: center;
     color: #333;
     padding: 2rem;
-    background-color: #f5fff5;
 }
 
 .carouselTitle {
     font-size: 2rem;
     font-weight: bold;
-    color: #388e3c;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,7 +127,7 @@
 .categoryCard {
     position: relative;
     text-align: center;
-    width: 440px;
+    width: 90%;
     height: 350px;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
@@ -129,11 +158,56 @@
     color: #ffffff;
 }
 
+/* Event Skeleton */
+.eventSkeletonContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.eventSkeletonContainer {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.eventSkeleton {
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    height: 200px;
+}
+
 /* Event Cards */
 .popularSection {
     padding: 2rem 1rem;
-    background-color: #f5fff5;
     text-align: center;
+}
+
+.popularSection h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: black;
+}
+
+.popularSection h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+}
+
+.popularSection p {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 0.5rem;
 }
 
 .eventgrid {
@@ -145,8 +219,8 @@
 }
 
 .eventcard {
-    background-color: white;
     border: 1px solid #e0e0e0;
+    background-color: #f0f0f0;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem;
@@ -159,7 +233,53 @@
 
 .eventimage {
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: cover;
     border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero {
+        height: 40vh;
+    }
+
+    .slogan {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .search {
+        width: 20rem;
+    }
+
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+    }
+
+    .carousel {
+        height: 300px;
+    }
+
+    .categoryCard {
+        height: 300px;
+    }
+
+    .eventgrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .categoryCard {
+        height: 250px;
+    }
 }

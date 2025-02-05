@@ -1,13 +1,13 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchEvents } from "@/services/eventeco/actions/getEvents";
+import { getEvents } from "@/services/eventeco/queries/getEvents";
+import { Event } from "@/types/Event";
 
-export const useEvents = () => {
-    return useQuery({
-        queryKey: ["getEvents"],
-        queryFn: fetchEvents,
-        staleTime: 5 * 60 * 1000, // Data is "fresh" for 5 minutes
-        retry: 2, // Retry the request 2 times in case of failure
+export const useEvents = <T extends Event[] = Event[]>() => {
+    return useQuery<T>({
+        queryKey: ["events"],
+        queryFn: getEvents as () => Promise<T>,
+        staleTime: 1000 * 60 * 30,
     });
 };

@@ -1,13 +1,13 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchCategories } from "@/services/eventeco/actions/getCategories";
+import { getCategories } from "@/services/eventeco/queries/getCategories";
+import { Category } from "@/types/Category";
 
-export const useCategories = () => {
-    return useQuery({
-        queryKey: ["getCategories"],
-        queryFn: fetchCategories,
-        staleTime: 5 * 60 * 1000,
-        retry: 2,
+export const useCategories = <T extends Category[] = Category[]>() => {
+    return useQuery<T>({
+        queryKey: ["categories"],
+        queryFn: getCategories as () => Promise<T>,
+        staleTime: 1000 * 60 * 5,
     });
 };
