@@ -28,11 +28,11 @@ body {
 }
 
 body.eventeco {
-  background-color: #d4f5d4;
+  background: linear-gradient(to bottom, #5ea664, #dbf2dc);
 }
 
 body.pawnity {
-  background-color: #c0a8e65e;
+  background: linear-gradient(to bottom, #c2e2c0, #f8ccaf);
 }
 
 /* * {
