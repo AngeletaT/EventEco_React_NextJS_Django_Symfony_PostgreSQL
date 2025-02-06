@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Button } from "primereact/button";
-import { Sidebar } from "primereact/sidebar";
+import { Button } from "@/utils/PrimeReactComponents";
+import { Sidebar } from "@/utils/PrimeReactComponents";
 import { GiHamburgerMenu } from "react-icons/gi";
 import styles from "@/styles/eventeco/Header.module.css";
 
