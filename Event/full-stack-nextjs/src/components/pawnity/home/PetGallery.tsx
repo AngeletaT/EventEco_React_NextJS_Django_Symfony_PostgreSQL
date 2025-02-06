@@ -35,9 +35,8 @@ const PetGallery: React.FC<PetGalleryProps> = ({ pets }) => {
                     <div key={pet.idpet} className={styles.petCard}>
                         <img src={pet.image || "/assets/p_logo/LogoPawnity_Img.png"} alt={pet.name} className={styles.petImage} />
                         <h3>{pet.name}</h3>
-                        <p>
-                            {pet.species} - {pet.breed}
-                        </p>
+                        <p>{pet.breed}</p>
+                        <p>{pet.description}</p>
                         <p>{calculateAge(pet.birthdate)} años</p>
                     </div>
                 ))}
