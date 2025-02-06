@@ -12,6 +12,7 @@ export interface Event {
     orgid: number;
     idcategory: number;
     category: object;
+    subevent: object;
     createdat: string;
     updatedat: string;
 }

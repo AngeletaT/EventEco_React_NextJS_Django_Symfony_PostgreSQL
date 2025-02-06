@@ -37,6 +37,11 @@
     color: #ff6f61;
 }
 
+.active {
+    color: #ff6f61;
+    border-bottom: 2px solid #ff6f61;
+}
+
 .actions {
     display: flex;
     align-items: center;
