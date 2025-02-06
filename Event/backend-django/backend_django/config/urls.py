@@ -47,6 +47,7 @@ urlpatterns = [
     path('p_django/api/categories/', include('backend_django.app.categories.P_categories.urls')),
     path('e_django/api/events/', include('backend_django.app.events.E_events.urls')),
     path('p_django/api/events/', include('backend_django.app.events.P_events.urls')),
+    path('p_django/api/pets/', include('backend_django.app.pets.urls')),
 ]
 
 if settings.DEBUG:

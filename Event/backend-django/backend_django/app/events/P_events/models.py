@@ -21,7 +21,7 @@ class P_Event(models.Model):
      status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Preparing')
      urlimage = ArrayField(models.URLField(max_length=255), null=True, blank=True)
      urlposter = models.URLField(max_length=255, null=True, blank=True)
-     orgid = models.IntegerField() 
+     idorg = models.IntegerField() 
      idcategory = models.ForeignKey(P_EventCategory, on_delete=models.CASCADE, db_column='idcategory')
      createdat = models.DateTimeField(auto_now_add=True)
      updatedat = models.DateTimeField(auto_now=True)
