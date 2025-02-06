@@ -861,7 +861,7 @@ $do$;
 DO
 $do$
 BEGIN
-CREATE TYPE petGender AS ENUM ('male', 'female');
+CREATE TYPE petGender AS ENUM ('macho', 'hembra');
 END
 $do$;
 
@@ -892,49 +892,459 @@ CREATE TABLE P_Pets (
     isActive BOOLEAN DEFAULT TRUE
 );
 
-INSERT INTO P_Pets (name,species,breed,gender,birthDate,description,status,idOrg,image)
-VALUES 
-    ('Buddy','dog','Golden Retriever','male','2020-05-14','Friendly and playful.','available',1,NULL),
-    ('Luna','cat','Siamese','female','2019-08-21','Loves to cuddle.','sponsored',1, NULL),
-    ('Charlie','dog','Labrador','male','2018-12-10','Energetic and loving.','available',1, NULL),
-    ('Milo','dog','Beagle','male','2021-07-05','Curious and smart.','sponsored',1, NULL),
-    ('Bella','cat','Persian','female','2022-01-11','Fluffy and affectionate.','available',1, NULL),
-    ('Max','dog','Bulldog','male','2019-03-30','Loyal and protective.','sponsored',1, NULL),
-    ('Simba','cat','Maine Coon','male','2020-09-15','Majestic and gentle.','available',1, NULL),
-    ('Daisy','dog','Poodle','female','2017-06-25','Loves to play fetch.','available',1, NULL),
-    ('Coco','cat','Bengal','female','2021-10-03','Very playful.','sponsored',2, NULL),
-    ('Rocky','dog','Rottweiler','male','2018-11-22','Strong and loving.','available',2, NULL),
-    ('Chloe','cat','British Shorthair','female','2019-02-14','Calm and elegant.','sponsored',2, NULL),
-    ('Buster','dog','Dachshund','male','2021-05-29','Small but brave.','available',2, NULL),
-    ('Loki','cat','Sphynx','male','2020-04-01','Unique and friendly.','available',2, NULL),
-    ('Rosie','dog','Cocker Spaniel','female','2021-08-17','Loves attention.','sponsored',2, NULL),
-    ('Oreo','cat','Ragdoll','male','2019-07-12','Fluffy and calm.','available',2, NULL),
-    ('Toby','dog','Shih Tzu','male','2018-05-05','Loves being pampered.','sponsored',2, NULL),
-    ('Nala','cat','Abyssinian','female','2022-02-08','Very active.','available',3, NULL),
-    ('Duke','dog','Boxer','male','2019-09-28','Energetic and fun.','available',3, NULL),
-    ('Shadow','cat','Scottish Fold','male','2020-11-16','Loves to sleep.','sponsored',3, NULL),
-    ('Ruby','dog','Chihuahua','female','2017-12-30','Tiny but confident.','available',3, NULL),
-    ('Pepa','dog','German Shepherd','female','2024-04-20','Huge and friendly.','sponsored',3, NULL),
-    ('Gizmo','cat','Devon Rex','male','2021-01-23','Loves to climb.','sponsored',3, NULL),
-    ('Rex','dog','Doberman','male','2018-06-18','Protective and alert.','available',3, NULL),
-    ('Misty','cat','Snowshoe','female','2020-07-07','Beautiful and calm.','available',3, NULL),
-    ('Leo','dog','Border Collie','male','2021-09-30','Very intelligent.','sponsored',4, NULL),
-    ('Mochi','cat','Exotic Shorthair','female','2019-03-25','Adorable and cuddly.','available',4, NULL),
-    ('Hunter','dog','Husky','male','2017-10-14','Loves the snow.','sponsored',4, NULL),
-    ('Lilly','cat','Turkish Angora','female','2021-06-01','Very fluffy.','available',4, NULL),
-    ('Scout','dog','Australian Shepherd','male','2018-11-05','Very agile.','sponsored',4, NULL),
-    ('Pepper','cat','Manx','male','2020-12-09','No tail but lots of love.','available',4, NULL),
-    ('Darwin','dog','Dalmatian','male','2021-04-15','Spotted and fun.','sponsored',4, NULL),
-    ('Whiskers','cat','American Curl','male','2019-02-28','Has unique ears.','sponsored',4, NULL),
-    ('Oscar','dog','Basset Hound','male','2020-08-06','Loves to sniff.','available',5, NULL),
-    ('Pumpkin','cat','Himalayan','female','2021-10-30','Fluffy and elegant.','available',5, NULL),
-    ('Ace','dog','Mastiff','male','2018-12-22','Big and gentle.','sponsored',5, NULL),
-    ('Willow','cat','Norwegian Forest','female','2022-03-14','Beautiful fur.','available',5, NULL),
-    ('Diesel','dog','Saint Bernard','male','2017-05-08','Huge but loving.','available',5, NULL),
-    ('Ginger','cat','Oriental Shorthair','female','2019-11-19','Loves to talk.','sponsored',5, NULL),
-    ('Bruno','dog','Bernese Mountain dog','male','2021-07-09','Very fluffy.','available',5, NULL),
-    ('Mittens','cat','Munchkin','male','2020-02-03','Short legs but big heart.','sponsored',5, NULL);
-END
+INSERT INTO
+    P_Pets (
+        name,
+        species,
+        breed,
+        gender,
+        birthDate,
+        description,
+        status,
+        idOrg,
+        image
+    )
+VALUES (
+        'Buddy',
+        'perro',
+        'Golden Retriever',
+        'macho',
+        '2020-05-14',
+        'Amistoso y juguetón.',
+        'available',
+        1,
+        NULL
+    ),
+    (
+        'Luna',
+        'gato',
+        'Siamés',
+        'hembra',
+        '2019-08-21',
+        'Le encanta acurrucarse.',
+        'sponsored',
+        1,
+        NULL
+    ),
+    (
+        'Charlie',
+        'perro',
+        'Labrador',
+        'macho',
+        '2018-12-10',
+        'Energético y cariñoso.',
+        'available',
+        1,
+        NULL
+    ),
+    (
+        'Milo',
+        'perro',
+        'Beagle',
+        'macho',
+        '2021-07-05',
+        'Curioso e inteligente.',
+        'sponsored',
+        1,
+        NULL
+    ),
+    (
+        'Bella',
+        'gato',
+        'Persa',
+        'hembra',
+        '2022-01-11',
+        'Esponjosa y afectuosa.',
+        'available',
+        1,
+        NULL
+    ),
+    (
+        'Max',
+        'perro',
+        'Bulldog',
+        'macho',
+        '2019-03-30',
+        'Leal y protector.',
+        'sponsored',
+        1,
+        NULL
+    ),
+    (
+        'Simba',
+        'gato',
+        'Maine Coon',
+        'macho',
+        '2020-09-15',
+        'Majestuoso y gentil.',
+        'available',
+        1,
+        NULL
+    ),
+    (
+        'Daisy',
+        'perro',
+        'Caniche',
+        'hembra',
+        '2017-06-25',
+        'Le encanta jugar a buscar.',
+        'available',
+        1,
+        NULL
+    ),
+    (
+        'Coco',
+        'gato',
+        'Bengalí',
+        'hembra',
+        '2021-10-03',
+        'Muy juguetona.',
+        'sponsored',
+        2,
+        NULL
+    ),
+    (
+        'Rocky',
+        'perro',
+        'Rottweiler',
+        'macho',
+        '2018-11-22',
+        'Fuerte y cariñoso.',
+        'available',
+        2,
+        NULL
+    ),
+    (
+        'Chloe',
+        'gato',
+        'British Shorthair',
+        'hembra',
+        '2019-02-14',
+        'Tranquila y elegante.',
+        'sponsored',
+        2,
+        NULL
+    ),
+    (
+        'Buster',
+        'perro',
+        'Dachshund',
+        'macho',
+        '2021-05-29',
+        'Pequeño pero valiente.',
+        'available',
+        2,
+        NULL
+    ),
+    (
+        'Loki',
+        'gato',
+        'Sphynx',
+        'macho',
+        '2020-04-01',
+        'Único y amigable.',
+        'available',
+        2,
+        NULL
+    ),
+    (
+        'Rosie',
+        'perro',
+        'Cocker Spaniel',
+        'hembra',
+        '2021-08-17',
+        'Le encanta la atención.',
+        'sponsored',
+        2,
+        NULL
+    ),
+    (
+        'Oreo',
+        'gato',
+        'Ragdoll',
+        'macho',
+        '2019-07-12',
+        'Esponjoso y tranquilo.',
+        'available',
+        2,
+        NULL
+    ),
+    (
+        'Toby',
+        'perro',
+        'Shih Tzu',
+        'macho',
+        '2018-05-05',
+        'Le encanta ser mimado.',
+        'sponsored',
+        2,
+        NULL
+    ),
+    (
+        'Nala',
+        'gato',
+        'Abisinio',
+        'hembra',
+        '2022-02-08',
+        'Muy activa.',
+        'available',
+        3,
+        NULL
+    ),
+    (
+        'Duke',
+        'perro',
+        'Bóxer',
+        'macho',
+        '2019-09-28',
+        'Energético y divertido.',
+        'available',
+        3,
+        NULL
+    ),
+    (
+        'Shadow',
+        'gato',
+        'Scottish Fold',
+        'macho',
+        '2020-11-16',
+        'Le encanta dormir.',
+        'sponsored',
+        3,
+        NULL
+    ),
+    (
+        'Ruby',
+        'perro',
+        'Chihuahua',
+        'hembra',
+        '2017-12-30',
+        'Pequeña pero segura de sí misma.',
+        'available',
+        3,
+        NULL
+    ),
+    (
+        'Pepa',
+        'perro',
+        'Pastor Alemán',
+        'hembra',
+        '2024-04-20',
+        'Grande y amigable.',
+        'sponsored',
+        3,
+        NULL
+    ),
+    (
+        'Gizmo',
+        'gato',
+        'Devon Rex',
+        'macho',
+        '2021-01-23',
+        'Le encanta trepar.',
+        'sponsored',
+        3,
+        NULL
+    ),
+    (
+        'Rex',
+        'perro',
+        'Dóberman',
+        'macho',
+        '2018-06-18',
+        'Protector y alerta.',
+        'available',
+        3,
+        NULL
+    ),
+    (
+        'Misty',
+        'gato',
+        'Snowshoe',
+        'hembra',
+        '2020-07-07',
+        'Hermosa y tranquila.',
+        'available',
+        3,
+        NULL
+    ),
+    (
+        'Leo',
+        'perro',
+        'Border Collie',
+        'macho',
+        '2021-09-30',
+        'Muy inteligente.',
+        'sponsored',
+        4,
+        NULL
+    ),
+    (
+        'Mochi',
+        'gato',
+        'Exótico de Pelo Corto',
+        'hembra',
+        '2019-03-25',
+        'Adorable y cariñosa.',
+        'available',
+        4,
+        NULL
+    ),
+    (
+        'Hunter',
+        'perro',
+        'Husky',
+        'macho',
+        '2017-10-14',
+        'Le encanta la nieve.',
+        'sponsored',
+        4,
+        NULL
+    ),
+    (
+        'Lilly',
+        'gato',
+        'Angora Turco',
+        'hembra',
+        '2021-06-01',
+        'Muy esponjosa.',
+        'available',
+        4,
+        NULL
+    ),
+    (
+        'Scout',
+        'perro',
+        'Pastor Australiano',
+        'macho',
+        '2018-11-05',
+        'Muy ágil.',
+        'sponsored',
+        4,
+        NULL
+    ),
+    (
+        'Pepper',
+        'gato',
+        'Manx',
+        'macho',
+        '2020-12-09',
+        'Sin cola pero con mucho amor.',
+        'available',
+        4,
+        NULL
+    ),
+    (
+        'Darwin',
+        'perro',
+        'Dálmata',
+        'macho',
+        '2021-04-15',
+        'Manchado y divertido.',
+        'sponsored',
+        4,
+        NULL
+    ),
+    (
+        'Whiskers',
+        'gato',
+        'Curl Americano',
+        'macho',
+        '2019-02-28',
+        'Tiene orejas únicas.',
+        'sponsored',
+        4,
+        NULL
+    ),
+    (
+        'Oscar',
+        'perro',
+        'Basset Hound',
+        'macho',
+        '2020-08-06',
+        'Le encanta olfatear.',
+        'available',
+        5,
+        NULL
+    ),
+    (
+        'Pumpkin',
+        'gato',
+        'Himalayo',
+        'hembra',
+        '2021-10-30',
+        'Esponjosa y elegante.',
+        'available',
+        5,
+        NULL
+    ),
+    (
+        'Ace',
+        'perro',
+        'Mastín',
+        'macho',
+        '2018-12-22',
+        'Grande y gentil.',
+        'sponsored',
+        5,
+        NULL
+    ),
+    (
+        'Willow',
+        'gato',
+        'Bosque de Noruega',
+        'hembra',
+        '2022-03-14',
+        'Hermoso pelaje.',
+        'available',
+        5,
+        NULL
+    ),
+    (
+        'Diesel',
+        'perro',
+        'San Bernardo',
+        'macho',
+        '2017-05-08',
+        'Enorme pero cariñoso.',
+        'available',
+        5,
+        NULL
+    ),
+    (
+        'Ginger',
+        'gato',
+        'Oriental de Pelo Corto',
+        'hembra',
+        '2019-11-19',
+        'Le encanta hablar.',
+        'sponsored',
+        5,
+        NULL
+    ),
+    (
+        'Bruno',
+        'perro',
+        'Boyero de Berna',
+        'macho',
+        '2021-07-09',
+        'Muy esponjoso.',
+        'available',
+        5,
+        NULL
+    ),
+    (
+        'Mittens',
+        'gato',
+        'Munchkin',
+        'macho',
+        '2020-02-03',
+        'Patas cortas pero gran corazón.',
+        'sponsored',
+        5,
+        NULL
+    );
+END 
 $do$;
 
 DO
