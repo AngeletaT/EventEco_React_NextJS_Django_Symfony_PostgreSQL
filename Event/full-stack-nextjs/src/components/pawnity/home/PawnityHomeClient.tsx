@@ -9,11 +9,11 @@ import { Event } from "@/types/Event";
 import { Pet } from "@/types/pawnity/Pet";
 import PawnityLayout from "@/layouts/pawnity/PawnityLayout";
 import Hero from "@/components/pawnity/home/Hero";
-import PetsSkeleton from "./skeletons/PetsSkeleton";
+import PetsSkeleton from "../skeletons/PetsSkeleton";
 import PetGallery from "@/components/pawnity/home/PetGallery";
-import CategorySkeleton from "./skeletons/CategorySkeleton";
+import CategorySkeleton from "../skeletons/CategorySkeleton";
 import CategoryCarousel from "@/components/pawnity/home/CategoryCarousel";
-import EventSkeleton from "./skeletons/EventSkeleton";
+import EventSkeleton from "../skeletons/EventSkeleton";
 import PopularEvents from "@/components/pawnity/home/PopularEvents";
 
 const PawnityHomePage = () => {

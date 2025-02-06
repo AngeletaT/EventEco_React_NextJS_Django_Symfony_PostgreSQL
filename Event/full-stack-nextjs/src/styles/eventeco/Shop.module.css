@@ -2,12 +2,23 @@
     width: 80%;
     margin: 0 auto;
     padding: 16px;
+    background-color: #f5fff5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ShopSection h2 {
+    margin: 0;
+    font-size: 2em;
+    padding: 20px 0;
+    text-align: center;
+    color: #333;
 }
 
 .eventcard {
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
+    background-color: #4e4e4e;
     border-radius: 8px;
     padding: 16px;
     margin-bottom: 16px;
