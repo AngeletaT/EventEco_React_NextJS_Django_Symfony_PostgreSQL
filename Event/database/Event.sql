@@ -195,11 +195,11 @@ CREATE TABLE P_ProfileOrganizer (
 
 INSERT INTO P_ProfileOrganizer (idOrg, name, address,urlLogo,description,urlWeb,urlImage)
 VALUES 
-    (1,'Patas y Garras al Rescate','Calle de Alcalá, 123, Madrid','https://example.com/logos/paws_claws.png','Dedicado a rescatar y rehabilitar animales abandonados.','https://pawsclawsrescue.org','https://example.com/images/paws_claws_rescue.jpg'),
-    (2,'Guardianes de la Vida Silvestre','Avenida Diagonal, 456, Barcelona','https://example.com/logos/wildlife_guardians.png','Protegiendo la vida silvestre en peligro a través de esfuerzos de conservación.','https://wildlifeguardians.net','https://example.com/images/wildlife_guardians.jpg'),
-    (3,'Refugio Colas Felices','Calle de la Paz, 789, Valencia','https://example.com/logos/happy_tails.png','Proporcionando refugio y cuidado para mascotas callejeras y sin hogar.','https://happytailsshelter.com','https://example.com/images/happy_tails_shelter.jpg'),
-    (4,'Fundación Amigos Peludos','Calle Sierpes, 321, Sevilla','https://example.com/logos/furry_friends.png','Abogando por los derechos y el bienestar animal a través de programas de educación y adopción.','https://furryfriendsfoundation.org','https://example.com/images/furry_friends_foundation.jpg'),
-    (5,'Esperanza para Patas','Gran Vía, 654, Bilbao','https://example.com/logos/hope_for_paws.png','Rescatando animales de situaciones peligrosas y encontrándoles hogares amorosos.','https://hopeforpaws.org','https://example.com/images/hope_for_paws.jpg');
+    (1,'Patas y Garras al Rescate','Calle de Alcalá, 123, Madrid','\assets\p_img\organizers\01.webp','Dedicado a rescatar y rehabilitar animales abandonados.','https://pawsclawsrescue.org','https://example.com/images/paws_claws_rescue.jpg'),
+    (2,'Guardianes de la Vida Silvestre','Avenida Diagonal, 456, Barcelona','\assets\p_img\organizers\02.webp','Protegiendo la vida silvestre en peligro a través de esfuerzos de conservación.','https://wildlifeguardians.net','https://example.com/images/wildlife_guardians.jpg'),
+    (3,'Refugio Colas Felices','Calle de la Paz, 789, Valencia','\assets\p_img\organizers\03.webp','Proporcionando refugio y cuidado para mascotas callejeras y sin hogar.','https://happytailsshelter.com','https://example.com/images/happy_tails_shelter.jpg'),
+    (4,'Fundación Amigos Peludos','Calle Sierpes, 321, Sevilla','\assets\p_img\organizers\04.webp','Abogando por los derechos y el bienestar animal a través de programas de educación y adopción.','https://furryfriendsfoundation.org','https://example.com/images/furry_friends_foundation.jpg'),
+    (5,'Esperanza para Patas','Gran Vía, 654, Bilbao','\assets\p_img\organizers\05.webp','Rescatando animales de situaciones peligrosas y encontrándoles hogares amorosos.','https://hopeforpaws.org','https://example.com/images/hope_for_paws.jpg');
 
 END
 $do$;
