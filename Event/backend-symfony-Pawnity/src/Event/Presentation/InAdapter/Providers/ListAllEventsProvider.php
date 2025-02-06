@@ -20,7 +20,7 @@ class ListAllEventsProvider
     }
 
     /**
-     * @Route("/api/events", name="get_all_events", methods={"GET"})
+     * @Route("/events", name="get_all_events", methods={"GET"})
      */
     public function getList(Request $request): JsonResponse
     {

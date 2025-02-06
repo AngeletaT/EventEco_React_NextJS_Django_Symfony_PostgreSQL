@@ -50,7 +50,7 @@ class Event
     #[ORM\Column(name: "urlposter", type: "string", length: 255, nullable: true)]
     private ?string $urlPoster = null;
 
-    #[ORM\Column(name: "orgid", type: "integer", nullable: true)]
+    #[ORM\Column(name: "idorg", type: "integer", nullable: true)]
     private ?int $orgId = null;
 
     #[ORM\Column(name: "idcategory", type: "integer", nullable: true)]

@@ -5,6 +5,7 @@ namespace App\Organizer\Domain\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 use DateTimeImmutable;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 
@@ -22,7 +23,7 @@ use ApiPlatform\Metadata\Post;
         )
     ]
 )]
-class Organizer
+class Organizer implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -83,5 +84,6 @@ class Organizer
     // Setters
     public function setEmail(string $email): void { $this->email = $email; }
     public function setPassword(string $password): void { $this->password = $password; }
+    public function setRefreshToken(?string $refreshToken): void { $this->refreshToken = $refreshToken; }
     public function setUpdatedAt(DateTimeImmutable $updatedAt): void { $this->updatedAt = $updatedAt; }
 }

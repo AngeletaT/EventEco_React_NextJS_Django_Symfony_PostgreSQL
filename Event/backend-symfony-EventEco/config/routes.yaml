@@ -1,3 +1,4 @@
 controllers:
     resource: '../src/'
     type: annotation
+    prefix: /e_symfony/api

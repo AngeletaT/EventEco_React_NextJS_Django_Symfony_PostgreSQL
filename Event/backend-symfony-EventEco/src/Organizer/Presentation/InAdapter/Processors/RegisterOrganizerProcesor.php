@@ -25,7 +25,7 @@ class RegisterOrganizerProcesor
     }
 
     /**
-     * @Route("/api/organizers", name="create_organizer", methods={"POST"})
+     * @Route("/organizers", name="create_organizer", methods={"POST"})
      */
     public function create(Request $request): JsonResponse
     {
