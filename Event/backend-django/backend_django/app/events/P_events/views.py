@@ -10,11 +10,34 @@ from .models import P_Event
 from .serializers import P_EventSerializer, P_EventDetailSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from math import ceil
 
 class P_EventPagination(PageNumberPagination):
+     """
+     Configuración de paginación para la lista de eventos.
+     """
      page_size = 5
      page_size_query_param = 'page_size'
      max_page_size = 100
+
+     def get_paginated_response(self, data):
+          """
+          Personaliza la respuesta de la paginación para que muestre el número de página en lugar de URLs.
+          """
+          total_items = self.page.paginator.count
+          total_pages = ceil(total_items / self.page_size)
+          current_page = self.page.number
+          next_page = self.page.next_page_number() if self.page.has_next() else None
+          previous_page = self.page.previous_page_number() if self.page.has_previous() else None
+
+          return Response({
+               "count": total_items,
+               "total_pages": total_pages,
+               "current_page": current_page,
+               "previous": previous_page,
+               "next": next_page,
+               "results": data
+          })
 
 class P_EventViewSet(ListModelMixin, GenericViewSet):
      """
