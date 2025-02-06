@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\Type;
  */
 class OrderStatusEnumType extends Type
 {
-    public const NAME = 'orderStatusEnum';
+    public const NAME = 'orderstatusenum';
 
     private const VALUES = [
         'pendingNomination',

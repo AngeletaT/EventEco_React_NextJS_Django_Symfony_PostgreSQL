@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\Type;
  */
 class OrderLineStatusEnumType extends Type
 {
-    public const NAME = 'orderLineStatusEnum';
+    public const NAME = 'orderlinestatusEnum';
 
     private const VALUES = [
         'active',

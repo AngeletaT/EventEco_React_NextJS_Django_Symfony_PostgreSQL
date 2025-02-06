@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\Type;
  */
 class IncidentsStatusEnumType extends Type
 {
-    public const NAME = 'incidentsStatus';
+    public const NAME = 'incidentsstatus';
 
     private const VALUES = [
         'pending',

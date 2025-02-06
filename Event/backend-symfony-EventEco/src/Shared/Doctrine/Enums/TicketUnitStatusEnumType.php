@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\Type;
  */
 class TicketUnitStatusEnumType extends Type
 {
-    public const NAME = 'ticketUnitStatusEnum';
+    public const NAME = 'ticketunitsatusenum';
 
     private const VALUES = [
         'active',
