@@ -1,6 +1,6 @@
 "use client";
 
-import { Skeleton } from "primereact/skeleton";
+import { Skeleton } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/eventeco/Home.module.css";
 
 const CategorySkeleton = () => {
