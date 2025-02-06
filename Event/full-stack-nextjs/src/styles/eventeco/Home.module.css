@@ -234,7 +234,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .hero {
-        height: 40vh;
+        height: 50vh;
     }
 
     .slogan {
@@ -255,20 +255,24 @@
     }
 
     .carousel {
-        height: 300px;
+        height: 85vh;
     }
 
     .categoryCard {
-        height: 300px;
+        height: 40vh;
     }
 
     .eventgrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 560px) {
     .categoryCard {
         height: 250px;
+    }
+
+    .eventgrid {
+        grid-template-columns: 1fr;
     }
 }

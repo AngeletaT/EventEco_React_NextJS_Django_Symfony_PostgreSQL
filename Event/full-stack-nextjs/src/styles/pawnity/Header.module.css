@@ -26,11 +26,26 @@
     gap: 2rem;
 }
 
+/* Menú hamburguesa (oculto por defecto) */
+.menuButton {
+    display: none;
+    background: none;
+    border: none;
+    color: #333333;
+    cursor: pointer;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+}
+
 .link {
     text-decoration: none;
     color: #333333;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    padding-bottom: 4px;
 }
 
 .link:hover {
@@ -42,7 +57,26 @@
     border-bottom: 2px solid #ff6f61;
 }
 
-.actions {
+/* Sidebar para el menú móvil */
+.sidebar {
+    background-color: #f6f0ff;
+}
+
+.mobileNav {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+
+    .nav,
+    .actions {
+        display: none;
+    }
+
+    .menuButton {
+        display: block;
+    }
 }

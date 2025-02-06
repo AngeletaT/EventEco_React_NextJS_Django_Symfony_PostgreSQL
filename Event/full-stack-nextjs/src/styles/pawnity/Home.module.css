@@ -249,7 +249,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .hero {
-        height: 40vh;
+        height: 50vh;
     }
 
     .slogan {
@@ -261,11 +261,11 @@
     }
 
     .carousel {
-        height: 300px;
+        height: 85vh;
     }
 
     .categoryCard {
-        height: 300px;
+        height: 40vh;
     }
 
     .petGallery h2 {
@@ -280,8 +280,12 @@
         width: 80px;
     }
 
+    .petGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .eventgrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -300,5 +304,13 @@
 
     .petImage {
         width: 60px;
+    }
+
+    .petgrid {
+        grid-template-columns: 1fr;
+    }
+
+    .eventgrid {
+        grid-template-columns: 1fr;
     }
 }
