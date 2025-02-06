@@ -913,7 +913,7 @@ VALUES (
         'Amistoso y juguetón.',
         'available',
         1,
-        NULL
+        '\assets\p_img\pets\organizer_01\Buddy.webp'
     ),
     (
         'Luna',
@@ -924,7 +924,7 @@ VALUES (
         'Le encanta acurrucarse.',
         'sponsored',
         1,
-        NULL
+        '\assets\p_img\pets\organizer_01\Luna.webp'
     ),
     (
         'Charlie',
@@ -935,7 +935,7 @@ VALUES (
         'Energético y cariñoso.',
         'available',
         1,
-        NULL
+        '\assets\p_img\pets\organizer_01\Charlie.webp'
     ),
     (
         'Milo',
@@ -946,7 +946,7 @@ VALUES (
         'Curioso e inteligente.',
         'sponsored',
         1,
-        NULL
+        '\assets\p_img\pets\organizer_01\Milo.webp'
     ),
     (
         'Bella',
@@ -957,7 +957,7 @@ VALUES (
         'Esponjosa y afectuosa.',
         'available',
         1,
-        NULL
+        '\assets\p_img\pets\organizer_01\Bella.webp'
     ),
     (
         'Max',
@@ -968,7 +968,7 @@ VALUES (
         'Leal y protector.',
         'sponsored',
         1,
-        NULL
+        '\assets\p_img\pets\organizer_01\Max.webp'
     ),
     (
         'Simba',
@@ -979,7 +979,7 @@ VALUES (
         'Majestuoso y gentil.',
         'available',
         1,
-        NULL
+        '\assets\p_img\pets\organizer_01\Simba.webp'
     ),
     (
         'Daisy',
@@ -990,7 +990,7 @@ VALUES (
         'Le encanta jugar a buscar.',
         'available',
         1,
-        NULL
+        '\assets\p_img\pets\organizer_01\Daisy.webp'
     ),
     (
         'Coco',
@@ -1001,7 +1001,7 @@ VALUES (
         'Muy juguetona.',
         'sponsored',
         2,
-        NULL
+        '\assets\p_img\pets\organizer_02\Coco.webp'
     ),
     (
         'Rocky',
@@ -1012,7 +1012,7 @@ VALUES (
         'Fuerte y cariñoso.',
         'available',
         2,
-        NULL
+        '\assets\p_img\pets\organizer_02\Rocky.webp'
     ),
     (
         'Chloe',
@@ -1023,7 +1023,7 @@ VALUES (
         'Tranquila y elegante.',
         'sponsored',
         2,
-        NULL
+        '\assets\p_img\pets\organizer_02\Chloe.webp'
     ),
     (
         'Buster',
@@ -1034,7 +1034,7 @@ VALUES (
         'Pequeño pero valiente.',
         'available',
         2,
-        NULL
+        '\assets\p_img\pets\organizer_02\Buster.webp'
     ),
     (
         'Loki',
@@ -1045,7 +1045,7 @@ VALUES (
         'Único y amigable.',
         'available',
         2,
-        NULL
+        '\assets\p_img\pets\organizer_02\Loki.webp'
     ),
     (
         'Rosie',
@@ -1056,7 +1056,7 @@ VALUES (
         'Le encanta la atención.',
         'sponsored',
         2,
-        NULL
+        '\assets\p_img\pets\organizer_02\Rosie.webp'
     ),
     (
         'Oreo',
@@ -1067,7 +1067,7 @@ VALUES (
         'Esponjoso y tranquilo.',
         'available',
         2,
-        NULL
+        '\assets\p_img\pets\organizer_02\Oreo.webp'
     ),
     (
         'Toby',
@@ -1078,7 +1078,7 @@ VALUES (
         'Le encanta ser mimado.',
         'sponsored',
         2,
-        NULL
+        '\assets\p_img\pets\organizer_02\Toby.webp'
     ),
     (
         'Nala',
@@ -1089,7 +1089,7 @@ VALUES (
         'Muy activa.',
         'available',
         3,
-        NULL
+        '\assets\p_img\pets\organizer_03\Nala.webp'
     ),
     (
         'Duke',
@@ -1100,7 +1100,7 @@ VALUES (
         'Energético y divertido.',
         'available',
         3,
-        NULL
+        '\assets\p_img\pets\organizer_03\Duke.webp'
     ),
     (
         'Shadow',
@@ -1111,7 +1111,7 @@ VALUES (
         'Le encanta dormir.',
         'sponsored',
         3,
-        NULL
+        '\assets\p_img\pets\organizer_03\Shadow.webp'
     ),
     (
         'Ruby',
@@ -1122,7 +1122,7 @@ VALUES (
         'Pequeña pero segura de sí misma.',
         'available',
         3,
-        NULL
+        '\assets\p_img\pets\organizer_03\Ruby.webp'
     ),
     (
         'Pepa',
@@ -1133,7 +1133,7 @@ VALUES (
         'Grande y amigable.',
         'sponsored',
         3,
-        NULL
+        '\assets\p_img\pets\organizer_03\Pepa.webp'
     ),
     (
         'Gizmo',
@@ -1144,7 +1144,7 @@ VALUES (
         'Le encanta trepar.',
         'sponsored',
         3,
-        NULL
+        '\assets\p_img\pets\organizer_03\Gizmo.webp'
     ),
     (
         'Rex',
@@ -1155,7 +1155,7 @@ VALUES (
         'Protector y alerta.',
         'available',
         3,
-        NULL
+        '\assets\p_img\pets\organizer_03\Rex.webp'
     ),
     (
         'Misty',
@@ -1166,7 +1166,7 @@ VALUES (
         'Hermosa y tranquila.',
         'available',
         3,
-        NULL
+        '\assets\p_img\pets\organizer_03\Misty.webp'
     ),
     (
         'Leo',
@@ -1177,7 +1177,7 @@ VALUES (
         'Muy inteligente.',
         'sponsored',
         4,
-        NULL
+        '\assets\p_img\pets\organizer_04\Leo.webp'
     ),
     (
         'Mochi',
@@ -1188,7 +1188,7 @@ VALUES (
         'Adorable y cariñosa.',
         'available',
         4,
-        NULL
+        '\assets\p_img\pets\organizer_04\Mochi.webp'
     ),
     (
         'Hunter',
@@ -1199,7 +1199,7 @@ VALUES (
         'Le encanta la nieve.',
         'sponsored',
         4,
-        NULL
+        '\assets\p_img\pets\organizer_04\Hunter.webp'
     ),
     (
         'Lilly',
@@ -1210,7 +1210,7 @@ VALUES (
         'Muy esponjosa.',
         'available',
         4,
-        NULL
+        '\assets\p_img\pets\organizer_04\Lilly.webp'
     ),
     (
         'Scout',
@@ -1221,7 +1221,7 @@ VALUES (
         'Muy ágil.',
         'sponsored',
         4,
-        NULL
+        '\assets\p_img\pets\organizer_04\Scout.webp'
     ),
     (
         'Pepper',
@@ -1232,7 +1232,7 @@ VALUES (
         'Sin cola pero con mucho amor.',
         'available',
         4,
-        NULL
+        '\assets\p_img\pets\organizer_04\Pepper.webp'
     ),
     (
         'Darwin',
@@ -1243,7 +1243,7 @@ VALUES (
         'Manchado y divertido.',
         'sponsored',
         4,
-        NULL
+        '\assets\p_img\pets\organizer_04\Darwin.webp'
     ),
     (
         'Whiskers',
@@ -1254,7 +1254,7 @@ VALUES (
         'Tiene orejas únicas.',
         'sponsored',
         4,
-        NULL
+        '\assets\p_img\pets\organizer_04\Whiskers.webp'
     ),
     (
         'Oscar',
@@ -1265,7 +1265,7 @@ VALUES (
         'Le encanta olfatear.',
         'available',
         5,
-        NULL
+        '\assets\p_img\pets\organizer_05\Oscar.webp'
     ),
     (
         'Pumpkin',
@@ -1276,7 +1276,7 @@ VALUES (
         'Esponjosa y elegante.',
         'available',
         5,
-        NULL
+        '\assets\p_img\pets\organizer_05\Pumpkin.webp'
     ),
     (
         'Ace',
@@ -1287,7 +1287,7 @@ VALUES (
         'Grande y gentil.',
         'sponsored',
         5,
-        NULL
+        '\assets\p_img\pets\organizer_05\Ace.webp'
     ),
     (
         'Willow',
@@ -1298,7 +1298,7 @@ VALUES (
         'Hermoso pelaje.',
         'available',
         5,
-        NULL
+        '\assets\p_img\pets\organizer_05\Willow.webp'
     ),
     (
         'Diesel',
@@ -1309,7 +1309,7 @@ VALUES (
         'Enorme pero cariñoso.',
         'available',
         5,
-        NULL
+        '\assets\p_img\pets\organizer_05\Diesel.webp'
     ),
     (
         'Ginger',
@@ -1320,7 +1320,7 @@ VALUES (
         'Le encanta hablar.',
         'sponsored',
         5,
-        NULL
+        '\assets\p_img\pets\organizer_05\Ginger.webp'
     ),
     (
         'Bruno',
@@ -1331,7 +1331,7 @@ VALUES (
         'Muy esponjoso.',
         'available',
         5,
-        NULL
+        '\assets\p_img\pets\organizer_05\Bruno.webp'
     ),
     (
         'Mittens',
@@ -1342,7 +1342,7 @@ VALUES (
         'Patas cortas pero gran corazón.',
         'sponsored',
         5,
-        NULL
+        '\assets\p_img\pets\organizer_05\Mittens.webp'
     );
 END 
 $do$;
