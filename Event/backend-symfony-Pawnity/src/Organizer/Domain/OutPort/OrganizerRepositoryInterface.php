@@ -20,4 +20,6 @@ interface OrganizerRepositoryInterface
     public function existsByEmail(string $email): bool;
 
     public function existsByNif(string $nif): bool;
+
+    public function update(Organizer $organizer): void;
 }

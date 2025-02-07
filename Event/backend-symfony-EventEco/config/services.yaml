@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     organizer_refresh_token_secret: '%env(REFRESH_TOKEN_SECRET)%'
+    organizer_jwt_public_key: '%env(resolve:JWT_PUBLIC_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -39,7 +40,20 @@ services:
     App\Organizer\Infrastructure\Security\RefreshTokenGenerator:
         arguments:
             $secret: '%organizer_refresh_token_secret%'
+            
+    App\Organizer\Application\UseCase\InPort\RefreshSessionInterface:
+        alias: App\Organizer\Application\UseCase\Command\RefreshSession\RefreshSessionService
+        public: true
 
     App\Shared\Exception\GlobalExceptionHandler:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 255 }
+    
+    App\Organizer\Application\UseCase\Command\RefreshSession\RefreshSessionService:
+        arguments:
+            $jwtSecret: '%organizer_refresh_token_secret%'
+            $jwtPublicKey: '%organizer_jwt_public_key%'
+    
+    App\Organizer\Application\UseCase\Command\LogoutOrganizer\LogoutOrganizerHandler:
+        public: true
+        autowire: true

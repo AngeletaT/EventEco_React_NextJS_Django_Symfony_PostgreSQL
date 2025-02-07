@@ -17,7 +17,7 @@ class OrganizerSecurityAdapter implements UserInterface, PasswordAuthenticatedUs
 
     public function getUserIdentifier(): string
     {
-        return $this->organizer->getEmail();
+        return (string) $this->organizer->getIdOrg();
     }
 
     public function getPassword(): string

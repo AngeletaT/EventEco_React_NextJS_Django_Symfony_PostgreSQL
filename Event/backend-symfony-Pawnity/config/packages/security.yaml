@@ -1,29 +1,34 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         users_in_memory: { memory: null }
+        app_organizer_provider:
+            entity:
+                class: App\Organizer\Domain\Entity\Organizer
+                property: id
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        # Primero definimos el firewall para las rutas API:
+        api:
+            pattern: ^/organizers
+            stateless: true
+            provider: app_organizer_provider
+            jwt: ~
+        # Luego, el firewall main para el resto de rutas
         main:
+            pattern: ^/(?!organizers)
             lazy: true
             provider: users_in_memory
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # Permitir el acceso anónimo al login, si está dentro de /organizers/login
+        - { path: ^/organizers/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # Para el resto de rutas en /organizers, se requiere autenticación
+        - { path: ^/organizers, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

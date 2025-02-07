@@ -50,4 +50,9 @@ class OrganizerRepositoryAdapter implements OrganizerRepositoryInterface
         $result = $this->entityManager->getRepository(Organizer::class)->findOneBy(['nif' => $nif]);
         return $result !== null;
     }
+
+    public function update(Organizer $organizer): void
+    {
+        $this->entityManager->flush();
+    }
 }
