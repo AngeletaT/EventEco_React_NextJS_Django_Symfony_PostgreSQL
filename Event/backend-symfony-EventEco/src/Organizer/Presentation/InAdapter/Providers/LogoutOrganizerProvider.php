@@ -21,7 +21,7 @@ class LogoutOrganizerProvider extends AbstractController
     }
 
     /**
-     * @Route("/organizers/logout", name="logout_organizer", methods={"POST"})
+     * @Route("/organizer/logout", name="logout_organizer", methods={"POST"})
      *
      * Endpoint para cerrar la sesión del organizer.
      * En esta versión se decodifica el token manualmente para extraer el identificador,

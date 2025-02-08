@@ -14,21 +14,21 @@ security:
             security: false
         # Primero definimos el firewall para las rutas API:
         api:
-            pattern: ^/organizers
+            pattern: ^/organizer
             stateless: true
             provider: app_organizer_provider
             jwt: ~
         # Luego, el firewall main para el resto de rutas
         main:
-            pattern: ^/(?!organizers)
+            pattern: ^/(?!organizer)
             lazy: true
             provider: users_in_memory
 
     access_control:
-        # Permitir el acceso anónimo al login, si está dentro de /organizers/login
-        - { path: ^/organizers/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        # Para el resto de rutas en /organizers, se requiere autenticación
-        - { path: ^/organizers, roles: IS_AUTHENTICATED_FULLY }
+        # Permitir el acceso anónimo al login, si está dentro de /organizer/login
+        - { path: ^/organizer/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # Para el resto de rutas en /organizer, se requiere autenticación
+        - { path: ^/organizer, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:
