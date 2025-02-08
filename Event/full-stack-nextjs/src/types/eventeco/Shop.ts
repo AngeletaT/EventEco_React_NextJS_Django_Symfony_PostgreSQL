@@ -18,6 +18,5 @@ export interface PaginationProps {
     hasPreviousPage: boolean;
     fetchNextPage: () => void;
     fetchPreviousPage: () => void;
-    current_page: number;
-    handlePreviousPage: () => void;
+    currentPage: number;
 }

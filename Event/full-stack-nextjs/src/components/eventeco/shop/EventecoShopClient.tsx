@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useCategories } from "@/hooks/eventeco/useCategories";
 import { useEventsPerPage } from "@/hooks/eventeco/useEvents";
 import { Category } from "@/types/Category";
@@ -12,6 +11,7 @@ import ListEvents from "./ListEvent";
 import Pagination from "./Pagination";
 
 const EventecoShopClient = () => {
+    const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(5);
     const [categorySlug, setCategorySlug] = useState("");
     const [location, setLocation] = useState("");
@@ -26,24 +26,35 @@ const EventecoShopClient = () => {
         setOrderByDate("asc");
     };
 
-    const {
-        data,
-        isLoading: loadingEvents,
-        fetchNextPage,
-        fetchPreviousPage,
-        hasNextPage,
-        hasPreviousPage,
-        refetch,
-    } = useEventsPerPage({ pageSize, categorySlug, location, order_by_date: orderByDate });
+    const { data, isLoading, isFetching } = useEventsPerPage({
+        page: currentPage,
+        pageSize,
+        categorySlug,
+        location,
+        order_by_date: orderByDate,
+    });
 
-    const currentPage = data?.pages[data.pages.length - 1]?.current_page || 1;
+    const events = data?.events || [];
+    const totalPages = data?.total_pages || 1;
 
-    const currentPageEvents = data?.pages.find((page) => page.current_page === currentPage)?.events || [];
-
-    const handlePreviousPage = async () => {
-        await fetchPreviousPage();
-        refetch();
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage((prev) => prev + 1);
+        }
     };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage((prev) => prev - 1);
+        }
+    };
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [currentPage]);
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [pageSize, categorySlug, location, orderByDate]);
 
     return (
         <EventecoLayout>
@@ -64,16 +75,15 @@ const EventecoShopClient = () => {
             )}
 
             {/* Lista de Eventos */}
-            {loadingEvents ? <EventSkeletonShop /> : <ListEvents events={currentPageEvents} />}
+            {isLoading || isFetching ? <EventSkeletonShop /> : <ListEvents events={events} />}
 
             {/* Paginación */}
             <Pagination
-                hasNextPage={!!hasNextPage}
-                hasPreviousPage={!!hasPreviousPage}
-                fetchNextPage={fetchNextPage}
-                fetchPreviousPage={fetchPreviousPage}
-                current_page={currentPage}
-                handlePreviousPage={handlePreviousPage}
+                hasNextPage={currentPage < totalPages}
+                hasPreviousPage={currentPage > 1}
+                fetchNextPage={handleNextPage}
+                fetchPreviousPage={handlePreviousPage}
+                currentPage={currentPage}
             />
         </EventecoLayout>
     );

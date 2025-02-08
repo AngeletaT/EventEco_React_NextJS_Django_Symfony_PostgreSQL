@@ -18,7 +18,7 @@ const Filters: React.FC<FiltersProps> = ({
     categories,
     resetFilters,
 }) => {
-    const pageSizeOptions = [5, 10, 25];
+    const pageSizeOptions = [5, 12, 25];
     const orderOptions = [
         { label: "Fecha Ascendente", value: "asc" },
         { label: "Fecha Descendente", value: "desc" },

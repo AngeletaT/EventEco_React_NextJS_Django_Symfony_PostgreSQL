@@ -60,11 +60,15 @@
 .eventdetails h3 {
     margin: 0;
     font-size: 1.5em;
+    color: #333;
 }
 
 .eventdetails p {
     margin: 8px 0;
+    color: #333;
 }
+
+
 
 .eventbutton {
     margin-left: 16px;
@@ -82,4 +86,5 @@
 .pageIndicator {
     font-size: 1rem;
     font-weight: bold;
+    color: #333;
 }
