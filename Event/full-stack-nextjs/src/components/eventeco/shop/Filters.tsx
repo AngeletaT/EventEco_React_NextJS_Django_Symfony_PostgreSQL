@@ -18,7 +18,7 @@ const Filters: React.FC<FiltersProps> = ({
     categories,
     resetFilters,
 }) => {
-    const pageSizeOptions = [5, 12, 25];
+    const pageSizeOptions = [5, 25];
     const orderOptions = [
         { label: "Fecha Ascendente", value: "asc" },
         { label: "Fecha Descendente", value: "desc" },
@@ -58,7 +58,7 @@ const Filters: React.FC<FiltersProps> = ({
             {/* Ítems por Página */}
             <Dropdown
                 value={pageSize}
-                options={pageSizeOptions.map((size) => ({ label: `${size} por página`, value: size }))}
+                options={pageSizeOptions.map((size) => ({ label: size === 25 ? "Ver Todo" : `${size} por página`, value: size }))}
                 onChange={(e) => setPageSize(e.value)}
                 placeholder="Ítems por página"
                 className={styles.dropdown}

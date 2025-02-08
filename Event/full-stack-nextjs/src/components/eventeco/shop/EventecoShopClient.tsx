@@ -78,13 +78,15 @@ const EventecoShopClient = () => {
             {isLoading || isFetching ? <EventSkeletonShop /> : <ListEvents events={events} />}
 
             {/* Paginación */}
-            <Pagination
-                hasNextPage={currentPage < totalPages}
-                hasPreviousPage={currentPage > 1}
-                fetchNextPage={handleNextPage}
-                fetchPreviousPage={handlePreviousPage}
-                currentPage={currentPage}
-            />
+            {pageSize !== 25 && (
+                <Pagination
+                    hasNextPage={currentPage < totalPages}
+                    hasPreviousPage={currentPage > 1}
+                    fetchNextPage={handleNextPage}
+                    fetchPreviousPage={handlePreviousPage}
+                    currentPage={currentPage}
+                />
+            )}
         </EventecoLayout>
     );
 };
