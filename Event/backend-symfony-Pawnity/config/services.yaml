@@ -62,6 +62,10 @@ services:
         arguments:
             $jwtSecret: '%organizer_refresh_token_secret%'
             $jwtPublicKey: '%organizer_jwt_public_key%'
+
+    App\Organizer\Presentation\Assembler\Request\UpdateProfileRequestAssembler:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
     
     App\Organizer\Application\UseCase\Command\LogoutOrganizer\LogoutOrganizerHandler:
         public: true

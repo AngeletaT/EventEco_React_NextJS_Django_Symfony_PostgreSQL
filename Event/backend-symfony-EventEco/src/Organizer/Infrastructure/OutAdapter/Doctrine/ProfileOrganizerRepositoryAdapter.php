@@ -34,4 +34,9 @@ class ProfileOrganizerRepositoryAdapter implements ProfileOrganizerRepositoryInt
             ->getRepository(ProfileOrganizer::class)
             ->findOneBy(['organizer' => $organizerReference]);
     }
+    public function save(ProfileOrganizer $profile): void
+    {
+        $this->entityManager->persist($profile);
+        $this->entityManager->flush();
+    }
 }

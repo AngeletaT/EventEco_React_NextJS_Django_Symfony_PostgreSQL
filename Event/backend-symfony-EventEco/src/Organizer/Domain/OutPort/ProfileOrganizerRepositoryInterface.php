@@ -15,4 +15,11 @@ interface ProfileOrganizerRepositoryInterface
      * @return ProfileOrganizer|null Devuelve la entidad ProfileOrganizer si se encuentra, o null en caso contrario.
      */
     public function findOneByOrganizerId(int $idOrg): ?ProfileOrganizer;
+
+    /**
+     * Guarda un profile en la base de datos.
+     *
+     * @param ProfileOrganizer $profile
+     */
+    public function save(ProfileOrganizer $profile): void;
 }
