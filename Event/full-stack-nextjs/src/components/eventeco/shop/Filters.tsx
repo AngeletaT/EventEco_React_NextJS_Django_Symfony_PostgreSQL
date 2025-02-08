@@ -24,7 +24,7 @@ const Filters: React.FC<FiltersProps> = ({
         { label: "Fecha Descendente", value: "desc" },
     ];
 
-    const locationOptions = ["Madrid", "Barcelona", "Valencia"];
+    const locationOptions = ["Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao"];
 
     return (
         <div className={styles.filtersContainer}>
