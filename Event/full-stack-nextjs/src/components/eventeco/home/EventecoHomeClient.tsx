@@ -10,12 +10,12 @@ import Hero from "@/components/eventeco/home/Hero";
 import IconCards from "@/components/eventeco/home/IconCards";
 import CategorySkeleton from "../skeletons/CategorySkeleton";
 import CategoryCarousel from "@/components/eventeco/home/CategoryCarousel";
-import EventSkeleton from "../skeletons/EventSkeleton";
+import { EventSkeleton } from "../skeletons/EventSkeleton";
 import PopularEvents from "@/components/eventeco/home/PopularEvents";
 
 const EventecoHomeClient = () => {
     const { data: categories, isLoading: loadingCategories } = useCategories<Category[]>();
-    const { data: events, isLoading: loadingEvents } = useEvents<Event[]>();
+    const { data: events, isLoading: loadingEvents } = useEvents();
 
     return (
         <EventecoLayout>
