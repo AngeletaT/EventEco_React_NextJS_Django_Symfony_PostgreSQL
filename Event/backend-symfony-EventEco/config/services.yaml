@@ -48,6 +48,12 @@ services:
         alias: App\Organizer\Application\UseCase\Command\RefreshSession\RefreshSessionService
         public: true
 
+    App\Organizer\Infrastructure\Middleware\IsOrganizer:
+        arguments:
+            $publicKey: '%env(resolve:JWT_PUBLIC_KEY)%'
+        tags:
+            - { name: 'kernel.event_subscriber' }
+            
     App\Shared\Exception\GlobalExceptionHandler:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 255 }

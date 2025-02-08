@@ -15,7 +15,7 @@ use ApiPlatform\Metadata\Post;
     operations: [
         new Post(
             name: 'create_organizer',
-            uriTemplate: '/organizers',
+            uriTemplate: '/organizer/register',
             description: 'Add a new organizer to the system.',
             denormalizationContext: [
                 'groups' => ['organizer_write']
