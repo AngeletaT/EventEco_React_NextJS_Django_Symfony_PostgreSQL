@@ -3,7 +3,7 @@
 import { Skeleton } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/pawnity/Home.module.css";
 
-const PetsSkeleton = () => {
+export const PetsSkeleton = () => {
     return (
         <section className={styles.petGallery}>
             <h2>Conoce a las Mascotas</h2>
@@ -21,4 +21,12 @@ const PetsSkeleton = () => {
     );
 };
 
-export default PetsSkeleton;
+export const PetSkeletonShop = () => {
+    return (
+        <div className={styles.EventSkeletonContainerShop}>
+            {[...Array(5)].map((_, index) => (
+                <Skeleton key={index} width="100%" height="200px" className={styles.petSkeleton} />
+            ))}
+        </div>
+    );
+};

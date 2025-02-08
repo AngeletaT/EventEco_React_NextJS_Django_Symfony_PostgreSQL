@@ -1,30 +1,13 @@
-import React from "react";
-import { GetServerSideProps } from "next";
-import { fetchCategories } from "@/services/pawnity/actions/getCategories";
-import { fetchEvents } from "@/services/pawnity/actions/getEvents";
+import { Metadata } from "next";
 import PawnityShopClient from "@/components/pawnity/shop/PawnityShopClient";
-import { Category } from "@/types/Category";
-import { Event } from "@/types/Event";
 
-interface PawnityShopPageProps {
-    categories: Category[];
-    events: Event[];
-}
-
-const PawnityShopPage: React.FC<PawnityShopPageProps> = ({ categories, events }) => {
-    return <PawnityShopClient categories={categories} events={events} />;
+export const metadata: Metadata = {
+    title: "Pawnity - Tienda",
+    description: "Descubre y adquiere entradas para los mejores eventos con Mascotas.",
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-    const categories = await fetchCategories();
-    const events = await fetchEvents();
-
-    return {
-        props: {
-            categories,
-            events,
-        },
-    };
+const PawnityShopPage = () => {
+    return <PawnityShopClient />;
 };
 
 export default PawnityShopPage;

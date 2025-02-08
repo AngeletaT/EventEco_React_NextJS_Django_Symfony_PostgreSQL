@@ -13,12 +13,12 @@ import PetsSkeleton from "../skeletons/PetsSkeleton";
 import PetGallery from "@/components/pawnity/home/PetGallery";
 import CategorySkeleton from "../skeletons/CategorySkeleton";
 import CategoryCarousel from "@/components/pawnity/home/CategoryCarousel";
-import EventSkeleton from "../skeletons/EventSkeleton";
+import { EventSkeleton } from "../skeletons/EventSkeleton";
 import PopularEvents from "@/components/pawnity/home/PopularEvents";
 
 const PawnityHomePage = () => {
     const { data: categories, isLoading: loadingCategories } = useCategories<Category[]>();
-    const { data: events, isLoading: loadingEvents } = useEvents<Event[]>();
+    const { data: events, isLoading: loadingEvents } = useEvents();
     const { data: pets, isLoading: loadingPets } = usePets<Pet[]>();
 
     return (

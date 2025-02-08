@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "@/styles/eventeco/Shop.module.css";
 import { Button } from "@/utils/PrimeReactComponents";
 import { Event } from "@/types/Event";
@@ -29,7 +29,7 @@ const ListEvents: React.FC<ListEventsProps> = ({ events }) => {
                         </div>
                         <Button
                             label="Ver más"
-                            onClick={() => (window.location.href = `/eventeco/shop/event/${event.name}`)}
+                            onClick={() => (window.location.href = `/pawnity/shop/event/${event.eventslug}`)}
                             className={`p-button-info ${styles.eventbutton}`}
                         />
                     </div>

@@ -1,40 +1,40 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useCategories } from "@/hooks/pawnity/useCategories";
-import { useEventsPerPage } from "@/hooks/pawnity/useEvents";
-import { Category } from "@/types/Category";
+import { usePetsPerPage } from "@/hooks/pawnity/usePets";
+import { useOrganizers } from "@/hooks/pawnity/useOrganizers";
+import { Organizer } from "@/types/Organizer";
 import PawnityLayout from "@/layouts/pawnity/PawnityLayout";
 import Filters from "./Filters";
-import { EventSkeletonShop } from "../skeletons/EventSkeleton";
-import ListEvents from "./ListEvent";
+import { PetSkeletonShop } from "../skeletons/PetsSkeleton";
+import ListPets from "./ListPets";
 import Pagination from "./Pagination";
 
-const PawnityShopClient = () => {
+const PawnityAdoptionClient = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(5);
-    const [categorySlug, setCategorySlug] = useState("");
-    const [location, setLocation] = useState("");
-    const [orderByDate, setOrderByDate] = useState<"asc" | "desc">("asc");
+    const [gender, setGender] = useState("");
+    const [idorg, setidOrganizer] = useState<number>();
+    const [species, setSpecies] = useState("");
 
-    const { data: categories, isLoading: loadingCategories } = useCategories<Category[]>();
+    const { data: organizers, isLoading: loadingOrganizers } = useOrganizers<Organizer[]>();
 
     const resetFilters = () => {
         setPageSize(5);
-        setCategorySlug("");
-        setLocation("");
-        setOrderByDate("asc");
+        setGender("");
+        setidOrganizer(1);
+        setSpecies("");
     };
 
-    const { data, isLoading, isFetching } = useEventsPerPage({
+    const { data, isLoading, isFetching } = usePetsPerPage({
         page: currentPage,
         pageSize,
-        categorySlug,
-        location,
-        order_by_date: orderByDate,
+        gender,
+        idorg,
+        species,
     });
 
-    const events = data?.events || [];
+    const pets = data?.pets || [];
     const totalPages = data?.total_pages || 1;
 
     const handleNextPage = () => {
@@ -54,31 +54,31 @@ const PawnityShopClient = () => {
     }, [currentPage]);
     useEffect(() => {
         setCurrentPage(1);
-    }, [pageSize, categorySlug, location, orderByDate]);
+    }, [pageSize, gender, idorg, species]);
 
     return (
         <PawnityLayout>
             {/* Filtros */}
-            {loadingCategories ? null : (
+            {loadingOrganizers ? null : (
                 <Filters
                     pageSize={pageSize}
                     setPageSize={setPageSize}
-                    categorySlug={categorySlug}
-                    setCategorySlug={setCategorySlug}
-                    location={location}
-                    setLocation={setLocation}
-                    orderByDate={orderByDate}
-                    setOrderByDate={setOrderByDate}
-                    categories={categories || []}
+                    gender={gender}
+                    setGender={setGender}
+                    idorg={idorg ?? 1}
+                    setidOrganizer={setidOrganizer}
+                    species={species}
+                    setSpecies={setSpecies}
+                    organizers={organizers || []}
                     resetFilters={resetFilters}
                 />
             )}
 
             {/* Lista de Eventos */}
-            {isLoading || isFetching ? <EventSkeletonShop /> : <ListEvents events={events} />}
+            {isLoading || isFetching ? <PetSkeletonShop /> : <ListPets pets={pets} />}
 
             {/* Paginación */}
-            {pageSize !== 25 && (
+            {pageSize !== 40 && (
                 <Pagination
                     hasNextPage={currentPage < totalPages}
                     hasPreviousPage={currentPage > 1}
@@ -91,4 +91,4 @@ const PawnityShopClient = () => {
     );
 };
 
-export default PawnityShopClient;
+export default PawnityAdoptionClient;

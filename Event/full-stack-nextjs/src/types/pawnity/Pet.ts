@@ -1,3 +1,5 @@
+import { Organizer } from "../Organizer";
+
 export interface Pet {
     idpet: number;
     uuidpet: string;
@@ -9,7 +11,7 @@ export interface Pet {
     species: string;
     image: string;
     idorg: number;
-    organizer: object;
+    organizer: Organizer;
     status: string;
     createdat: string;
     updatedat: string;

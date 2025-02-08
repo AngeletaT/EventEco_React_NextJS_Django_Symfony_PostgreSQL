@@ -30,8 +30,8 @@
     width: 200px;
 }
 
-/* Eventos */
-.eventcard {
+/* Mascotas */
+.petcard {
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
@@ -42,7 +42,7 @@
     margin-bottom: 16px;
 }
 
-.eventimage {
+.petimage {
     width: 150px;
     height: 150px;
     object-fit: cover;
@@ -50,27 +50,27 @@
     margin-right: 16px;
 }
 
-.eventdetails {
+.petdetails {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.eventdetails h3 {
+.petdetails h3 {
     margin: 0;
     font-size: 1.5em;
     color: #333;
 }
 
-.eventdetails p {
+.petdetails p {
     margin: 8px 0;
     color: #333;
 }
 
 
 
-.eventbutton {
+.petbutton {
     margin-left: 16px;
 }
 

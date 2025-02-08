@@ -1,5 +1,6 @@
 import { djangoAPI_P, symfonyAPI_P } from "../../api";
 import { Event } from "@/types/Event";
+import { GetEventsParams } from "@/types/GetEventParams";
 
 export const getEvents = async (): Promise<Event[]> => {
     try {
@@ -11,4 +12,37 @@ export const getEvents = async (): Promise<Event[]> => {
         console.error("Error fetching events:", error);
         throw new Error("Failed to fetch events.");
     }
+};
+
+export const getEventsPerPage = async ({
+    pageParam = 1,
+    pageSize = 5,
+    categorySlug,
+    location,
+    order_by_date,
+}: GetEventsParams): Promise<{
+    events: Event[];
+    total_pages: number;
+    count: number;
+}> => {
+    const params = new URLSearchParams({
+        page: pageParam.toString(),
+        page_size: pageSize.toString(),
+    });
+    if (categorySlug) params.append("categorySlug", categorySlug);
+    if (location) params.append("location", location);
+    if (order_by_date) params.append("order_by_date", order_by_date);
+
+    const response = await djangoAPI_P.get(`/events/listEvents?${params.toString()}`);
+    const data = response.data as {
+        results: Event[];
+        total_pages: number;
+        count: number;
+    };
+
+    return {
+        events: data.results,
+        total_pages: data.total_pages,
+        count: data.count,
+    };
 };
