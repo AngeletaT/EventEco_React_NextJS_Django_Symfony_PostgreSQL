@@ -1598,7 +1598,7 @@ $do$
 BEGIN
 CREATE TABLE token_blacklist_outstandingtoken (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES e_client (idclient) ON DELETE CASCADE,
+    user_id INTEGER NOT NULL REFERENCES p_client (idclient) ON DELETE CASCADE,
     jti VARCHAR(255) NOT NULL UNIQUE,
     token VARCHAR(500) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,

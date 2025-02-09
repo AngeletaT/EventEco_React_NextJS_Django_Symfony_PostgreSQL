@@ -18,8 +18,8 @@ DEBUG = os.getenv('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['*']
 
 # Modelo de usuario personalizado
-# AUTH_USER_MODEL = 'p_accounts.P_Client'
-AUTH_USER_MODEL = 'e_accounts.E_Client'
+AUTH_USER_MODEL = 'p_accounts.P_Client'
+# AUTH_USER_MODEL = 'e_accounts.E_Client'
 
 # Application definition
 INSTALLED_APPS = [
@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     # # Local Apps (Accounts)
-    # 'backend_django.app.accounts.P_accounts',
-    'backend_django.app.accounts.E_accounts',
+    'backend_django.app.accounts.P_accounts',
+    # 'backend_django.app.accounts.E_accounts',
+    # Local Apps (Profiles)
+    'backend_django.app.profiles.E_profiles.e_clients',
+    'backend_django.app.profiles.P_profiles.p_clients',
+    'backend_django.app.profiles.P_profiles.organizers',
     # Local Apps (Events, Categories, etc.)
     'backend_django.app.categories.E_categories',
     'backend_django.app.categories.P_categories',
@@ -48,7 +52,6 @@ INSTALLED_APPS = [
     'backend_django.app.subEvents.E_subEvents',
     'backend_django.app.subEvents.P_subEvents',
     'backend_django.app.pets',
-    'backend_django.app.profiles.P_profiles.organizers',
 ]
 
 # Rest Framework Config
