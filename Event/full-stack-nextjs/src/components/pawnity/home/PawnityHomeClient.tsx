@@ -9,7 +9,7 @@ import { Event } from "@/types/Event";
 import { Pet } from "@/types/pawnity/Pet";
 import PawnityLayout from "@/layouts/pawnity/PawnityLayout";
 import Hero from "@/components/pawnity/home/Hero";
-import PetsSkeleton from "../skeletons/PetsSkeleton";
+import { PetsSkeleton } from "../skeletons/PetsSkeleton";
 import PetGallery from "@/components/pawnity/home/PetGallery";
 import CategorySkeleton from "../skeletons/CategorySkeleton";
 import CategoryCarousel from "@/components/pawnity/home/CategoryCarousel";
@@ -19,7 +19,7 @@ import PopularEvents from "@/components/pawnity/home/PopularEvents";
 const PawnityHomePage = () => {
     const { data: categories, isLoading: loadingCategories } = useCategories<Category[]>();
     const { data: events, isLoading: loadingEvents } = useEvents();
-    const { data: pets, isLoading: loadingPets } = usePets<Pet[]>();
+    const { data: pets, isLoading: loadingPets } = usePets();
 
     return (
         <PawnityLayout>
