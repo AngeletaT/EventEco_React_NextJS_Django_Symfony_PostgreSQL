@@ -25,16 +25,19 @@ $do$
 BEGIN
 CREATE TABLE E_Client (
     idClient SERIAL PRIMARY KEY,
-    clientUuid UUID DEFAULT uuid_generate_v4() NOT NULL,
+    clientUuid UUID DEFAULT uuid_generate_v4 () NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    refreshToken VARCHAR(255),
+    refreshToken VARCHAR(1024),
     isActive BOOLEAN DEFAULT TRUE,
+    last_login TIMESTAMP NULL,
+    is_staff BOOLEAN DEFAULT FALSE,
+    is_superuser BOOLEAN DEFAULT FALSE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-END $do$;
+END
+$do$;
 
 DO
 $do$
@@ -134,17 +137,14 @@ $do$
 BEGIN
 CREATE TABLE P_Client (
     idClient SERIAL PRIMARY KEY,
-    clientUuid UUID DEFAULT uuid_generate_v4() NOT NULL,
-    firstName VARCHAR(100) NOT NULL,
-    lastName VARCHAR(100) NOT NULL,
+    clientUuid UUID DEFAULT uuid_generate_v4 () NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    phoneNumber VARCHAR(20),
     password VARCHAR(255) NOT NULL,
-    dni VARCHAR(20) UNIQUE NOT NULL,
-    bio VARCHAR(255),
-    avatarUrl VARCHAR(255),
-    refreshToken VARCHAR(255),
+    refreshToken VARCHAR(1024),
     isActive BOOLEAN DEFAULT TRUE,
+    last_login TIMESTAMP NULL,
+    is_staff BOOLEAN DEFAULT FALSE,
+    is_superuser BOOLEAN DEFAULT FALSE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -1590,4 +1590,30 @@ CREATE TABLE P_TicketHistory(
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 END
+$do$;
+
+
+DO
+$do$
+BEGIN
+CREATE TABLE token_blacklist_outstandingtoken (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES e_client (idclient) ON DELETE CASCADE,
+    jti VARCHAR(255) NOT NULL UNIQUE,
+    token VARCHAR(500) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    expires_at TIMESTAMP WITH TIME ZONE NOT NULL
+);
+END 
+$do$;
+
+DO
+$do$
+BEGIN
+CREATE TABLE token_blacklist_blacklistedtoken (
+    id SERIAL PRIMARY KEY,
+    token_id INTEGER NOT NULL REFERENCES token_blacklist_outstandingtoken (id) ON DELETE CASCADE,
+    blacklisted_at TIMESTAMP WITH TIME ZONE NOT NULL
+);
+END 
 $do$;

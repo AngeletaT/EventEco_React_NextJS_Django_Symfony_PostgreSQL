@@ -49,6 +49,8 @@ urlpatterns = [
     path('p_django/api/events/', include('backend_django.app.events.P_events.urls')),
     path('p_django/api/pets/', include('backend_django.app.pets.urls')),
     path('p_django/api/organizers/', include('backend_django.app.profiles.P_profiles.organizers.urls')),
+    # path('p_django/api/client/auth/', include('backend_django.app.accounts.P_accounts.urls')),
+    path('e_django/api/client/auth/', include('backend_django.app.accounts.E_accounts.urls')),
 ]
 
 if settings.DEBUG:
