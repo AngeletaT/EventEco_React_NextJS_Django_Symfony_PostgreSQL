@@ -6,7 +6,7 @@ namespace App\Organizer\Application\UseCase\Query;
 
 use App\Organizer\Application\DTO\Request\ProfileRequest;
 use App\Organizer\Application\DTO\Response\ProfileResponse;
-use App\Organizer\Application\InPort\ProfileInterface;
+use App\Organizer\Application\UseCase\InPort\ProfileInterface;
 use App\Organizer\Domain\OutPort\ProfileOrganizerRepositoryInterface;
 use App\Organizer\Domain\Exception\ProfileNotFoundException;
 

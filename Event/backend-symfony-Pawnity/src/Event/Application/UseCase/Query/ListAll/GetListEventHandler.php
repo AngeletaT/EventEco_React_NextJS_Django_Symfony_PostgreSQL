@@ -1,27 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Event\Application\UseCase\Query\ListAll;
 
-use App\Event\Application\DTO\Response\GetListEventResponse;
-use App\Event\Application\UseCase\InPort\ListAllEventsInterface;
-use App\Event\Domain\OutPort\EventRepositoryInterface;
-use App\Event\Presentation\Assembler\Response\GetListEventResponseAssembler;
-
-/**
- * Handler for retrieving a list of events.
- */
-class GetListEventHandler implements ListAllEventsInterface
+class GetListEventHandler
 {
-    private EventRepositoryInterface $repository;
+    private GetListEventService $service;
 
-    public function __construct(EventRepositoryInterface $repository)
+    public function __construct(GetListEventService $service)
     {
-        $this->repository = $repository;
+        $this->service = $service;
     }
 
-    public function execute(): GetListEventResponse
+    /**
+     * Método invocable que procesa el query y retorna la lista de eventos.
+     *
+     * @param GetListEventQuery $query
+     * @return array
+     */
+    public function __invoke(GetListEventQuery $query): array
     {
-        $events = $this->repository->findAll();
-        return GetListEventResponseAssembler::toHttpResponseCollection($events);
+        return $this->service->getListEvents($query);
+    }
+
+    /**
+     * Alternativa para procesar la petición a partir del header Authorization.
+     *
+     * @param string $authorizationHeader
+     * @return array
+     */
+    public function getListEventsByToken(string $authorizationHeader): array
+    {
+        return $this->service->getListEventsByToken($authorizationHeader);
     }
 }

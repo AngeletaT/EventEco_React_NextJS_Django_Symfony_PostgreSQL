@@ -1,14 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Event\Application\UseCase\Query\ListAll;
 
-/**
- * Query to get the list of events.
- */
 class GetListEventQuery
 {
-    public function __construct()
+    private int $orgId;
+
+    public function __construct(int $orgId)
     {
-        // En este caso, no necesitamos parámetros, pero se pueden agregar si fueran necesarios.
+        $this->orgId = $orgId;
+    }
+
+    public function getOrgId(): int
+    {
+        return $this->orgId;
     }
 }

@@ -8,7 +8,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 
 #[ORM\Entity]
-#[ORM\Table(name: "e_profileorganizer")]
+#[ORM\Table(name: "p_profileorganizer")]
 #[ApiResource(
     operations: [
         new Post(

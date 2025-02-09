@@ -46,4 +46,9 @@ class EventRepositoryAdapter implements EventRepositoryInterface
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function findByOrganizerId(int $orgId): array
+    {
+        return $this->repository->findBy(['orgId' => $orgId]);
+    }
 }

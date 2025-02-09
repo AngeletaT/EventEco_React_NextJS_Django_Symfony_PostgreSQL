@@ -36,4 +36,10 @@ interface EventRepositoryInterface
      * @return int The total number of events.
      */
     public function countAll(): int;
+
+    /**
+     * @param int $orgId
+     * @return Event[]
+     */
+    public function findByOrganizerId(int $orgId): array;
 }

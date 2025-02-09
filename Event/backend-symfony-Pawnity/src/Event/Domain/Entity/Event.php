@@ -3,22 +3,12 @@
 namespace App\Event\Domain\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Metadata\GetCollection;
 use App\Shared\Doctrine\Enums\StatusEventEnumType;
-use ApiPlatform\Metadata\ApiResource;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity]
 #[ORM\Table(name: "p_events")]
-// #[ApiResource(
-//     operations: [
-//         new GetCollection(
-//             name: 'get_events',
-//             uriTemplate: '/events',
-//             description: 'Retrieve the list of events.',
-//             normalizationContext: ['groups' => ['event_read']]
-//         )
-//     ]
-// )]
 class Event
 {
     #[ORM\Id]
@@ -62,6 +52,9 @@ class Event
     #[ORM\Column(name: "updatedat", type: "datetime_immutable")]
     private \DateTimeImmutable $updatedAt;
 
+    #[ORM\OneToMany(mappedBy: "event", targetEntity: SubEvent::class, cascade: ["persist", "remove"])]
+    private Collection $subEvents;
+
     public function __construct(
         string $name,
         \DateTimeInterface $startDate,
@@ -87,6 +80,7 @@ class Event
         $this->urlPoster = $urlPoster;
         $this->orgId = $orgId;
         $this->idCategory = $idCategory;
+        $this->subEvents = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
     }
@@ -105,6 +99,7 @@ class Event
     public function getIdCategory(): ?int { return $this->idCategory; }
     public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
     public function getUpdatedAt(): \DateTimeImmutable { return $this->updatedAt; }
+    public function getSubEvents(): Collection { return $this->subEvents; }
 
     // Setters
     public function setName(string $name): void { $this->name = $name; }

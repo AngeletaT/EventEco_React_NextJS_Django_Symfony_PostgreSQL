@@ -3,10 +3,9 @@
 namespace App\Event\Application\DTO\Response;
 
 use JsonSerializable;
-use App\Event\Domain\Entity\Event;
 
 /**
- * DTO for returning a list of events.
+ * DTO for returning a list of events along with their subevents.
  */
 class GetListEventResponse implements JsonSerializable
 {
@@ -14,21 +13,41 @@ class GetListEventResponse implements JsonSerializable
 
     public function __construct(array $events)
     {
-        $this->events = array_map(fn($event) => [
-            'idevent' => $event['idevent'],
-            'name' => $event['name'],
-            'startdate' => $event['startDate'],
-            'enddate' => $event['endDate'],
-            'location' => $event['location'],
-            'description' => $event['description'],
-            'status' => $event['status'],
-            'urlimage' => $this->normalizeUrlImage($event['urlImage']),
-            'urlposter' => str_replace('\\\\', '\\', $event['urlPoster']),
-            'orgid' => $event['orgId'],
-            'idcategory' => $event['idCategory'],
-            'createdat' => $event['createdAt'],
-            'updatedat' => $event['updatedAt'],
-        ], $events);
+        $this->events = array_map(function ($event) {
+            return [
+                'idevent'    => $event['idevent'],
+                'name'       => $event['name'],
+                'startdate'  => $event['startDate'],
+                'enddate'    => $event['endDate'],
+                'location'   => $event['location'],
+                'description'=> $event['description'],
+                'status'     => $event['status'],
+                'urlimage'   => $this->normalizeUrlImage($event['urlImage']),
+                'urlposter'  => str_replace('\\\\', '\\', $event['urlPoster']),
+                'orgid'      => $event['orgId'],
+                'idcategory' => $event['idCategory'],
+                'createdat'  => $event['createdAt'],
+                'updatedat'  => $event['updatedAt'],
+                // Aquí se añade la transformación de los subevents:
+                'subevents'  => isset($event['subevents']) && is_array($event['subevents'])
+                    ? array_map(function ($subEvent) {
+                        return [
+                            'idsubevents' => $subEvent['idsubevents'],
+                            'name'        => $subEvent['name'],
+                            'description' => $subEvent['description'],
+                            'startdate'   => $subEvent['startDate'],
+                            'enddate'     => $subEvent['endDate'],
+                            'urlimage'    => $this->normalizeUrlImage($subEvent['urlImage']),
+                            'urlposter'   => str_replace('\\\\', '\\', $subEvent['urlPoster']),
+                            'status'      => $subEvent['status'],
+                            'isactive'    => $subEvent['isActive'],
+                            'createdat'   => $subEvent['createdAt'],
+                            'updatedat'   => $subEvent['updatedAt'],
+                        ];
+                    }, $event['subevents'])
+                    : [],
+            ];
+        }, $events);
     }
 
     public function getData(): array
@@ -37,7 +56,7 @@ class GetListEventResponse implements JsonSerializable
     }
 
     /**
-     * Serializa correctamente el array de imágenes asegurando que no haya estructuras JSON incorrectas.
+     * Normaliza el campo de URL de imágenes.
      *
      * @param mixed $urlImage
      * @return array
@@ -50,16 +69,14 @@ class GetListEventResponse implements JsonSerializable
                 return array_map(fn($img) => str_replace('\\\\', '\\', $img), $decoded);
             }
         }
-
         if (is_array($urlImage)) {
             return array_map(fn($img) => str_replace('\\\\', '\\', $img), $urlImage);
         }
-
         return [];
     }
 
     /**
-     * Implement JsonSerializable to return structured response.
+     * Implementación de JsonSerializable para retornar la respuesta estructurada.
      */
     public function jsonSerialize(): array
     {
