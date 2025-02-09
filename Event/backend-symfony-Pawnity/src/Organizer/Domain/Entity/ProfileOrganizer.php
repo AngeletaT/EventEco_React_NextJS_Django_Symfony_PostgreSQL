@@ -4,21 +4,9 @@ namespace App\Organizer\Domain\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Post;
 
 #[ORM\Entity]
 #[ORM\Table(name: "p_profileorganizer")]
-#[ApiResource(
-    operations: [
-        new Post(
-            name: 'create_profile_organizer',
-            uriTemplate: '/profile-organizers',
-            description: 'Create a new profile for an organizer.',
-            denormalizationContext: ['groups' => ['profile_organizer_write']]
-        )
-    ]
-)]
 class ProfileOrganizer
 {
     #[ORM\Id]
