@@ -39,7 +39,7 @@ class RefreshSessionProvider extends AbstractController
             // Preparar la respuesta (datos del organizer sin exponer el refresh token)
             $data = [
                 'organizer'    => $responseDTO->getOrganizer(),
-                'access_token' => $responseDTO->getAccessToken(),
+                'accesstoken' => $responseDTO->getAccessToken(),
             ];
 
             return new JsonResponse($data, JsonResponse::HTTP_OK);

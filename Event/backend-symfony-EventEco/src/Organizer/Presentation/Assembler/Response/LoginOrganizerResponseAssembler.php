@@ -15,7 +15,7 @@ class LoginOrganizerResponseAssembler
     public static function assemble(LoginOrganizerResponse $response): array
     {
         return [
-            'access_token'  => $response->getAccessToken(),
+            'accesstoken'  => $response->getAccessToken(),
         ];
     }
 }

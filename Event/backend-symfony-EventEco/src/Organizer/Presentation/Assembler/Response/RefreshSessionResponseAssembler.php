@@ -16,7 +16,7 @@ class RefreshSessionResponseAssembler
     {
         return [
             'organizer'    => $response->getOrganizer(),
-            'access_token' => $response->getAccessToken(),
+            'accesstoken' => $response->getAccessToken(),
         ];
     }
 }
