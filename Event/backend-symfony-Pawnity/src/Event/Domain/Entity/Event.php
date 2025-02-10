@@ -52,6 +52,9 @@ class Event
     #[ORM\Column(name: "updatedat", type: "datetime_immutable")]
     private \DateTimeImmutable $updatedAt;
 
+    #[ORM\Column(name: "eventslug", type: "string", length: 150)]
+    private string $eventSlug;
+
     #[ORM\OneToMany(mappedBy: "event", targetEntity: SubEvent::class, cascade: ["persist", "remove"])]
     private Collection $subEvents;
 
@@ -80,9 +83,16 @@ class Event
         $this->urlPoster = $urlPoster;
         $this->orgId = $orgId;
         $this->idCategory = $idCategory;
+        $this->eventSlug = $this->generateSlug($name);
         $this->subEvents = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+    }
+
+    private function generateSlug(string $name): string
+    {
+        // Convertir el nombre a minúsculas, eliminar caracteres no deseados y reemplazar espacios por guiones
+        return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
     }
 
     // Getters

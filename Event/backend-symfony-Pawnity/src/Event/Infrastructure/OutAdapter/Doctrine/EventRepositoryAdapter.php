@@ -51,4 +51,10 @@ class EventRepositoryAdapter implements EventRepositoryInterface
     {
         return $this->repository->findBy(['orgId' => $orgId]);
     }
+
+    public function save(Event $event): void
+    {
+        $this->entityManager->persist($event);
+        $this->entityManager->flush();
+    }
 }
