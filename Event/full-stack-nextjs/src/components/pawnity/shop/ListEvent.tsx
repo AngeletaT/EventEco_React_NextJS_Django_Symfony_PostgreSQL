@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import styles from "@/styles/eventeco/Shop.module.css";
+import styles from "@/styles/pawnity/Shop.module.css";
 import { Button } from "@/utils/PrimeReactComponents";
 import { Event } from "@/types/Event";
 

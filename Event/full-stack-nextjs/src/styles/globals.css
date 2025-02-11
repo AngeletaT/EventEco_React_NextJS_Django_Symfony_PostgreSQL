@@ -21,18 +21,18 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body.eventeco {
-  background: linear-gradient(to bottom, #5ea664, #dbf2dc);
+  background-color: #ffffff;
 }
 
 body.pawnity {
-  background: linear-gradient(to bottom, #c2e2c0, #f8ccaf);
+  background-color: #ffffff;
 }
 
 /* * {
