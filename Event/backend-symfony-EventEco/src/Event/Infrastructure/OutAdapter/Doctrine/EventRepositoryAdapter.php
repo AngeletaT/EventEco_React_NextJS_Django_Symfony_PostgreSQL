@@ -57,4 +57,9 @@ class EventRepositoryAdapter implements EventRepositoryInterface
         $this->entityManager->persist($event);
         $this->entityManager->flush();
     }
+
+    public function find(int $eventId): ?Event
+    {
+        return $this->repository->find($eventId);
+    }
 }

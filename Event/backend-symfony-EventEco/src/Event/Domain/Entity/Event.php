@@ -116,4 +116,10 @@ class Event
     public function setLocation(?string $location): void { $this->location = $location; }
     public function setDescription(?string $description): void { $this->description = $description; }
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): void { $this->updatedAt = $updatedAt; }
+    public function setUrlImage(?array $urlImage): void { $this->urlImage = $urlImage; }
+    public function setUrlPoster(?string $urlPoster): void { $this->urlPoster = $urlPoster; }
+    public function setIdCategory(?int $idCategory): void { $this->idCategory = $idCategory; }
+    public function setStartDate(\DateTimeInterface $startDate): void { $this->startDate = $startDate; }
+    public function setEndDate(\DateTimeInterface $endDate): void { $this->endDate = $endDate; }
+
 }

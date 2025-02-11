@@ -44,4 +44,6 @@ interface EventRepositoryInterface
     public function findByOrganizerId(int $orgId): array;
 
     public function save(Event $event): void;
+
+    public function find(int $eventId): ?Event;
 }
