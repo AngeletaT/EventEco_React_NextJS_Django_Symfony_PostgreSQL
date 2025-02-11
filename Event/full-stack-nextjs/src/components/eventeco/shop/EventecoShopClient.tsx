@@ -99,7 +99,7 @@ const EventecoShopClient = () => {
             {isLoading || isFetching ? <EventSkeletonShop /> : <ListEvents events={events} />}
 
             {/* Paginación */}
-            {pageSize !== 25 && (
+            {pageSize !== 25 && events.length > 0 && (
                 <Pagination
                     hasNextPage={currentPage < totalPages}
                     hasPreviousPage={currentPage > 1}

@@ -13,6 +13,13 @@
     color: #333;
 }
 
+.noEvents {
+    text-align: center;
+    font-size: 1.2em;
+    color: #848484;
+    margin-top: 1rem;
+}
+
 /* Filtros */
 .filtersContainer {
     display: flex;

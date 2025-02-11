@@ -45,7 +45,7 @@ const PawnityShopClient = () => {
         console.log("3 params", params.toString());
         console.log("3 categorySlug", categorySlug);
         console.log("3 location", location);
-        // router.replace(`/pawnity/shop?${params.toString()}`);
+        router.replace(`/pawnity/shop?${params.toString()}`);
     }, [currentPage, pageSize, categorySlug, location, orderByDate, router]);
 
     const { data: categories, isLoading: loadingCategories } = useCategories<Category[]>();
@@ -109,7 +109,7 @@ const PawnityShopClient = () => {
             {isLoading || isFetching ? <EventSkeletonShop /> : <ListEvents events={events} />}
 
             {/* Paginación */}
-            {pageSize !== 25 && (
+            {pageSize !== 25 && events.length > 0 && (
                 <Pagination
                     hasNextPage={currentPage < totalPages}
                     hasPreviousPage={currentPage > 1}
