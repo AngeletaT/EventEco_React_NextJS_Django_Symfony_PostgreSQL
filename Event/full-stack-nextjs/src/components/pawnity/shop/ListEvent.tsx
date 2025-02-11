@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import styles from "@/styles/pawnity/Shop.module.css";
 import { Button } from "@/utils/PrimeReactComponents";
 import { Event } from "@/types/Event";
@@ -18,24 +19,22 @@ const ListEvents: React.FC<ListEventsProps> = ({ events }) => {
             ) : (
                 <div className={styles.eventgrid}>
                     {events.map((event: Event) => (
-                        <div key={event.idevent} className={styles.eventcard}>
-                            <img src={event.urlposter} alt={event.name} className={styles.eventimage} />
-                            <div className={styles.eventdetails}>
-                                <h3>{event.name}</h3>
-                                <p>{event.description}</p>
-                                <p>
-                                    <i className="pi pi-calendar"></i> {new Date(event.startdate).toLocaleDateString("es-ES")}
-                                </p>
-                                <p>
-                                    <i className="pi pi-map-marker"></i> {event.location}
-                                </p>
+                        <Link key={event.idevent} href={`/pawnity/shop/event/${event.eventslug}`} className={styles.eventCard}>
+                            <div key={event.idevent} className={styles.eventcard}>
+                                <img src={event.urlposter} alt={event.name} className={styles.eventimage} />
+                                <div className={styles.eventdetails}>
+                                    <h3>{event.name}</h3>
+                                    <p>{event.description}</p>
+                                    <p>
+                                        <i className="pi pi-calendar"></i> {new Date(event.startdate).toLocaleDateString("es-ES")}
+                                    </p>
+                                    <p>
+                                        <i className="pi pi-map-marker"></i> {event.location}
+                                    </p>
+                                </div>
+                                <Button label="Ver más" className={`p-button-info ${styles.eventbutton}`} />
                             </div>
-                            <Button
-                                label="Ver más"
-                                onClick={() => (window.location.href = `/pawnity/shop/event/${event.eventslug}`)}
-                                className={`p-button-info ${styles.eventbutton}`}
-                            />
-                        </div>
+                        </Link>
                     ))}
                 </div>
             )}

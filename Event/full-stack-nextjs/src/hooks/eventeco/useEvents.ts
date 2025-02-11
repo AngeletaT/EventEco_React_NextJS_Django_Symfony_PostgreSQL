@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getEvents, getEventsPerPage } from "@/services/eventeco/queries/getEvents";
+import { getEvents, getEventsPerPage, getEventBySlug } from "@/services/eventeco/queries/getEvents";
 import { Event } from "@/types/Event";
 
 export const useEvents = () =>
@@ -36,3 +36,13 @@ export const useEventsPerPage = ({
             }),
         staleTime: 1000 * 60,
     });
+
+export const useEventDetails = (slug: string) => {
+    return useQuery<Event>({
+        queryKey: ["eventDetails", slug],
+        queryFn: () => getEventBySlug(slug),
+        staleTime: 1000 * 60 * 5,
+        retry: 2,
+        refetchOnWindowFocus: false,
+    });
+};

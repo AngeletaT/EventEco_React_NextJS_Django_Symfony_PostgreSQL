@@ -21,17 +21,11 @@ const PawnityShopClient = () => {
     const initialLocation = searchParams.get("location") || "";
     const initialOrderByDate = (searchParams.get("order_by_date") as "asc" | "desc") || "asc";
 
-    console.log("1 initialCategorySlug", initialCategorySlug);
-    console.log("1 initialLocation", initialLocation);
-
     const [currentPage, setCurrentPage] = useState(initialPageParam);
     const [pageSize, setPageSize] = useState(initialPageSize);
     const [categorySlug, setCategorySlug] = useState(initialCategorySlug);
     const [location, setLocation] = useState(initialLocation);
     const [orderByDate, setOrderByDate] = useState<"asc" | "desc">(initialOrderByDate);
-
-    console.log("2 categorySlug", categorySlug);
-    console.log("2 location", location);
 
     useEffect(() => {
         const params = new URLSearchParams({
@@ -42,9 +36,6 @@ const PawnityShopClient = () => {
             order_by_date: orderByDate,
         });
 
-        console.log("3 params", params.toString());
-        console.log("3 categorySlug", categorySlug);
-        console.log("3 location", location);
         router.replace(`/pawnity/shop?${params.toString()}`);
     }, [currentPage, pageSize, categorySlug, location, orderByDate, router]);
 

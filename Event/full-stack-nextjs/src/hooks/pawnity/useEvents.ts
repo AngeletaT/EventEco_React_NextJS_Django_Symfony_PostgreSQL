@@ -36,3 +36,13 @@ export const useEventsPerPage = ({
             }),
         staleTime: 1000 * 60,
     });
+
+export const useEventDetails = (slug: string) => {
+    return useQuery<Event>({
+        queryKey: ["eventDetails", slug],
+        queryFn: () => getEventBySlug(slug),
+        staleTime: 1000 * 60 * 5,
+        retry: 2,
+        refetchOnWindowFocus: false,
+    });
+};

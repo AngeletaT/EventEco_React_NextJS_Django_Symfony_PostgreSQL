@@ -1,3 +1,6 @@
+import { Category } from "./Category";
+import { Subevent } from "./Subevent";
+
 export interface Event {
     idevent: number;
     name: string;
@@ -7,12 +10,12 @@ export interface Event {
     location: string;
     description: string;
     status: string;
-    urlimage: {};
+    urlimage: [];
     urlposter: string;
-    orgid: number;
+    idorg: number;
     idcategory: number;
-    category: object;
-    subevent: object;
+    category: Category;
+    subevents: Subevent[] | null;
     createdat: string;
     updatedat: string;
 }
