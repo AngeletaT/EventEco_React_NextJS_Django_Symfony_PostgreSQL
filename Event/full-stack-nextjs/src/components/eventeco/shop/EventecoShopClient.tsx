@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCategories } from "@/hooks/eventeco/useCategories";
 import { useEventsPerPage } from "@/hooks/eventeco/useEvents";
 import { Category } from "@/types/Category";
@@ -11,11 +12,29 @@ import ListEvents from "./ListEvent";
 import Pagination from "./Pagination";
 
 const EventecoShopClient = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(5);
-    const [categorySlug, setCategorySlug] = useState("");
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    const initialPageParam = parseInt(searchParams.get("page") || "1", 10);
+    const initialPageSize = parseInt(searchParams.get("page_size") || "5", 10);
+    const initialCategorySlug = searchParams.get("categorySlug") || "";
+
+    const [currentPage, setCurrentPage] = useState(initialPageParam);
+    const [pageSize, setPageSize] = useState(initialPageSize);
+    const [categorySlug, setCategorySlug] = useState(initialCategorySlug);
     const [location, setLocation] = useState("");
     const [orderByDate, setOrderByDate] = useState<"asc" | "desc">("asc");
+
+    useEffect(() => {
+        const params = new URLSearchParams({
+            page: currentPage.toString(),
+            page_size: pageSize.toString(),
+            ...(categorySlug && { categorySlug }),
+            ...(location && { location }),
+            order_by_date: orderByDate,
+        });
+        router.push(`/eventeco/shop?${params.toString()}`);
+    }, [currentPage, pageSize, categorySlug, location, orderByDate, router]);
 
     const { data: categories, isLoading: loadingCategories } = useCategories<Category[]>();
 
