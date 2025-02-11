@@ -18,12 +18,14 @@ const PawnityShopClient = () => {
     const initialPageParam = parseInt(searchParams.get("page") || "1", 10);
     const initialPageSize = parseInt(searchParams.get("page_size") || "5", 10);
     const initialCategorySlug = searchParams.get("categorySlug") || "";
+    const initialLocation = searchParams.get("location") || "";
+    const initialOrderByDate = (searchParams.get("order_by_date") as "asc" | "desc") || "asc";
 
     const [currentPage, setCurrentPage] = useState(initialPageParam);
     const [pageSize, setPageSize] = useState(initialPageSize);
     const [categorySlug, setCategorySlug] = useState(initialCategorySlug);
-    const [location, setLocation] = useState("");
-    const [orderByDate, setOrderByDate] = useState<"asc" | "desc">("asc");
+    const [location, setLocation] = useState(initialLocation);
+    const [orderByDate, setOrderByDate] = useState<"asc" | "desc">(initialOrderByDate);
 
     useEffect(() => {
         const params = new URLSearchParams({
@@ -33,7 +35,7 @@ const PawnityShopClient = () => {
             ...(location && { location }),
             order_by_date: orderByDate,
         });
-        router.push(`/pawnity/shop?${params.toString()}`);
+        router.replace(`/pawnity/shop?${params.toString()}`);
     }, [currentPage, pageSize, categorySlug, location, orderByDate, router]);
 
     const { data: categories, isLoading: loadingCategories } = useCategories<Category[]>();
