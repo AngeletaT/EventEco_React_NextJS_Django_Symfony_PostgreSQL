@@ -1,0 +1,35 @@
+.eventDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.eventImage {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.eventInfo {
+    text-align: left;
+}
+
+.eventDate {
+    font-weight: bold;
+    color: #388e3c;
+    margin: 0.5rem 0;
+}
+
+.eventDescription {
+    margin: 1rem 0;
+    line-height: 1.6;
+}
+
+.organizerInfo {
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 8px;
+}
