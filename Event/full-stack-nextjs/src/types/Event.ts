@@ -15,7 +15,7 @@ export interface Event {
     idorg: number;
     idcategory: number;
     category: Category;
-    subevent: Subevent[] | null;
+    subevents: Subevent[] | null;
     createdat: string;
     updatedat: string;
 }
