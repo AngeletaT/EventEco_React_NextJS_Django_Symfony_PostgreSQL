@@ -21,7 +21,7 @@ class LoginOrganizerProvider extends AbstractController
     }
 
     /**
-     * @Route("/organizer/login", name="organizer_login", methods={"POST"})
+     * @Route("/organizer/auth/login", name="organizer_login", methods={"POST"})
      */
     public function login(Request $request): JsonResponse
     {
