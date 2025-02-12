@@ -27,7 +27,11 @@ const PopularEvents: React.FC<PopularEventsProps> = ({ events }) => {
                         <h3>{event.name}</h3>
                         <p>{new Date(event.startdate).toLocaleDateString("es-ES")}</p>
                         <p>{event.location}</p>
-                        <Button label="Más detalles" className="p-button-info" />{" "}
+                        <Button
+                            label="Ver más"
+                            onClick={() => (window.location.href = `/pawnity/shop/event/${event.eventslug}`)}
+                            className="p-button-info"
+                        />
                     </div>
                 ))}
             </div>
