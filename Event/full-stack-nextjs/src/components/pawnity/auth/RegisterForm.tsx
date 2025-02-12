@@ -55,7 +55,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
 
     return (
         <div className={styles.formRegisterContainer}>
-            <FloatLabel>
+            <FloatLabel className={styles.floatLabelContainer}>
                 <InputText
                     id="email"
                     value={email}
@@ -67,7 +67,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
                 <label htmlFor="email">Email</label>
             </FloatLabel>
             {userType === "organizer" && (
-                <FloatLabel>
+                <FloatLabel className={styles.floatLabelContainer}>
                     <InputText
                         id="nif"
                         value={nif}
@@ -79,7 +79,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
                     <label htmlFor="nif">NIF</label>
                 </FloatLabel>
             )}
-            <FloatLabel>
+            <FloatLabel className={styles.floatLabelContainer}>
                 <Password
                     id="password"
                     value={password}
@@ -93,7 +93,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
                 <label htmlFor="password">Contraseña</label>
             </FloatLabel>
 
-            <FloatLabel>
+            <FloatLabel className={styles.floatLabelContainer}>
                 <Password
                     id="repeatpassword"
                     value={repeatpassword}

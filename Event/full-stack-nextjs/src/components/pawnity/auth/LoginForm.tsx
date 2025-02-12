@@ -41,7 +41,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
     return (
         <div className="card flex justify-content-center">
             <div className={styles.formLoginContainer}>
-                <FloatLabel>
+                <FloatLabel className={styles.floatLabelContainer}>
                     <InputText
                         id="email"
                         value={email}
@@ -53,7 +53,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
                     <label htmlFor="email">Email</label>
                 </FloatLabel>
 
-                <FloatLabel>
+                <FloatLabel className={styles.floatLabelContainer}>
                     <Password
                         id="password"
                         value={password}
