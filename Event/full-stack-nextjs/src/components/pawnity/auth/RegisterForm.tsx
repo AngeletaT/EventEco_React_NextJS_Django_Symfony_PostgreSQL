@@ -12,6 +12,7 @@ import styles from "@/styles/pawnity/Auth.module.css";
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }) => {
     const [email, setEmail] = useState("");
+    const [nif, setNif] = useState("");
     const [password, setPassword] = useState("");
     const [repeatpassword, setRepeatPassword] = useState("");
     const [error, setError] = useState("");
@@ -27,17 +28,17 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
 
         try {
             if (userType === "client") {
-                await registerClientService({ email, password, repeatpassword });
+                await registerClientService({ email, password, nif, repeatpassword });
                 setError("");
                 setShowSuccessModal(true);
                 console.log("Registro exitoso");
             } else if (userType === "organizer") {
-                await registerOrganizerService({ email, password, repeatpassword });
+                await registerOrganizerService({ email, password, nif, repeatpassword });
                 setError("");
                 setShowSuccessModal(true);
                 console.log("Registro exitoso");
             } else if (userType === "admin") {
-                await registerAdminService({ email, password, repeatpassword });
+                await registerAdminService({ email, password, nif, repeatpassword });
                 setError("");
                 setShowSuccessModal(true);
                 console.log("Registro exitoso");
@@ -65,7 +66,19 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
                 />
                 <label htmlFor="email">Email</label>
             </FloatLabel>
-
+            {userType === "organizer" && (
+                <FloatLabel>
+                    <InputText
+                        id="nif"
+                        value={nif}
+                        onChange={(e) => setNif(e.target.value)}
+                        placeholder="Introduce tu NIF"
+                        className="w-full"
+                        required
+                    />
+                    <label htmlFor="nif">NIF</label>
+                </FloatLabel>
+            )}
             <FloatLabel>
                 <Password
                     id="password"

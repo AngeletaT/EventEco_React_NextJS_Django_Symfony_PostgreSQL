@@ -16,6 +16,7 @@ export const loginClientService = async (data: LoginData): Promise<Client> => {
 export const loginOrganizerService = async (data: LoginData): Promise<Organizer> => {
     try {
         const response = await symfonyAPI_P.post("/organizer/login", data);
+        console.log("response.data", response.data);
         return response.data as Organizer;
     } catch (error) {
         console.error("Error during login:", error);
