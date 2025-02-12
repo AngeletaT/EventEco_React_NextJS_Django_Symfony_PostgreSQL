@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import errorReducer from "./errorSlice";
+import errorReducer from "@/store/pawnity/slices/errorSlice";
+import authReducer from "@/store/pawnity/slices/authSlice";
 
-const store_p = configureStore({
+const PawnityProvider = configureStore({
     reducer: {
         error: errorReducer,
+        auth: authReducer,
     },
 });
 
-export type RootState = ReturnType<typeof store_p.getState>;
-export type AppDispatch = typeof store_p.dispatch;
+export type RootState = ReturnType<typeof PawnityProvider.getState>;
+export type AppDispatch = typeof PawnityProvider.dispatch;
 
-export default store_p;
+export default PawnityProvider;

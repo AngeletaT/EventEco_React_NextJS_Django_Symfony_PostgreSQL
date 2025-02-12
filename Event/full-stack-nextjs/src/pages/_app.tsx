@@ -8,6 +8,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PrimeReactProvider } from "primereact/api";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { Provider } from "react-redux";
+import EventecoProvider from "@/store/eventeco";
+import PawnityProvider from "@/store/pawnity";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +33,17 @@ function MyApp({ Component, pageProps }: any) {
     return (
         <QueryClientProvider client={queryClient}>
             <PrimeReactProvider>
-                <Component {...pageProps} />
+                {router.pathname.includes("eventeco") ? (
+                    <Provider store={EventecoProvider}>
+                        <Component {...pageProps} />
+                    </Provider>
+                ) : router.pathname.includes("pawnity") ? (
+                    <Provider store={PawnityProvider}>
+                        <Component {...pageProps} />
+                    </Provider>
+                ) : (
+                    <Component {...pageProps} />
+                )}
             </PrimeReactProvider>
         </QueryClientProvider>
     );
