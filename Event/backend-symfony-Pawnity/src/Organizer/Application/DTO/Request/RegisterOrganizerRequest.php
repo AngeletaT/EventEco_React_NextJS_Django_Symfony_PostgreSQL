@@ -22,6 +22,7 @@ class RegisterOrganizerRequest
     public string $password;
 
     /**
+     * @Assert\NotBlank(message="El campo 'nif' es obligatorio.")
      * @Assert\Length(
      *     max=20,
      *     maxMessage="El campo 'nif' no puede tener más de 20 caracteres."
