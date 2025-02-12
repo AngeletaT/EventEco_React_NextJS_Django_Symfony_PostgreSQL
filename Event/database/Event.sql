@@ -674,7 +674,7 @@ $do$
 BEGIN
 CREATE TABLE E_TicketInfo (
     idTicketInfo SERIAL PRIMARY KEY,
-    idEvent INT,
+    idEvent INT,                                                                    
     type VARCHAR(50) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     capacity INT,
@@ -709,7 +709,7 @@ CREATE TABLE P_TicketInfo (
 );
 
 -- Inserción de tipos de tickets en E_TicketInfo
-INSERT INTO E_TicketInfo (idEvent, type, price, capacity, descripcion, createdAt, updatedAt)
+INSERT INTO P_TicketInfo (idEvent, type, price, capacity, descripcion, createdAt, updatedAt)
 VALUES
     (NULL, 'Entrada General', 20.00, 1000, 'Acceso general al evento, sin áreas restringidas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (NULL, 'Entrada VIP', 50.00, 200, 'Acceso a áreas VIP con asientos preferenciales y beneficios exclusivos.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
