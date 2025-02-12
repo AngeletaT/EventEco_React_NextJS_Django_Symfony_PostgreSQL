@@ -267,6 +267,7 @@ CREATE TABLE E_Events (
     urlPoster VARCHAR(255),
     idOrg INT,
     idCategory INT,
+    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -397,6 +398,7 @@ CREATE TABLE P_Events (
     urlPoster VARCHAR(255),
     idOrg INT,
     idCategory INT,
+    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -530,39 +532,34 @@ CREATE TABLE E_SubEvents (
     urlImage VARCHAR(255)[],
     urlPoster VARCHAR(255),
     idEvent INT,
-    status statusSubEvents DEFAULT 'Confirmed',
     isActive BOOLEAN DEFAULT TRUE,
+    status statusSubEvents DEFAULT 'Confirmed',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO E_SubEvents (name, description, startDate, endDate, urlImage, urlPoster, idEvent, status, isActive, createdAt, updatedAt)
 VALUES
--- 'Salón del Manga' (Gaming, Evento ID: 1)
     ('Conferencia sobre Cultura Manga', 'Charla con expertos sobre la evolución del manga.', '2025-03-01 10:00', '2025-03-01 12:00', ARRAY['url1'], 'poster1', 1, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Taller de Dibujo Manga', 'Aprende técnicas básicas de dibujo manga.', '2025-03-01 13:00', '2025-03-01 15:00', ARRAY['url2'], 'poster2', 1, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Desfile de Cosplay', 'Competencia de cosplay con premios.', '2025-03-02 10:00', '2025-03-02 12:00', ARRAY['url3'], 'poster3', 1, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Proyección de Anime Clásico', 'Proyección especial de películas clásicas.', '2025-03-02 14:00', '2025-03-02 16:00', ARRAY['url4'], 'poster4', 1, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Encuentro con Mangakas', 'Conoce a tus autores favoritos.', '2025-03-03 10:00', '2025-03-03 12:00', ARRAY['url5'], 'poster5', 1, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- 'Charlas sobre Emprendimiento' (Conferencias, Evento ID: 6)
     ('Charla sobre Innovación', 'Ideas innovadoras para el futuro.', '2025-03-05 10:00', '2025-03-05 11:00', ARRAY['url1'], 'poster1', 6, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Mesa Redonda: Sostenibilidad', 'Debate sobre prácticas sostenibles.', '2025-03-05 12:00', '2025-03-05 13:30', ARRAY['url2'], 'poster2', 6, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Charla Inspiradora', 'Historias personales que inspiran.', '2025-03-06 10:00', '2025-03-06 11:30', ARRAY['url3'], 'poster3', 6, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Workshop de Liderazgo', 'Taller interactivo para líderes emergentes.', '2025-03-06 12:00', '2025-03-06 14:00', ARRAY['url4'], 'poster4', 6, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Networking Session', 'Conecta con otros asistentes.', '2025-03-06 15:00', '2025-03-06 16:30', ARRAY['url5'], 'poster5', 6, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- 'BeachSound Festival' (Festivales, Evento ID: 11)
     ('Concierto de Artista A', 'Actuación en vivo de Artista A.', '2025-06-15 18:00', '2025-06-15 20:00', ARRAY['url1'], 'poster1', 11, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Concierto de Artista B', 'Actuación en vivo de Artista B.', '2025-06-15 21:00', '2025-06-15 23:00', ARRAY['url2'], 'poster2', 11, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Fiesta Electrónica', 'Sesión de DJ al aire libre.', '2025-06-16 00:00', '2025-06-16 02:00', ARRAY['url3'], 'poster3', 11, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Taller de Música', 'Aprende sobre producción musical.', '2025-06-16 15:00', '2025-06-16 17:00', ARRAY['url4'], 'poster4', 11, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Concierto de Clausura', 'Evento de clausura con Artista C.', '2025-06-17 18:00', '2025-06-17 20:00', ARRAY['url5'], 'poster5', 11, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- 'Competición Mundial de Fútbol' (Deportes, Evento ID: 16)
     ('Partido Inaugural', 'Inicio del torneo.', '2025-06-10 18:00', '2025-06-10 20:00', ARRAY['url1'], 'poster1', 16, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Semifinal 1', 'Primera semifinal del torneo.', '2025-06-15 18:00', '2025-06-15 20:00', ARRAY['url2'], 'poster2', 16, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Semifinal 2', 'Segunda semifinal del torneo.', '2025-06-16 18:00', '2025-06-16 20:00', ARRAY['url3'], 'poster3', 16, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Partido por el Tercer Lugar', 'Disputa del tercer puesto.', '2025-06-19 18:00', '2025-06-19 20:00', ARRAY['url4'], 'poster4', 16, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Final del Torneo', 'Gran final del torneo mundial.', '2025-06-20 18:00', '2025-06-20 20:00', ARRAY['url5'], 'poster5', 16, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- 'Día de los Árboles' (Naturaleza, Evento ID: 21)
     ('Plantación de Árboles', 'Actividad principal del día.', '2025-04-01 09:00', '2025-04-01 12:00', ARRAY['url1'], 'poster1', 21, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Charla Educativa', 'Sensibilización sobre la importancia de los árboles.', '2025-04-01 12:30', '2025-04-01 13:30', ARRAY['url2'], 'poster2', 21, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Taller de Compostaje', 'Aprende a compostar en casa.', '2025-04-01 14:00', '2025-04-01 15:30', ARRAY['url3'], 'poster3', 21, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -591,31 +588,26 @@ CREATE TABLE P_SubEvents (
 
 INSERT INTO P_SubEvents (name, description, startDate, endDate, urlImage, urlPoster, idEvent, status, isActive, createdAt, updatedAt)
 VALUES
--- 'Jornada de Adopción en el Parque' (Adopción Responsable, Evento ID: 1)
     ('Presentación de Mascotas', 'Conoce a las mascotas disponibles para adopción.', '2025-04-10 10:00', '2025-04-10 11:30', ARRAY['subevent1.jpg'], 'poster1.jpg', 1, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Charla sobre Tenencia Responsable', 'Aprende cómo cuidar a tu nueva mascota.', '2025-04-10 12:00', '2025-04-10 13:00', ARRAY['subevent2.jpg'], 'poster2.jpg', 1, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Taller para Niños: Cuida a tu Mascota', 'Actividad educativa para los más pequeños.', '2025-04-10 14:00', '2025-04-10 15:30', ARRAY['subevent3.jpg'], 'poster3.jpg', 1, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Desfile de Mascotas', 'Evento divertido con premios para mascotas adoptadas.', '2025-04-10 16:00', '2025-04-10 17:30', ARRAY['subevent4.jpg'], 'poster4.jpg', 1, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Cierre Musical', 'Concierto solidario para finalizar la jornada.', '2025-04-10 18:00', '2025-04-10 19:30', ARRAY['subevent5.jpg'], 'poster5.jpg', 1, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- 'Taller de Tenencia Responsable' (Concienciación y Educación, Evento ID: 6)
     ('Introducción a la Tenencia Responsable', 'Conceptos básicos para cuidar a los animales.', '2025-03-10 10:00', '2025-03-10 11:00', ARRAY['subevent1.jpg'], 'poster1.jpg', 6, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Cuidados Veterinarios Básicos', 'Cómo detectar problemas de salud en mascotas.', '2025-03-10 11:30', '2025-03-10 12:30', ARRAY['subevent2.jpg'], 'poster2.jpg', 6, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Alimentación Saludable para Mascotas', 'Consejos para una dieta equilibrada.', '2025-03-10 13:00', '2025-03-10 14:00', ARRAY['subevent3.jpg'], 'poster3.jpg', 6, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Taller Práctico: Higiene Animal', 'Aprende sobre el aseo adecuado.', '2025-03-10 14:30', '2025-03-10 15:30', ARRAY['subevent4.jpg'], 'poster4.jpg', 6, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Preguntas y Respuestas', 'Resuelve tus dudas con un experto.', '2025-03-10 16:00', '2025-03-10 17:00', ARRAY['subevent5.jpg'], 'poster5.jpg', 6, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- 'Mercadillo Solidario' (Recaudación de Fondos, Evento ID: 11)
     ('Apertura del Mercadillo', 'Inauguración oficial del evento.', '2025-05-01 10:00', '2025-05-01 10:30', ARRAY['subevent1.jpg'], 'poster1.jpg', 11, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Zona de Manualidades', 'Compra artículos hechos a mano por voluntarios.', '2025-05-01 10:30', '2025-05-01 12:30', ARRAY['subevent2.jpg'], 'poster2.jpg', 11, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Rifa Benéfica', 'Participa para ganar premios y ayudar.', '2025-05-01 13:00', '2025-05-01 14:00', ARRAY['subevent3.jpg'], 'poster3.jpg', 11, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Demostración de Productos Ecológicos', 'Conoce alternativas sostenibles.', '2025-05-01 14:30', '2025-05-01 15:30', ARRAY['subevent4.jpg'], 'poster4.jpg', 11, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Cierre del Mercadillo', 'Agradecimientos y resumen del evento.', '2025-05-01 16:00', '2025-05-01 16:30', ARRAY['subevent5.jpg'], 'poster5.jpg', 11, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- 'Caminata Solidaria' (Actividades al Aire Libre con Mascotas, Evento ID: 16)
     ('Inicio de la Caminata', 'Bienvenida y distribución de grupos.', '2025-04-10 09:00', '2025-04-10 09:30', ARRAY['subevent1.jpg'], 'poster1.jpg', 16, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Parada de Hidratación', 'Descanso y agua para mascotas y dueños.', '2025-04-10 10:30', '2025-04-10 10:45', ARRAY['subevent2.jpg'], 'poster2.jpg', 16, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Actividades en el Punto Medio', 'Juegos y charlas breves.', '2025-04-10 11:00', '2025-04-10 12:00', ARRAY['subevent3.jpg'], 'poster3.jpg', 16, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Reanudación de la Caminata', 'Continúa la caminata hasta el punto final.', '2025-04-10 12:15', '2025-04-10 13:00', ARRAY['subevent4.jpg'], 'poster4.jpg', 16, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Cierre con Reconocimientos', 'Entrega de premios y agradecimientos.', '2025-04-10 13:30', '2025-04-10 14:00', ARRAY['subevent5.jpg'], 'poster5.jpg', 16, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- 'Competencia de Agilidad' (Competiciones y Exhibiciones, Evento ID: 21)
     ('Registro de Participantes', 'Apertura para registrar a los competidores.', '2025-05-05 08:00', '2025-05-05 09:00', ARRAY['subevent1.jpg'], 'poster1.jpg', 21, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Ronda Clasificatoria', 'Primera ronda para seleccionar finalistas.', '2025-05-05 09:30', '2025-05-05 11:30', ARRAY['subevent2.jpg'], 'poster2.jpg', 21, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Pausa y Zona de Relax', 'Espacio para descansar y socializar.', '2025-05-05 12:00', '2025-05-05 12:30', ARRAY['subevent3.jpg'], 'poster3.jpg', 21, 'Confirmed', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -674,23 +666,24 @@ $do$
 BEGIN
 CREATE TABLE E_TicketInfo (
     idTicketInfo SERIAL PRIMARY KEY,
-    idEvent INT,                                                                    
+    eventSlug VARCHAR(100),                                                                    
     type VARCHAR(50) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     capacity INT,
+    remaining INT,
     descripcion VARCHAR(255),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Inserción de tipos de tickets en E_TicketInfo
-INSERT INTO E_TicketInfo (idEvent, type, price, capacity, descripcion, createdAt, updatedAt)
+INSERT INTO E_TicketInfo (eventSlug, type, price, capacity, remaining, descripcion, createdAt, updatedAt)
 VALUES
-    (NULL, 'Entrada General', 20.00, 1000, 'Acceso general al evento, sin áreas restringidas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada VIP', 50.00, 200, 'Acceso a áreas VIP con asientos preferenciales y beneficios exclusivos.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada Familiar', 60.00, 500, 'Incluye acceso para dos adultos y dos niños.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada de Grupo', 90.00, 300, 'Descuento para grupos de hasta cinco personas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada Estudiante', 15.00, 500, 'Descuento especial para estudiantes con credencial válida.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (NULL, 'Entrada General', 20.00, 1000, 1000,'Acceso general al evento, sin áreas restringidas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (NULL, 'Entrada VIP', 50.00, 200, 200,'Acceso a áreas VIP con asientos preferenciales y beneficios exclusivos.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (NULL, 'Entrada Familiar', 60.00, 500, 500,'Incluye acceso para dos adultos y dos niños.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (NULL, 'Entrada de Grupo', 90.00, 300, 300,'Descuento para grupos de hasta cinco personas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (NULL, 'Entrada Estudiante', 15.00, 500, 500,'Descuento especial para estudiantes con credencial válida.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 END
 $do$;
 
@@ -699,23 +692,24 @@ $do$
 BEGIN
 CREATE TABLE P_TicketInfo (
     idTicketInfo SERIAL PRIMARY KEY,
-    idEvent INT,
+    eventSlug VARCHAR(100),
     type VARCHAR(50) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     capacity INT,
+    remaining INT,
     descripcion VARCHAR(255),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Inserción de tipos de tickets en E_TicketInfo
-INSERT INTO P_TicketInfo (idEvent, type, price, capacity, descripcion, createdAt, updatedAt)
+INSERT INTO P_TicketInfo (eventSlug, type, price, capacity, remaining, descripcion, createdAt, updatedAt)
 VALUES
-    (NULL, 'Entrada General', 20.00, 1000, 'Acceso general al evento, sin áreas restringidas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada VIP', 50.00, 200, 'Acceso a áreas VIP con asientos preferenciales y beneficios exclusivos.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada Familiar', 60.00, 500, 'Incluye acceso para dos adultos y dos niños.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada de Grupo', 90.00, 300, 'Descuento para grupos de hasta cinco personas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada Estudiante', 15.00, 500, 'Descuento especial para estudiantes con credencial válida.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (NULL, 'Entrada General', 20.00, 1000, 1000, 'Acceso general al evento, sin áreas restringidas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (NULL, 'Entrada VIP', 50.00, 200, 200,'Acceso a áreas VIP con asientos preferenciales y beneficios exclusivos.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (NULL, 'Entrada Familiar', 60.00, 500, 500,'Incluye acceso para dos adultos y dos niños.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (NULL, 'Entrada de Grupo', 90.00, 300, 300,'Descuento para grupos de hasta cinco personas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (NULL, 'Entrada Estudiante', 15.00, 500, 500,'Descuento especial para estudiantes con credencial válida.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 END
 $do$;
 
@@ -732,7 +726,7 @@ BEGIN
 CREATE TABLE E_Order (
     idOrder SERIAL PRIMARY KEY,
     idClient INT,
-    idEvents INT,
+    idEvent INT,
     datePurchase TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     totalPrice DECIMAL(10, 2),
     payment VARCHAR(50),
@@ -749,7 +743,7 @@ BEGIN
 CREATE TABLE P_Order (
     idOrder SERIAL PRIMARY KEY,
     idClient INT,
-    idEvents INT,
+    idEvent INT,
     datePurchase TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     totalPrice DECIMAL(10, 2),
     payment VARCHAR(50),
@@ -844,27 +838,28 @@ DO
 $do$
 BEGIN
 CREATE TABLE E_Complements (
-    idComplements SERIAL PRIMARY KEY,
+    idComplement SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2),
     imageURL VARCHAR(255),
+    idEvent INT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO E_Complements (name, description, price, imageURL, createdAt, updatedAt)
+INSERT INTO E_Complements (name, description, price, imageURL, idEvent, createdAt, updatedAt)
 VALUES
-    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Poster', 'Póster oficial del evento.', 7.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Poster', 'Póster oficial del evento.', 7.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 END
 $do$;
 
@@ -872,34 +867,35 @@ DO
 $do$
 BEGIN
 CREATE TABLE P_Complements (
-    idComplements SERIAL PRIMARY KEY,
+    idComplement SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT,
     price DECIMAL(10, 2),
     imageURL VARCHAR(255),
+    idEvent INT,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO P_Complements (name, description, price, imageURL, createdAt, updatedAt)
+INSERT INTO P_Complements (name, description, price, imageURL, idEvent, createdAt, updatedAt)
 VALUES
-    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Poster', 'Póster oficial del evento.', 7.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Poster', 'Póster oficial del evento.', 7.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 END
 $do$;
 
 DO
 $do$
 BEGIN
-CREATE TYPE ticketComplementsStatusEnum AS ENUM ('pending', 'used', 'inClaim', 'refunded');
+CREATE TYPE ticketComplementStatusEnum AS ENUM ('pending', 'used', 'inClaim', 'refunded');
 END
 $do$;
 
@@ -907,12 +903,12 @@ DO
 $do$
 BEGIN
 CREATE TABLE E_TicketComplements (
-    idTicketComplements SERIAL PRIMARY KEY,
+    idTicketComplement SERIAL PRIMARY KEY,
     idTicketUnit INT,
-    idComplements INT,
+    idComplement INT,
     quantity INT NOT NULL,
     subtotal DECIMAL(10, 2),
-    status ticketComplementsStatusEnum DEFAULT 'pending',
+    status ticketComplementStatusEnum DEFAULT 'pending',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -923,12 +919,12 @@ DO
 $do$
 BEGIN
 CREATE TABLE P_TicketComplements (
-    idTicketComplements SERIAL PRIMARY KEY,
+    idTicketComplement SERIAL PRIMARY KEY,
     idTicketUnit INT,
-    idComplements INT,
+    idComplement INT,
     quantity INT NOT NULL,
     subtotal DECIMAL(10, 2),
-    status ticketComplementsStatusEnum DEFAULT 'pending',
+    status ticketComplementStatusEnum DEFAULT 'pending',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -1564,33 +1560,33 @@ CREATE TABLE P_Blacklist (
 END
 $do$;
 
-DO
-$do$
-BEGIN
-CREATE TABLE E_TicketHistory(
-    idTicketHistory SERIAL PRIMARY KEY,
-    idOrder INT,
-    idEvent INT,
-    idTicketUnit INT,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-END
-$do$;
+-- DO
+-- $do$
+-- BEGIN
+-- CREATE TABLE E_TicketHistory(
+--     idTicketHistory SERIAL PRIMARY KEY,
+--     idOrder INT,
+--     idEvent INT,
+--     idTicketUnit INT,
+--     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+-- END
+-- $do$;
 
-DO
-$do$
-BEGIN
-CREATE TABLE P_TicketHistory(
-    idTicketHistory SERIAL PRIMARY KEY,
-    idOrder INT,
-    idEvent INT,
-    idTicketUnit INT,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-END
-$do$;
+-- DO
+-- $do$
+-- BEGIN
+-- CREATE TABLE P_TicketHistory(
+--     idTicketHistory SERIAL PRIMARY KEY,
+--     idOrder INT,
+--     idEvent INT,
+--     idTicketUnit INT,
+--     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
+-- END
+-- $do$;
 
 
 DO
