@@ -10,7 +10,7 @@ import PawnityLayout from "@/layouts/pawnity/PawnityLayout";
 const PawnityAuthClient: React.FC = () => {
     const [isLogin, setIsLogin] = useState(true);
 
-    const [userType, setUserType] = useState<"client" | "organization" | "admin">("client");
+    const [userType, setUserType] = useState<"client" | "organizer" | "admin">("client");
 
     return (
         <PawnityLayout>
@@ -19,7 +19,7 @@ const PawnityAuthClient: React.FC = () => {
 
                 <UserTypeSelector userType={userType} setUserType={setUserType} />
 
-                {isLogin ? <LoginForm userType={userType} /> : <RegisterForm userType={userType} />}
+                {isLogin ? <LoginForm userType={userType} /> : <RegisterForm userType={userType} onSwitchToLogin={() => setIsLogin(true)} />}
 
                 <p className={styles.authtoggleMessage}>
                     {isLogin ? "¿No tienes cuenta? " : "¿Ya tienes cuenta? "}

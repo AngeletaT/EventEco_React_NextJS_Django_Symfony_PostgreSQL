@@ -2,17 +2,14 @@
 
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { loginClientService, loginOrganizerService, loginAdminService } from "@/services/pawnity/command/loginService";
+import { LoginFormProps } from "@/types/Auth";
 import { InputText } from "@/utils/PrimeReactComponents";
 import { FloatLabel } from "@/utils/PrimeReactComponents";
 import { Password } from "@/utils/PrimeReactComponents";
 import { Button } from "@/utils/PrimeReactComponents";
 import { loginSuccess } from "@/store/pawnity/slices/authSlice";
-import { loginClientService, loginOrganizerService, loginAdminService } from "@/services/pawnity/command/loginService";
 import styles from "@/styles/pawnity/Auth.module.css";
-
-interface LoginFormProps {
-    userType: "client" | "organization" | "admin";
-}
 
 const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
     const dispatch = useDispatch();
@@ -25,15 +22,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
         try {
             if (userType === "client") {
                 const user = await loginClientService({ email, password });
-                dispatch(loginSuccess(user));
+                dispatch(loginSuccess({ user }));
                 console.log("Login successful:", user);
-            } else if (userType === "organization") {
+            } else if (userType === "organizer") {
                 const user = await loginOrganizerService({ email, password });
-                dispatch(loginSuccess(user));
+                dispatch(loginSuccess({ user }));
                 console.log("Login successful:", user);
             } else if (userType === "admin") {
                 const user = await loginAdminService({ email, password });
-                dispatch(loginSuccess(user));
+                dispatch(loginSuccess({ user }));
                 console.log("Login successful:", user);
             }
         } catch (err) {
@@ -45,7 +42,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
         <div className="card flex justify-content-center">
             <div className={styles.formLoginContainer}>
                 <FloatLabel>
-                    <InputText id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Introduce tu correo" required />
+                    <InputText
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Introduce tu correo"
+                        className="w-full"
+                        required
+                    />
                     <label htmlFor="email">Email</label>
                 </FloatLabel>
 
@@ -56,12 +60,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Introduce tu contraseña"
                         feedback={false}
+                        className="w-full"
                         toggleMask
                         required
                     />
                     <label htmlFor="password">Contraseña</label>
                 </FloatLabel>
-                <Button type="button" label="Iniciar Sesión" className="p-button-info" onClick={handleLogin} />
+                <Button type="button" label="Iniciar Sesión" className="p-button-primary" onClick={handleLogin} />
             </div>
         </div>
     );

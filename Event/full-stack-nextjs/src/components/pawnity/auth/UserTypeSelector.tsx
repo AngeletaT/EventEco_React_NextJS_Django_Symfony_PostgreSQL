@@ -1,38 +1,44 @@
 "use client";
 
 import React from "react";
-import { RadioButton } from "@/utils/PrimeReactComponents";
+import { UserTypeSelectorProps } from "@/types/Auth";
 import styles from "@/styles/pawnity/Auth.module.css";
-
-interface UserTypeSelectorProps {
-    userType: "client" | "organization" | "admin";
-    setUserType: (type: "client" | "organization" | "admin") => void;
-}
 
 const UserTypeSelector: React.FC<UserTypeSelectorProps> = ({ userType, setUserType }) => {
     return (
-        <div className={styles.selectorContainer}>
-            <div className={styles.radioButton}>
-                <RadioButton inputId="client" name="userType" value="client" onChange={(e) => setUserType(e.value)} checked={userType === "client"} />
-                <label htmlFor="client">Cliente</label>
-            </div>
-
-            <div className={styles.radioButton}>
-                <RadioButton
-                    inputId="organization"
+        <fieldset className={styles.fieldset}>
+            <div className={styles.toggle}>
+                <input
+                    type="radio"
                     name="userType"
-                    value="organization"
-                    onChange={(e) => setUserType(e.value)}
-                    checked={userType === "organization"}
+                    value="client"
+                    id="client"
+                    checked={userType === "client"}
+                    onChange={(e) => setUserType(e.target.value as "client" | "organizer" | "admin")}
                 />
-                <label htmlFor="organization">Organización</label>
-            </div>
+                <label htmlFor="client">Cliente</label>
 
-            <div className={styles.radioButton}>
-                <RadioButton inputId="admin" name="userType" value="admin" onChange={(e) => setUserType(e.value)} checked={userType === "admin"} />
-                <label htmlFor="admin">Administrador</label>
+                <input
+                    type="radio"
+                    name="userType"
+                    value="organizer"
+                    id="organizer"
+                    checked={userType === "organizer"}
+                    onChange={(e) => setUserType(e.target.value as "client" | "organizer" | "admin")}
+                />
+                <label htmlFor="organizer">Organizador</label>
+
+                <input
+                    type="radio"
+                    name="userType"
+                    value="admin"
+                    id="admin"
+                    checked={userType === "admin"}
+                    onChange={(e) => setUserType(e.target.value as "client" | "organizer" | "admin")}
+                />
+                <label htmlFor="admin">Admin</label>
             </div>
-        </div>
+        </fieldset>
     );
 };
 

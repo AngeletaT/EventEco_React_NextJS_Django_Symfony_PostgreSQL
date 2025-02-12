@@ -8,3 +8,4 @@ export { Sidebar } from "primereact/sidebar";
 export { Dropdown } from "primereact/dropdown";
 export { Password } from "primereact/password";
 export { RadioButton } from "primereact/radiobutton";
+export { Dialog } from "primereact/dialog";

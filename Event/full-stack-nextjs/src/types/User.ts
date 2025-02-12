@@ -1,6 +1,17 @@
-export interface User {
-    id: number;
+export interface Client {
+    idclient: number;
     email: string;
-    userType: string;
-    token: string;
+    accesstoken: string;
+}
+
+export interface Organizer {
+    idorganizer: number;
+    email: string;
+    accesstoken: string;
+}
+
+export interface Admin {
+    idadmin: number;
+    email: string;
+    accesstoken: string;
 }
