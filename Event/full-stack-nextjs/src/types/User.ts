@@ -13,17 +13,18 @@ export interface Client {
 }
 
 export interface Organizer {
-    idorganizer: number;
     email: string;
     accesstoken: string;
     userType: "organizer";
-    idprofileclient: number;
-    firstname: string;
-    lastname: string;
-    avatarurl: string;
-    bio: string;
-    dni: string;
-    phonenumber: string;
+    idOrg: number;
+    idProfileOrg: number;
+    nif: string;
+    name: string;
+    address: string;
+    urlImage: string;
+    urlLogo: string;
+    description: string;
+    urlWeb: string;
 }
 
 export interface Admin {

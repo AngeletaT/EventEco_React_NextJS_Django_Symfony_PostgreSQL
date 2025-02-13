@@ -27,11 +27,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
             } else if (userType === "organizer") {
                 const user = await loginOrganizerService({ email, password });
                 dispatch(loginSuccess({ user }));
-                window.location.href = "/pawnity/home";
+                window.location.href = "/pawnity/dashboard-organizer";
             } else if (userType === "admin") {
                 const user = await loginAdminService({ email, password });
                 dispatch(loginSuccess({ user }));
-                window.location.href = "/pawnity/home";
+                window.location.href = "/pawnity/dashboard-admin";
             }
         } catch (err) {
             setError("Error al iniciar sesión. Verifica tus credenciales.");

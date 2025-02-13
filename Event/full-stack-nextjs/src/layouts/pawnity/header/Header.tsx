@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 import { RootState } from "@/store/pawnity";
+import { Client } from "@/types/User";
 import { fetchUser, logoutUser } from "@/store/pawnity/slices/authSlice";
 import { Button, Sidebar, Avatar } from "@/utils/PrimeReactComponents";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -14,7 +15,11 @@ const Header: React.FC = () => {
     const [visible, setVisible] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
     const dispatch = useDispatch();
-    const { user, isAuthenticated, isLoading } = useSelector((state: RootState) => state.auth);
+    const { user, isAuthenticated, isLoading } = useSelector((state: RootState) => state.auth) as {
+        user: Client;
+        isAuthenticated: boolean;
+        isLoading: boolean;
+    };
 
     useEffect(() => {
         if (!user) {

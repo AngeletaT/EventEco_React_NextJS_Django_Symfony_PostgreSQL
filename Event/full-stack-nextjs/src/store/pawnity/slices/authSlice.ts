@@ -25,7 +25,7 @@ export const fetchUser = createAsyncThunk("auth/fetchUser", async (_, { rejectWi
         const userType = localStorage.getItem("userType");
         if (!userType) throw new Error("No user type available");
 
-        let user;
+        let user: Client | Organizer | Admin;
         switch (userType) {
             case "client":
                 user = await getClient();
