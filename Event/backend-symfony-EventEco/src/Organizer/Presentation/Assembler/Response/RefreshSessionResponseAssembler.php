@@ -16,6 +16,7 @@ class RefreshSessionResponseAssembler
     {
         return [
             'email'    => $response->getEmail(),
+            'nif'     => $response->getNif(),
             'accesstoken' => $response->getAccessToken(),
         ];
     }

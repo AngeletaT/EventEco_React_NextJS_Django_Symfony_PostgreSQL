@@ -82,8 +82,9 @@ class RefreshSessionService implements RefreshSessionInterface
             }
 
             $email = $organizer->getEmail();
+            $nif = $organizer->getNif();
                 
-            return new RefreshSessionResponse($email, $accessToken);
+            return new RefreshSessionResponse($email, $nif, $accessToken);
         }
 
         // 3. Si el access token ha expirado, validar el refresh token almacenado (HS256)
@@ -115,13 +116,10 @@ class RefreshSessionService implements RefreshSessionInterface
         $organizerAdapter = new OrganizerSecurityAdapter($organizer);
         $newAccessToken = $this->jwtManager->create($organizerAdapter);
 
-        $organizerData = [
-            'id'    => $organizer->getIdOrg(),
-            'email' => $organizer->getEmail(),
-            // Agrega aquí otros campos necesarios
-        ];
+        $email = $organizer->getEmail();
+        $nif = $organizer->getNif();
 
-        return new RefreshSessionResponse($organizer->getEmail(), $newAccessToken);
+        return new RefreshSessionResponse($email, $nif, $newAccessToken);
     }
 
     /**

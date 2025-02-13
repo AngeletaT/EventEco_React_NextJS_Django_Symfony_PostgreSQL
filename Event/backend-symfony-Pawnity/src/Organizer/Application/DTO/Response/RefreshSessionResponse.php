@@ -17,16 +17,23 @@ class RefreshSessionResponse
      * @var string
      */
     private string $accessToken;
+    private string $nif;
 
-    public function __construct(string $email, string $accessToken)
+    public function __construct(string $email, string $nif, string $accessToken)
     {
         $this->email = $email;
         $this->accessToken = $accessToken;
+        $this->nif = $nif;
     }
 
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getNif(): string
+    {
+        return $this->nif;
     }
 
     public function getAccessToken(): string
