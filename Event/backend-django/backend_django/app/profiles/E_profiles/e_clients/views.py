@@ -31,6 +31,7 @@ class E_ProfileClientMeView(APIView):
                decoded_token = AccessToken(access_token)
                idclient = decoded_token["idclient"]
                email = decoded_token["email"]
+               name = email.split("@")[0]
           except TokenError:
                return Response({"error": "Token inválido o expirado"}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -38,7 +39,7 @@ class E_ProfileClientMeView(APIView):
           profile, created = E_ProfileClient.objects.get_or_create(
                idclient=idclient,
                defaults={  # Solo si no existe
-                    "firstname": "Nombre de ejemplo",
+                    "firstname": f"{name}",
                     "lastname": "Apellido de ejemplo",
                     "phonenumber": "000-000-000",
                     "dni": "00000000X",

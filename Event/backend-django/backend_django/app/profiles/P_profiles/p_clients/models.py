@@ -10,7 +10,7 @@ class P_ProfileClient(models.Model):
      firstname = models.CharField(max_length=100)
      lastname = models.CharField(max_length=100)
      phonenumber = models.CharField(max_length=20, blank=True, null=True)
-     dni = models.CharField(max_length=20, unique=True)
+     dni = models.CharField(max_length=20, unique=True, null=True)
      bio = models.CharField(max_length=255, blank=True, null=True)
      avatarurl = models.CharField(max_length=255, blank=True, null=True)
      createdat = models.DateTimeField(auto_now_add=True)
