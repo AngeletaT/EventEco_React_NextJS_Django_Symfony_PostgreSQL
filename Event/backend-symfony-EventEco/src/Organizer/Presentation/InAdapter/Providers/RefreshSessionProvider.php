@@ -38,7 +38,7 @@ class RefreshSessionProvider extends AbstractController
 
             // Preparar la respuesta (datos del organizer sin exponer el refresh token)
             $data = [
-                'organizer'    => $responseDTO->getOrganizer(),
+                'email'    => $responseDTO->getEmail(),
                 'accesstoken' => $responseDTO->getAccessToken(),
             ];
 

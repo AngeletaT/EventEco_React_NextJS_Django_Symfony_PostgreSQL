@@ -81,13 +81,9 @@ class RefreshSessionService implements RefreshSessionInterface
                 throw new \Exception('Organizador no encontrado');
             }
 
-            $organizerData = [
-                'id'    => $organizer->getIdOrg(),
-                'email' => $organizer->getEmail(),
-                // Agrega aquí otros campos necesarios, sin exponer el refresh token
-            ];
-
-            return new RefreshSessionResponse($organizerData, $accessToken);
+            $email = $organizer->getEmail();
+                
+            return new RefreshSessionResponse($email, $accessToken);
         }
 
         // 3. Si el access token ha expirado, validar el refresh token almacenado (HS256)
@@ -125,7 +121,7 @@ class RefreshSessionService implements RefreshSessionInterface
             // Agrega aquí otros campos necesarios
         ];
 
-        return new RefreshSessionResponse($organizerData, $newAccessToken);
+        return new RefreshSessionResponse($organizer->getEmail(), $newAccessToken);
     }
 
     /**

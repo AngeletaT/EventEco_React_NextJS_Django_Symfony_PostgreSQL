@@ -15,7 +15,7 @@ class RefreshSessionResponseAssembler
     public function toArray(RefreshSessionResponse $response): array
     {
         return [
-            'organizer'    => $response->getOrganizer(),
+            'email'    => $response->getEmail(),
             'accesstoken' => $response->getAccessToken(),
         ];
     }

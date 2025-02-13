@@ -7,9 +7,9 @@ class RefreshSessionResponse
     /**
      * Datos del organizer (por ejemplo, id, email, etc.) sin incluir el refresh token.
      *
-     * @var array
+     * @var string
      */
-    private array $organizer;
+    private string $email;
 
     /**
      * El access token, ya sea el antiguo (si sigue siendo válido) o uno nuevo generado.
@@ -18,15 +18,15 @@ class RefreshSessionResponse
      */
     private string $accessToken;
 
-    public function __construct(array $organizer, string $accessToken)
+    public function __construct(string $email, string $accessToken)
     {
-        $this->organizer = $organizer;
+        $this->email = $email;
         $this->accessToken = $accessToken;
     }
 
-    public function getOrganizer(): array
+    public function getEmail(): string
     {
-        return $this->organizer;
+        return $this->email;
     }
 
     public function getAccessToken(): string
