@@ -1,16 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import errorReducer from "@/store/eventeco/slices/errorSlice";
+import authReducer from "@/store/eventeco/slices/authSlice";
 
-const EventecoProvider = configureStore({
+const store = configureStore({
     reducer: {
-        // category: categorySlice.reducer,
+        error: errorReducer,
+        auth: authReducer,
     },
 });
 
-export type RootState = ReturnType<typeof EventecoProvider.getState>;
-export type AppDispatch = typeof EventecoProvider.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
-export default EventecoProvider;
+export default store;

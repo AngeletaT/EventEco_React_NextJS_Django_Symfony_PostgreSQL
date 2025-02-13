@@ -1,0 +1,186 @@
+.authContainer {
+    max-width: 326px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.322);
+    text-align: center;
+}
+
+.authtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #222;
+}
+
+.authtoggleMessage {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.authtoggleLink {
+    color: #648943;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.authtoggleLink:hover {
+    text-decoration: underline;
+}
+
+/* UserTypeSelector */
+.selectorContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.radioButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.selectorContainer label {
+    font-size: 1rem;
+    color: #333;
+}
+
+.fieldset {
+    margin: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    min-width: 0;
+    align-items: center;
+}
+
+.toggle {
+    margin: 0 0 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.toggle input {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -9999px;
+}
+
+.toggle input+label {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    border: solid 1px #ddd;
+    background-color: #fff;
+    color: #949494;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    transition: border-color .15s ease-out, color .25s ease-out, background-color .15s ease-out;
+}
+
+.toggle input:hover+label {
+    border-color: #276131;
+}
+
+.toggle input:checked+label {
+    background-color: #7FA366;
+    color: #fff;
+    border-color: #7FA366;
+    z-index: 1;
+}
+
+.toggle input:focus+label {
+    outline: dotted 1px #ccc;
+    outline-offset: .45rem;
+}
+
+.toggle input+label:first-of-type {
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+}
+
+.toggle input+label:last-of-type {
+    border-radius: 0 4px 4px 0;
+    border-left: none;
+}
+
+/* LoginForm and RegisterForm */
+.formLoginContainer,
+.formRegisterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 2rem;
+    gap: 2rem;
+}
+
+.formContainer label {
+    color: #333;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: -0.5rem;
+}
+
+.floatLabelContainer {
+    width: 100%;
+}
+
+.floatLabelContainer .p-float-label {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .toggle {
+        flex-direction: column;
+    }
+
+    .toggle input+label {
+        padding: 0.5rem 0.5rem;
+        flex: 0 0 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        border-right: solid 1px #ddd;
+        border-left: solid 1px #ddd;
+    }
+
+    .toggle input+label:first-of-type {
+        border-radius: 4px 4px 0 0;
+        border-bottom: none;
+    }
+
+    .toggle input+label:last-of-type {
+        border-radius: 0 0 4px 4px;
+        border-top: none;
+    }
+}
+
+@media (max-width: 512px) {
+    .authContainer {
+        padding: 1rem;
+    }
+
+    .toggle input+label {
+        padding: 0.5rem 0.25rem;
+        flex: 0 0 100%;
+    }
+}

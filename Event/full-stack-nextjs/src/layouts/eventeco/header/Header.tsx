@@ -1,16 +1,44 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
-import { Button } from "@/utils/PrimeReactComponents";
-import { Sidebar } from "@/utils/PrimeReactComponents";
+import { RootState } from "@/store/eventeco";
+import { Client } from "@/types/User";
+import { fetchUser, logoutUser } from "@/store/eventeco/slices/authSlice";
+import { Button, Sidebar, Avatar } from "@/utils/PrimeReactComponents";
 import { GiHamburgerMenu } from "react-icons/gi";
 import styles from "@/styles/eventeco/Header.module.css";
 
 const Header: React.FC = () => {
     const pathname = usePathname();
     const [visible, setVisible] = useState(false);
-    const user = null;
+    const [menuVisible, setMenuVisible] = useState(false);
+    const dispatch = useDispatch();
+    const { user, isAuthenticated, isLoading } = useSelector((state: RootState) => state.auth) as {
+        user: Client;
+        isAuthenticated: boolean;
+        isLoading: boolean;
+    };
+
+    useEffect(() => {
+        if (!user) {
+            dispatch(fetchUser() as any);
+        }
+    }, [dispatch, user]);
+
+    const menuItems = [
+        {
+            label: "Perfil",
+            icon: "pi pi-user",
+            command: () => (window.location.href = "/eventeco/profile"),
+        },
+        {
+            label: "Cerrar Sesión",
+            icon: "pi pi-sign-out",
+            command: () => dispatch(logoutUser() as any),
+        },
+    ];
 
     return (
         <header className={styles.header}>
@@ -39,11 +67,35 @@ const Header: React.FC = () => {
                     </a>
                 </nav>
 
-                <div className={styles.actions}>
-                    {user ? (
-                        <Button label="Cerrar Sesión" className="p-button-error" />
+                {/* Sección de Usuario / Autenticación */}
+                <div className={`${styles.userSection} ${styles.hideOnSmallScreens}`}>
+                    {isLoading ? (
+                        <p>Cargando...</p>
+                    ) : isAuthenticated && user ? (
+                        <div className={styles.userDropdown}>
+                            <Avatar
+                                image={user.avatarurl || "https://i.pravatar.cc/300"}
+                                shape="circle"
+                                className={styles.avatar}
+                                onClick={() => setMenuVisible(!menuVisible)}
+                            />
+                            <span className={styles.userName} onClick={() => setMenuVisible(!menuVisible)}>
+                                {user.firstname}
+                            </span>
+
+                            {/* Dropdown del usuario */}
+                            {menuVisible && (
+                                <div className={styles.dropdownMenu}>
+                                    {menuItems.map((item, index) => (
+                                        <div key={index} className={styles.dropdownItem} onClick={item.command}>
+                                            <i className={item.icon}></i> {item.label}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     ) : (
-                        <Button label="Iniciar Sesión" className="p-button-success" />
+                        <Button label="Iniciar Sesión" className="p-button-success" onClick={() => (window.location.href = "/eventeco/auth")} />
                     )}
                 </div>
             </div>
@@ -61,9 +113,14 @@ const Header: React.FC = () => {
                         Contacto
                     </a>
                     {user ? (
-                        <Button label="Cerrar Sesión" className="p-button-error" />
+                        <>
+                            <a href="/eventeco/profile" className={`${styles.link} ${pathname === "/eventeco/contact" ? styles.active : ""}`}>
+                                {user.firstname}
+                            </a>
+                            <Button label="Cerrar Sesión" className="p-button-secondary" onClick={() => dispatch(logoutUser() as any)} />
+                        </>
                     ) : (
-                        <Button label="Iniciar Sesión" className="p-button-success" />
+                        <Button label="Iniciar Sesión" className="p-button-success" onClick={() => (window.location.href = "/eventeco/auth")} />
                     )}
                 </nav>
             </Sidebar>

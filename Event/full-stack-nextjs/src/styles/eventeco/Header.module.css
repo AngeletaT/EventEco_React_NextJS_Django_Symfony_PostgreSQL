@@ -31,14 +31,75 @@
     display: none;
     background: none;
     border: none;
+    color: #333333;
+    cursor: pointer;
+}
+
+.userSection {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.userDropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.userName {
+    font-weight: bold;
     color: #333;
     cursor: pointer;
 }
 
-/* Acciones (botón de sesión) */
-.actions {
+/* Dropdown Menu */
+.dropdownMenu {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: #f5fff5;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 0.5rem;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdownItem {
+    padding: 0.5rem;
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: #333333;
+}
+
+.dropdownItem i {
+    font-size: 1rem;
+}
+
+.dropdownItem:hover {
+    color: #FBC02D;
+    border-bottom: 2px solid #FBC02D;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #333333;
 }
 
 .link {
@@ -79,5 +140,9 @@
 
     .menuButton {
         display: block;
+    }
+
+    .hideOnSmallScreens {
+        display: none;
     }
 }
