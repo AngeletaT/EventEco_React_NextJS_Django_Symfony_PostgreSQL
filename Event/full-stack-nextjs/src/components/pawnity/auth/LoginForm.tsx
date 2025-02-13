@@ -23,15 +23,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
             if (userType === "client") {
                 const user = await loginClientService({ email, password });
                 dispatch(loginSuccess({ user }));
-                console.log("Login successful:", user);
+                window.location.href = "/pawnity/home";
             } else if (userType === "organizer") {
                 const user = await loginOrganizerService({ email, password });
                 dispatch(loginSuccess({ user }));
-                console.log("Login successful:", user);
+                window.location.href = "/pawnity/home";
             } else if (userType === "admin") {
                 const user = await loginAdminService({ email, password });
                 dispatch(loginSuccess({ user }));
-                console.log("Login successful:", user);
+                window.location.href = "/pawnity/home";
             }
         } catch (err) {
             setError("Error al iniciar sesión. Verifica tus credenciales.");

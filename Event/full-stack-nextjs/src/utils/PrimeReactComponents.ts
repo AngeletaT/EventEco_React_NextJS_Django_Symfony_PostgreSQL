@@ -9,3 +9,5 @@ export { Dropdown } from "primereact/dropdown";
 export { Password } from "primereact/password";
 export { RadioButton } from "primereact/radiobutton";
 export { Dialog } from "primereact/dialog";
+export { Avatar } from "primereact/avatar";
+export { Menu } from "primereact/menu";

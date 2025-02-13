@@ -117,27 +117,6 @@
     border-left: none;
 }
 
-@media (max-width: 768px) {
-    .toggle input+label {
-        padding: 0.5rem 0.5rem;
-        flex: 0 0 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-
-@media (max-width: 512px) {
-    .authContainer {
-        padding: 1rem;
-    }
-
-    .toggle input+label {
-        padding: 0.5rem 0.25rem;
-        flex: 0 0 100%;
-    }
-}
-
 /* LoginForm and RegisterForm */
 .formLoginContainer,
 .formRegisterContainer {
@@ -166,4 +145,42 @@
 
 .floatLabelContainer .p-float-label {
     width: 100%;
+}
+
+@media (max-width: 768px) {
+    .toggle {
+        flex-direction: column;
+    }
+
+    .toggle input+label {
+        padding: 0.5rem 0.5rem;
+        flex: 0 0 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        border-right: solid 1px #ddd;
+        border-left: solid 1px #ddd;
+    }
+
+    .toggle input+label:first-of-type {
+        border-radius: 4px 4px 0 0;
+        border-bottom: none;
+    }
+
+    .toggle input+label:last-of-type {
+        border-radius: 0 0 4px 4px;
+        border-top: none;
+    }
+}
+
+@media (max-width: 512px) {
+    .authContainer {
+        padding: 1rem;
+    }
+
+    .toggle input+label {
+        padding: 0.5rem 0.25rem;
+        flex: 0 0 100%;
+    }
 }

@@ -5,8 +5,12 @@ import { LoginData } from "@/types/Auth";
 export const loginClientService = async (data: LoginData): Promise<Client> => {
     try {
         const response = await djangoAPI_P.post("/client/auth/login", data);
-        console.log("response.data", response.data);
-        return response.data as Client;
+        const user = response.data as Client;
+        if (user.accesstoken) {
+            localStorage.setItem("accesstoken", user.accesstoken);
+            localStorage.setItem("userType", "client");
+        }
+        return user;
     } catch (error) {
         console.error("Error during login:", error);
         throw new Error("Failed to login. Please check your credentials.");
@@ -17,7 +21,12 @@ export const loginOrganizerService = async (data: LoginData): Promise<Organizer>
     try {
         const response = await symfonyAPI_P.post("/organizer/login", data);
         console.log("response.data", response.data);
-        return response.data as Organizer;
+        const user = response.data as Organizer;
+        if (user.accesstoken) {
+            localStorage.setItem("accesstoken", user.accesstoken);
+            localStorage.setItem("userType", "organizer");
+        }
+        return user;
     } catch (error) {
         console.error("Error during login:", error);
         throw new Error("Failed to login. Please check your credentials.");
@@ -27,7 +36,13 @@ export const loginOrganizerService = async (data: LoginData): Promise<Organizer>
 export const loginAdminService = async (data: LoginData): Promise<Admin> => {
     try {
         const response = await symfonyAPI_P.post("/admin/login", data);
-        return response.data as Admin;
+        console.log("response.data", response.data);
+        const user = response.data as Admin;
+        if (user.accesstoken) {
+            localStorage.setItem("accesstoken", user.accesstoken);
+            localStorage.setItem("userType", "admin");
+        }
+        return user;
     } catch (error) {
         console.error("Error during login:", error);
         throw new Error("Failed to login. Please check your credentials.");
