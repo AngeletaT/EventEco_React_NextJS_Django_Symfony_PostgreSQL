@@ -672,6 +672,7 @@ CREATE TABLE E_TicketInfo (
     capacity INT,
     remaining INT,
     descripcion VARCHAR(255),
+    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -698,6 +699,7 @@ CREATE TABLE P_TicketInfo (
     capacity INT,
     remaining INT,
     descripcion VARCHAR(255),
+    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -909,6 +911,7 @@ CREATE TABLE E_TicketComplements (
     quantity INT NOT NULL,
     subtotal DECIMAL(10, 2),
     status ticketComplementStatusEnum DEFAULT 'pending',
+    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -925,6 +928,7 @@ CREATE TABLE P_TicketComplements (
     quantity INT NOT NULL,
     subtotal DECIMAL(10, 2),
     status ticketComplementStatusEnum DEFAULT 'pending',
+    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
