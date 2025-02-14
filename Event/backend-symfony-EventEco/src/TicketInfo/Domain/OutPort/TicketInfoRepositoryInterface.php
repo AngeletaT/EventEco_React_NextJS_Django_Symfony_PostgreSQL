@@ -19,5 +19,11 @@ interface TicketInfoRepositoryInterface
      */
     public function find(int $id): ?TicketInfo;
     
-    // Aquí podrías agregar otros métodos (por ejemplo, update, disable, etc.) según las necesidades.
+    /**
+     * Retorna un array de TicketInfo que tengan el eventSlug especificado.
+     *
+     * @param string $eventSlug
+     * @return TicketInfo[]
+     */
+    public function findByEventSlug(string $eventSlug): array;
 }
