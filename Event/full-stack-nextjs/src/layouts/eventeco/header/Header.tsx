@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 import { RootState } from "@/store/eventeco";
 import { Client } from "@/types/User";
-import { fetchUser, logoutUser } from "@/store/eventeco/slices/authSlice";
+import { logoutUser } from "@/store/eventeco/slices/authSlice";
+import { fetchUser } from "@/store/eventeco/slices/userSlice";
 import { Button, Sidebar, Avatar } from "@/utils/PrimeReactComponents";
 import { GiHamburgerMenu } from "react-icons/gi";
 import styles from "@/styles/eventeco/Header.module.css";
@@ -15,7 +16,7 @@ const Header: React.FC = () => {
     const [visible, setVisible] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
     const dispatch = useDispatch();
-    const { user, isAuthenticated, isLoading } = useSelector((state: RootState) => state.auth) as {
+    const { user, isAuthenticated, isLoading } = useSelector((state: RootState) => state.user) as {
         user: Client;
         isAuthenticated: boolean;
         isLoading: boolean;

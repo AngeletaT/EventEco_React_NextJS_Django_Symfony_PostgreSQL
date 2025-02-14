@@ -112,6 +112,7 @@
 
 .link:hover {
     color: #FBC02D;
+    border-bottom: 2px solid #FBC02D;
 }
 
 .active {
