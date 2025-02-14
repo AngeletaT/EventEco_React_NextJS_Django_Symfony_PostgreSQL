@@ -55,6 +55,9 @@ class Event
     #[ORM\Column(name: "eventslug", type: "string", length: 150)]
     private string $eventSlug;
 
+    #[ORM\Column(name: "isactive", type: "boolean", options: ["default" => true])]
+    private bool $isActive;
+
     #[ORM\OneToMany(mappedBy: "event", targetEntity: SubEvent::class, cascade: ["persist", "remove"])]
     private Collection $subEvents;
 
@@ -95,6 +98,12 @@ class Event
         return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $name)));
     }
 
+    public function disable(): self
+    {
+        $this->isActive = !$this->isActive;
+        return $this;
+    }
+
     // Getters
     public function getIdEvent(): ?int { return $this->idEvent; }
     public function getName(): string { return $this->name; }
@@ -106,6 +115,7 @@ class Event
     public function getUrlImage(): ?array { return $this->urlImage; }
     public function getUrlPoster(): ?string { return $this->urlPoster; }
     public function getOrgId(): ?int { return $this->orgId; }
+    public function isActive(): bool { return $this->isActive; }
     public function getIdCategory(): ?int { return $this->idCategory; }
     public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
     public function getUpdatedAt(): \DateTimeImmutable { return $this->updatedAt; }

@@ -62,4 +62,10 @@ class EventRepositoryAdapter implements EventRepositoryInterface
     {
         return $this->repository->find($eventId);
     }
+
+    public function disable(Event $event): void
+    {
+        $event->disable();
+        $this->save($event);
+    }
 }

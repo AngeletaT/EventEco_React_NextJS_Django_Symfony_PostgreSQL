@@ -46,4 +46,6 @@ interface EventRepositoryInterface
     public function save(Event $event): void;
 
     public function find(int $eventId): ?Event;
+
+    public function disable (Event $event): void;
 }

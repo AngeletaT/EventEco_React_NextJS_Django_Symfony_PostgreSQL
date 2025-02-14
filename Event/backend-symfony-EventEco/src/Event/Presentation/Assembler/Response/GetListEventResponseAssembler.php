@@ -32,6 +32,7 @@ class GetListEventResponseAssembler
             'urlposter'   => str_replace('/', '\\', $event->getUrlPoster()),
             'orgid'       => $event->getOrgId(),
             'idcategory'  => $event->getIdCategory(),
+            'isactive'    => $event->isActive(),
             'createdat'   => $event->getCreatedAt()->format('Y-m-d\TH:i:s.u\Z'),
             'updatedat'   => $event->getUpdatedAt()->format('Y-m-d\TH:i:s.u\Z'),
             'subevents'   => self::transformSubEvents($event)
