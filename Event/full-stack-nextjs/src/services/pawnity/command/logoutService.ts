@@ -1,4 +1,5 @@
 import { djangoAPI_P, symfonyAPI_P } from "../../api";
+import Cookies from "js-cookie";
 
 export const logoutClientService = async () => {
     try {
@@ -9,6 +10,9 @@ export const logoutClientService = async () => {
 
         localStorage.removeItem("accesstoken");
         localStorage.removeItem("userType");
+        Cookies.remove("accesstoken");
+        Cookies.remove("userType");
+
         const response = await djangoAPI_P.post("/client/auth/logout", {}, { headers });
         return response.data;
     } catch (error) {
@@ -27,6 +31,8 @@ export const logoutOrganizerService = async () => {
         const response = await symfonyAPI_P.post("/organizer/logout", {}, { headers });
         localStorage.removeItem("accesstoken");
         localStorage.removeItem("userType");
+        Cookies.remove("accesstoken");
+        Cookies.remove("userType");
         return response.data;
     } catch (error) {
         console.error("Error during logout:", error);
@@ -44,6 +50,8 @@ export const logoutAdminService = async () => {
         const response = await symfonyAPI_P.post("/admin/logout", {}, { headers });
         localStorage.removeItem("accesstoken");
         localStorage.removeItem("userType");
+        Cookies.remove("accesstoken");
+        Cookies.remove("userType");
         return response.data;
     } catch (error) {
         console.error("Error during logout:", error);
