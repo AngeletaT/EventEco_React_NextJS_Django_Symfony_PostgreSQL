@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Client, Organizer, Admin } from "@/types/User";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getClient, getOrganizer, getAdmin } from "@/services/eventeco/queries/getUser";
-import { logoutClientService, logoutOrganizerService, logoutAdminService } from "@/services/eventeco/command/logoutService";
+import { logoutClientService, logoutOrganizerService, logoutAdminService } from "@/services/eventeco/command/user/logoutService";
 
 interface AuthState {
     user: Client | Organizer | Admin | null;

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginClientService, loginOrganizerService, loginAdminService } from "@/services/pawnity/command/loginService";
+import { loginClientService, loginOrganizerService, loginAdminService } from "@/services/pawnity/command/user/loginService";
 import { LoginFormProps } from "@/types/Auth";
 import { InputText } from "@/utils/PrimeReactComponents";
 import { FloatLabel } from "@/utils/PrimeReactComponents";

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { registerClientService, registerOrganizerService, registerAdminService } from "@/services/pawnity/command/registerService";
+import { registerClientService, registerOrganizerService, registerAdminService } from "@/services/pawnity/command/user/registerService";
 import { RegisterFormProps } from "@/types/Auth";
 import { InputText } from "@/utils/PrimeReactComponents";
 import { FloatLabel } from "@/utils/PrimeReactComponents";
