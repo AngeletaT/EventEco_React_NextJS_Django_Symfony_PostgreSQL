@@ -1,6 +1,6 @@
 from rest_framework import mixins, viewsets
 from rest_framework.response import Response
-from .models import ProfileOrganizer
+from rest_framework import status
 from .serializers import ProfileOrganizerSerializer
 from drf_yasg.utils import swagger_auto_schema
 
@@ -10,9 +10,7 @@ class ProfileOrganizerViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
      - **Listar organizadores:** `list_all_organizers()`
      """
-     queryset = ProfileOrganizer.objects.all().order_by('idprofileorg')
      serializer_class = ProfileOrganizerSerializer
-     lookup_field = 'idprofileorg'
 
      @swagger_auto_schema(
           operation_description="Obtiene la lista de todos los organizadores sin paginación.",
@@ -24,7 +22,11 @@ class ProfileOrganizerViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
           **Retorna:**
           - 200 OK: Lista de organizadores en formato JSON.
+          - 404 Not Found: Si no existen organizadores registrados.
           """
-          queryset = self.get_queryset()
-          serializer = self.get_serializer(queryset, many=True)
-          return Response(serializer.data)
+          try:
+               organizers = ProfileOrganizerSerializer.get_all_organizers()
+               serializer = self.get_serializer(organizers, many=True)
+               return Response(serializer.data, status=status.HTTP_200_OK)
+          except serializers.ValidationError as e:
+               return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)

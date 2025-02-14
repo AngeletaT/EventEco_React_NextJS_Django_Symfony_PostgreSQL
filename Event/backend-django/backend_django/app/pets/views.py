@@ -1,15 +1,16 @@
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import ListModelMixin
+from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
-from .models import Pet
-from .serializers import PetSerializer
+from rest_framework.decorators import action
+from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+
+from .models import Pet
+from .serializers import PetSerializer, PetFilterSerializer
 from math import ceil
+
 
 class PetPagination(PageNumberPagination):
      """
@@ -21,7 +22,7 @@ class PetPagination(PageNumberPagination):
 
      def get_paginated_response(self, data):
           """
-          Personaliza la respuesta de la paginación para que muestre el número de página en lugar de URLs.
+          Personaliza la respuesta de la paginación para mostrar la información de páginas.
           """
           total_items = self.page.paginator.count
           total_pages = ceil(total_items / self.page_size)
@@ -38,6 +39,7 @@ class PetPagination(PageNumberPagination):
                "results": data
           })
 
+
 class PetViewSet(ListModelMixin, GenericViewSet):
      """
      API ViewSet para gestionar las mascotas.
@@ -49,7 +51,7 @@ class PetViewSet(ListModelMixin, GenericViewSet):
      queryset = Pet.objects.all().order_by('idpet')
      serializer_class = PetSerializer
      lookup_field = 'idpet'
-     pagination_class = PetPagination  # Usamos la paginación configurada
+     pagination_class = PetPagination 
 
      @swagger_auto_schema(
           operation_description="Obtiene la lista de todas las mascotas disponibles con filtros y paginación.",
@@ -61,9 +63,10 @@ class PetViewSet(ListModelMixin, GenericViewSet):
                openapi.Parameter('page', openapi.IN_QUERY, description="Número de página para la paginación", type=openapi.TYPE_INTEGER),
           ]
      )
+     @action(detail=False, methods=['get'], url_path='list-pets')
      def list_pets(self, request):
           """
-          Devuelve una lista de mascotas, con filtros y paginación.
+          Devuelve una lista de mascotas con filtros y paginación.
 
           **Parámetros de consulta:**
           - **gender**: Filtra por género ('macho' o 'hembra').
@@ -74,21 +77,12 @@ class PetViewSet(ListModelMixin, GenericViewSet):
           **Retorna:**
           - 200 OK: Lista de mascotas en formato JSON con información de paginación.
           """
-          gender = request.query_params.get('gender')
-          idorg = request.query_params.get('idorg')
-          species = request.query_params.get('species')
-          page = request.query_params.get('page', 1)  # Valor por defecto 1
+          serializer = PetFilterSerializer(data=request.query_params)
 
-          # Filtramos las mascotas
-          queryset = self.get_queryset()
-          if gender:
-               queryset = queryset.filter(gender=gender)
+          if not serializer.is_valid():
+               return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-          if idorg:
-               queryset = queryset.filter(idorg=idorg)
-
-          if species:
-               queryset = queryset.filter(species=species)
+          queryset = serializer.filter_pets(self.get_queryset())
 
           # Aplicar paginación
           paginator = self.pagination_class()

@@ -1,16 +1,19 @@
-from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.views import APIView
-from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import ListModelMixin
 from rest_framework.pagination import PageNumberPagination
 from .models import E_Event
-from .serializers import E_EventSerializer, E_EventDetailSerializer
+from .serializers import (
+     E_EventSerializer, 
+     E_EventDetailSerializer,
+     E_EventFilterSerializer,
+     E_EventDetailRetrievalSerializer
+)
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from math import ceil
+
 
 class E_EventPagination(PageNumberPagination):
      """
@@ -22,7 +25,7 @@ class E_EventPagination(PageNumberPagination):
 
      def get_paginated_response(self, data):
           """
-          Personaliza la respuesta de la paginación para que muestre el número de página en lugar de URLs.
+          Personaliza la respuesta de la paginación.
           """
           total_items = self.page.paginator.count
           total_pages = ceil(total_items / self.page_size)
@@ -39,86 +42,51 @@ class E_EventPagination(PageNumberPagination):
                "results": data
           })
 
+
 class E_EventViewSet(ListModelMixin, GenericViewSet):
      """
      API ViewSet para gestionar los eventos de Eventeco.
-
-     - **Listar eventos:** `list()`
-     - **Listar todos los eventos (custom action):** `list_events()`
      """
 
      queryset = E_Event.objects.all().order_by('idevent')
      serializer_class = E_EventSerializer
      lookup_field = 'idevent'
-     pagination_class = E_EventPagination  # Usamos la paginación configurada
+     pagination_class = E_EventPagination
 
      @swagger_auto_schema(
           operation_description="Obtiene la lista de todos los eventos disponibles en Eventeco con filtros y paginación.",
-          responses={200: E_EventSerializer(many=True)},
-          manual_parameters=[
-               openapi.Parameter('categorySlug', openapi.IN_QUERY, description="Slug de la categoría de los eventos", type=openapi.TYPE_STRING),
-               openapi.Parameter('location', openapi.IN_QUERY, description="Ubicación de los eventos", type=openapi.TYPE_STRING),
-               openapi.Parameter('order_by_date', openapi.IN_QUERY, description="Ordenar por fecha (asc/desc)", type=openapi.TYPE_STRING),
-               openapi.Parameter('page', openapi.IN_QUERY, description="Número de página para la paginación", type=openapi.TYPE_INTEGER),
-          ]
+          query_serializer=E_EventFilterSerializer,
+          responses={200: E_EventSerializer(many=True)}
      )
      def list_events(self, request):
           """
           Devuelve una lista de eventos registrados en Eventeco, con filtros y paginación.
-
-          **Parámetros de consulta:**
-          - **categorySlug**: Slug de la categoría para filtrar.
-          - **location**: Filtra por ubicación de los eventos.
-          - **order_by_date**: Ordena los eventos por fecha (ascendente o descendente).
-          - **page**: Número de página para la paginación (por defecto página 1).
-
-          **Retorna:**
-          - 200 OK: Lista de eventos en formato JSON con información de paginación.
           """
-          category_slug = request.query_params.get('categorySlug')
-          location = request.query_params.get('location')
-          order_by_date = request.query_params.get('order_by_date')
-          page = request.query_params.get('page', 1)  # Valor por defecto 1
+          filter_serializer = E_EventFilterSerializer(data=request.query_params)
 
-          # Filtramos los eventos
-          queryset = self.get_queryset()
-          if category_slug:
-               queryset = queryset.filter(idcategory__categoryslug=category_slug)  
+          if not filter_serializer.is_valid():
+               return Response(filter_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-          if location:
-               queryset = queryset.filter(location__icontains=location)
+          queryset = filter_serializer.filter_events(self.get_queryset())
 
-          if order_by_date:
-               if order_by_date.lower() == 'asc':
-                    queryset = queryset.order_by('startdate')
-               elif order_by_date.lower() == 'desc':
-                    queryset = queryset.order_by('-startdate')
-
-          # Aplicar paginación
           paginator = self.pagination_class()
           result_page = paginator.paginate_queryset(queryset, request)
           serializer = self.get_serializer(result_page, many=True)
 
           return paginator.get_paginated_response(serializer.data)
 
-class E_EventDetailViewSet(ListModelMixin, GenericViewSet):
+
+class E_EventDetailViewSet(GenericViewSet):
      """
      API ViewSet para obtener los detalles de un evento en Eventeco.
-
-     - **Obtener detalles de un evento:** `retrieve_event_details()`
      """
-     queryset = E_Event.objects.all()
      serializer_class = E_EventDetailSerializer
      lookup_field = 'eventslug'
 
      @swagger_auto_schema(
           operation_description="Obtiene los detalles de un evento específico en Eventeco basado en su slug.",
-          responses={200: E_EventDetailSerializer()},
-          manual_parameters=[
-               openapi.Parameter('eventslug', openapi.IN_PATH, description="Slug del evento", type=openapi.TYPE_STRING),
-          ]
+          responses={200: E_EventDetailSerializer()}
      )
-     @action(detail=True, methods=['get'], url_path='details')
      def retrieve_event_details(self, request, eventslug=None):
           """
           Devuelve los detalles de un evento específico basado en su slug.
@@ -130,6 +98,13 @@ class E_EventDetailViewSet(ListModelMixin, GenericViewSet):
           - 200 OK: Detalles del evento en formato JSON.
           - 404 Not Found: Si el evento no existe.
           """
-          event = get_object_or_404(E_Event, eventslug=eventslug)
+          if not eventslug:
+               return Response({"error": "El campo 'eventslug' es obligatorio."}, status=status.HTTP_400_BAD_REQUEST)
+
+          event = E_Event.objects.filter(eventslug=eventslug).first()
+
+          if not event:
+               return Response({"error": "Evento no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+
           serializer = self.get_serializer(event)
           return Response(serializer.data, status=status.HTTP_200_OK)

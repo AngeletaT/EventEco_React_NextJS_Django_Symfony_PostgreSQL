@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from .models import E_Event
 from backend_django.app.categories.E_categories.serializers import E_EventCategorySerializer
-from backend_django.app.subEvents.E_subEvents.serializers import E_SubEventSerializer 
+from backend_django.app.subEvents.E_subEvents.serializers import E_SubEventSerializer
+
 
 class E_EventSerializer(serializers.ModelSerializer):
      category = E_EventCategorySerializer(source='idcategory', read_only=True)
@@ -26,9 +27,10 @@ class E_EventSerializer(serializers.ModelSerializer):
                'updatedat',
           ]
 
+
 class E_EventDetailSerializer(serializers.ModelSerializer):
      category = E_EventCategorySerializer(source='idcategory', read_only=True)
-     subevents = E_SubEventSerializer(many=True, read_only=True) 
+     subevents = E_SubEventSerializer(many=True, read_only=True)
 
      class Meta:
           model = E_Event
@@ -46,7 +48,55 @@ class E_EventDetailSerializer(serializers.ModelSerializer):
                'idorg',
                'idcategory',
                'category',
-               'subevents',  
+               'subevents',
                'createdat',
                'updatedat',
           ]
+
+
+class E_EventFilterSerializer(serializers.Serializer):
+     """
+     Serializador para manejar los filtros de búsqueda en eventos.
+     """
+     categorySlug = serializers.CharField(required=False)
+     location = serializers.CharField(required=False)
+     order_by_date = serializers.ChoiceField(choices=['asc', 'desc'], required=False)
+     
+     def filter_events(self, queryset):
+          """
+          Aplica los filtros a la consulta de eventos.
+          """
+          category_slug = self.validated_data.get("categorySlug")
+          location = self.validated_data.get("location")
+          order_by_date = self.validated_data.get("order_by_date")
+
+          if category_slug:
+               queryset = queryset.filter(idcategory__categoryslug=category_slug)
+
+          if location:
+               queryset = queryset.filter(location__icontains=location)
+
+          if order_by_date:
+               order_field = 'startdate' if order_by_date == 'asc' else '-startdate'
+               queryset = queryset.order_by(order_field)
+
+          return queryset
+
+
+class E_EventDetailRetrievalSerializer(serializers.Serializer):
+     """
+     Serializador para obtener los detalles de un evento.
+     """
+     eventslug = serializers.CharField()
+
+     def get_event(self):
+          """
+          Obtiene el evento correspondiente al slug proporcionado.
+          """
+          eventslug = self.validated_data.get("eventslug")
+          event = E_Event.objects.filter(eventslug=eventslug).first()
+
+          if not event:
+               raise serializers.ValidationError({"error": "Evento no encontrado."})
+
+          return event
