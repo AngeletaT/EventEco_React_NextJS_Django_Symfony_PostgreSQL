@@ -33,4 +33,14 @@ class TicketInfoRepositoryAdapter implements TicketInfoRepositoryInterface
                      ->getRepository(TicketInfo::class)
                      ->findBy(['eventSlug' => $eventSlug]);
     }
+
+    public function findOneByEventSlugAndType(string $eventSlug, string $type): ?TicketInfo
+    {
+         return $this->entityManager
+                     ->getRepository(TicketInfo::class)
+                     ->findOneBy([
+                         'eventSlug' => $eventSlug,
+                         'type' => $type
+                     ]);
+    }
 }

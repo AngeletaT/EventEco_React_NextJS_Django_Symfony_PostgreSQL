@@ -6,6 +6,7 @@ use App\TicketInfo\Application\DTO\Request\CreateTicketInfoRequest;
 use App\TicketInfo\Application\DTO\Response\CreateTicketInfoResponse;
 use App\TicketInfo\Domain\Entity\TicketInfo;
 use App\TicketInfo\Domain\OutPort\TicketInfoRepositoryInterface;
+use App\TicketInfo\Domain\Exception\DuplicateTicketInfoException;
 
 class CreateTicketInfoService
 {
@@ -18,6 +19,10 @@ class CreateTicketInfoService
 
     public function create(string $eventSlug, CreateTicketInfoRequest $request): CreateTicketInfoResponse
     {
+        $existingTicketInfo = $this->repository->findOneByEventSlugAndType($eventSlug, $request->getType());
+        if ($existingTicketInfo) {
+            throw new DuplicateTicketInfoException();
+        }
         $ticketInfo = new TicketInfo();
         $ticketInfo->setEventSlug($eventSlug);
         $ticketInfo->setType($request->getType());

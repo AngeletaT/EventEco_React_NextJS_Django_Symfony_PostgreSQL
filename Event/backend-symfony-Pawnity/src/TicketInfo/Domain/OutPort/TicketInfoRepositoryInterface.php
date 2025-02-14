@@ -26,4 +26,13 @@ interface TicketInfoRepositoryInterface
      * @return TicketInfo[]
      */
     public function findByEventSlug(string $eventSlug): array;
+
+    /**
+     * Retorna un TicketInfo que tenga la combinación de eventSlug y type.
+     *
+     * @param string $eventSlug
+     * @param string $type
+     * @return TicketInfo|null
+     */
+    public function findOneByEventSlugAndType(string $eventSlug, string $type): ?TicketInfo;
 }
