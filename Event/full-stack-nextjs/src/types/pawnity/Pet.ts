@@ -1,4 +1,4 @@
-import { Organizer } from "../Organizer";
+import { Organizer } from "@/types/Organizer";
 
 export interface Pet {
     idpet: number;

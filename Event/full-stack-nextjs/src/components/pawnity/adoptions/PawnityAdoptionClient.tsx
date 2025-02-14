@@ -6,7 +6,7 @@ import { useOrganizers } from "@/hooks/pawnity/useOrganizers";
 import { Organizer } from "@/types/Organizer";
 import PawnityLayout from "@/layouts/pawnity/PawnityLayout";
 import Filters from "./Filters";
-import { PetSkeletonShop } from "../skeletons/PetsSkeleton";
+import { PetSkeletonShop } from "@/components/pawnity/skeletons/PetsSkeleton";
 import ListPets from "./ListPets";
 import Pagination from "./Pagination";
 

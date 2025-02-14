@@ -1,4 +1,4 @@
-import { djangoAPI_E, symfonyAPI_E } from "../../api";
+import { djangoAPI_E, symfonyAPI_E } from "@/services/api";
 import { Category } from "@/types/Category";
 
 export const getCategories = async (): Promise<Category[]> => {

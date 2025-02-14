@@ -7,7 +7,7 @@ import { useEventsPerPage } from "@/hooks/eventeco/useEvents";
 import { Category } from "@/types/Category";
 import EventecoLayout from "@/layouts/eventeco/EventecoLayout";
 import Filters from "./Filters";
-import { EventSkeletonShop } from "../skeletons/EventSkeleton";
+import { EventSkeletonShop } from "@/components/eventeco/skeletons/EventSkeleton";
 import ListEvents from "./ListEvent";
 import Pagination from "./Pagination";
 

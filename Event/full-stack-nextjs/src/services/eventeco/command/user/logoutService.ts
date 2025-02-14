@@ -1,4 +1,4 @@
-import { djangoAPI_E, symfonyAPI_E } from "../../api";
+import { djangoAPI_E, symfonyAPI_E } from "@/services/api";
 
 export const logoutClientService = async () => {
     try {

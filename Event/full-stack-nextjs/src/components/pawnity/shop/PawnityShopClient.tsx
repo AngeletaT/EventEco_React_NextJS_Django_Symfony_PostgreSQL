@@ -7,7 +7,7 @@ import { useEventsPerPage } from "@/hooks/pawnity/useEvents";
 import { Category } from "@/types/Category";
 import PawnityLayout from "@/layouts/pawnity/PawnityLayout";
 import Filters from "./Filters";
-import { EventSkeletonShop } from "../skeletons/EventSkeleton";
+import { EventSkeletonShop } from "@/components/pawnity/skeletons/EventSkeleton";
 import ListEvents from "./ListEvent";
 import Pagination from "./Pagination";
 

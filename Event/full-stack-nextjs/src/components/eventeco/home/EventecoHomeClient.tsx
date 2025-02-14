@@ -8,9 +8,9 @@ import { Event } from "@/types/Event";
 import EventecoLayout from "@/layouts/eventeco/EventecoLayout";
 import Hero from "@/components/eventeco/home/Hero";
 import IconCards from "@/components/eventeco/home/IconCards";
-import CategorySkeleton from "../skeletons/CategorySkeleton";
+import CategorySkeleton from "@/components/eventeco/skeletons/CategorySkeleton";
 import CategoryCarousel from "@/components/eventeco/home/CategoryCarousel";
-import { EventSkeleton } from "../skeletons/EventSkeleton";
+import { EventSkeleton } from "@/components/eventeco/skeletons/EventSkeleton";
 import PopularEvents from "@/components/eventeco/home/PopularEvents";
 
 const EventecoHomeClient = () => {

@@ -1,11 +1,11 @@
-import { djangoAPI_P, symfonyAPI_P } from "../../api";
+import { djangoAPI_E, symfonyAPI_E } from "@/services/api";
 import { Client, Organizer, Admin } from "@/types/User";
 import { RegisterData } from "@/types/Auth";
 
 export const registerClientService = async (data: RegisterData): Promise<Client> => {
     try {
         console.log("data", data);
-        const response = await djangoAPI_P.post("/client/auth/register", data);
+        const response = await djangoAPI_E.post("/client/auth/register", data);
         console.log("response.data", response.data);
         return response.data as Client;
     } catch (error) {
@@ -17,7 +17,7 @@ export const registerClientService = async (data: RegisterData): Promise<Client>
 export const registerOrganizerService = async (data: RegisterData): Promise<Organizer> => {
     try {
         console.log("data", data);
-        const response = await symfonyAPI_P.post("/organizer/register", data);
+        const response = await symfonyAPI_E.post("/organizer/register", data);
         return response.data as Organizer;
     } catch (error) {
         console.error("Error during registration:", error);
@@ -27,7 +27,7 @@ export const registerOrganizerService = async (data: RegisterData): Promise<Orga
 
 export const registerAdminService = async (data: RegisterData): Promise<Admin> => {
     try {
-        const response = await symfonyAPI_P.post("/admin/register", data);
+        const response = await symfonyAPI_E.post("/admin/register", data);
         return response.data as Admin;
     } catch (error) {
         console.error("Error during registration:", error);

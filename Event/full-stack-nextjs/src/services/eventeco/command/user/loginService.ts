@@ -1,4 +1,4 @@
-import { djangoAPI_E, symfonyAPI_E } from "../../api";
+import { djangoAPI_E, symfonyAPI_E } from "@/services/api";
 import Cookies from "js-cookie";
 import { Client, Organizer, Admin } from "@/types/User";
 import { LoginData } from "@/types/Auth";
