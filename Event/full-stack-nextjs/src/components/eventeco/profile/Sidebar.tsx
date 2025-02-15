@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store/eventeco";
 import { RootState } from "@/store/eventeco";
 import { fetchUser } from "@/store/eventeco/slices/userSlice";
-import { Avatar } from "@/utils/PrimeReactComponents";
+import { Button } from "@/utils/PrimeReactComponents";
 import { Client } from "@/types/User";
+import { logoutUser } from "@/store/eventeco/slices/authSlice";
 import styles from "@/styles/eventeco/Profile.module.css";
 
 interface SidebarProps {
@@ -23,6 +24,11 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedTab, setSelectedTab }) => {
             dispatch(fetchUser() as any);
         }
     }, [dispatch, user]);
+
+    const handleLogout = () => {
+        dispatch(logoutUser() as any);
+        window.location.href = "/eventeco/home";
+    };
 
     if (isLoading) return <p>Cargando perfil...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -51,6 +57,9 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedTab, setSelectedTab }) => {
                     Preferencias
                 </button>
             </nav>
+            <div className={styles.profileActions}>
+                <Button label="Cerrar Sesión" className="p-button-secondary" onClick={handleLogout} />
+            </div>
         </aside>
     );
 };

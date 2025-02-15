@@ -14,6 +14,7 @@
     left: 0;
     overflow-y: auto;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
 }
 
 .profileContent {
@@ -62,6 +63,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
 }
 
 .formGroup {
@@ -81,6 +83,13 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
+}
+
+.profileActions {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
 }
 
 /* Responsive Design */

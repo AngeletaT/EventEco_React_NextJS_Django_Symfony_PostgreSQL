@@ -24,7 +24,7 @@ export interface UserTypeSelectorProps {
     setUserType: (type: "client" | "organizer" | "admin") => void;
 }
 
-export interface SuccessModalProps {
+export interface GenericModalProps {
     visible: boolean;
     onHide: () => void;
 }

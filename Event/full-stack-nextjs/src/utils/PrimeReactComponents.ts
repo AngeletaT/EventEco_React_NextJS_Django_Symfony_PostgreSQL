@@ -11,3 +11,4 @@ export { RadioButton } from "primereact/radiobutton";
 export { Dialog } from "primereact/dialog";
 export { Avatar } from "primereact/avatar";
 export { Menu } from "primereact/menu";
+export { Toast } from "primereact/toast";

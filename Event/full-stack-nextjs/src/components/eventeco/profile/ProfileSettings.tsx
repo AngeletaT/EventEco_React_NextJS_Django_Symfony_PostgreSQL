@@ -1,24 +1,31 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/store/eventeco";
 import { Client } from "@/types/User";
 import { fetchUser, updateUser } from "@/store/eventeco/slices/userSlice";
 import { Button, InputText } from "@/utils/PrimeReactComponents";
+import { Toast } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/eventeco/Profile.module.css";
 
 const ProfileSettings: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { user, isLoading, error } = useSelector((state: RootState) => state.user);
     const [formData, setFormData] = useState<Client | null>(user as Client | null);
+    const toast = useRef<Toast>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value } as Client);
     };
 
-    const handleSubmit = () => {
-        dispatch(updateUser(formData as Partial<Client>));
+    const handleSubmit = async () => {
+        try {
+            await dispatch(updateUser(formData as Partial<Client>)).unwrap();
+            toast.current?.show({ severity: "success", summary: "Éxito", detail: "Perfil actualizado correctamente", life: 3000 });
+        } catch (err) {
+            toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo actualizar el perfil", life: 3000 });
+        }
     };
 
     useEffect(() => {
@@ -36,6 +43,7 @@ const ProfileSettings: React.FC = () => {
 
     return (
         <div className={styles.settingsContainer}>
+            <Toast ref={toast} />
             <h2>Ajustes del Perfil</h2>
             {formData && (
                 <>
