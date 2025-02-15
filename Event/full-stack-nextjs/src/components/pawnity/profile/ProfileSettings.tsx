@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "@/store/eventeco";
+import { RootState, AppDispatch } from "@/store/pawnity";
 import { Client } from "@/types/User";
-import { fetchUser, updateUser } from "@/store/eventeco/slices/userSlice";
+import { fetchUser, updateUser } from "@/store/pawnity/slices/userSlice";
 import { Button, InputText } from "@/utils/PrimeReactComponents";
 import { Toast } from "@/utils/PrimeReactComponents";
-import styles from "@/styles/eventeco/Profile.module.css";
+import styles from "@/styles/pawnity/Profile.module.css";
 
 const ProfileSettings: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();

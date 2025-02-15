@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     const [visible, setVisible] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
     const dispatch = useDispatch();
-    const { user, isAuthenticated, isLoading } = useSelector((state: RootState) => state.auth) as {
+    const { user, isAuthenticated, isLoading } = useSelector((state: RootState) => state.user) as {
         user: Client;
         isAuthenticated: boolean;
         isLoading: boolean;

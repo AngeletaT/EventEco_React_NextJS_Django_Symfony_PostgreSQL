@@ -7,7 +7,7 @@ import { InputText } from "@/utils/PrimeReactComponents";
 import { FloatLabel } from "@/utils/PrimeReactComponents";
 import { Password } from "@/utils/PrimeReactComponents";
 import { Button } from "@/utils/PrimeReactComponents";
-import SuccessModal from "./SuccessModal";
+import SuccessModal from "@/components/shared/SuccessModal";
 import styles from "@/styles/pawnity/Auth.module.css";
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }) => {
@@ -23,6 +23,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
 
         if (password !== repeatpassword) {
             setError("Las contraseñas no coinciden.");
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setError("El correo electrónico no es válido. Por favor, introduce un correo válido.");
             return;
         }
 
@@ -112,7 +118,14 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
 
             <Button type="button" label="Registrarse" className="p-button-primary" onClick={handleRegister} />
 
-            <SuccessModal visible={showSuccessModal} onHide={handleModalClose} />
+            <SuccessModal
+                visible={showSuccessModal}
+                onHide={handleModalClose}
+                header="Registro Exitoso"
+                message="Te has registrado exitosamente."
+                buttonLabel="Aceptar"
+                buttonClass="p-button-success"
+            />
         </div>
     );
 };

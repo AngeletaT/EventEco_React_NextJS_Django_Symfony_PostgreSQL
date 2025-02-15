@@ -19,6 +19,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setError("El correo electrónico no es válido. Por favor, introduce un correo válido.");
+            return;
+        }
+
         try {
             if (userType === "client") {
                 const user = await loginClientService({ email, password });
@@ -66,6 +73,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
                     />
                     <label htmlFor="password">Contraseña</label>
                 </FloatLabel>
+
+                {error && <p className={styles.errorMessage}>{error}</p>}
+
                 <Button type="button" label="Iniciar Sesión" className="p-button-primary" onClick={handleLogin} />
             </div>
         </div>
