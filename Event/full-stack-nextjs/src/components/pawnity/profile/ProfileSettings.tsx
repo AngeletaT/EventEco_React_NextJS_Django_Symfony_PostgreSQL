@@ -14,6 +14,8 @@ const ProfileSettings: React.FC = () => {
     const { user, isLoading, error } = useSelector((state: RootState) => state.user);
     const [formData, setFormData] = useState<Client | null>(user as Client | null);
     const [isChanged, setIsChanged] = useState(false);
+    const [dniError, setDNIError] = useState("");
+    const [phoneError, setPhoneError] = useState("");
     const toast = useRef<Toast>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,14 +24,20 @@ const ProfileSettings: React.FC = () => {
     };
 
     const dniRegex = /^[0-9]{8}[A-Za-z]$/;
-    const validateDNI = (dni: string) => {
-        return dniRegex.test(dni);
-    };
+    if (formData && !dniRegex.test(formData.dni)) {
+        setDNIError("El DNI no es válido. Por favor, introduce un DNI válido.");
+        return;
+    } else {
+        setDNIError("");
+    }
 
     const phoneRegex = /^[0-9]{9}$/;
-    const validatePhone = (phone: string) => {
-        return phoneRegex.test(phone);
-    };
+    if (formData && !phoneRegex.test(formData.phonenumber)) {
+        setPhoneError("El teléfono no es válido. Por favor, introduce un teléfono válido.");
+        return;
+    } else {
+        setPhoneError("");
+    }
 
     const handleSubmit = async () => {
         try {
@@ -70,13 +78,19 @@ const ProfileSettings: React.FC = () => {
                     </div>
                     <div className={styles.formGroup}>
                         <label>DNI</label>
-                        <InputText name="dni" value={formData.dni} onChange={handleChange} maxLength={9} />
-                        {!validateDNI(formData.dni) && <small className={styles.error}>DNI no válido</small>}
+                        <InputText name="dni" value={formData.dni} onChange={handleChange} maxLength={9} invalid={dniError || error ? true : false} />
+                        {dniError && <small className={styles.error}>{dniError}</small>}
                     </div>
                     <div className={styles.formGroup}>
                         <label>Teléfono</label>
-                        <InputText name="phonenumber" value={formData.phonenumber} onChange={handleChange} maxLength={9} />
-                        {!validatePhone(formData.phonenumber) && <small className={styles.error}>Teléfono no válido</small>}
+                        <InputText
+                            name="phonenumber"
+                            value={formData.phonenumber}
+                            onChange={handleChange}
+                            maxLength={9}
+                            invalid={phoneError || error ? true : false}
+                        />
+                        {phoneError && <small className={styles.error}>{phoneError}</small>}
                     </div>
                     <div className={styles.formGroup}>
                         <label>Biografía</label>
@@ -86,7 +100,7 @@ const ProfileSettings: React.FC = () => {
                         label="Guardar Cambios"
                         onClick={handleSubmit}
                         className="p-button-success"
-                        disabled={!isChanged || !validateDNI(formData.dni) || !validatePhone(formData.phonenumber)}
+                        disabled={!isChanged || dniError || phoneError || error ? true : false}
                     />
                 </>
             )}

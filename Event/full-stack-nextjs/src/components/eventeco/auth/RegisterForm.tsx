@@ -16,20 +16,38 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
     const [password, setPassword] = useState("");
     const [repeatpassword, setRepeatPassword] = useState("");
     const [error, setError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [nifError, setNifError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (password !== repeatpassword) {
-            setError("Las contraseñas no coinciden.");
-            return;
-        }
-
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            setError("El correo electrónico no es válido. Por favor, introduce un correo válido.");
+            setEmailError("El correo electrónico no es válido. Por favor, introduce un correo válido.");
             return;
+        } else {
+            setEmailError("");
+        }
+
+        const nifRegex = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i;
+        if (userType === "organizer" && !nifRegex.test(nif)) {
+            setNifError("El NIF no es válido. Por favor, introduce un NIF válido.");
+            return;
+        } else {
+            setNifError("");
+        }
+
+        if (password === "") {
+            setPasswordError("La contraseña no puede estar vacía.");
+            return;
+        } else if (password !== repeatpassword) {
+            setPasswordError("Las contraseñas no coinciden.");
+            return;
+        } else {
+            setPasswordError("");
         }
 
         try {
@@ -68,22 +86,29 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Introduce tu correo"
                     className="w-full"
+                    invalid={emailError || error ? true : false}
                     required
                 />
                 <label htmlFor="email">Email</label>
             </FloatLabel>
+            {emailError && <p className={styles.errorMessage}>{emailError}</p>}
+
             {userType === "organizer" && (
-                <FloatLabel className={styles.floatLabelContainer}>
-                    <InputText
-                        id="nif"
-                        value={nif}
-                        onChange={(e) => setNif(e.target.value)}
-                        placeholder="Introduce tu NIF"
-                        className="w-full"
-                        required
-                    />
-                    <label htmlFor="nif">NIF</label>
-                </FloatLabel>
+                <>
+                    <FloatLabel className={styles.floatLabelContainer}>
+                        <InputText
+                            id="nif"
+                            value={nif}
+                            onChange={(e) => setNif(e.target.value)}
+                            placeholder="Introduce tu NIF"
+                            className="w-full"
+                            invalid={nifError || error ? true : false}
+                            required
+                        />
+                        <label htmlFor="nif">NIF</label>
+                    </FloatLabel>
+                    {nifError && <p className={styles.errorMessage}>{nifError}</p>}
+                </>
             )}
             <FloatLabel className={styles.floatLabelContainer}>
                 <Password
@@ -94,10 +119,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
                     feedback={false}
                     className="w-full"
                     toggleMask
+                    invalid={passwordError || error ? true : false}
                     required
                 />
                 <label htmlFor="password">Contraseña</label>
             </FloatLabel>
+            {passwordError && <p className={styles.errorMessage}>{passwordError}</p>}
 
             <FloatLabel className={styles.floatLabelContainer}>
                 <Password
@@ -109,10 +136,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
                     className="w-full"
                     pt={{ input: { className: "w-full" } }}
                     toggleMask
+                    invalid={passwordError || error ? true : false}
                     required
                 />
                 <label htmlFor="repeatpassword">Repite la Contraseña</label>
             </FloatLabel>
+            {passwordError && <p className={styles.errorMessage}>{passwordError}</p>}
 
             {error && <p className={styles.errorMessage}>{error}</p>}
 

@@ -15,6 +15,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const [error, setError] = useState("");
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -22,8 +24,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            setError("El correo electrónico no es válido. Por favor, introduce un correo válido.");
+            setEmailError("El correo electrónico no es válido. Por favor, introduce un correo válido.");
             return;
+        } else {
+            setEmailError("");
+        }
+
+        if (password === "") {
+            setPasswordError("La contraseña no puede estar vacía.");
+            return;
+        } else {
+            setPasswordError("");
         }
 
         try {
@@ -55,10 +66,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Introduce tu correo"
                         className="w-full"
+                        invalid={emailError || error ? true : false}
                         required
                     />
                     <label htmlFor="email">Email</label>
                 </FloatLabel>
+                {emailError && <p className={styles.errorMessage}>{emailError}</p>}
 
                 <FloatLabel className={styles.floatLabelContainer}>
                     <Password
@@ -69,10 +82,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
                         feedback={false}
                         className="w-full"
                         toggleMask
+                        invalid={passwordError || error ? true : false}
                         required
                     />
                     <label htmlFor="password">Contraseña</label>
                 </FloatLabel>
+                {passwordError && <p className={styles.errorMessage}>{passwordError}</p>}
 
                 {error && <p className={styles.errorMessage}>{error}</p>}
 
