@@ -107,7 +107,7 @@ const Header: React.FC = () => {
                     <a href="/eventeco/home" className={`${styles.link} ${pathname === "/eventeco/home" ? styles.active : ""}`}>
                         Inicio
                     </a>
-                    <a href="/eventeco/shop" className={`${styles.link} ${pathname === "/eventeco/shop" ? styles.active : ""}`}>
+                    <a href="/eventeco/shop" className={`${styles.link} ${pathname.includes("/eventeco/shop") ? styles.active : ""}`}>
                         Eventos
                     </a>
                     <a href="/eventeco/contact" className={`${styles.link} ${pathname === "/eventeco/contact" ? styles.active : ""}`}>
