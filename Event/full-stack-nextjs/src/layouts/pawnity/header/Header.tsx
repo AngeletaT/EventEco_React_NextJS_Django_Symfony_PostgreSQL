@@ -110,7 +110,7 @@ const Header: React.FC = () => {
                     <a href="/pawnity/home" className={`${styles.link} ${pathname === "/pawnity/home" ? styles.active : ""}`}>
                         Inicio
                     </a>
-                    <a href="/pawnity/shop" className={`${styles.link} ${pathname === "/pawnity/shop" ? styles.active : ""}`}>
+                    <a href="/pawnity/shop" className={`${styles.link} ${pathname.includes("/pawnity/shop") ? styles.active : ""}`}>
                         Eventos
                     </a>
                     <a href="/pawnity/adoptions" className={`${styles.link} ${pathname === "/pawnity/adoptions" ? styles.active : ""}`}>
