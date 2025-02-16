@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
 
 #[ORM\Entity]
-#[ORM\Table(name: "p_profileorganizer")]
+#[ORM\Table(name: "e_profileorganizer")]
 class ProfileOrganizer
 {
     #[ORM\Id]

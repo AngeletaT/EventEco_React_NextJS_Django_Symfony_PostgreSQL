@@ -10,7 +10,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 
 #[ORM\Entity]
-#[ORM\Table(name: "p_organizer")]
+#[ORM\Table(name: "e_organizer")]
 #[ApiResource(
     operations: [
         new Post(
