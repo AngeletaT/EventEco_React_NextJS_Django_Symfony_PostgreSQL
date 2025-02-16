@@ -1,38 +1,93 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Event } from "@/types/Event";
-import { Subevent } from "@/types/Subevent";
 import PawnityLayout from "@/layouts/pawnity/PawnityLayout";
 import { EventSkeleton } from "@/components/pawnity/skeletons/EventSkeleton";
 import styles from "@/styles/pawnity/EventDetails.module.css";
 
 const PawnityDetailsClient = ({ event }: { event: Event }) => {
+    const [activeTab, setActiveTab] = useState("entradas");
+
     if (!event) return <EventSkeleton />;
 
     return (
         <PawnityLayout>
-            <div className={styles.eventDetailsContainer}>
-                <img src={event.urlposter} alt={event.name} className={styles.eventImage} />
-                <div className={styles.eventInfo}>
-                    <h1>{event.name}</h1>
-                    <p className={styles.eventDate}>
-                        {event.startdate} - {event.enddate}
-                    </p>
-                    <p className={styles.eventLocation}>{event.location}</p>
-                    <p className={styles.eventDescription}>{event.description}</p>
-                    <div className={styles.organizerInfo}>
-                        <h3>Podrás disfrutar de eventos como:</h3>
-                        {event.subevents && event.subevents.length > 0 ? (
-                            <ul>
-                                {event.subevents.map((subevent: Subevent) => (
-                                    <li key={subevent.idsubevents}>{subevent.name}</li>
-                                ))}
+            <div className={styles.container}>
+                {/* Header con Imagen */}
+                <div className={styles.eventHeader} style={{ backgroundImage: `url(${event.urlposter})` }}>
+                    <div className={styles.overlay} style={{ backgroundImage: `url(${event.urlposter})` }}>
+                        <div className={styles.eventInfo}>
+                            <img src={event.urlposter} alt={event.name} className={styles.eventLogo} />
+                            <div className={styles.eventDetails}>
+                                <h1>{event.name}</h1>
+                                <p className={styles.location}>{event.location}</p>
+                                <p className={styles.date}>
+                                    {event.startdate} - {event.enddate}
+                                </p>
+                            </div>
+                        </div>
+                        <div className={styles.breadcrumbs}>
+                            <ul className="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+                                <li>
+                                    <a className="no-underline line-height-3 cursor-pointer" onClick={() => (window.location.href = "/pawnity/shop")}>
+                                        Eventos
+                                    </a>
+                                </li>
+                                <li className="px-2">
+                                    <i className="pi pi-angle-right text-500 line-height-3"></i>
+                                </li>
+                                <li>
+                                    <span className=" line-height-3" style={{ color: "#d4d4d4" }}>
+                                        {event.name}
+                                    </span>
+                                </li>
                             </ul>
-                        ) : (
-                            <p>No hay subeventos disponibles.</p>
-                        )}
+                        </div>
                     </div>
+                </div>
+
+                {/* Navegación de Tabs */}
+                <nav className={styles.tabs}>
+                    <button className={activeTab === "entradas" ? styles.active : ""} onClick={() => setActiveTab("entradas")}>
+                        Entradas
+                    </button>
+                    <button className={activeTab === "info" ? styles.active : ""} onClick={() => setActiveTab("info")}>
+                        Información
+                    </button>
+                </nav>
+
+                {/* Contenido de la Página */}
+                <div className={styles.content}>
+                    {activeTab === "entradas" ? (
+                        <div className={styles.ticketSection}>
+                            <h2>Entradas</h2>
+                            <p>Entradas a la venta próximamente.</p>
+                        </div>
+                    ) : (
+                        <div className={styles.eventInfoSection}>
+                            <h2>Info</h2>
+                            <p>{event.description}</p>
+                            <h2>Ubicación</h2>
+                            <p>{event.location}</p>
+                            <h2>Próximos eventos</h2>
+                            {event.subevents && event.subevents.length > 0 ? (
+                                event.subevents.map((sub, index) => (
+                                    <div key={index} className={styles.eventCard}>
+                                        <div className={styles.eventCardHeader}>
+                                            <h3>{sub.name}</h3>
+                                            <p>{sub.startdate}</p>
+                                        </div>
+                                        <div className={styles.eventCardBody}>
+                                            <p>{sub.description}</p>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No hay eventos disponibles.</p>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </PawnityLayout>

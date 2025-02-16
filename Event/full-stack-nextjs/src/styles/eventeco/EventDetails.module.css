@@ -1,38 +1,225 @@
-.eventDetailsContainer {
+.container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
+    align-items: center;
+    background-color: #f9f9f9;
 }
 
-.eventImage {
+.eventHeader {
     width: 100%;
-    height: auto;
-    border-radius: 10px;
+    height: 300px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem;
+    color: white;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 2rem;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Optional: to add a dark overlay effect */
+}
+
+.breadcrumbs {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 0.9rem;
+}
+
+.breadcrumbs a {
+    color: #d4d4d4 !important;
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    color: #f1c40f !important;
+    text-decoration: underline !important;
 }
 
 .eventInfo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-left: 100px;
+}
+
+.eventLogo {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+.eventDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     text-align: left;
-    color: #333;
+    gap: 0.5rem;
 }
 
-.eventDate {
+.eventDetails h1 {
+    font-size: 2rem;
     font-weight: bold;
-    color: #388e3c;
-    margin: 0.5rem 0;
+    margin-bottom: 0.3rem;
 }
 
-.eventDescription {
-    margin: 1rem 0;
+.location {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #f1c40f;
+    font-weight: bold;
+}
+
+.date {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #f1c40f;
+}
+
+.tabs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-bottom: 2px solid #ddd;
+}
+
+.tabs button {
+    background: none;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.2s ease-in-out;
+}
+
+.tabs button:hover {
+    color: black;
+}
+
+.tabs .active {
+    border-bottom: 3px solid #2c3e50;
+    color: black;
+}
+
+.content {
+    width: 100%;
+    max-width: 900px;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 1.5rem;
+}
+
+.ticketSection h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.ticketSection p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.eventInfoSection {
+    font-size: 1rem;
     line-height: 1.6;
     color: #333;
 }
 
-.organizerInfo {
-    background-color: #f5f5f5;
+.eventInfoSection h2 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #2c3e50;
+}
+
+.eventCard {
+    background: #f4f4f4;
     padding: 1rem;
     border-radius: 8px;
-    color: #333;
+    margin: 0.8rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.eventCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+.eventCardHeader h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.eventCardHeader p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+.eventCardBody {
+    padding-top: 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+    .eventHeader {
+        height: 200px;
+        padding: 1.5rem;
+    }
+
+    .eventLogo {
+        width: 90px;
+        height: 90px;
+    }
+
+    .eventDetails h1 {
+        font-size: 1.6rem;
+    }
+
+    .tabs button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .content {
+        padding: 1.5rem;
+    }
+
+    .eventCard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ticketButton {
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
 }
