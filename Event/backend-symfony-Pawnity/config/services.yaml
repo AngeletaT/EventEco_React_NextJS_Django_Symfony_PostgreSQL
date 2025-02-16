@@ -78,3 +78,20 @@ services:
     
     App\TicketInfo\Domain\OutPort\TicketInfoRepositoryInterface:
         alias: App\TicketInfo\Infrastructure\OutAdapter\Doctrine\TicketInfoRepositoryAdapter
+
+    App\TicketInfo\Application\UseCase\InPort\CreateTicketInfoInterface:
+        alias: App\TicketInfo\Application\UseCase\Command\CreateTicketInfo\CreateTicketInfoService
+        public: false
+
+    App\TicketInfo\Application\UseCase\InPort\GetTicketInfosByEventSlugInterface:
+        alias: App\TicketInfo\Application\UseCase\Query\GetTicketInfosByEventSlug\GetTicketInfosByEventSlugQueryService
+        public: false
+    
+    App\TicketInfo\Application\UseCase\Command\UpdateTicketInfo\UpdateTicketInfoCommandHandler:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\TicketInfo\Application\UseCase\InPort\UpdateTicketInfoInterface:
+        alias: App\TicketInfo\Application\UseCase\Command\UpdateTicketInfo\UpdateTicketInfoService
+        public: false

@@ -2,10 +2,11 @@
 
 namespace App\TicketInfo\Application\UseCase\Query\GetTicketInfosByEventSlug;
 
-use App\TicketInfo\Domain\OutPort\TicketInfoRepositoryInterface;
 use App\TicketInfo\Application\DTO\Response\GetTicketInfoResponse;
+use App\TicketInfo\Application\UseCase\InPort\GetTicketInfosByEventSlugInterface;
+use App\TicketInfo\Domain\OutPort\TicketInfoRepositoryInterface;
 
-class GetTicketInfosByEventSlugQueryService
+class GetTicketInfosByEventSlugQueryService implements GetTicketInfosByEventSlugInterface
 {
     private TicketInfoRepositoryInterface $repository;
 
@@ -20,23 +21,24 @@ class GetTicketInfosByEventSlugQueryService
      */
     public function getTicketInfos(string $eventSlug): array
     {
-         $ticketInfos = $this->repository->findByEventSlug($eventSlug);
+        $ticketInfos = $this->repository->findByEventSlug($eventSlug);
+        $responses = [];
 
-         $responses = [];
-         foreach ($ticketInfos as $ticketInfo) {
-             $responses[] = new GetTicketInfoResponse(
-                 $ticketInfo->getIdTicketInfo(),
-                 $ticketInfo->getEventSlug(),
-                 $ticketInfo->getType(),
-                 $ticketInfo->getPrice(),
-                 $ticketInfo->getCapacity(),
-                 $ticketInfo->getRemaining(),
-                 $ticketInfo->getDescripcion(),
-                 $ticketInfo->getIsActive(),
-                 $ticketInfo->getCreatedAt(),
-                 $ticketInfo->getUpdatedAt()
-             );
-         }
-         return $responses;
+        foreach ($ticketInfos as $ticketInfo) {
+            $responses[] = new GetTicketInfoResponse(
+                $ticketInfo->getIdTicketInfo(),
+                $ticketInfo->getEventSlug(),
+                $ticketInfo->getType(),
+                $ticketInfo->getPrice(),
+                $ticketInfo->getCapacity(),
+                $ticketInfo->getRemaining(),
+                $ticketInfo->getDescripcion(),
+                $ticketInfo->getIsActive(),
+                $ticketInfo->getCreatedAt(),
+                $ticketInfo->getUpdatedAt()
+            );
+        }
+
+        return $responses;
     }
 }

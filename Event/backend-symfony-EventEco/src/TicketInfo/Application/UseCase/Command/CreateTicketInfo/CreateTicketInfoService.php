@@ -4,11 +4,12 @@ namespace App\TicketInfo\Application\UseCase\Command\CreateTicketInfo;
 
 use App\TicketInfo\Application\DTO\Request\CreateTicketInfoRequest;
 use App\TicketInfo\Application\DTO\Response\CreateTicketInfoResponse;
+use App\TicketInfo\Application\UseCase\InPort\CreateTicketInfoInterface;
 use App\TicketInfo\Domain\Entity\TicketInfo;
 use App\TicketInfo\Domain\OutPort\TicketInfoRepositoryInterface;
 use App\TicketInfo\Domain\Exception\DuplicateTicketInfoException;
 
-class CreateTicketInfoService
+class CreateTicketInfoService implements CreateTicketInfoInterface
 {
     private TicketInfoRepositoryInterface $repository;
 
@@ -23,6 +24,7 @@ class CreateTicketInfoService
         if ($existingTicketInfo) {
             throw new DuplicateTicketInfoException();
         }
+
         $ticketInfo = new TicketInfo();
         $ticketInfo->setEventSlug($eventSlug);
         $ticketInfo->setType($request->getType());

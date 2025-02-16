@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Event\Application\InPort;
+namespace App\Event\Application\UseCase\InPort;
 
 use App\Event\Application\DTO\Request\UpdateEventRequest;
 use App\Event\Application\DTO\Response\UpdateEventResponse;

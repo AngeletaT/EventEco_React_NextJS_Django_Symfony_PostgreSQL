@@ -3,12 +3,13 @@
 namespace App\TicketInfo\Application\UseCase\Query\GetTicketInfosByEventSlug;
 
 use App\TicketInfo\Application\DTO\Response\GetTicketInfoResponse;
+use App\TicketInfo\Application\UseCase\InPort\GetTicketInfosByEventSlugInterface;
 
 class GetTicketInfosByEventSlugQueryHandler
 {
-    private GetTicketInfosByEventSlugQueryService $service;
+    private GetTicketInfosByEventSlugInterface $service;
 
-    public function __construct(GetTicketInfosByEventSlugQueryService $service)
+    public function __construct(GetTicketInfosByEventSlugInterface $service)
     {
         $this->service = $service;
     }
@@ -19,6 +20,6 @@ class GetTicketInfosByEventSlugQueryHandler
      */
     public function __invoke(GetTicketInfosByEventSlugQuery $query): array
     {
-         return $this->service->getTicketInfos($query->getEventSlug());
+        return $this->service->getTicketInfos($query->getEventSlug());
     }
 }
