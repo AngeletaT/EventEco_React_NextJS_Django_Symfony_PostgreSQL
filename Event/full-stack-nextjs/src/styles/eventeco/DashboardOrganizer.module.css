@@ -94,6 +94,9 @@
     width: 100%;
     max-width: 600px;
     margin: 20px auto;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .SettingsContainer h2 {

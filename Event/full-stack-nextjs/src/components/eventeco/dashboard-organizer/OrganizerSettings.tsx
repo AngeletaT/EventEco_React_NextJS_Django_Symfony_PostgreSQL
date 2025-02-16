@@ -23,9 +23,11 @@ const OrganizerSettings: React.FC = () => {
     const handleSubmit = async () => {
         try {
             await dispatch(updateUser(formData as Partial<Organizer>)).unwrap();
+            console.log("Profile updated successfully");
             toast.current?.show({ severity: "success", summary: "Éxito", detail: "Perfil actualizado correctamente", life: 3000 });
             setIsChanged(false);
         } catch (err) {
+            console.log("Error updating profile", err);
             toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo actualizar el perfil", life: 3000 });
         }
     };
@@ -45,29 +47,29 @@ const OrganizerSettings: React.FC = () => {
 
     return (
         <div className={styles.SettingsContainer}>
+            <Toast ref={toast} />
             <h2>Editar Perfil</h2>
-            <form onSubmit={handleSubmit}>
-                <label>Nombre</label>
-                <InputText name="name" value={formData.name} onChange={handleChange} />
+            <label>Nombre</label>
+            <InputText name="name" value={formData.name} onChange={handleChange} />
 
-                <label>Dirección</label>
-                <InputText name="address" value={formData.address} onChange={handleChange} />
+            <label>Dirección</label>
+            <InputText name="address" value={formData.address} onChange={handleChange} />
 
-                <label>Logo URL</label>
-                <InputText name="urlLogo" value={formData.urlLogo} onChange={handleChange} />
+            <label>Logo URL</label>
+            <InputText name="urlLogo" value={formData.urlLogo} onChange={handleChange} />
 
-                <label>Descripción</label>
-                <InputTextarea name="description" value={formData.description} onChange={handleChange} rows={4} />
+            <label>Descripción</label>
+            <InputTextarea name="description" value={formData.description} onChange={handleChange} rows={4} />
 
-                <label>Página Web</label>
-                <InputText name="urlWeb" value={formData.urlWeb} onChange={handleChange} />
+            <label>Página Web</label>
+            <InputText name="urlWeb" value={formData.urlWeb} onChange={handleChange} />
 
-                <label>Imagen de Portada</label>
-                <InputText name="urlImage" value={formData.urlImage} onChange={handleChange} />
+            <label>Imagen de Portada</label>
+            <InputText name="urlImage" value={formData.urlImage} onChange={handleChange} />
 
-                <Button label="Guardar Cambios" type="submit" loading={isLoading} disabled={!isChanged || error ? true : false} />
-            </form>
+            <Button label="Guardar Cambios" type="submit" loading={isLoading} disabled={!isChanged || error ? true : false} onClick={handleSubmit} />
         </div>
     );
 };
+
 export default OrganizerSettings;
