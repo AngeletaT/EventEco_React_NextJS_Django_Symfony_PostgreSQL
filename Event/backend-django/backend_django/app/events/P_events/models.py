@@ -17,6 +17,7 @@ class P_Event(models.Model):
      startdate = models.DateField()
      enddate = models.DateField()
      location = models.CharField(max_length=255, null=True, blank=True)
+     position = models.CharField(max_length=255, null=True, blank=True)
      description = models.TextField(null=True, blank=True)
      status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Preparing')
      urlimage = ArrayField(models.URLField(max_length=255), null=True, blank=True)

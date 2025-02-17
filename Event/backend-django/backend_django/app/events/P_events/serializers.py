@@ -41,6 +41,7 @@ class P_EventDetailSerializer(serializers.ModelSerializer):
                'startdate',
                'enddate',
                'location',
+               'position',
                'description',
                'status',
                'urlimage',
