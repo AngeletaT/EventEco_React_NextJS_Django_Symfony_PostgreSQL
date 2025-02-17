@@ -14,6 +14,7 @@ export const logoutClientService = async () => {
         Cookies.remove("userType");
 
         const response = await djangoAPI_P.post("/client/auth/logout", {}, { headers });
+        window.location.href = "/pawnity/home";
         return response.data;
     } catch (error) {
         console.error("Error during logout:", error);
@@ -33,6 +34,7 @@ export const logoutOrganizerService = async () => {
         localStorage.removeItem("userType");
         Cookies.remove("accesstoken");
         Cookies.remove("userType");
+        window.location.href = "/pawnity/home";
         return response.data;
     } catch (error) {
         console.error("Error during logout:", error);
@@ -52,6 +54,7 @@ export const logoutAdminService = async () => {
         localStorage.removeItem("userType");
         Cookies.remove("accesstoken");
         Cookies.remove("userType");
+        window.location.href = "/pawnity/home";
         return response.data;
     } catch (error) {
         console.error("Error during logout:", error);

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { Client, Organizer, Admin } from "@/types/User";
 import { UserState } from "@/types/UserState";
-import { getClient, getOrganizer, getAdmin } from "@/services/eventeco/queries/getUser";
 import { logoutClientService, logoutOrganizerService, logoutAdminService } from "@/services/eventeco/command/user/logoutService";
 
 const initialState: UserState = {
