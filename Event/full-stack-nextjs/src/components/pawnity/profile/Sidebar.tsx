@@ -27,7 +27,6 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedTab, setSelectedTab }) => {
 
     const handleLogout = () => {
         dispatch(logoutUser() as any);
-        window.location.href = "/pawnity/home";
     };
 
     if (isLoading) return <p>Cargando perfil...</p>;

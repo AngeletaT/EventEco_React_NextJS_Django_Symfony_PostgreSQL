@@ -31,15 +31,12 @@ export const getOrganizer = async (): Promise<Organizer> => {
 
         const authResponse = await symfonyAPI_P.get("/organizer/current_user", { headers });
         const authUser = authResponse.data as Organizer;
-        console.log("authUser", authUser);
 
         const profileResponse = await symfonyAPI_P.get("/organizer/profile", { headers });
         const profileUser = profileResponse.data as Organizer;
-        console.log("profileUser", profileUser);
 
         const user = { ...authUser, ...profileUser };
 
-        console.log("user", user);
         return user;
     } catch (error) {
         console.error("Error fetching user data:", error);
@@ -62,7 +59,6 @@ export const getAdmin = async (): Promise<Admin> => {
 
         const user = { ...authUser, ...profileUser };
 
-        console.log("user", user);
         return user;
     } catch (error) {
         console.error("Error fetching user data:", error);

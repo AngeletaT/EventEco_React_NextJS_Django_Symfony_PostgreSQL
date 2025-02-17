@@ -33,8 +33,6 @@ export const getPetsPerPage = async ({
     if (idorg) params.append("idorg", idorg.toString());
     if (species) params.append("species", species);
 
-    console.log("params", params.toString());
-
     const response = await djangoAPI_P.get(`/pets/listPets?${params.toString()}`);
     const data = response.data as {
         results: Pet[];

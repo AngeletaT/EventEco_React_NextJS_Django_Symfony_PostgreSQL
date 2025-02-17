@@ -66,9 +66,9 @@ const Header: React.FC = () => {
                     <a href="/pawnity/adoptions" className={`${styles.link} ${pathname === "/pawnity/adoptions" ? styles.active : ""}`}>
                         Adopciones
                     </a>
-                    <a href="/pawnity/contact" className={`${styles.link} ${pathname === "/pawnity/contact" ? styles.active : ""}`}>
+                    {/* <a href="/pawnity/contact" className={`${styles.link} ${pathname === "/pawnity/contact" ? styles.active : ""}`}>
                         Contacto
-                    </a>
+                    </a> */}
                 </nav>
 
                 {/* Sección de Usuario / Autenticación */}
@@ -116,9 +116,9 @@ const Header: React.FC = () => {
                     <a href="/pawnity/adoptions" className={`${styles.link} ${pathname === "/pawnity/adoptions" ? styles.active : ""}`}>
                         Adopciones
                     </a>
-                    <a href="/pawnity/contact" className={`${styles.link} ${pathname === "/pawnity/contact" ? styles.active : ""}`}>
+                    {/* <a href="/pawnity/contact" className={`${styles.link} ${pathname === "/pawnity/contact" ? styles.active : ""}`}>
                         Contacto
-                    </a>
+                    </a> */}
                     {user ? (
                         <>
                             <a href="/pawnity/profile" className={`${styles.link} ${pathname === "/pawnity/contact" ? styles.active : ""}`}>

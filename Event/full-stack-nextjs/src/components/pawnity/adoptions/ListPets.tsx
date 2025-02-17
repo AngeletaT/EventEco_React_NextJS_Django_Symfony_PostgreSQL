@@ -32,11 +32,11 @@ const ListPets: React.FC<ListPetsProps> = ({ pets }) => {
                                 {new Date(pet.birthdate).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })}
                             </p>
                         </div>
-                        <Button
+                        {/* <Button
                             label="Ver más"
                             onClick={() => (window.location.href = `/pawnity/shop/pet/${pet.name}`)}
                             className={`p-button-info ${styles.petbutton}`}
-                        />
+                        /> */}
                     </div>
                 ))}
             </div>

@@ -1,6 +1,9 @@
 "use client";
 
 import React from "react";
+import { logoutUser } from "@/store/eventeco/slices/authSlice";
+import { Button } from "@/utils/PrimeReactComponents";
+import { useDispatch } from "react-redux";
 import styles from "@/styles/eventeco/DashboardOrganizer.module.css";
 
 interface SidebarProps {
@@ -9,6 +12,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ selectedTab, setSelectedTab }) => {
+    const dispatch = useDispatch();
     return (
         <aside className={styles.sidebar}>
             <div className={styles.logo}>
@@ -28,6 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedTab, setSelectedTab }) => {
                     ⚙️ Ajustes
                 </button>
             </nav>
+            <Button label="Cerrar Sesión" className="p-button-secondary" onClick={() => dispatch(logoutUser() as any)} />
         </aside>
     );
 };

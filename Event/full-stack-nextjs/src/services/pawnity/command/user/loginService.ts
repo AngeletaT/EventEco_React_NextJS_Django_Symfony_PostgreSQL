@@ -23,7 +23,6 @@ export const loginClientService = async (data: LoginData): Promise<Client> => {
 export const loginOrganizerService = async (data: LoginData): Promise<Organizer> => {
     try {
         const response = await symfonyAPI_P.post("/organizer/login", data);
-        console.log("response.data", response.data);
         const user = response.data as Organizer;
         if (user.accesstoken) {
             localStorage.setItem("accesstoken", user.accesstoken);
@@ -41,7 +40,6 @@ export const loginOrganizerService = async (data: LoginData): Promise<Organizer>
 export const loginAdminService = async (data: LoginData): Promise<Admin> => {
     try {
         const response = await symfonyAPI_P.post("/admin/login", data);
-        console.log("response.data", response.data);
         const user = response.data as Admin;
         if (user.accesstoken) {
             localStorage.setItem("accesstoken", user.accesstoken);

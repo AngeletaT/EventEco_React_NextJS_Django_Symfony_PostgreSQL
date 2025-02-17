@@ -63,9 +63,9 @@ const Header: React.FC = () => {
                     <a href="/eventeco/shop" className={`${styles.link} ${pathname.includes("/eventeco/shop") ? styles.active : ""}`}>
                         Eventos
                     </a>
-                    <a href="/eventeco/contact" className={`${styles.link} ${pathname === "/eventeco/contact" ? styles.active : ""}`}>
+                    {/* <a href="/eventeco/contact" className={`${styles.link} ${pathname === "/eventeco/contact" ? styles.active : ""}`}>
                         Contacto
-                    </a>
+                    </a> */}
                 </nav>
 
                 {/* Sección de Usuario / Autenticación */}
@@ -110,9 +110,9 @@ const Header: React.FC = () => {
                     <a href="/eventeco/shop" className={`${styles.link} ${pathname.includes("/eventeco/shop") ? styles.active : ""}`}>
                         Eventos
                     </a>
-                    <a href="/eventeco/contact" className={`${styles.link} ${pathname === "/eventeco/contact" ? styles.active : ""}`}>
+                    {/* <a href="/eventeco/contact" className={`${styles.link} ${pathname === "/eventeco/contact" ? styles.active : ""}`}>
                         Contacto
-                    </a>
+                    </a> */}
                     {user ? (
                         <>
                             <a href="/eventeco/profile" className={`${styles.link} ${pathname === "/eventeco/contact" ? styles.active : ""}`}>

@@ -13,6 +13,7 @@ export const logoutClientService = async () => {
         Cookies.remove("accesstoken");
         Cookies.remove("userType");
         const response = await djangoAPI_E.post("/client/auth/logout", {}, { headers });
+        window.location.href = "/eventeco/home";
         return response.data;
     } catch (error) {
         console.error("Error during logout:", error);
@@ -32,6 +33,7 @@ export const logoutOrganizerService = async () => {
         localStorage.removeItem("userType");
         Cookies.remove("accesstoken");
         Cookies.remove("userType");
+        window.location.href = "/eventeco/home";
         return response.data;
     } catch (error) {
         console.error("Error during logout:", error);
@@ -51,6 +53,7 @@ export const logoutAdminService = async () => {
         localStorage.removeItem("userType");
         Cookies.remove("accesstoken");
         Cookies.remove("userType");
+        window.location.href = "/eventeco/home";
         return response.data;
     } catch (error) {
         console.error("Error during logout:", error);

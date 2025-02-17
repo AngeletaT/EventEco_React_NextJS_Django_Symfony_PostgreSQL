@@ -55,17 +55,14 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
                 await registerClientService({ email, password, nif, repeatpassword });
                 setError("");
                 setShowSuccessModal(true);
-                console.log("Registro exitoso");
             } else if (userType === "organizer") {
                 await registerOrganizerService({ email, password, nif, repeatpassword });
                 setError("");
                 setShowSuccessModal(true);
-                console.log("Registro exitoso");
             } else if (userType === "admin") {
                 await registerAdminService({ email, password, nif, repeatpassword });
                 setError("");
                 setShowSuccessModal(true);
-                console.log("Registro exitoso");
             }
         } catch (err) {
             setError("Error al registrarse. Inténtalo de nuevo.");
