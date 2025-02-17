@@ -55,8 +55,8 @@ class Event
     #[ORM\Column(name: "eventslug", type: "string", length: 150)]
     private string $eventSlug;
 
-    #[ORM\Column(name: "isactive", type: "boolean", options: ["default" => true])]
-    private bool $isActive;
+    #[ORM\Column(name: "isactive", type: "boolean", nullable: false, options: ["default" => true])]
+    private bool $isActive = true;
 
     #[ORM\OneToMany(mappedBy: "event", targetEntity: SubEvent::class, cascade: ["persist", "remove"])]
     private Collection $subEvents;
@@ -90,6 +90,7 @@ class Event
         $this->subEvents = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->isActive = true;
     }
 
     private function generateSlug(string $name): string
