@@ -23,11 +23,9 @@ const OrganizerSettings: React.FC = () => {
     const handleSubmit = async () => {
         try {
             await dispatch(updateUser(formData as Partial<Organizer>)).unwrap();
-            console.log("Profile updated successfully");
             toast.current?.show({ severity: "success", summary: "Éxito", detail: "Perfil actualizado correctamente", life: 3000 });
             setIsChanged(false);
         } catch (err) {
-            console.log("Error updating profile", err);
             toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo actualizar el perfil", life: 3000 });
         }
     };

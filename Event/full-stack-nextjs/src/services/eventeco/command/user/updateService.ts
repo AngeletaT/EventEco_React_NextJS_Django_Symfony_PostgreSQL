@@ -23,10 +23,8 @@ export const updateOrganizerService = async (updatedData: Partial<Organizer>): P
 
         const headers = { Authorization: `Bearer ${accesstoken}` };
 
-        // Enviar la solicitud de actualización al backend
         const response = await symfonyAPI_E.put("/organizer/profile", updatedData, { headers });
 
-        console.log("Perfil actualizado:", response.data);
         return response.data as Organizer;
     } catch (error) {
         console.error("Error al actualizar el perfil:", error);

@@ -16,6 +16,7 @@ export interface Event {
     idcategory: number;
     category: Category;
     subevents: Subevent[] | null;
+    isactive: boolean;
     createdat: string;
     updatedat: string;
 }

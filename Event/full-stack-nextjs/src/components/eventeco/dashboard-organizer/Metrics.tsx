@@ -4,7 +4,7 @@ import React from "react";
 import styles from "@/styles/eventeco/DashboardOrganizer.module.css";
 
 const Metrics: React.FC = () => {
-    return <h1>Sidebar</h1>;
+    return <h1 style={{ color: "black" }}>Próximamente...</h1>;
 };
 
 export default Metrics;
