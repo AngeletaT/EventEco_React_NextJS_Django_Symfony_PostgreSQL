@@ -66,8 +66,6 @@
     color: #333;
 }
 
-
-
 .petbutton {
     margin-left: 16px;
 }
@@ -85,4 +83,54 @@
     font-size: 1rem;
     font-weight: bold;
     color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ShopSection {
+        width: 100%;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 512px) {
+    .ShopSection {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .filtersContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dropdown {
+        width: 100%;
+    }
+
+    .petcard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .petimage {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 16px;
+    }
+
+    .petdetails h3 {
+        font-size: 1.2em;
+    }
+
+    .petdetails p {
+        font-size: 1em;
+    }
+
+    .petbutton {
+        align-self: center;
+        margin-left: 0;
+        margin-top: 16px;
+    }
 }

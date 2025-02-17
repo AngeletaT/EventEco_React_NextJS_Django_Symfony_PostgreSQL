@@ -28,8 +28,7 @@
     align-items: flex-end;
     padding: 2rem;
     background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.5);
-    /* Optional: to add a dark overlay effect */
+    background-color: rgba(0, 0, 0, 0.681);
 }
 
 .breadcrumbs {
@@ -82,14 +81,14 @@
 .location {
     font-size: 1rem;
     text-transform: uppercase;
-    color: #662721;
+    color: #FF6F61;
     font-weight: bold;
 }
 
 .date {
     margin-top: 0.5rem;
     font-size: 1rem;
-    color: #662721;
+    color: #FF6F61;
 }
 
 .tabs {
@@ -167,6 +166,7 @@
 
 .eventCardHeader {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ddd;
@@ -190,13 +190,13 @@
 
 @media screen and (max-width: 768px) {
     .eventHeader {
-        height: 200px;
+        height: 250px;
         padding: 1.5rem;
     }
 
     .eventLogo {
-        width: 90px;
-        height: 90px;
+        width: 150px;
+        height: 150px;
     }
 
     .eventDetails h1 {
@@ -216,6 +216,57 @@
         flex-direction: column;
         align-items: flex-start;
     }
+
+    .eventCardHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ticketButton {
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 512px) {
+    .eventHeader {
+        height: 250px;
+        padding: 1rem;
+    }
+
+    .eventInfo {
+        margin-left: 0;
+    }
+
+    .eventLogo {
+        width: 150px;
+        height: 150px;
+    }
+
+    .eventDetails h1 {
+        font-size: 1.4rem;
+    }
+
+    .tabs button {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+
+    .eventCard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .eventCardHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
 
     .ticketButton {
         width: 100%;

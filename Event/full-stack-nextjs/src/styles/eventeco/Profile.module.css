@@ -58,6 +58,23 @@
     border-bottom: 2px solid #FBC02D;
 }
 
+.profileActions button {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    text-align: left;
+    font-size: 1em;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profileActions button:hover,
+.profileActions button.active {
+    color: #FBC02D;
+    border-bottom: 2px solid #FBC02D;
+}
+
 .settingsContainer {
     background-color: #fff;
     padding: 20px;
@@ -80,7 +97,6 @@
 .formGroup input {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
 }
@@ -92,17 +108,69 @@
     margin-top: 20px;
 }
 
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .sidebar {
-        width: 100%;
+        width: 100px;
+        position: relative;
+        top: 0;
+        box-shadow: none;
+    }
+
+    .profileInfo {
+        display: none;
+    }
+
+    .nav button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .nav button span {
+        display: none;
+    }
+
+    .nav button i {
+        font-size: 1.5em;
+    }
+
+    .profileActions button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .profileActions button span {
+        display: none;
+    }
+
+    .profileActions button i {
+        font-size: 1.5em;
+    }
+
+    .profileContent {
+        margin-left: 0;
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar {
+        width: 70px;
         position: relative;
         top: 0;
         box-shadow: none;
     }
 
     .profileContent {
-        margin-left: 0;
         padding-top: 20px;
     }
 }

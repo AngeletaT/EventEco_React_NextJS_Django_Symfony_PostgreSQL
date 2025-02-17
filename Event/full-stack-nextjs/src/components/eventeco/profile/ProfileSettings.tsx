@@ -19,25 +19,28 @@ const ProfileSettings: React.FC = () => {
     const toast = useRef<Toast>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value } as Client);
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value } as Client);
         setIsChanged(true);
+
+        if (name === "dni") {
+            const dniRegex = /^[0-9]{8}[A-Za-z]$/;
+            if (!dniRegex.test(value)) {
+                setDNIError("El DNI no es válido. Por favor, introduce un DNI válido.");
+            } else {
+                setDNIError("");
+            }
+        }
+
+        if (name === "phonenumber") {
+            const phoneRegex = /^[0-9]{9}$/;
+            if (!phoneRegex.test(value)) {
+                setPhoneError("El teléfono no es válido. Por favor, introduce un teléfono válido.");
+            } else {
+                setPhoneError("");
+            }
+        }
     };
-
-    const dniRegex = /^[0-9]{8}[A-Za-z]$/;
-    if (formData && !dniRegex.test(formData.dni)) {
-        setDNIError("El DNI no es válido. Por favor, introduce un DNI válido.");
-        return;
-    } else {
-        setDNIError("");
-    }
-
-    const phoneRegex = /^[0-9]{9}$/;
-    if (formData && !phoneRegex.test(formData.phonenumber)) {
-        setPhoneError("El teléfono no es válido. Por favor, introduce un teléfono válido.");
-        return;
-    } else {
-        setPhoneError("");
-    }
 
     const handleSubmit = async () => {
         try {

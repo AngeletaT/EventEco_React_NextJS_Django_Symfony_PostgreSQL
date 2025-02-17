@@ -44,20 +44,27 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedTab, setSelectedTab }) => {
             </div>
             <nav className={styles.nav}>
                 <button className={selectedTab === "settings" ? styles.active : ""} onClick={() => setSelectedTab("settings")}>
-                    Ajustes
+                    <i className="pi pi-cog"></i> &nbsp;&nbsp;
+                    <span>Ajustes</span>
                 </button>
                 <button className={selectedTab === "tickets" ? styles.active : ""} onClick={() => setSelectedTab("tickets")}>
-                    Tickets
+                    <i className="pi pi-ticket"></i> &nbsp;&nbsp;
+                    <span>Tickets</span>
                 </button>
                 <button className={selectedTab === "orders" ? styles.active : ""} onClick={() => setSelectedTab("orders")}>
-                    Historial de Compras
+                    <i className="pi pi-shopping-cart"></i> &nbsp;&nbsp;
+                    <span>Historial de Compras</span>
                 </button>
                 <button className={selectedTab === "preferences" ? styles.active : ""} onClick={() => setSelectedTab("preferences")}>
-                    Preferencias
+                    <i className="pi pi-sliders-h"></i> &nbsp;&nbsp;
+                    <span>Preferencias</span>
                 </button>
             </nav>
             <div className={styles.profileActions}>
-                <Button label="Cerrar Sesión" className="p-button-secondary" onClick={handleLogout} />
+                <button className="p-button-secondary" onClick={handleLogout}>
+                    <i className="pi pi-sign-out"></i> &nbsp;&nbsp;
+                    <span>Cerrar Sesión</span>
+                </button>
             </div>
         </aside>
     );

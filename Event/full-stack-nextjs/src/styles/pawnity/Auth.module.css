@@ -174,14 +174,3 @@
         border-top: none;
     }
 }
-
-@media (max-width: 512px) {
-    .authContainer {
-        padding: 1rem;
-    }
-
-    .toggle input+label {
-        padding: 0.5rem 0.25rem;
-        flex: 0 0 100%;
-    }
-}

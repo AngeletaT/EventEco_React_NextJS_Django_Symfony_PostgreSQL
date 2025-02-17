@@ -69,11 +69,11 @@ const EventecoDetailsClient = ({ event }: { event: Event }) => {
                         </div>
                     ) : (
                         <div className={styles.eventInfoSection}>
-                            <h2>Info</h2>
+                            <h2>Detalles</h2>
                             <p>{event.description}</p>
                             <h2>Ubicación</h2>
                             <p>{event.location}</p>
-                            <h2>Próximos eventos</h2>
+                            <h2>Actividades propuestas</h2>
                             {event.subevents && event.subevents.length > 0 ? (
                                 event.subevents.map((sub, index) => (
                                     <div key={index} className={styles.eventCard}>
@@ -87,7 +87,7 @@ const EventecoDetailsClient = ({ event }: { event: Event }) => {
                                     </div>
                                 ))
                             ) : (
-                                <p>No hay eventos disponibles.</p>
+                                <p>Se darán a conocer más adelante.</p>
                             )}
                         </div>
                     )}

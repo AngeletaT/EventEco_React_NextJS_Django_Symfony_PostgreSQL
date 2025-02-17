@@ -80,7 +80,6 @@
 .formGroup input {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
 }
@@ -94,20 +93,52 @@
 
 .error {
     color: red;
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .sidebar {
-        width: 100%;
+        width: 100px;
+        position: relative;
+        top: 0;
+        box-shadow: none;
+    }
+
+    .profileInfo {
+        display: none;
+    }
+
+    .nav button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .nav button span {
+        display: none;
+    }
+
+    .nav button i {
+        font-size: 1.5em;
+    }
+
+    .profileContent {
+        margin-left: 0;
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar {
+        width: 70px;
         position: relative;
         top: 0;
         box-shadow: none;
     }
 
     .profileContent {
-        margin-left: 0;
         padding-top: 20px;
     }
 }
