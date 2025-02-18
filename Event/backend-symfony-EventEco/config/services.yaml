@@ -106,3 +106,10 @@ services:
     App\Complement\Application\UseCase\InPort\CreateComplementInterface:
         alias: App\Complement\Application\UseCase\Command\CreateComplement\CreateComplementService
         public: false
+
+    App\Event\Domain\OutPort\SubEventRepositoryInterface:
+        alias: App\Event\Infrastructure\OutAdapter\Doctrine\SubEventRepositoryAdapter
+
+    App\Event\Application\UseCase\InPort\CreateSubEventInterface:
+        alias: App\Event\Application\UseCase\Command\CreateSubEvent\CreateSubEventService
+        public: false
