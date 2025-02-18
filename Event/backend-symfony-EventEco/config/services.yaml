@@ -95,3 +95,7 @@ services:
     App\TicketInfo\Application\UseCase\InPort\UpdateTicketInfoInterface:
         alias: App\TicketInfo\Application\UseCase\Command\UpdateTicketInfo\UpdateTicketInfoService
         public: false
+    
+    App\TicketInfo\Application\UseCase\InPort\ToggleTicketInfoInterface:
+        alias: App\TicketInfo\Application\UseCase\Command\ToggleTicketInfo\ToggleTicketInfoService
+        public: false
