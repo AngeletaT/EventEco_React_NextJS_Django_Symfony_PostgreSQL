@@ -99,3 +99,10 @@ services:
     App\TicketInfo\Application\UseCase\InPort\ToggleTicketInfoInterface:
         alias: App\TicketInfo\Application\UseCase\Command\ToggleTicketInfo\ToggleTicketInfoService
         public: false
+        
+    App\Complement\Domain\OutPort\ComplementRepositoryInterface:
+        alias: App\Complement\Infrastructure\OutAdapter\Doctrine\ComplementRepositoryAdapter
+
+    App\Complement\Application\UseCase\InPort\CreateComplementInterface:
+        alias: App\Complement\Application\UseCase\Command\CreateComplement\CreateComplementService
+        public: false
