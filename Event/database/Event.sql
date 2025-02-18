@@ -847,23 +847,24 @@ CREATE TABLE E_Complements (
     description TEXT,
     price DECIMAL(10, 2),
     imageURL VARCHAR(255),
-    idEvent INT,
+    eventSlug VARCHAR(100),
+    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO E_Complements (name, description, price, imageURL, idEvent, createdAt, updatedAt)
+INSERT INTO E_Complements (name, description, price, imageURL, eventSlug, createdAt, updatedAt)
 VALUES
-    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Poster', 'Póster oficial del evento.', 7.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Poster', 'Póster oficial del evento.', 7.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 END
 $do$;
 
@@ -876,23 +877,24 @@ CREATE TABLE P_Complements (
     description TEXT,
     price DECIMAL(10, 2),
     imageURL VARCHAR(255),
-    idEvent INT,
+    eventSlug VARCHAR(100),
+    isActive BOOLEAN DEFAULT TRUE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO P_Complements (name, description, price, imageURL, idEvent, createdAt, updatedAt)
+INSERT INTO P_Complements (name, description, price, imageURL, eventSlug, createdAt, updatedAt)
 VALUES
-    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Poster', 'Póster oficial del evento.', 7.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, 1,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, '6',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Poster', 'Póster oficial del evento.', 7.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 END
 $do$;
 
