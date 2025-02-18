@@ -20,6 +20,7 @@ class GetListEventResponse implements JsonSerializable
                 'startdate'  => $event['startDate'],
                 'enddate'    => $event['endDate'],
                 'location'   => $event['location'],
+                'position'   => $event['position'],
                 'description'=> $event['description'],
                 'status'     => $event['status'],
                 'urlimage'   => $this->normalizeUrlImage($event['urlImage']),

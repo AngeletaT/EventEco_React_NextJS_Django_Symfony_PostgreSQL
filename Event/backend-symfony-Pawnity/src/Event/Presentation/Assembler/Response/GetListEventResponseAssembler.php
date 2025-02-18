@@ -26,6 +26,7 @@ class GetListEventResponseAssembler
             'startdate'   => $event->getStartDate()->format('Y-m-d'),
             'enddate'     => $event->getEndDate()->format('Y-m-d'),
             'location'    => $event->getLocation(),
+            'position'    => $event->getPosition(),
             'description' => $event->getDescription(),
             'status'      => $event->getStatus(),
             'urlimage'    => self::fixUrlImage($event->getUrlImage()),

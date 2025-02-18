@@ -40,6 +40,7 @@ class CreateEventRequestAssembler
             new \DateTime($data['startDate'] ?? 'now'),
             new \DateTime($data['endDate'] ?? 'now'),
             $data['location'] ?? null,
+            $data['position'] ?? null,
             $data['description'] ?? null,
             $data['status'] ?? 'Preparing',
             $urlImage, // Ahora se garantiza que es un array (o [] en caso de no haber dato)

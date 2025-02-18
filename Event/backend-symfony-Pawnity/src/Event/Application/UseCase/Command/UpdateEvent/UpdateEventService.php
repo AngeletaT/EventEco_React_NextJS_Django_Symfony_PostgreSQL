@@ -54,6 +54,9 @@ class UpdateEventService
         if ($request->getLocation() !== null) {
             $event->setLocation($request->getLocation());
         }
+        if ($request->getPosition() !== null) {
+            $event->setPosition($request->getPosition());
+        }
         if ($request->getDescription() !== null) {
             $event->setDescription($request->getDescription());
         }
@@ -79,6 +82,7 @@ class UpdateEventService
             $event->getStartDate(),
             $event->getEndDate(),
             $event->getLocation(),
+            $event->getPosition(),
             $event->getDescription(),
             $event->getStatus(),
             $event->getUrlImage(),

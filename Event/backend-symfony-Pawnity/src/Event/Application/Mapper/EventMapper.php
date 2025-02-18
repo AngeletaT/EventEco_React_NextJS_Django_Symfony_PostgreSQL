@@ -22,6 +22,7 @@ class EventMapper implements MapperInterface
             'startDate' => $event->getStartDate()->format('Y-m-d'),
             'endDate' => $event->getEndDate()->format('Y-m-d'),
             'location' => $event->getLocation(),
+            'position' => $event->getPosition(),
             'description' => $event->getDescription(),
             'status' => $event->getStatus(),
             'urlImage' => $event->getUrlImage(),

@@ -14,6 +14,7 @@ class CreateEventResponse
     private DateTimeInterface $startDate;
     private DateTimeInterface $endDate;
     private ?string $location;
+    private ?string $position;
     private ?string $description;
     private string $status;
     private ?array $urlImage; // Cambiado de ?string a ?array
@@ -29,6 +30,7 @@ class CreateEventResponse
         DateTimeInterface $startDate,
         DateTimeInterface $endDate,
         ?string $location,
+        ?string $position,
         ?string $description,
         string $status,
         ?array $urlImage, // Cambiado de ?string a ?array
@@ -43,6 +45,7 @@ class CreateEventResponse
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->location = $location;
+        $this->position = $position;
         $this->description = $description;
         $this->status = $status;
         $this->urlImage = $urlImage;
@@ -59,6 +62,7 @@ class CreateEventResponse
     public function getStartDate(): DateTimeInterface { return $this->startDate; }
     public function getEndDate(): DateTimeInterface { return $this->endDate; }
     public function getLocation(): ?string { return $this->location; }
+    public function getPosition(): ?string { return $this->position; }
     public function getDescription(): ?string { return $this->description; }
     public function getStatus(): string { return $this->status; }
     public function getUrlImage(): ?array { return $this->urlImage; }

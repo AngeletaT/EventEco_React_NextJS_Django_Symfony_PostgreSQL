@@ -30,6 +30,7 @@ class UpdateEventRequestAssembler
             isset($data['startDate']) ? new \DateTime($data['startDate']) : null,
             isset($data['endDate']) ? new \DateTime($data['endDate']) : null,
             $data['location'] ?? null,
+            $data['position'] ?? null,
             $data['description'] ?? null,
             $data['status'] ?? null,
             $urlImage,

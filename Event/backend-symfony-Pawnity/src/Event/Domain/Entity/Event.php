@@ -29,6 +29,9 @@ class Event
     private ?string $location = null;
 
     #[ORM\Column(type: "string", length: 255, nullable: true)]
+    private ?string $position = null;
+
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(type: "statusEvent", options: ["default" => "Preparing"])]
@@ -66,6 +69,7 @@ class Event
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
         ?string $location,
+        ?string $position,
         ?string $description,
         string $status,
         ?array $urlImage,
@@ -80,6 +84,7 @@ class Event
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->location = $location;
+        $this->position = $position;
         $this->description = $description;
         $this->status = $status;
         $this->urlImage = $urlImage;
@@ -111,6 +116,7 @@ class Event
     public function getStartDate(): \DateTimeInterface { return $this->startDate; }
     public function getEndDate(): \DateTimeInterface { return $this->endDate; }
     public function getLocation(): ?string { return $this->location; }
+    public function getPosition(): ?string { return $this->position; }
     public function getDescription(): ?string { return $this->description; }
     public function getStatus(): string { return $this->status; }
     public function getUrlImage(): ?array { return $this->urlImage; }
@@ -125,6 +131,7 @@ class Event
     // Setters
     public function setName(string $name): void { $this->name = $name; }
     public function setLocation(?string $location): void { $this->location = $location; }
+    public function setPosition(?string $position): void { $this->position = $position; }
     public function setDescription(?string $description): void { $this->description = $description; }
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): void { $this->updatedAt = $updatedAt; }
     public function setUrlImage(?array $urlImage): void { $this->urlImage = $urlImage; }

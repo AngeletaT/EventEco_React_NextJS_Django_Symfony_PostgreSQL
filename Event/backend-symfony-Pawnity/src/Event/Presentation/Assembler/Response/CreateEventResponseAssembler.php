@@ -16,6 +16,7 @@ class CreateEventResponseAssembler
             'startdate'  => $response->getStartDate()->format('Y-m-d'),
             'enddate'    => $response->getEndDate()->format('Y-m-d'),
             'location'   => $response->getLocation(),
+            'position'   => $response->getPosition(),
             'description'=> $response->getDescription(),
             'status'     => $response->getStatus(),
             'urlimage'   => $response->getUrlImage(),

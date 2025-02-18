@@ -14,6 +14,7 @@ class UpdateEventResponse
     private DateTimeInterface $startDate;
     private DateTimeInterface $endDate;
     private ?string $location;
+    private ?string $position;
     private ?string $description;
     private string $status;
     private ?array $urlImage;
@@ -29,6 +30,7 @@ class UpdateEventResponse
         DateTimeInterface $startDate,
         DateTimeInterface $endDate,
         ?string $location,
+        ?string $position,
         ?string $description,
         string $status,
         ?array $urlImage,
@@ -43,6 +45,7 @@ class UpdateEventResponse
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->location = $location;
+        $this->position = $position;
         $this->description = $description;
         $this->status = $status;
         $this->urlImage = $urlImage;
@@ -76,6 +79,11 @@ class UpdateEventResponse
     public function getLocation(): ?string
     {
         return $this->location;
+    }
+
+    public function getPosition(): ?string
+    {
+        return $this->position;
     }
 
     public function getDescription(): ?string

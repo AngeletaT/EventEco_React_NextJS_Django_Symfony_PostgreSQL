@@ -10,6 +10,7 @@ class CreateEventRequest
     private \DateTimeInterface $startDate;
     private \DateTimeInterface $endDate;
     private ?string $location;
+    private ?string $position;
     private ?string $description;
     private string $status;
     private ?array $urlImage;
@@ -21,6 +22,7 @@ class CreateEventRequest
         \DateTimeInterface $startDate,
         \DateTimeInterface $endDate,
         ?string $location,
+        ?string $position,
         ?string $description,
         string $status,
         ?array $urlImage,
@@ -31,6 +33,7 @@ class CreateEventRequest
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->location = $location;
+        $this->position = $position;
         $this->description = $description;
         $this->status = $status;
         $this->urlImage = $urlImage;
@@ -43,6 +46,7 @@ class CreateEventRequest
     public function getStartDate(): \DateTimeInterface { return $this->startDate; }
     public function getEndDate(): \DateTimeInterface { return $this->endDate; }
     public function getLocation(): ?string { return $this->location; }
+    public function getPosition(): ?string { return $this->position; }
     public function getDescription(): ?string { return $this->description; }
     public function getStatus(): string { return $this->status; }
     public function getUrlImage(): ?array { return $this->urlImage; }
