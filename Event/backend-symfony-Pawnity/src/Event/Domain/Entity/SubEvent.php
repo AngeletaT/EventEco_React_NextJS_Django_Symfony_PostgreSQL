@@ -87,4 +87,44 @@ class SubEvent
     public function getCreatedAt(): DateTimeImmutable { return $this->createdAt; }
     public function getUpdatedAt(): DateTimeImmutable { return $this->updatedAt; }
     public function getEvent(): Event { return $this->event; }
+
+    public function setName(string $name): self {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function setDescription(?string $description): self {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function setStartDate(DateTimeInterface $startDate): self {
+        $this->startDate = $startDate;
+        return $this;
+    }
+
+    public function setEndDate(DateTimeInterface $endDate): self {
+        $this->endDate = $endDate;
+        return $this;
+    }
+
+    public function setUrlImage(?array $urlImage): self {
+        $this->urlImage = $urlImage;
+        return $this;
+    }
+
+    public function setUrlPoster(?string $urlPoster): self {
+        $this->urlPoster = $urlPoster;
+        return $this;
+    }
+
+    public function setStatus(string $status): self {
+        $this->status = $status;
+        return $this;
+    }
+
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): self {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
 }
