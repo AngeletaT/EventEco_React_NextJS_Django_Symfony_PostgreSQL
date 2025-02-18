@@ -127,4 +127,9 @@ class SubEvent
         $this->updatedAt = $updatedAt;
         return $this;
     }
+
+    public function setIsActive(bool $isActive): self {
+        $this->isActive = $isActive;
+        return $this;
+    }
 }
