@@ -8,6 +8,7 @@ export interface Event {
     startdate: string;
     enddate: string;
     location: string;
+    position: string;
     description: string;
     status: string;
     urlimage: [];

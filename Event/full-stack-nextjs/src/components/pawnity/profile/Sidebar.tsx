@@ -45,7 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedTab, setSelectedTab }) => {
             <nav className={styles.nav}>
                 <button className={selectedTab === "settings" ? styles.active : ""} onClick={() => setSelectedTab("settings")}>
                     <i className="pi pi-cog"></i> &nbsp;&nbsp;
-                    <span>Ajustes</span>
+                    <span>Cuenta</span>
                 </button>
                 <button className={selectedTab === "tickets" ? styles.active : ""} onClick={() => setSelectedTab("tickets")}>
                     <i className="pi pi-ticket"></i> &nbsp;&nbsp;
