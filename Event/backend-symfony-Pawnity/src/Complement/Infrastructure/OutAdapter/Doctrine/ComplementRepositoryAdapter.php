@@ -25,4 +25,9 @@ class ComplementRepositoryAdapter implements ComplementRepositoryInterface
     {
          return $this->entityManager->getRepository(Complement::class)->find($id);
     }
+
+    public function findByEventSlug(string $eventSlug): array
+    {
+         return $this->entityManager->getRepository(Complement::class)->findBy(['eventSlug' => $eventSlug]);
+    }
 }

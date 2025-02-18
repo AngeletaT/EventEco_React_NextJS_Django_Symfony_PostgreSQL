@@ -20,7 +20,7 @@ class GetTicketInfosByEventSlugProvider extends AbstractController
     }
 
     /**
-     * @Route("/organizer/event/{eventSlug}/ticketinfo", name="get_ticketinfos_by_eventslug", methods={"GET"})
+     * @Route("/event/{eventSlug}/ticketinfo", name="get_ticketinfos_by_eventslug", methods={"GET"})
      */
     public function __invoke(Request $request, string $eventSlug): JsonResponse
     {
