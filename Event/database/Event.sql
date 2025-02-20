@@ -682,11 +682,11 @@ CREATE TABLE E_TicketInfo (
 -- Inserción de tipos de tickets en E_TicketInfo
 INSERT INTO E_TicketInfo (eventSlug, type, price, capacity, remaining, descripcion, createdAt, updatedAt)
 VALUES
-    (NULL, 'Entrada General', 20.00, 1000, 1000,'Acceso general al evento, sin áreas restringidas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada VIP', 50.00, 200, 200,'Acceso a áreas VIP con asientos preferenciales y beneficios exclusivos.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada Familiar', 60.00, 500, 500,'Incluye acceso para dos adultos y dos niños.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada de Grupo', 90.00, 300, 300,'Descuento para grupos de hasta cinco personas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada Estudiante', 15.00, 500, 500,'Descuento especial para estudiantes con credencial válida.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('salon-del-manga', 'Entrada General', 20.00, 1000, 1000,'Acceso general al evento, sin áreas restringidas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('salon-del-manga', 'Entrada VIP', 50.00, 200, 200,'Acceso a áreas VIP con asientos preferenciales y beneficios exclusivos.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('salon-del-manga', 'Entrada Familiar', 60.00, 500, 500,'Incluye acceso para dos adultos y dos niños.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('salon-del-manga', 'Entrada de Grupo', 90.00, 300, 300,'Descuento para grupos de hasta cinco personas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('salon-del-manga', 'Entrada Estudiante', 15.00, 500, 500,'Descuento especial para estudiantes con credencial válida.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 END
 $do$;
 
@@ -709,11 +709,11 @@ CREATE TABLE P_TicketInfo (
 -- Inserción de tipos de tickets en E_TicketInfo
 INSERT INTO P_TicketInfo (eventSlug, type, price, capacity, remaining, descripcion, createdAt, updatedAt)
 VALUES
-    (NULL, 'Entrada General', 20.00, 1000, 1000, 'Acceso general al evento, sin áreas restringidas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada VIP', 50.00, 200, 200,'Acceso a áreas VIP con asientos preferenciales y beneficios exclusivos.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada Familiar', 60.00, 500, 500,'Incluye acceso para dos adultos y dos niños.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada de Grupo', 90.00, 300, 300,'Descuento para grupos de hasta cinco personas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (NULL, 'Entrada Estudiante', 15.00, 500, 500,'Descuento especial para estudiantes con credencial válida.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('jornada-de-adopcion-en-el-parque', 'Entrada General', 20.00, 1000, 1000, 'Acceso general al evento, sin áreas restringidas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('jornada-de-adopcion-en-el-parque', 'Entrada VIP', 50.00, 200, 200,'Acceso a áreas VIP con asientos preferenciales y beneficios exclusivos.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('jornada-de-adopcion-en-el-parque', 'Entrada Familiar', 60.00, 500, 500,'Incluye acceso para dos adultos y dos niños.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('jornada-de-adopcion-en-el-parque', 'Entrada de Grupo', 90.00, 300, 300,'Descuento para grupos de hasta cinco personas.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('jornada-de-adopcion-en-el-parque', 'Entrada Estudiante', 15.00, 500, 500,'Descuento especial para estudiantes con credencial válida.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 END
 $do$;
 
@@ -772,6 +772,7 @@ CREATE TABLE E_OrderLine (
     idOrderLine SERIAL PRIMARY KEY,
     idOrder INT,
     idTicketInfo INT,
+    idComplement INT,
     quantity INT NOT NULL,
     unitPrice DECIMAL(10, 2) NOT NULL,
     subtotal DECIMAL(10, 2) NOT NULL,
@@ -789,6 +790,7 @@ CREATE TABLE P_OrderLine (
     idOrderLine SERIAL PRIMARY KEY,
     idOrder INT,
     idTicketInfo INT,
+    idComplement INT,
     quantity INT NOT NULL,
     unitPrice DECIMAL(10, 2) NOT NULL,
     subtotal DECIMAL(10, 2) NOT NULL,
@@ -855,16 +857,16 @@ CREATE TABLE E_Complements (
 
 INSERT INTO E_Complements (name, description, price, imageURL, eventSlug, createdAt, updatedAt)
 VALUES
-    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Poster', 'Póster oficial del evento.', 7.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, 'salon-del-manga', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, 'salon-del-manga', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, 'salon-del-manga', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, 'salon-del-manga', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, 'salon-del-manga', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Poster', 'Póster oficial del evento.', 7.00, NULL, 'salon-del-manga', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, 'salon-del-manga', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, 'salon-del-manga', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, 'salon-del-manga', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, 'salon-del-manga', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 END
 $do$;
 
@@ -885,16 +887,16 @@ CREATE TABLE P_Complements (
 
 INSERT INTO P_Complements (name, description, price, imageURL, eventSlug, createdAt, updatedAt)
 VALUES
-    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, '6',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Poster', 'Póster oficial del evento.', 7.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, '1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('Pack Bebida', 'Incluye 2 bebidas a elegir.', 5.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Camiseta', 'Camiseta oficial del evento.', 15.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Gorra', 'Gorra con el logo del evento.', 10.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Mochila', 'Mochila ecológica conmemorativa.', 20.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Pulsera', 'Pulsera de acceso al área VIP.', 8.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Poster', 'Póster oficial del evento.', 7.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Merchandising Variado', 'Pack con artículos del evento.', 25.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 END
 $do$;
 

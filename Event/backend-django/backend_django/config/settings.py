@@ -52,6 +52,10 @@ INSTALLED_APPS = [
     'backend_django.app.subEvents.E_subEvents',
     'backend_django.app.subEvents.P_subEvents',
     'backend_django.app.pets',
+    'backend_django.app.tickets.P_tickets',
+    'backend_django.app.tickets.E_tickets',
+    'backend_django.app.complements.P_complements',
+    'backend_django.app.complements.E_complements',
 ]
 
 # Rest Framework Config

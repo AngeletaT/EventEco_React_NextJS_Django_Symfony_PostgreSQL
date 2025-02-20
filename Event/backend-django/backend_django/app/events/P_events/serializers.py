@@ -2,6 +2,10 @@ from rest_framework import serializers
 from .models import P_Event
 from backend_django.app.categories.P_categories.serializers import P_EventCategorySerializer
 from backend_django.app.subEvents.P_subEvents.serializers import P_SubEventSerializer
+from backend_django.app.complements.P_complements.serializers import P_ComplementSerializer
+from backend_django.app.tickets.P_tickets.serializers import P_TicketInfoSerializer
+from backend_django.app.complements.P_complements.models import P_Complement
+from backend_django.app.tickets.P_tickets.models import P_TicketInfo
 
 
 class P_EventSerializer(serializers.ModelSerializer):
@@ -31,6 +35,8 @@ class P_EventSerializer(serializers.ModelSerializer):
 class P_EventDetailSerializer(serializers.ModelSerializer):
      category = P_EventCategorySerializer(source='idcategory', read_only=True)
      subevents = P_SubEventSerializer(many=True, read_only=True)
+     complements = serializers.SerializerMethodField()
+     tickets = serializers.SerializerMethodField()
 
      class Meta:
           model = P_Event
@@ -50,9 +56,25 @@ class P_EventDetailSerializer(serializers.ModelSerializer):
                'idcategory',
                'category',
                'subevents',
+               'complements',
+               'tickets', 
                'createdat',
                'updatedat',
           ]
+
+     def get_complements(self, obj):
+          """
+          Devuelve la lista de complementos asociados al evento mediante eventslug.
+          """
+          complements = P_Complement.objects.filter(eventslug=obj.eventslug, isactive=True)
+          return P_ComplementSerializer(complements, many=True).data
+
+     def get_tickets(self, obj):
+          """
+          Devuelve la lista de tickets asociados al evento mediante eventslug.
+          """
+          tickets = P_TicketInfo.objects.filter(eventslug=obj.eventslug, isactive=True)
+          return P_TicketInfoSerializer(tickets, many=True).data
 
 
 class P_EventFilterSerializer(serializers.Serializer):
