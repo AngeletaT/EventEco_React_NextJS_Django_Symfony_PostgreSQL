@@ -53,6 +53,8 @@ urlpatterns = [
     path('e_django/api/client/auth/', include('backend_django.app.accounts.E_accounts.urls')),
     path('e_django/api/client/profile/', include('backend_django.app.profiles.E_profiles.e_clients.urls')),
     path('p_django/api/client/profile/', include('backend_django.app.profiles.P_profiles.p_clients.urls')),
+    path('e_django/api/order/', include('backend_django.app.orders.E_orders.urls')),
+    path('p_django/api/order/', include('backend_django.app.orders.P_orders.urls')),
 ]
 
 if settings.DEBUG:

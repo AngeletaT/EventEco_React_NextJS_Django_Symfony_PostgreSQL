@@ -720,7 +720,8 @@ $do$;
 DO
 $do$
 BEGIN
-CREATE TYPE orderStatusEnum AS ENUM ('pendingNomination', 'completed', 'cancelled', 'inClaim', 'refunded');
+CREATE TYPE orderStatusEnum AS ENUM ('pending', 'completed', 'cancelled', 'refunded');
+CREATE TYPE paymentStatusEnum AS ENUM ('pending', 'paid', 'failed', 'refunded');
 END
 $do$;
 
@@ -731,10 +732,14 @@ CREATE TABLE E_Order (
     idOrder SERIAL PRIMARY KEY,
     idClient INT,
     idEvent INT,
-    datePurchase TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    subtotalTickets DECIMAL(10, 2) DEFAULT 0.00,
+    subtotalComplements DECIMAL(10, 2) DEFAULT 0.00,
     totalPrice DECIMAL(10, 2),
     payment VARCHAR(50),
-    status orderStatusEnum DEFAULT 'pendingNomination',
+    paymentReference VARCHAR(100),
+    paymentStatus paymentStatusEnum DEFAULT 'pending',
+    status orderStatusEnum DEFAULT 'pending',
+    datePurchase TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -748,10 +753,14 @@ CREATE TABLE P_Order (
     idOrder SERIAL PRIMARY KEY,
     idClient INT,
     idEvent INT,
-    datePurchase TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    subtotalTickets DECIMAL(10, 2) DEFAULT 0.00,
+    subtotalComplements DECIMAL(10, 2) DEFAULT 0.00,
     totalPrice DECIMAL(10, 2),
     payment VARCHAR(50),
-    status orderStatusEnum DEFAULT 'pendingNomination',
+    paymentReference VARCHAR(100),
+    paymentStatus paymentStatusEnum DEFAULT 'pending',
+    status orderStatusEnum DEFAULT 'pending',
+    datePurchase TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -761,7 +770,8 @@ $do$;
 DO
 $do$
 BEGIN
-CREATE TYPE orderLineStatusEnum AS ENUM ('active', 'inClaim', 'refunded');
+CREATE TYPE orderLineStatusEnum AS ENUM ('active', 'cancelled', 'refunded');
+CREATE TYPE itemTypeEnum AS ENUM ('ticket', 'complement');
 END
 $do$;
 
@@ -770,12 +780,12 @@ $do$
 BEGIN
 CREATE TABLE E_OrderLine (
     idOrderLine SERIAL PRIMARY KEY,
-    idOrder INT,
-    idTicketInfo INT,
-    idComplement INT,
-    quantity INT NOT NULL,
-    unitPrice DECIMAL(10, 2) NOT NULL,
-    subtotal DECIMAL(10, 2) NOT NULL,
+    idOrder INT NOT NULL,                
+    itemType itemTypeEnum NOT NULL,     
+    itemId INT NOT NULL,                
+    quantity INT NOT NULL,            
+    discount DECIMAL(10, 2) DEFAULT 0.00,
+    subtotal DECIMAL(10, 2) NOT NULL,    
     status orderLineStatusEnum DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -788,11 +798,11 @@ $do$
 BEGIN
 CREATE TABLE P_OrderLine (
     idOrderLine SERIAL PRIMARY KEY,
-    idOrder INT,
-    idTicketInfo INT,
-    idComplement INT,
+    idOrder INT NOT NULL,
+    itemType itemTypeEnum NOT NULL,
+    itemId INT NOT NULL,
     quantity INT NOT NULL,
-    unitPrice DECIMAL(10, 2) NOT NULL,
+    discount DECIMAL(10, 2) DEFAULT 0.00,
     subtotal DECIMAL(10, 2) NOT NULL,
     status orderLineStatusEnum DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -813,10 +823,13 @@ $do$
 BEGIN
 CREATE TABLE E_TicketUnit (
     idTicketUnit SERIAL PRIMARY KEY,
-    idOrder INT,
-    code VARCHAR(50) UNIQUE NOT NULL,
-    nameAssistant VARCHAR(100),
-    dniAssistant VARCHAR(20),
+    idOrder INT NOT NULL,               
+    idTicketInfo INT NOT NULL,          
+    code VARCHAR(50) UNIQUE NOT NULL,   
+    unitPrice DECIMAL(10, 2) NOT NULL,
+    complements INTEGER[] DEFAULT '{}',  
+    nameAssistant VARCHAR(100),         
+    dniAssistant VARCHAR(20),           
     status ticketUnitStatusEnum DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -829,10 +842,13 @@ $do$
 BEGIN
 CREATE TABLE P_TicketUnit (
     idTicketUnit SERIAL PRIMARY KEY,
-    idOrder INT,
-    code VARCHAR(50) UNIQUE NOT NULL,
-    nameAssistant VARCHAR(100),
-    dniAssistant VARCHAR(20),
+    idOrder INT NOT NULL,               
+    idTicketInfo INT NOT NULL,         
+    code VARCHAR(50) UNIQUE NOT NULL,   
+    unitPrice DECIMAL(10, 2) NOT NULL,
+    complements INTEGER[] DEFAULT '{}',
+    nameAssistant VARCHAR(100),        
+    dniAssistant VARCHAR(20),          
     status ticketUnitStatusEnum DEFAULT 'active',
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -897,47 +913,6 @@ VALUES
     ('Parche', 'Parche bordado exclusivo del evento.', 6.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Bolsa de Tela', 'Bolsa reutilizable con diseño del evento.', 12.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('Taza', 'Taza conmemorativa del evento.', 10.00, NULL, 'jornada-de-adopcion-en-el-parque',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-END
-$do$;
-
-DO
-$do$
-BEGIN
-CREATE TYPE ticketComplementStatusEnum AS ENUM ('pending', 'used', 'inClaim', 'refunded');
-END
-$do$;
-
-DO
-$do$
-BEGIN
-CREATE TABLE E_TicketComplements (
-    idTicketComplement SERIAL PRIMARY KEY,
-    idTicketUnit INT,
-    idComplement INT,
-    quantity INT NOT NULL,
-    subtotal DECIMAL(10, 2),
-    status ticketComplementStatusEnum DEFAULT 'pending',
-    isActive BOOLEAN DEFAULT TRUE,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-END
-$do$;
-
-DO
-$do$
-BEGIN
-CREATE TABLE P_TicketComplements (
-    idTicketComplement SERIAL PRIMARY KEY,
-    idTicketUnit INT,
-    idComplement INT,
-    quantity INT NOT NULL,
-    subtotal DECIMAL(10, 2),
-    status ticketComplementStatusEnum DEFAULT 'pending',
-    isActive BOOLEAN DEFAULT TRUE,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 END
 $do$;
 

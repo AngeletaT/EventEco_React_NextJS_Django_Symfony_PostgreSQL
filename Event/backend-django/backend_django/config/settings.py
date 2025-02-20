@@ -37,25 +37,34 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
     'corsheaders',
-    # # Local Apps (Accounts)
+    # Local Apps
+    # Accounts (Auth)
     # 'backend_django.app.accounts.P_accounts',
     'backend_django.app.accounts.E_accounts',
-    # Local Apps (Profiles)
+    # Profiles
     'backend_django.app.profiles.E_profiles.e_clients',
     'backend_django.app.profiles.P_profiles.p_clients',
     'backend_django.app.profiles.P_profiles.organizers',
-    # Local Apps (Events, Categories, etc.)
+    # Categories
     'backend_django.app.categories.E_categories',
     'backend_django.app.categories.P_categories',
+    # Events
     'backend_django.app.events.E_events',
     'backend_django.app.events.P_events',
+    # SubEvents
     'backend_django.app.subEvents.E_subEvents',
     'backend_django.app.subEvents.P_subEvents',
+    # Pets
     'backend_django.app.pets',
+    # Tickets
     'backend_django.app.tickets.P_tickets',
     'backend_django.app.tickets.E_tickets',
+    # Complements
     'backend_django.app.complements.P_complements',
     'backend_django.app.complements.E_complements',
+    # Orders
+    'backend_django.app.orders.P_orders',
+    'backend_django.app.orders.E_orders',
 ]
 
 # Rest Framework Config
