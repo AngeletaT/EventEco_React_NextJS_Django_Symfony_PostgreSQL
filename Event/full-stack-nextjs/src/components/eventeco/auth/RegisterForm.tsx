@@ -20,6 +20,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
     const [nifError, setNifError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -52,17 +53,32 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
 
         try {
             if (userType === "client") {
-                await registerClientService({ email, password, nif, repeatpassword });
-                setError("");
-                setShowSuccessModal(true);
+                setIsLoading(true);
+                try {
+                    await registerClientService({ email, password, nif, repeatpassword });
+                    setError("");
+                    setShowSuccessModal(true);
+                } finally {
+                    setIsLoading(false);
+                }
             } else if (userType === "organizer") {
-                await registerOrganizerService({ email, password, nif, repeatpassword });
-                setError("");
-                setShowSuccessModal(true);
+                setIsLoading(true);
+                try {
+                    await registerOrganizerService({ email, password, nif, repeatpassword });
+                    setError("");
+                    setShowSuccessModal(true);
+                } finally {
+                    setIsLoading(false);
+                }
             } else if (userType === "admin") {
-                await registerAdminService({ email, password, nif, repeatpassword });
-                setError("");
-                setShowSuccessModal(true);
+                setIsLoading(true);
+                try {
+                    await registerAdminService({ email, password, nif, repeatpassword });
+                    setError("");
+                    setShowSuccessModal(true);
+                } finally {
+                    setIsLoading(false);
+                }
             }
         } catch (err) {
             setError("Error al registrarse. Inténtalo de nuevo.");
@@ -142,7 +158,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
 
             {error && <p className={styles.errorMessage}>{error}</p>}
 
-            <Button type="button" label="Registrarse" className="p-button-success" onClick={handleRegister} />
+            <Button
+                type="button"
+                label={isLoading ? "Cargando..." : "Registrarse"}
+                className="p-button-success"
+                onClick={handleRegister}
+                disabled={isLoading}
+            />
 
             <SuccessModal
                 visible={showSuccessModal}

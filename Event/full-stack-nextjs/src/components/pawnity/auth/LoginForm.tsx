@@ -18,6 +18,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -39,17 +40,32 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
 
         try {
             if (userType === "client") {
-                const user = await loginClientService({ email, password });
-                dispatch(loginSuccess({ user }));
-                window.location.href = "/pawnity/home";
+                setIsLoading(true);
+                try {
+                    const user = await loginClientService({ email, password });
+                    dispatch(loginSuccess({ user }));
+                    window.location.href = "/eventeco/home";
+                } finally {
+                    setIsLoading(false);
+                }
             } else if (userType === "organizer") {
-                const user = await loginOrganizerService({ email, password });
-                dispatch(loginSuccess({ user }));
-                window.location.href = "/pawnity/dashboard-organizer";
+                setIsLoading(true);
+                try {
+                    const user = await loginOrganizerService({ email, password });
+                    dispatch(loginSuccess({ user }));
+                    window.location.href = "/eventeco/dashboard-organizer";
+                } finally {
+                    setIsLoading(false);
+                }
             } else if (userType === "admin") {
-                const user = await loginAdminService({ email, password });
-                dispatch(loginSuccess({ user }));
-                window.location.href = "/pawnity/dashboard-admin";
+                setIsLoading(true);
+                try {
+                    const user = await loginAdminService({ email, password });
+                    dispatch(loginSuccess({ user }));
+                    window.location.href = "/eventeco/dashboard-admin";
+                } finally {
+                    setIsLoading(false);
+                }
             }
         } catch (err) {
             setError("Error al iniciar sesión. Verifica tus credenciales.");
@@ -91,7 +107,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
 
                 {error && <p className={styles.errorMessage}>{error}</p>}
 
-                <Button type="button" label="Iniciar Sesión" className="p-button-primary" onClick={handleLogin} />
+                <Button
+                    type="button"
+                    label={isLoading ? "Cargando..." : "Iniciar Sesión"}
+                    className="p-button-success"
+                    onClick={handleLogin}
+                    disabled={isLoading}
+                />
             </div>
         </div>
     );
