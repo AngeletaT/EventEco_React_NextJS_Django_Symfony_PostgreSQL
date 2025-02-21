@@ -127,6 +127,7 @@ class Event
     public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
     public function getUpdatedAt(): \DateTimeImmutable { return $this->updatedAt; }
     public function getSubEvents(): Collection { return $this->subEvents; }
+    public function getEventSlug(): string { return $this->eventSlug; }
 
     // Setters
     public function setName(string $name): void { $this->name = $name; }

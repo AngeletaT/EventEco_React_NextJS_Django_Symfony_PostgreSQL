@@ -26,6 +26,8 @@ class GetListEventResponse implements JsonSerializable
                 'urlimage'   => $this->normalizeUrlImage($event['urlImage']),
                 'urlposter'  => str_replace('\\\\', '\\', $event['urlPoster']),
                 'orgid'      => $event['orgId'],
+                'eventslug'  => $event['eventSlug'],
+                'isactive'   => $event['isActive'],
                 'idcategory' => $event['idCategory'],
                 'createdat'  => $event['createdAt'],
                 'updatedat'  => $event['updatedAt'],
