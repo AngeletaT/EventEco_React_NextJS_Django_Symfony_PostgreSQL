@@ -1,0 +1,148 @@
+/* ==========================
+   CONTENEDOR GENERAL DEL EVENTO
+========================== */
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ==========================
+   TÍTULOS Y PESTAÑAS
+========================== */
+.container h2 {
+    font-size: 24px;
+    color: #2c5042;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.container h3 {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* ==========================
+   TABS DE NAVEGACIÓN
+========================== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.tabs button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+    color: #666;
+}
+
+.tabs button:hover {
+    color: #2c5042;
+}
+
+.tabs .active {
+    border-bottom: 3px solid #1abc9c;
+    color: #1abc9c;
+}
+
+/* ==========================
+   FORMULARIO DE EVENTO
+========================== */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================
+   CAMPOS DE FORMULARIO
+========================== */
+.floatLabelContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form input,
+.form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form input:focus,
+.form textarea:focus {
+    outline: none;
+    border-color: #1abc9c;
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+}
+
+/* ==========================
+   BOTÓN DE GUARDAR
+========================== */
+.form button {
+    background-color: #1abc9c;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    font-size: 16px;
+}
+
+.form button:hover {
+    background-color: #16a085;
+}
+
+.form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* ==========================
+   RESPONSIVE DESIGN
+========================== */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .tabs button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .form {
+        padding: 15px;
+    }
+}

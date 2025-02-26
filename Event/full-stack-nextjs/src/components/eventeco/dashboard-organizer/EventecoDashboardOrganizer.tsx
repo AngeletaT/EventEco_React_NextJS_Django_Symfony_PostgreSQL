@@ -8,20 +8,20 @@ import { Organizer } from "@/types/User";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import Metrics from "./Metrics";
-import EventList from "./event/EventList";
-import TicketList from "./tickets/TicketList";
 import OrganizerSettings from "./OrganizerSettings";
-import styles from "@/styles/eventeco/DashboardOrganizer.module.css";
+import EventView from "./event/EventView";
+import styles from "@/styles/eventeco/Organizer/DashboardOrganizer.module.css";
 
 const EventecoDashboardOrganizer: React.FC = () => {
-    const [selectedTab, setSelectedTab] = useState<"metrics" | "events" | "tickets" | "settings">("metrics");
-
     const dispatch = useDispatch();
     const { user, isLoading } = useSelector((state: RootState) => state.user) as {
         user: Organizer | null;
         isAuthenticated: boolean;
         isLoading: boolean;
     };
+
+    const [selectedView, setSelectedView] = useState<"metrics" | "settings" | "event">("metrics");
+    const [selectedEvent, setSelectedEvent] = useState<string>("");
 
     useEffect(() => {
         if (!user) {
@@ -31,14 +31,19 @@ const EventecoDashboardOrganizer: React.FC = () => {
 
     return (
         <div className={styles.dashboardContainer}>
-            <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+            <Sidebar
+                selectedView={selectedView}
+                setSelectedView={setSelectedView}
+                setSelectedEvent={setSelectedEvent}
+                selectedEvent={selectedEvent}
+                newEventName=""
+            />
             <div className={styles.mainContent}>
                 <Topbar user={user} isLoading={isLoading} />
                 <div className={styles.content}>
-                    {selectedTab === "metrics" && <Metrics />}
-                    {selectedTab === "events" && <EventList />}
-                    {selectedTab === "tickets" && <TicketList />}
-                    {selectedTab === "settings" && <OrganizerSettings />}
+                    {selectedView === "metrics" && <Metrics />}
+                    {selectedView === "settings" && <OrganizerSettings />}
+                    {selectedView === "event" && <EventView eventslug={selectedEvent} />}
                 </div>
             </div>
         </div>

@@ -13,8 +13,6 @@ const EventecoDetailsClient = ({ event }: { event: Event }) => {
     const position = event.position.slice(1, -1).split(",").map(Number) as [number, number];
     const coordinates: [number, number] = [position[0] || 0, position[1] || 0];
 
-    console.log("coords", event.urlposter);
-
     if (!event) return <EventSkeleton />;
 
     return (
@@ -33,7 +31,7 @@ const EventecoDetailsClient = ({ event }: { event: Event }) => {
                         className={styles.overlay}
                         style={{
                             backgroundImage: `url(${event.urlposter.replace(/\\/g, "/")})`,
-                            backgroundSize: "cover",
+                            backgroundSize: "200%",
                             backgroundPosition: "center",
                         }}
                     >

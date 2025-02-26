@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/eventeco";
 import { updateUser, fetchUser } from "@/store/eventeco/slices/userSlice";
 import { InputText, InputTextarea, Button, Toast } from "@/utils/PrimeReactComponents";
-import styles from "@/styles/eventeco/DashboardOrganizer.module.css";
+import styles from "@/styles/eventeco/Organizer/DashboardOrganizer.module.css";
 import { Organizer } from "@/types/User";
 
 const OrganizerSettings: React.FC = () => {

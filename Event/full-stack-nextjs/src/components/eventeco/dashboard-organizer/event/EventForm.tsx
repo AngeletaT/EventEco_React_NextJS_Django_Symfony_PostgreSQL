@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCreateEvent, useUpdateEvent } from "@/hooks/eventeco/useEvents";
 import { Event } from "@/types/Event";
 import { Button, InputText, FloatLabel, InputTextarea } from "@/utils/PrimeReactComponents";
-import styles from "@/styles/eventeco/DashboardEvent.module.css";
+import styles from "@/styles/eventeco/Organizer/DashboardEvent.module.css";
 
-const EventForm = ({ event, closeModal }: { event?: Event | null; closeModal: () => void }) => {
+const EventForm = ({ event, setNewEventName }: { event?: Event | null; setNewEventName?: (name: string) => void }) => {
     const createEvent = useCreateEvent();
     const updateEvent = useUpdateEvent();
 
@@ -18,13 +18,18 @@ const EventForm = ({ event, closeModal }: { event?: Event | null; closeModal: ()
         urlposter: event?.urlposter || "",
     });
 
+    useEffect(() => {
+        if (eventData.name && setNewEventName) {
+            setNewEventName(eventData.name);
+        }
+    }, [eventData.name, setNewEventName]);
+
     const handleSubmit = () => {
         if (event) {
             updateEvent.mutate({ id: event.idevent, data: eventData });
         } else {
             createEvent.mutate(eventData);
         }
-        closeModal();
     };
 
     return (
