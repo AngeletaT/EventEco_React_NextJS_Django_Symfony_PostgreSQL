@@ -17,7 +17,7 @@ const EventView = ({
     onEventUpdated: () => void;
 }) => {
     const { data: event, isLoading, isError } = eventslug ? useEventDetails(eventslug) : { data: null, isLoading: false, isError: false };
-    const [activeTab, setActiveTab] = useState<"details" | "subevents" | "tickets" | "complements">("details");
+    const [activeTab, setActiveTab] = useState<"details" | "settings" | "subevents" | "tickets" | "complements">("details");
 
     return (
         <div className={styles.container}>
@@ -25,6 +25,9 @@ const EventView = ({
             <nav className={styles.tabs}>
                 <button className={activeTab === "details" ? styles.active : ""} onClick={() => setActiveTab("details")}>
                     Detalles
+                </button>
+                <button className={activeTab === "settings" ? styles.active : ""} onClick={() => setActiveTab("settings")}>
+                    Configuración
                 </button>
                 <button className={activeTab === "subevents" ? styles.active : ""} onClick={() => setActiveTab("subevents")}>
                     Subeventos
@@ -37,7 +40,8 @@ const EventView = ({
                 </button>
             </nav>
             <div className={styles.content}>
-                {activeTab === "details" && (
+                {activeTab === "details" && <p>Aquí se gestionarán los detalles del evento.</p>}
+                {activeTab === "settings" && (
                     <EventForm key={eventslug || "null"} event={event} setNewEventName={setNewEventName} onEventUpdated={onEventUpdated} />
                 )}
                 {activeTab === "subevents" && <p>Aquí se gestionarán los subeventos.</p>}
