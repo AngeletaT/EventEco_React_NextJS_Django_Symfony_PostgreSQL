@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 export const logoutClientService = async () => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };
@@ -23,7 +23,7 @@ export const logoutClientService = async () => {
 
 export const logoutOrganizerService = async () => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };
@@ -43,7 +43,7 @@ export const logoutOrganizerService = async () => {
 
 export const logoutAdminService = async () => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };

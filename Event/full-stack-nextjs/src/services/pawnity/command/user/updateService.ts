@@ -3,7 +3,7 @@ import { Client, Organizer, Admin } from "@/types/User";
 
 export const updateClientService = async (updatedData: Partial<Client>): Promise<Client> => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };
@@ -18,7 +18,7 @@ export const updateClientService = async (updatedData: Partial<Client>): Promise
 
 export const updateOrganizerService = async (updatedData: Partial<Organizer>): Promise<Organizer> => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };

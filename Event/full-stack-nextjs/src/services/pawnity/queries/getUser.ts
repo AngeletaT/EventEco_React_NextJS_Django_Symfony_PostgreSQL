@@ -3,7 +3,7 @@ import { Client, Organizer, Admin } from "@/types/User";
 
 export const getClient = async (): Promise<Client> => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };
@@ -24,7 +24,7 @@ export const getClient = async (): Promise<Client> => {
 
 export const getOrganizer = async (): Promise<Organizer> => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };
@@ -46,7 +46,7 @@ export const getOrganizer = async (): Promise<Organizer> => {
 
 export const getAdmin = async (): Promise<Admin> => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };

@@ -3,7 +3,7 @@ import { Event } from "@/types/Event";
 
 export const createEvent = async (eventData: Partial<Event>): Promise<Event> => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };

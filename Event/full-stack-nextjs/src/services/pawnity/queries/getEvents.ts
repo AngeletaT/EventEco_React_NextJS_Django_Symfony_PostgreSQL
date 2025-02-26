@@ -59,7 +59,7 @@ export const getEventBySlug = async (eventslug: string): Promise<Event> => {
 
 export const getEventsByOrganizer = async (): Promise<Event[]> => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };

@@ -3,7 +3,7 @@ import { Event } from "@/types/Event";
 
 export const updateEvent = async (id: number, data: Partial<Event>): Promise<Event> => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };
@@ -18,7 +18,7 @@ export const updateEvent = async (id: number, data: Partial<Event>): Promise<Eve
 
 export const toggleEventStatusActive = async (id: number) => {
     try {
-        const accesstoken = localStorage.getItem("accesstoken");
+        const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
 
         const headers = { Authorization: `Bearer ${accesstoken}` };
