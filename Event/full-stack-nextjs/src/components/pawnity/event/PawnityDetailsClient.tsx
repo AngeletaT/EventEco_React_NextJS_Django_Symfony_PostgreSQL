@@ -1,13 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { Event } from "@/types/Event";
 import PawnityLayout from "@/layouts/pawnity/PawnityLayout";
 import { EventSkeleton } from "@/components/pawnity/skeletons/EventSkeleton";
 import styles from "@/styles/pawnity/EventDetails.module.css";
+const EventMap = dynamic(() => import("@/components/eventeco/event/EventMap"), { ssr: false });
 
 const PawnityDetailsClient = ({ event }: { event: Event }) => {
     const [activeTab, setActiveTab] = useState("entradas");
+    const position = event.position.slice(1, -1).split(",").map(Number) as [number, number];
+    const coordinates: [number, number] = [position[0] || 0, position[1] || 0];
 
     if (!event) return <EventSkeleton />;
 
@@ -15,8 +19,22 @@ const PawnityDetailsClient = ({ event }: { event: Event }) => {
         <PawnityLayout>
             <div className={styles.container}>
                 {/* Header con Imagen */}
-                <div className={styles.eventHeader} style={{ backgroundImage: `url(${event.urlposter})` }}>
-                    <div className={styles.overlay} style={{ backgroundImage: `url(${event.urlposter})` }}>
+                <div
+                    className={styles.eventHeader}
+                    style={{
+                        backgroundImage: `url(${event.urlposter.replace(/\\/g, "/")})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                    }}
+                >
+                    <div
+                        className={styles.overlay}
+                        style={{
+                            backgroundImage: `url(${event.urlposter.replace(/\\/g, "/")})`,
+                            backgroundSize: "200%",
+                            backgroundPosition: "center",
+                        }}
+                    >
                         <div className={styles.eventInfo}>
                             <img src={event.urlposter} alt={event.name} className={styles.eventLogo} />
                             <div className={styles.eventDetails}>
@@ -70,6 +88,7 @@ const PawnityDetailsClient = ({ event }: { event: Event }) => {
                             <p>{event.description}</p>
                             <h2>Ubicación</h2>
                             <p>{event.location}</p>
+                            <EventMap location={event.location} coordinates={coordinates} />
                             <h2>Actividades propuestas</h2>
                             {event.subevents && event.subevents.length > 0 ? (
                                 event.subevents.map((sub, index) => (
