@@ -22,10 +22,10 @@ class SubEvent
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(name: "startdate", type: "date")]
+    #[ORM\Column(name: "startdate", type: "datetime")]
     private DateTimeInterface $startDate;
 
-    #[ORM\Column(name: "enddate", type: "date")]
+    #[ORM\Column(name: "enddate", type: "datetime")]
     private DateTimeInterface $endDate;
 
     #[ORM\Column(name: "urlimage", type: "simple_array", nullable: true)]
