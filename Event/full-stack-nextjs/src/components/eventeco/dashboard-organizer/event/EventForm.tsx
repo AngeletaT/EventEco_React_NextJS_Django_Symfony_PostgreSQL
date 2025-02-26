@@ -28,8 +28,8 @@ const EventForm = ({
         startdate: event?.startdate || "",
         enddate: event?.enddate || "",
         location: event?.location || "",
-        description: event?.description || "",
         position: event?.position || "",
+        description: event?.description || "",
         idcategory: event?.idcategory || 1,
         urlposter: event?.urlposter || "",
     };
@@ -130,15 +130,19 @@ const EventForm = ({
             </FloatLabel>
             <FloatLabel className={styles.floatLabelContainer}>
                 <InputText value={eventData.startdate} onChange={(e) => setEventData({ ...eventData, startdate: e.target.value })} />
-                <label htmlFor="startdate">Fecha de Inicio (yyyy-mm-dd)</label>
+                <label htmlFor="startdate">Fecha de Inicio ( yyyy-mm-dd )</label>
             </FloatLabel>
             <FloatLabel className={styles.floatLabelContainer}>
                 <InputText value={eventData.enddate} onChange={(e) => setEventData({ ...eventData, enddate: e.target.value })} />
-                <label htmlFor="enddate">Fecha de Fin (yyyy-mm-dd)</label>
+                <label htmlFor="enddate">Fecha de Fin ( yyyy-mm-dd )</label>
             </FloatLabel>
             <FloatLabel className={styles.floatLabelContainer}>
                 <InputText value={eventData.location} onChange={(e) => setEventData({ ...eventData, location: e.target.value })} />
                 <label htmlFor="location">Ciudad</label>
+            </FloatLabel>
+            <FloatLabel className={styles.floatLabelContainer}>
+                <InputText value={eventData.position} onChange={(e) => setEventData({ ...eventData, position: e.target.value })} />
+                <label htmlFor="position">Coordenadas de la localización ( [00.00,00.00] )</label>
             </FloatLabel>
             <FloatLabel className={styles.floatLabelContainer}>
                 <InputTextarea value={eventData.description} onChange={(e) => setEventData({ ...eventData, description: e.target.value })} />
