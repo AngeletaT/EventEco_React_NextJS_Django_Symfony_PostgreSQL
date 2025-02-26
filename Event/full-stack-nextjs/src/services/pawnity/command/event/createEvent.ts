@@ -1,4 +1,5 @@
 import { djangoAPI_P, symfonyAPI_P } from "@/services/api";
+import Cookies from "js-cookie";
 import { Event } from "@/types/Event";
 
 export const createEvent = async (eventData: Partial<Event>): Promise<Event> => {

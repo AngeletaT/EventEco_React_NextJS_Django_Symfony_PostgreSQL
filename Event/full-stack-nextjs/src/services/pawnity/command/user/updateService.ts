@@ -1,4 +1,5 @@
 import { djangoAPI_P, symfonyAPI_P } from "@/services/api";
+import Cookies from "js-cookie";
 import { Client, Organizer, Admin } from "@/types/User";
 
 export const updateClientService = async (updatedData: Partial<Client>): Promise<Client> => {
