@@ -83,7 +83,7 @@
 .eventList {
     flex-grow: 1;
     overflow-y: auto;
-    max-height: calc(100vh - 220px);
+    max-height: 400px;
 }
 
 .eventList::-webkit-scrollbar {
@@ -122,7 +122,7 @@
 .fixedBottom {
     border-top: 2px solid rgba(255, 255, 255, 0.2);
     padding-top: 10px;
-    margin-top: 10px;
+    margin-top: 40px;
 }
 
 /* Botón de crear evento */

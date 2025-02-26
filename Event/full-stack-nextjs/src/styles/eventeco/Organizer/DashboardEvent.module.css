@@ -7,7 +7,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 20px auto;
     display: flex;
     flex-direction: column;
@@ -72,7 +72,7 @@
     padding: 20px;
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 /* ==========================
@@ -104,7 +104,7 @@
 /* ==========================
    BOTÓN DE GUARDAR
 ========================== */
-.form button {
+.saveButton {
     background-color: #1abc9c;
     color: white;
     padding: 10px;
@@ -115,13 +115,23 @@
     font-size: 16px;
 }
 
-.form button:hover {
+.saveButton:hover {
     background-color: #16a085;
 }
 
-.form button:disabled {
+.saveButton:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+.toggleButton {
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    font-size: 16px;
 }
 
 /* ==========================

@@ -1,22 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { useCreateEvent, useUpdateEvent } from "@/hooks/eventeco/useEvents";
+import { useCreateEvent, useUpdateEvent, useToggleEvent } from "@/hooks/eventeco/useEvents";
 import { Event } from "@/types/Event";
-import { Button, InputText, FloatLabel, InputTextarea } from "@/utils/PrimeReactComponents";
+import { Button, InputText, FloatLabel, InputTextarea, Toast } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/eventeco/Organizer/DashboardEvent.module.css";
 
-const EventForm = ({ event, setNewEventName }: { event?: Event | null; setNewEventName?: (name: string) => void }) => {
+const EventForm = ({
+    event,
+    setNewEventName,
+    onEventUpdated,
+}: {
+    event?: Event | null;
+    setNewEventName?: (name: string) => void;
+    onEventUpdated?: () => void;
+}) => {
     const createEvent = useCreateEvent();
     const updateEvent = useUpdateEvent();
+    const toggleEvent = useToggleEvent();
 
-    const [eventData, setEventData] = useState<Partial<Event>>({
+    const toast = React.useRef<any>(null);
+    const [isLoadingSave, setIsLoadingSave] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isModified, setIsModified] = useState(false);
+    const [isActive, setIsActive] = useState(event?.isactive || false);
+
+    const initialEventData = {
         name: event?.name || "",
         startdate: event?.startdate || "",
         enddate: event?.enddate || "",
         location: event?.location || "",
         description: event?.description || "",
+        position: event?.position || "",
         idcategory: event?.idcategory || 1,
         urlposter: event?.urlposter || "",
-    });
+    };
+
+    const [eventData, setEventData] = useState<Partial<Event>>(initialEventData);
 
     useEffect(() => {
         if (eventData.name && setNewEventName) {
@@ -24,11 +42,83 @@ const EventForm = ({ event, setNewEventName }: { event?: Event | null; setNewEve
         }
     }, [eventData.name, setNewEventName]);
 
+    useEffect(() => {
+        const isDataModified = JSON.stringify(eventData) !== JSON.stringify(initialEventData);
+        setIsModified(isDataModified);
+    }, [eventData]);
+
     const handleSubmit = () => {
         if (event) {
-            updateEvent.mutate({ id: event.idevent, data: eventData });
+            try {
+                setIsLoadingSave(true);
+                updateEvent.mutate(
+                    { id: event.idevent, data: eventData },
+                    {
+                        onSuccess: () => {
+                            toast.current?.show({ severity: "success", summary: "Éxito", detail: "Evento actualizado correctamente", life: 3000 });
+                            if (onEventUpdated) onEventUpdated();
+                            setIsLoadingSave(false);
+                        },
+                    }
+                );
+            } catch (error) {
+                console.error("Error updating event:", error);
+                toast.current?.show({ severity: "error", summary: "Error", detail: "Error al actualizar el evento", life: 3000 });
+                setIsLoadingSave(false);
+            }
         } else {
-            createEvent.mutate(eventData);
+            try {
+                setIsLoadingSave(true);
+                createEvent.mutate(eventData, {
+                    onSuccess: () => {
+                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Evento creado correctamente", life: 3000 });
+                        if (onEventUpdated) onEventUpdated();
+                        setIsLoadingSave(false);
+                    },
+                });
+            } catch (error) {
+                console.error("Error creating event:", error);
+                toast.current?.show({ severity: "error", summary: "Error", detail: "Error al crear el evento", life: 3000 });
+                setIsLoadingSave(false);
+            }
+        }
+    };
+
+    const handleToggleEvent = () => {
+        if (event) {
+            try {
+                setIsLoading(true);
+                setIsActive(!isActive);
+                toggleEvent.mutate(
+                    { id: event.idevent },
+                    {
+                        onSuccess: () => {
+                            toast.current?.show({
+                                severity: "success",
+                                summary: "Éxito",
+                                detail: `Evento ${isActive ? "desactivado" : "activado"} correctamente`,
+                                life: 3000,
+                            });
+                            if (onEventUpdated) onEventUpdated();
+                            setIsLoading(false);
+                        },
+                        onError: () => {
+                            setIsLoading(false);
+                            setIsActive(isActive);
+                            toast.current?.show({
+                                severity: "error",
+                                summary: "Error",
+                                detail: `Error al ${isActive ? "desactivar" : "activar"} el evento`,
+                                life: 3000,
+                            });
+                        },
+                    }
+                );
+            } catch (error) {
+                console.error("Error toggling event:", error);
+                toast.current?.show({ severity: "error", summary: "Error", detail: "Error al cambiar el estado del evento", life: 3000 });
+                setIsLoading(false);
+            }
         }
     };
 
@@ -59,7 +149,22 @@ const EventForm = ({ event, setNewEventName }: { event?: Event | null; setNewEve
                 <label htmlFor="urlposter">URL del Poster</label>
             </FloatLabel>
 
-            <Button label="Guardar" className="p-button-primary" onClick={handleSubmit} />
+            <Button
+                label={isLoadingSave ? "Cargando" : "Guardar"}
+                className={`${styles.saveButton} "p-button-success"`}
+                onClick={handleSubmit}
+                disabled={isLoadingSave || !isModified}
+            />
+            {event && (
+                <Button
+                    label={isLoading ? "Cargando" : isActive ? "Desactivar" : "Activar"}
+                    className={`${styles.toggleButton} ${isActive ? "p-button-danger" : "p-button-success"}`}
+                    onClick={handleToggleEvent}
+                    disabled={isLoading}
+                />
+            )}
+
+            <Toast ref={toast} />
         </div>
     );
 };

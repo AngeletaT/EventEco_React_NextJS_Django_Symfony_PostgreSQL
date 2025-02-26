@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "@/store/eventeco/slices/authSlice";
 import styles from "@/styles/eventeco/Organizer/DashboardOrganizer.module.css";
-import { useEventsByOrganizer } from "@/hooks/eventeco/useEvents";
 
 interface SidebarProps {
     selectedView: "metrics" | "settings" | "event";
@@ -12,12 +11,22 @@ interface SidebarProps {
     setSelectedEvent: (eventslug: string) => void;
     selectedEvent: string;
     newEventName: string;
+    events: any[] | undefined;
+    creatingNewEvent: boolean;
+    onCreateNewEvent: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ selectedView, setSelectedView, setSelectedEvent, selectedEvent, newEventName }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+    selectedView,
+    setSelectedView,
+    setSelectedEvent,
+    selectedEvent,
+    newEventName,
+    events,
+    creatingNewEvent,
+    onCreateNewEvent,
+}) => {
     const dispatch = useDispatch();
-    const { data: events, isLoading, isError } = useEventsByOrganizer();
-    const [creatingNewEvent, setCreatingNewEvent] = useState(false);
 
     return (
         <aside className={styles.sidebar}>
@@ -34,10 +43,8 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedView, setSelectedView, setSel
             </div>
             <div className={styles.eventList}>
                 <h2>Mis Eventos</h2>
-                {isLoading ? (
+                {events?.length === 0 ? (
                     <div className={styles.spinner}>Cargando eventos...</div>
-                ) : isError ? (
-                    <div className={styles.error}>Error al cargar eventos</div>
                 ) : (
                     <>
                         {events?.map((event: any) => (
@@ -49,7 +56,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedView, setSelectedView, setSel
                                     setSelectedEvent(event.eventslug);
                                 }}
                             >
-                                {event.name}
+                                {selectedEvent === event.eventslug && newEventName.trim() !== "" ? newEventName : event.name}
                             </button>
                         ))}
                         {creatingNewEvent && (
@@ -67,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedView, setSelectedView, setSel
                 )}
             </div>
             <nav className={styles.fixedBottom}>
-                <button className={styles.createEvent} onClick={() => setCreatingNewEvent(true)}>
+                <button className={styles.createEvent} onClick={onCreateNewEvent}>
                     <i className="pi pi-plus"></i>&nbsp;&nbsp; Crear Nuevo Evento
                 </button>
                 <button className={styles.logout} onClick={() => dispatch(logoutUser() as any)}>
