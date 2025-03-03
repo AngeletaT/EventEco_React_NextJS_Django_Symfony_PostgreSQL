@@ -1,0 +1,158 @@
+.ticketContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ticketContainer h2 {
+    font-size: 22px;
+    color: #2c5042;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.loading,
+.error {
+    text-align: center;
+    font-size: 16px;
+    color: #c0392b;
+}
+
+/* Botón para crear tickets */
+.ticketContainer .p-button-success {
+    align-self: center;
+    margin-bottom: 10px;
+}
+
+/* Lista de tickets */
+.ticketList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ==========================
+   TARJETAS DE TICKETS
+========================== */
+.ticketCard {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ticketCard:hover {
+    transform: scale(1.02);
+}
+
+.ticketCard.soldOut {
+    background: #ddd;
+    opacity: 0.8;
+}
+
+.ticketHeader {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #2c5042;
+    display: flex;
+    flex-direction: column;
+}
+
+.ticketContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticketLeft {
+    flex: 2;
+}
+
+.ticketCenter {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+.ticketRight {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* ==========================
+   FORMULARIO DE TICKETS
+========================== */
+.ticketForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Campos del formulario */
+.ticketForm .p-inputtext,
+.ticketForm .p-inputtextarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.ticketForm .p-inputtext:focus,
+.ticketForm .p-inputtextarea:focus {
+    outline: none;
+    border-color: #1abc9c;
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+}
+
+/* Botones del formulario */
+.ticketForm .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.ticketForm .p-button-primary {
+    background-color: #1abc9c;
+}
+
+.ticketForm .p-button-secondary {
+    background-color: #7f8c8d;
+}
+
+@media screen and (max-width: 768px) {
+    .ticketContainer {
+        padding: 15px;
+    }
+
+    .ticketCard {
+        padding: 12px;
+    }
+
+    .ticketForm {
+        padding: 12px;
+    }
+
+    .actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

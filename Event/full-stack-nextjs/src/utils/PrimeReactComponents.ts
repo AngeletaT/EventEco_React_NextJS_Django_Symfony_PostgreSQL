@@ -2,6 +2,7 @@ export { Button } from "primereact/button";
 export { Card } from "primereact/card";
 export { InputText } from "primereact/inputtext";
 export { InputTextarea } from "primereact/inputtextarea";
+export { InputNumber } from "primereact/inputnumber";
 export { FloatLabel } from "primereact/floatlabel";
 export { Carousel } from "primereact/carousel";
 export { Skeleton } from "primereact/skeleton";
