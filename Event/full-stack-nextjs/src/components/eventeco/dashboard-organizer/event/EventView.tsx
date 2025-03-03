@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { useEventDetails } from "@/hooks/eventeco/useEvents";
-import { useTickets } from "@/hooks/eventeco/useTickets";
 import EventForm from "./EventForm";
 import styles from "@/styles/eventeco/Organizer/DashboardEvent.module.css";
 import TicketList from "./tickets/TicketList";
+import ComplementList from "./complements/ComplementList";
 
 const EventView = ({
     eventslug,
@@ -19,7 +19,6 @@ const EventView = ({
     onEventUpdated: () => void;
 }) => {
     const { data: event, isLoading, isError } = eventslug ? useEventDetails(eventslug) : { data: null, isLoading: false, isError: false };
-    const { data: tickets } = eventslug ? useTickets(eventslug) : { data: null };
     const [activeTab, setActiveTab] = useState<"details" | "settings" | "subevents" | "tickets" | "complements">("details");
 
     return (
@@ -49,7 +48,7 @@ const EventView = ({
                 )}
                 {activeTab === "subevents" && <p>Aquí se gestionarán los subeventos.</p>}
                 {activeTab === "tickets" && event?.eventslug && <TicketList key={eventslug || "null"} eventSlug={event.eventslug} />}
-                {activeTab === "complements" && <p>Aquí se gestionarán los complementos.</p>}
+                {activeTab === "complements" && event?.eventslug && <ComplementList key={eventslug || "null"} eventSlug={event.eventslug} />}
             </div>
         </div>
     );

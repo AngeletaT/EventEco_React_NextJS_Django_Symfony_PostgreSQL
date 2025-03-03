@@ -14,8 +14,6 @@ const TicketList = ({ eventSlug }: { eventSlug: string }) => {
     const [creatingNewTicket, setCreatingNewTicket] = useState(false);
     const toast = useRef<Toast>(null);
 
-    console.log(tickets);
-
     const handleCreateTicket = () => {
         setCreatingNewTicket(true);
     };
