@@ -38,6 +38,7 @@ class E_Order(models.Model):
      idevent = models.IntegerField(db_column='idevent')
      subtotaltickets = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, db_column='subtotaltickets')
      subtotalcomplements = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, db_column='subtotalcomplements')
+     subtotalcommissions = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, db_column='subtotalcommissions')
      totalprice = models.DecimalField(max_digits=10, decimal_places=2, db_column='totalprice')
      payment = models.CharField(max_length=50, null=True, blank=True, db_column='payment')
      paymentreference = models.CharField(max_length=100, null=True, blank=True, db_column='paymentreference')

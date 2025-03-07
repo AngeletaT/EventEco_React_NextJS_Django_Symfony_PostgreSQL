@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.utils.timezone import now
 from .models import E_Order, E_OrderLine, E_TicketUnit
 
 
@@ -19,7 +20,15 @@ class E_TicketUnitSerializer(serializers.ModelSerializer):
                'createdat',
                'updatedat'
           ]
-
+     def update(self, instance, validated_data):
+          """
+          Actualiza los datos de un TicketUnit (asignación de nombre y DNI del asistente).
+          """
+          instance.nameassistant = validated_data.get('nameassistant', instance.nameassistant)
+          instance.dniassistant = validated_data.get('dniassistant', instance.dniassistant)
+          instance.updatedat = now()  # Actualizamos la fecha de modificación
+          instance.save()
+          return instance
 
 # 🧾 SERIALIZER: OrderLine
 class E_OrderLineSerializer(serializers.ModelSerializer):
@@ -52,6 +61,7 @@ class E_OrderDetailSerializer(serializers.ModelSerializer):
                'idevent',
                'subtotaltickets',
                'subtotalcomplements',
+               'subtotalcommissions',
                'totalprice',
                'payment',
                'paymentreference',

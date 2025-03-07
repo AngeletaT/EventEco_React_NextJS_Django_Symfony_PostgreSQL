@@ -5,11 +5,13 @@ from rest_framework_simplejwt.tokens import AccessToken, TokenError
 from django.db import transaction
 from django.utils.timezone import now
 from django.shortcuts import get_object_or_404
-from .serializers import E_OrderDetailSerializer
+from .serializers import E_OrderDetailSerializer, E_TicketUnitSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 import json
 import uuid
+import random
+import string
 from .models import E_Order, E_OrderLine, E_TicketUnit
 from backend_django.app.tickets.E_tickets.models import E_TicketInfo
 from backend_django.app.complements.E_complements.models import E_Complement
@@ -105,6 +107,7 @@ class E_OrderCreateView(APIView):
 
           subtotaltickets = 0.00
           subtotalcomplements = 0.00
+          subtotalcommissions = 0.00 
 
           # 📝 Paso 3: Crear la orden con estado "pending"
           order = E_Order.objects.create(
@@ -112,6 +115,7 @@ class E_OrderCreateView(APIView):
                idevent=idevent,
                subtotaltickets=0.00,  # Se actualizarán después
                subtotalcomplements=0.00,
+               subtotalcommissions=0.00,
                totalprice=0.00,
                paymentstatus="pending",
                status="pending",
@@ -175,11 +179,14 @@ class E_OrderCreateView(APIView):
 
                     subtotalcomplements += complementsubtotal
 
+                    # ✅ Añadir 5.00 al subtotal de comisiones por cada entry
+                    subtotalcommissions += 5.00
+
                     # 🎟️ Crear unidad de ticket
                     E_TicketUnit.objects.create(
                          idorder=order.idorder,
                          idticketinfo=idticketinfo,
-                         code=str(uuid.uuid4()).upper(),  # Código único
+                         code=generate_ticket_code(),
                          unitprice=unitprice,
                          complements=complements, 
                          createdat=now(),
@@ -187,9 +194,10 @@ class E_OrderCreateView(APIView):
                     )
 
           # 💵 Paso 6: Actualizar subtotales y total en la orden
-          totalprice = subtotaltickets + subtotalcomplements
+          totalprice = subtotaltickets + subtotalcomplements + subtotalcommissions
           order.subtotaltickets = round(subtotaltickets, 2)
           order.subtotalcomplements = round(subtotalcomplements, 2)
+          order.subtotalcommissions = round(subtotalcommissions, 2)
           order.totalprice = round(totalprice, 2)
           order.updatedat = now()
           order.save()
@@ -197,3 +205,59 @@ class E_OrderCreateView(APIView):
           # 🎉 Paso 7: Respuesta con la orden creada
           serializer = E_OrderDetailSerializer(order)
           return Response(serializer.data, status=status.HTTP_201_CREATED)
+     
+def generate_ticket_code():
+     """Genera un código de 7 caracteres (4 dígitos + 3 letras mayúsculas)"""
+     numbers = ''.join(random.choices(string.digits, k=4))  # 4 números
+     letters = ''.join(random.choices(string.ascii_uppercase, k=3))  # 3 letras
+     return numbers + letters
+
+
+class E_TicketUnitUpdateView(APIView):
+     """
+     ✏️ Actualiza un TicketUnit con el nombre y DNI del asistente.
+     """
+
+     permission_classes = [permissions.IsAuthenticated]
+
+     @swagger_auto_schema(
+          operation_description="Actualiza un TicketUnit con el nombre y DNI del asistente.",
+          manual_parameters=[
+               openapi.Parameter(
+                    'ticketunitid',
+                    openapi.IN_PATH,
+                    description="ID del TicketUnit",
+                    type=openapi.TYPE_INTEGER
+               )
+          ],
+          request_body=openapi.Schema(
+               type=openapi.TYPE_OBJECT,
+               properties={
+                    "nameassistant": openapi.Schema(
+                         type=openapi.TYPE_STRING,
+                         description="Nombre del asistente"
+                    ),
+                    "dniassistant": openapi.Schema(
+                         type=openapi.TYPE_STRING,
+                         description="DNI del asistente"
+                    )
+               },
+               required=["nameassistant", "dniassistant"]
+          ),
+          responses={200: E_TicketUnitSerializer(), 400: "Datos inválidos", 404: "TicketUnit no encontrado"}
+     )
+     def put(self, request, ticketunitid):
+          """
+          PUT: http://localhost:8099/e_django/api/ticketunit/{ticketunitid}
+          """
+          # 🔍 Buscar el TicketUnit
+          ticketunit = get_object_or_404(E_TicketUnit, idticketunit=ticketunitid)
+
+          # 📝 Validar los datos de entrada con el serializer
+          serializer = E_TicketUnitSerializer(ticketunit, data=request.data, partial=True)
+
+          if serializer.is_valid():
+               serializer.save()  # 🛠️ Se ejecuta `update()` desde el serializer
+               return Response(serializer.data, status=status.HTTP_200_OK)
+          
+          return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

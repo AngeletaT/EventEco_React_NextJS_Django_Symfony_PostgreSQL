@@ -71,6 +71,14 @@ CREATE TABLE E_Organizer (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+INSERT INTO
+    E_Organizer (orgUuid, email, password, NIF)
+VALUES (
+        '606edef0-4cc3-4e0f-a38b-65c7aa08612e',
+        'yomogan@gmail.com',
+        '$2y$10$pSmja4uz6o4a1k/BECb7GevuvNxZQl85mcUtFrdygM3GaYgSGcsFe',
+        '123473540Z'
+    );
 END
 $do$;
 
@@ -183,8 +191,18 @@ CREATE TABLE P_Organizer (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT INTO P_Organizer (orgUuid, email, password, NIF)
+VALUES 
+    (
+    '606edef0-4cc3-4e0f-a38b-65c7aa08612e',
+    'yomogan@gmail.com',
+    '$2y$10$pSmja4uz6o4a1k/BECb7GevuvNxZQl85mcUtFrdygM3GaYgSGcsFe',
+    '123473540Z');
 END
 $do$;
+
+
 
 DO
 $do$
@@ -734,6 +752,7 @@ CREATE TABLE E_Order (
     idEvent INT,
     subtotalTickets DECIMAL(10, 2) DEFAULT 0.00,
     subtotalComplements DECIMAL(10, 2) DEFAULT 0.00,
+    subtotalCommissions DECIMAL(10, 2) DEFAULT 0.00,
     totalPrice DECIMAL(10, 2),
     payment VARCHAR(50),
     paymentReference VARCHAR(100),
@@ -755,6 +774,7 @@ CREATE TABLE P_Order (
     idEvent INT,
     subtotalTickets DECIMAL(10, 2) DEFAULT 0.00,
     subtotalComplements DECIMAL(10, 2) DEFAULT 0.00,
+    subtotalCommissions DECIMAL(10, 2) DEFAULT 0.00,
     totalPrice DECIMAL(10, 2),
     payment VARCHAR(50),
     paymentReference VARCHAR(100),
