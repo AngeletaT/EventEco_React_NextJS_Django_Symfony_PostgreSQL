@@ -1514,9 +1514,9 @@ CREATE TABLE P_Adoptions (
     idAdoption SERIAL PRIMARY KEY,
     idClient INT,
     idPet INT,
-    irOrg INT,
+    idOrg INT,
     adoptionDate DATE DEFAULT CURRENT_DATE,
-    lastReviewDate DATE,
+    lastReviewDate DATE DEFAULT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     isActive BOOLEAN DEFAULT TRUE
@@ -1533,7 +1533,7 @@ CREATE TABLE P_Sponsorships (
     idOrg INT,
     idPet INT,
     startDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    endDate TIMESTAMP,
+    endDate TIMESTAMP DEFAULT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     isActive BOOLEAN DEFAULT TRUE

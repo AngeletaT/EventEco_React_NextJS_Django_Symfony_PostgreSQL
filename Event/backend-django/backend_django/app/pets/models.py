@@ -32,3 +32,40 @@ class Pet(models.Model):
 
      def __str__(self):
           return self.name
+     
+# 🏠 Modelo para Adopciones
+class Adoption(models.Model):
+     idadoption = models.AutoField(primary_key=True)
+     idclient = models.IntegerField(db_column='idclient')
+     idpet = models.ForeignKey(Pet, related_name='adoptions', on_delete=models.CASCADE, db_column='idpet')
+     idorg = models.ForeignKey(ProfileOrganizer, related_name='adoptions', on_delete=models.CASCADE, db_column='idorg')
+     adoptiondate = models.DateField(auto_now_add=True)
+     lastreviewdate = models.DateField(null=True, blank=True)
+     createdat = models.DateTimeField(auto_now_add=True)
+     updatedat = models.DateTimeField(auto_now=True)
+     isactive = models.BooleanField(default=True)
+
+     class Meta:
+          db_table = 'p_adoptions'
+
+     def __str__(self):
+          return f"Adoption {self.idadoption} - Client {self.idclient}"
+
+
+# 💰 Modelo para Apadrinamientos / Suscripciones
+class Sponsorship(models.Model):
+     idsponsorship = models.AutoField(primary_key=True)
+     idclient = models.IntegerField(db_column='idclient')
+     idorg = models.ForeignKey(ProfileOrganizer, related_name='sponsorships', on_delete=models.CASCADE, db_column='idorg')
+     idpet = models.ForeignKey(Pet, related_name='sponsorships', on_delete=models.CASCADE, db_column='idpet')
+     startdate = models.DateTimeField(auto_now_add=True)
+     enddate = models.DateTimeField(null=True, blank=True)
+     createdat = models.DateTimeField(auto_now_add=True)
+     updatedat = models.DateTimeField(auto_now=True)
+     isactive = models.BooleanField(default=True)
+
+     class Meta:
+          db_table = 'p_sponsorships'
+
+     def __str__(self):
+          return f"Sponsorship {self.idsponsorship} - Client {self.idclient}"
