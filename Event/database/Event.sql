@@ -1514,6 +1514,7 @@ CREATE TABLE P_Adoptions (
     idAdoption SERIAL PRIMARY KEY,
     idClient INT,
     idPet INT,
+    irOrg INT,
     adoptionDate DATE DEFAULT CURRENT_DATE,
     lastReviewDate DATE,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -1529,6 +1530,7 @@ BEGIN
 CREATE TABLE P_Sponsorships (
     idSponsorship SERIAL PRIMARY KEY,
     idClient INT,
+    idOrg INT,
     idPet INT,
     startDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     endDate TIMESTAMP,

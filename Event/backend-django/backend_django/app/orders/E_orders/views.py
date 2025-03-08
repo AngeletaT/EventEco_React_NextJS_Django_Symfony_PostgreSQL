@@ -5,7 +5,7 @@ from rest_framework_simplejwt.tokens import AccessToken, TokenError
 from django.db import transaction
 from django.utils.timezone import now
 from django.shortcuts import get_object_or_404
-from .serializers import E_OrderDetailSerializer, E_TicketUnitSerializer
+from .serializers import E_OrderDetailSerializer, E_TicketUnitSerializer, E_ClientDashboardSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 import json
@@ -261,3 +261,37 @@ class E_TicketUnitUpdateView(APIView):
                return Response(serializer.data, status=status.HTTP_200_OK)
           
           return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class E_ClientDashboardView(APIView):
+     """
+     📊 Devuelve todos los pedidos de un cliente con toda la información anidada.
+     """
+     permission_classes = [permissions.IsAuthenticated]
+
+     @swagger_auto_schema(
+          operation_description="Obtiene todos los pedidos de un cliente con toda la información anidada.",
+          responses={200: "Lista de pedidos del cliente"},
+     )
+     def get(self, request):
+          # 🔑 Paso 1: Extraer el idclient del token JWT
+          auth_header = request.headers.get("Authorization", "")
+          if not auth_header.startswith("Bearer "):
+               return Response({"error": "Token no proporcionado o formato incorrecto"}, status=401)
+
+          try:
+               access_token = auth_header.split("Bearer ")[-1]
+               decoded_token = AccessToken(access_token)
+               idclient = decoded_token.get("idclient")
+          except TokenError:
+               return Response({"error": "Token inválido o expirado"}, status=401)
+
+          # 📦 Paso 2: Filtrar pedidos por idclient
+          orders = E_Order.objects.filter(idclient=idclient)
+
+          if not orders.exists():
+               return Response({"message": "El cliente no tiene pedidos aún."}, status=200)
+
+          # 📦 Paso 3: Serializar pedidos del cliente (PASAMOS `orders` DENTRO DEL DICCIONARIO)
+          serializer = E_ClientDashboardSerializer({"orders": orders}, context={"idclient": idclient})
+
+          return Response(serializer.data, status=200)
