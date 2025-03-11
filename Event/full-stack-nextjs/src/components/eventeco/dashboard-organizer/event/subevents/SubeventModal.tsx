@@ -24,6 +24,7 @@ const SubeventModal = ({
 }) => {
     const createSubevent = useCreateSubevent();
     const updateSubevent = useUpdateSubevent();
+    const toggleSubevent = useToggleSubevent();
     const toast = React.useRef<Toast>(null);
 
     const [subeventData, setSubeventData] = useState({
@@ -116,6 +117,24 @@ const SubeventModal = ({
         }
     };
 
+    const handleToggle = () => {
+        if (!subevent) return;
+
+        toggleSubevent.mutate(
+            { idsubevents: subevent.id },
+            {
+                onSuccess: () => {
+                    toast.current?.show({ severity: "success", summary: "Éxito", detail: "Subevento desactivado correctamente", life: 3000 });
+                    refetch();
+                    onHide();
+                },
+                onError: () => {
+                    toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo desactivar el subevento", life: 3000 });
+                },
+            }
+        );
+    };
+
     // #region return
     return (
         <Dialog visible={visible} onHide={onHide} header={subevent ? "Editar Subevento" : "Crear Subevento"} modal className={styles.modal}>
@@ -145,7 +164,9 @@ const SubeventModal = ({
 
                 <label>Color</label>
                 <ColorPicker value={subeventData?.urlposter} onChange={(e) => handleChange("urlposter", e.target.value)} />
-                <div className={styles.actions}>
+
+                <div className={`p-d-flex p-jc-between ${styles.actions}`}>
+                    {subevent && <Button label="Eliminar" className="p-button-danger" onClick={handleToggle} />}
                     <Button label="Guardar" className="p-button-primary" onClick={handleSubmit} />
                     <Button label="Cancelar" className="p-button-secondary" onClick={onHide} />
                 </div>
