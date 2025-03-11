@@ -8,6 +8,7 @@ import { Subevent } from "@/types/Subevent";
 import { parseISO, format } from "date-fns";
 import { Toast } from "@/utils/PrimeReactComponents";
 import SubeventModal from "./SubeventModal";
+import { subeventCalendar } from "@/types/SubeventCalendar";
 
 // #region getDays
 const getDays = (startDate: string, endDate: string) => {
@@ -34,7 +35,7 @@ const formatEventDate = (dateString: string) => {
 };
 
 // #region mapSubeventsToEvents
-const mapSubeventsToEvents = (subevents: Subevent[], columns: any) => {
+const mapSubeventsToEvents = (subevents: Subevent[], columns: any, idevent: number) => {
     const subeventsCalendar = subevents
         .filter((subevent) => subevent.isactive)
         .map((subevent) => {
@@ -57,11 +58,12 @@ const mapSubeventsToEvents = (subevents: Subevent[], columns: any) => {
                     isactive: subevent.isactive,
                     urlposter: subevent.urlposter,
                     status: subevent.status,
+                    idevent: idevent,
                 },
             };
         });
     console.log("Subevents calendar: ", subeventsCalendar);
-    return subeventsCalendar;
+    return subeventsCalendar as subeventCalendar[];
 };
 
 // #region SubeventCalendar
@@ -72,10 +74,13 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
 
     const [columns, setColumns] = useState(getDays(event.startdate, event.enddate));
     const [events, setEvents] = useState<any[]>([]);
+    const [selectedSubevent, setSelectedSubevent] = useState<subeventCalendar | null>(null);
+    const [selectedRange, setSelectedRange] = useState<{ start: string; end: string } | undefined>(undefined);
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         if (subevents) {
-            setEvents(mapSubeventsToEvents(subevents, columns));
+            setEvents(mapSubeventsToEvents(subevents, columns, event.idevent));
         }
     }, [subevents, columns]);
 
@@ -88,12 +93,35 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
         // #region onTimeRangeSelected
         onTimeRangeSelected: async (args) => {
             console.log("Time range selected: ", args.start, args.end);
+
+            setSelectedRange({ start: args.start.toString(), end: args.end.toString() });
+            setSelectedSubevent(null);
+            setModalVisible(true);
         },
         // #region onEventClick
         onEventClick: async (args) => {
-            console.log("Event clicked: ", args);
+            console.log("Event clicked: ", args.e.data);
+
+            const subevent = subevents.find((subevent) => subevent.idsubevents === args.e.id());
+            if (subevent) {
+                setSelectedSubevent({
+                    id: subevent.idsubevents,
+                    text: subevent.name,
+                    start: formatEventDate(subevent.startdate),
+                    end: formatEventDate(subevent.enddate),
+                    barColor: subevent.urlposter,
+                    resource: columns.find((col: any) => col.name === format(parseISO(subevent.startdate), "dd/MM/yyyy"))?.id || null,
+                    data: subevent,
+                });
+                setSelectedRange(undefined);
+                setModalVisible(true);
+            } else {
+                setSelectedRange({ start: args.e.start.toString(), end: args.e.end.toString() });
+                setSelectedSubevent(null);
+                setModalVisible(true);
+            }
         },
-        // #region onEventMoved (FUNCIONA)
+        // #region onEventMoved
         onEventMoved: async (args) => {
             const subeventCalendar = args.e.data;
             const idsubevents = args.e.id() as number;
@@ -123,7 +151,7 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
                 }
             );
         },
-        // #region onEventResized (FUNCIONA)
+        // #region onEventResized
         onEventResized: async (args) => {
             const subeventCalendar = args.e.data;
             const idsubevents = args.e.id() as number;
@@ -185,6 +213,14 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
         <div>
             <Toast ref={toast} />
             <DayPilotCalendar {...config} />
+            <SubeventModal
+                visible={modalVisible}
+                onHide={() => setModalVisible(false)}
+                subevent={selectedSubevent}
+                idevent={event.idevent}
+                selectedRange={selectedRange}
+                refetch={refetch}
+            />
         </div>
     );
 };
