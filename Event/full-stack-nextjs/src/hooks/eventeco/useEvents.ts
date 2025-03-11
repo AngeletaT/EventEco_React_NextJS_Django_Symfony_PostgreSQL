@@ -46,7 +46,9 @@ export const useEventDetails = (eventslug: string | null) => {
 
     const cachedEvent = cachedEvents?.find((event) => event.eventslug === eventslug) || null;
 
-    return { data: cachedEvent, isLoading: false, isError: false };
+    const refetch = () => queryClient.invalidateQueries({ queryKey: ["eventsByOrganizer"] });
+
+    return { data: cachedEvent, isLoading: false, isError: false, refetch };
 };
 
 export const useEventsByOrganizer = () =>

@@ -6,6 +6,7 @@ import EventForm from "./EventForm";
 import styles from "@/styles/eventeco/Organizer/DashboardEvent.module.css";
 import TicketList from "./tickets/TicketList";
 import ComplementList from "./complements/ComplementList";
+import SubeventCalendar from "./subevents/SubeventCalendar";
 
 const EventView = ({
     eventslug,
@@ -46,7 +47,7 @@ const EventView = ({
                 {activeTab === "settings" && (
                     <EventForm key={eventslug || "null"} event={event} setNewEventName={setNewEventName} onEventUpdated={onEventUpdated} />
                 )}
-                {activeTab === "subevents" && <p>Aquí se gestionarán los subeventos.</p>}
+                {activeTab === "subevents" && event && <SubeventCalendar key={eventslug || "null"} event={event} />}
                 {activeTab === "tickets" && event?.eventslug && <TicketList key={eventslug || "null"} eventSlug={event.eventslug} />}
                 {activeTab === "complements" && event?.eventslug && <ComplementList key={eventslug || "null"} eventSlug={event.eventslug} />}
             </div>
