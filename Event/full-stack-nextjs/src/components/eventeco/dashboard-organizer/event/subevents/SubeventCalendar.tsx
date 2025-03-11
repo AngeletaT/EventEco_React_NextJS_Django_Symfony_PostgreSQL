@@ -62,7 +62,6 @@ const mapSubeventsToEvents = (subevents: Subevent[], columns: any, idevent: numb
                 },
             };
         });
-    console.log("Subevents calendar: ", subeventsCalendar);
     return subeventsCalendar as subeventCalendar[];
 };
 
@@ -92,16 +91,12 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
         timeRangeSelectedHandling: "Enabled",
         // #region onTimeRangeSelected
         onTimeRangeSelected: async (args) => {
-            console.log("Time range selected: ", args.start, args.end);
-
             setSelectedRange({ start: args.start.toString(), end: args.end.toString() });
             setSelectedSubevent(null);
             setModalVisible(true);
         },
         // #region onEventClick
         onEventClick: async (args) => {
-            console.log("Event clicked: ", args.e.data);
-
             const subevent = subevents.find((subevent) => subevent.idsubevents === args.e.id());
             if (subevent) {
                 setSelectedSubevent({
@@ -161,12 +156,10 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
             const originalEnd = subeventCalendar.data.end;
 
             if (newStart !== originalStart) {
-                console.log("Start date changed: ", newStart);
                 subeventCalendar.start = newStart;
             }
 
             if (newEnd !== originalEnd) {
-                console.log("End date changed: ", newEnd);
                 subeventCalendar.end = newEnd;
             }
 

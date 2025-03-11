@@ -90,7 +90,6 @@ const SubeventModal = ({
                 }
             );
         } else {
-            console.log("Create subevent: ", idevent, subeventData);
             createSubevent.mutate(
                 {
                     idevent,
@@ -118,7 +117,6 @@ const SubeventModal = ({
     };
 
     // #region return
-    console.log("Subevent data: ", subeventData);
     return (
         <Dialog visible={visible} onHide={onHide} header={subevent ? "Editar Subevento" : "Crear Subevento"} modal className={styles.modal}>
             <Toast ref={toast} />

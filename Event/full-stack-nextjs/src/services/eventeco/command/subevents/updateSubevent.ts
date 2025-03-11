@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 import { Subevent } from "@/types/Subevent";
 
 export const updateSubevent = async ({ idsubevents, subeventData }: { idsubevents: number; subeventData: Object }) => {
-    console.log("updateSubevent", idsubevents, subeventData);
     try {
         const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
@@ -11,7 +10,6 @@ export const updateSubevent = async ({ idsubevents, subeventData }: { idsubevent
         const headers = { Authorization: `Bearer ${accesstoken}` };
 
         const response = await symfonyAPI_E.put(`organizer/subevent/${idsubevents}`, subeventData, { headers });
-        console.log("updateSubevent response", response.data);
         return response.data;
     } catch (error) {
         console.error("Error creating subevent:", error);
