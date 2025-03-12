@@ -39,19 +39,21 @@ export const useEventsPerPage = ({
         staleTime: 1000 * 60,
     });
 
-export const useEventDetails = (slug: string) => {
-    return useQuery<Event>({
-        queryKey: ["eventDetails", slug],
-        queryFn: () => getEventBySlug(slug),
-        staleTime: 1000 * 60 * 5,
-        retry: 2,
-        refetchOnWindowFocus: false,
-    });
+export const useEventDetails = (eventslug: string | null) => {
+    const queryClient = useQueryClient();
+
+    const cachedEvents: Event[] | undefined = queryClient.getQueryData(["eventsByOrganizer"]);
+
+    const cachedEvent = cachedEvents?.find((event) => event.eventslug === eventslug) || null;
+
+    const refetch = () => queryClient.invalidateQueries({ queryKey: ["eventsByOrganizer"] });
+
+    return { data: cachedEvent, isLoading: false, isError: false, refetch };
 };
 
 export const useEventsByOrganizer = () =>
     useQuery<Event[]>({
-        queryKey: ["events"],
+        queryKey: ["eventsByOrganizer"],
         queryFn: getEventsByOrganizer as () => Promise<Event[]>,
         staleTime: 1000 * 60 * 30,
     });
