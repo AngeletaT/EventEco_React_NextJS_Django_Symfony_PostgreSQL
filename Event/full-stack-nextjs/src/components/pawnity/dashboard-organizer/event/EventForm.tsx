@@ -36,8 +36,6 @@ const EventForm = ({
 
     const [eventData, setEventData] = useState<Partial<Event>>(initialEventData);
 
-    console.log("eventData", eventData);
-
     useEffect(() => {
         if (eventData.name && setNewEventName) {
             setNewEventName(eventData.name);

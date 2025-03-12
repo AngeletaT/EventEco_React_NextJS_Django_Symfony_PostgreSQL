@@ -6,7 +6,7 @@ import EventForm from "./EventForm";
 import styles from "@/styles/pawnity/Organizer/DashboardEvent.module.css";
 import TicketList from "./tickets/TicketList";
 import ComplementList from "./complements/ComplementList";
-import SubeventModule from "./subevents/SubeventModule";
+import SubeventList from "./subevents/SubeventList";
 
 const EventView = ({
     eventslug,
@@ -47,7 +47,7 @@ const EventView = ({
                 {activeTab === "settings" && (
                     <EventForm key={eventslug || "null"} event={event} setNewEventName={setNewEventName} onEventUpdated={onEventUpdated} />
                 )}
-                {activeTab === "subevents" && event && <SubeventModule key={eventslug || "null"} event={event} />}
+                {activeTab === "subevents" && event && <SubeventList key={eventslug || "null"} event={event} />}
                 {activeTab === "tickets" && event?.eventslug && <TicketList key={eventslug || "null"} eventSlug={event.eventslug} />}
                 {activeTab === "complements" && event?.eventslug && <ComplementList key={eventslug || "null"} eventSlug={event.eventslug} />}
             </div>
