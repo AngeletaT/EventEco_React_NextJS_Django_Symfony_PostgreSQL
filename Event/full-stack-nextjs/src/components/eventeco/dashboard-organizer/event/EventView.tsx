@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useEventDetails } from "@/hooks/eventeco/useEvents";
 import EventForm from "./EventForm";
 import styles from "@/styles/eventeco/Organizer/DashboardEvent.module.css";
 import TicketList from "./tickets/TicketList";
 import ComplementList from "./complements/ComplementList";
-import SubeventCalendar from "./subevents/SubeventCalendar";
 import SubeventModule from "./subevents/SubeventModule";
 
 const EventView = ({

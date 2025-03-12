@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "@/store/eventeco/slices/authSlice";
 import styles from "@/styles/eventeco/Organizer/DashboardOrganizer.module.css";

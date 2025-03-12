@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 import { Ticket } from "@/types/Ticket";
 
 export const createTicket = async ({ eventSlug, ticketData }: { eventSlug: string; ticketData: Partial<Ticket> }) => {
-    console.log("Creating ticket:", ticketData);
     try {
         const accesstoken = Cookies.get("accesstoken");
         if (!accesstoken) throw new Error("No access token available");
