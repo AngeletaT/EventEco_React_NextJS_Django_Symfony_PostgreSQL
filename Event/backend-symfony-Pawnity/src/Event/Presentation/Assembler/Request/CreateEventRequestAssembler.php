@@ -6,6 +6,7 @@ namespace App\Event\Presentation\Assembler\Request;
 
 use App\Event\Application\DTO\Request\CreateEventRequest;
 use Symfony\Component\HttpFoundation\Request;
+use InvalidArgumentException;
 
 class CreateEventRequestAssembler
 {
@@ -16,10 +17,15 @@ class CreateEventRequestAssembler
      *
      * @param Request $request
      * @return CreateEventRequest
+     * @throws InvalidArgumentException si las fechas requeridas no están presentes o tienen formato incorrecto
      */
     public static function fromHttpRequest(Request $request): CreateEventRequest
     {
         $data = json_decode($request->getContent(), true) ?? [];
+        
+        // Validar y convertir fechas
+        $startDate = self::validateAndParseDate($data, 'startDate');
+        $endDate = self::validateAndParseDate($data, 'endDate');
         
         // Procesar urlImage: convertir a array, ya que el DTO espera un ?array.
         $urlImage = $data['urlImage'] ?? null;
@@ -37,8 +43,8 @@ class CreateEventRequestAssembler
         
         return new CreateEventRequest(
             $data['name'] ?? '',
-            new \DateTime($data['startDate'] ?? 'now'),
-            new \DateTime($data['endDate'] ?? 'now'),
+            $startDate,
+            $endDate,
             $data['location'] ?? null,
             $data['position'] ?? null,
             $data['description'] ?? null,
@@ -47,5 +53,26 @@ class CreateEventRequestAssembler
             $data['urlPoster'] ?? null,
             $data['idCategory'] ?? null
         );
+    }
+    
+    /**
+     * Valida y convierte una fecha de string a objeto DateTime
+     * 
+     * @param array $data Array de datos
+     * @param string $field Nombre del campo fecha
+     * @return \DateTime
+     * @throws InvalidArgumentException si la fecha no está presente o es inválida
+     */
+    private static function validateAndParseDate(array $data, string $field): \DateTime
+    {
+        if (!isset($data[$field]) || empty($data[$field])) {
+            throw new InvalidArgumentException("El campo $field es obligatorio");
+        }
+        
+        try {
+            return new \DateTime($data[$field]);
+        } catch (\Exception $e) {
+            throw new InvalidArgumentException("El formato del campo $field es incorrecto");
+        }
     }
 }
