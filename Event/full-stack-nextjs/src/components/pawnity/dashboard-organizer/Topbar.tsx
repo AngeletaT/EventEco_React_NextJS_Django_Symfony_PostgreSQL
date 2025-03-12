@@ -3,7 +3,7 @@
 import React from "react";
 import { Organizer } from "@/types/User";
 import { Avatar } from "@/utils/PrimeReactComponents";
-import styles from "@/styles/pawnity/DashboardOrganizer.module.css";
+import styles from "@/styles/pawnity/Organizer/DashboardOrganizer.module.css";
 
 interface TopbarProps {
     user: Organizer | null;

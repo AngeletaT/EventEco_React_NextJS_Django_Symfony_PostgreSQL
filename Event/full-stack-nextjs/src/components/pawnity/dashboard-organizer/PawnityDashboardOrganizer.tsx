@@ -8,14 +8,12 @@ import { Organizer } from "@/types/User";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import Metrics from "./Metrics";
-import EventList from "./event/EventList";
-import TicketList from "./tickets/TicketList";
 import OrganizerSettings from "./OrganizerSettings";
-import styles from "@/styles/pawnity/DashboardOrganizer.module.css";
+import EventView from "./event/EventView";
+import styles from "@/styles/pawnity/Organizer/DashboardOrganizer.module.css";
+import { useEventsByOrganizer } from "@/hooks/pawnity/useEvents";
 
 const PawnityDashboardOrganizer: React.FC = () => {
-    const [selectedTab, setSelectedTab] = useState<"metrics" | "events" | "tickets" | "settings">("metrics");
-
     const dispatch = useDispatch();
     const { user, isLoading } = useSelector((state: RootState) => state.user) as {
         user: Organizer | null;
@@ -23,22 +21,61 @@ const PawnityDashboardOrganizer: React.FC = () => {
         isLoading: boolean;
     };
 
+    const [selectedView, setSelectedView] = useState<"metrics" | "settings" | "event">("metrics");
+    const [selectedEvent, setSelectedEvent] = useState<string>("");
+    const [newEventName, setNewEventName] = useState<string>("");
+    const { data: events, refetch } = useEventsByOrganizer();
+    const [creatingNewEvent, setCreatingNewEvent] = useState(false);
+
     useEffect(() => {
         if (!user) {
             dispatch(fetchUser() as any);
         }
     }, [dispatch, user]);
 
+    const handleSetSelectedEvent = (eventslug: string) => {
+        setSelectedEvent(eventslug);
+        setNewEventName("");
+        setCreatingNewEvent(false);
+    };
+
+    const handleCreateNewEvent = () => {
+        setSelectedEvent("null");
+        setNewEventName("");
+        setCreatingNewEvent(true);
+        setSelectedView("event");
+    };
+
+    const handleEventUpdated = () => {
+        refetch();
+        setCreatingNewEvent(false);
+    };
+
     return (
         <div className={styles.dashboardContainer}>
-            <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+            <Sidebar
+                selectedView={selectedView}
+                setSelectedView={setSelectedView}
+                setSelectedEvent={handleSetSelectedEvent}
+                selectedEvent={selectedEvent}
+                newEventName={newEventName}
+                events={events}
+                creatingNewEvent={creatingNewEvent}
+                onCreateNewEvent={handleCreateNewEvent}
+            />
             <div className={styles.mainContent}>
                 <Topbar user={user} isLoading={isLoading} />
                 <div className={styles.content}>
-                    {selectedTab === "metrics" && <Metrics />}
-                    {selectedTab === "events" && <EventList />}
-                    {selectedTab === "tickets" && <TicketList />}
-                    {selectedTab === "settings" && <OrganizerSettings />}
+                    {selectedView === "metrics" && <Metrics />}
+                    {selectedView === "settings" && <OrganizerSettings />}
+                    {selectedView === "event" && (
+                        <EventView
+                            eventslug={selectedEvent}
+                            newEventName={newEventName}
+                            setNewEventName={setNewEventName}
+                            onEventUpdated={handleEventUpdated}
+                        />
+                    )}
                 </div>
             </div>
         </div>

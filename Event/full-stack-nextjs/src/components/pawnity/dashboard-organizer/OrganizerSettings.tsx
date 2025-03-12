@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store/pawnity";
 import { updateUser, fetchUser } from "@/store/pawnity/slices/userSlice";
 import { InputText, InputTextarea, Button, Toast } from "@/utils/PrimeReactComponents";
-import styles from "@/styles/pawnity/DashboardOrganizer.module.css";
+import styles from "@/styles/pawnity/Organizer/DashboardOrganizer.module.css";
 import { Organizer } from "@/types/User";
 
 const OrganizerSettings: React.FC = () => {
