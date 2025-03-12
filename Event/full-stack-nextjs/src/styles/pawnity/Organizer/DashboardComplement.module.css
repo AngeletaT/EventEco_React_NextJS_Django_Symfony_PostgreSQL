@@ -1,0 +1,187 @@
+.complementContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.complementContainer h2 {
+    font-size: 22px;
+    color: #2c5042;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.loading,
+.error {
+    text-align: center;
+    font-size: 16px;
+    color: #c0392b;
+}
+
+/* Botón para crear complementos */
+.complementContainer .p-button-success {
+    align-self: center;
+    margin-bottom: 10px;
+}
+
+/* Lista de complementos */
+.complementList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.complementCard {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.complementCard:hover {
+    transform: scale(1.02);
+}
+
+.complementCard.free {
+    background: #ddd;
+    opacity: 0.8;
+}
+
+.complementHeader {
+    font-weight: bold;
+    color: #2c5042;
+    display: flex;
+    flex-direction: column;
+}
+
+.complementHeader h3 {
+    font-size: 18px;
+    color: #2c5042;
+}
+
+.complementImage {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.complementContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.complementLeft {
+    flex: 2;
+}
+
+.complementCenter {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+.complementRight {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* ==========================
+   BOTONES DE ACCIÓN
+========================== */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.actions .p-button-warning {
+    background-color: #f39c12;
+    border: none;
+}
+
+.actions .p-button-danger {
+    background-color: #c0392b;
+    border: none;
+}
+
+.actions .p-button-success {
+    background-color: #27ae60;
+    border: none;
+}
+
+.complementForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Campos del formulario */
+.complementForm .p-inputtext,
+.complementForm .p-inputtextarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.complementForm .p-inputtext:focus,
+.complementForm .p-inputtextarea:focus {
+    outline: none;
+    border-color: #1abc9c;
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+}
+
+/* Botones del formulario */
+.complementForm .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.complementForm .p-button-primary {
+    background-color: #1abc9c;
+}
+
+.complementForm .p-button-secondary {
+    background-color: #7f8c8d;
+}
+
+@media screen and (max-width: 768px) {
+    .complementContainer {
+        padding: 15px;
+    }
+
+    .complementCard {
+        padding: 12px;
+    }
+
+    .complementForm {
+        padding: 12px;
+    }
+
+    .actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
