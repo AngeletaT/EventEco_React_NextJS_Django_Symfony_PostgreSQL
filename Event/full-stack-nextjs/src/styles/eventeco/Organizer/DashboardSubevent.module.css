@@ -17,29 +17,38 @@ MODAL DE CREACIÓN/EDICIÓN DE SUBEVENTOS
     padding: 15px;
 }
 
-.modal .p-dialog-content {
+.modal .p-dialog-content,
+.modal .p-dialog-footer {
     padding: 20px;
 }
 
 .modal .p-dialog-footer {
     display: flex;
     justify-content: space-between;
-    padding: 15px;
 }
 
-.form {
+/* Formulario */
+.form,
+.subeventForm {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.form label {
+.form label,
+.subeventHeader {
     font-weight: bold;
     color: #2c5042;
 }
 
 .form .p-inputtext,
-.form .p-inputtextarea {
+.form .p-inputtextarea,
+.subeventForm .p-inputtext,
+.subeventForm .p-inputtextarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -48,25 +57,112 @@ MODAL DE CREACIÓN/EDICIÓN DE SUBEVENTOS
 }
 
 .form .p-inputtext:focus,
-.form .p-inputtextarea:focus {
+.form .p-inputtextarea:focus,
+.subeventForm .p-inputtext:focus,
+.subeventForm .p-inputtextarea:focus {
     outline: none;
     border-color: #1abc9c;
     box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
 }
 
 /* Botones */
-.actions {
+.actions,
+.subeventForm .actions {
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
 }
 
-.actions .p-button-primary {
+.actions .p-button-primary,
+.subeventForm .p-button-primary {
     background-color: #1abc9c;
 }
 
-.actions .p-button-secondary {
+.actions .p-button-secondary,
+.subeventForm .p-button-secondary {
     background-color: #7f8c8d;
+}
+
+/* List Container */
+.listContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h2 {
+    font-size: 22px;
+    color: #2c5042;
+}
+
+.newSubeventForm,
+.subeventCard {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.subeventCard:hover {
+    transform: scale(1.02);
+}
+
+.subeventForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.subeventCard.inactive {
+    background: #ddd;
+    opacity: 0.8;
+}
+
+.subeventContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subeventLeft {
+    flex: 2;
+}
+
+.subeventCenter {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+.subeventRight {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.subeventActions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
 /* ==========================
@@ -81,8 +177,14 @@ MODAL DE CREACIÓN/EDICIÓN DE SUBEVENTOS
         width: 90vw !important;
     }
 
-    .actions {
+    .actions,
+    .subeventForm .actions {
         flex-direction: column;
         gap: 8px;
+    }
+
+    .subeventCard,
+    .subeventForm {
+        padding: 12px;
     }
 }

@@ -163,7 +163,14 @@ const SubeventModal = ({
                 />
 
                 <label>Color</label>
-                <ColorPicker value={subeventData?.urlposter} onChange={(e) => handleChange("urlposter", e.target.value)} />
+                <div className="p-d-flex p-jc-between">
+                    <ColorPicker
+                        value={subeventData?.urlposter}
+                        onChange={(e) => handleChange("urlposter", e.value)}
+                        style={{ marginRight: "20px" }}
+                    />
+                    <span>{subeventData.urlposter}</span>
+                </div>
 
                 <div className={`p-d-flex p-jc-between ${styles.actions}`}>
                     {subevent && <Button label="Eliminar" className="p-button-danger" onClick={handleToggle} />}

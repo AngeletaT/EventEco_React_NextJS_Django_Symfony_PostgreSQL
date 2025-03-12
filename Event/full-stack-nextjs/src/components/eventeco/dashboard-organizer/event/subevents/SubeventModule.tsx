@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "primereact/button";
-import { Tooltip } from "primereact/tooltip";
+import { Button } from "@/utils/PrimeReactComponents";
 import { Event } from "@/types/Event";
 import SubeventCalendar from "./SubeventCalendar";
+import SubEventList from "./SubeventList";
 import styles from "@/styles/eventeco/Organizer/DashboardSubevent.module.css";
 
 const SubeventModule: React.FC<{ event: Event }> = ({ event }) => {
@@ -48,7 +48,7 @@ const SubeventModule: React.FC<{ event: Event }> = ({ event }) => {
             </div>
 
             <div className={styles.content}>
-                {viewMode === "calendar" ? <SubeventCalendar key={event.eventslug} event={event} /> : <h1>Lista</h1>}
+                {viewMode === "calendar" ? <SubeventCalendar key={event.eventslug} event={event} /> : <SubEventList event={event} />}
             </div>
         </div>
     );
