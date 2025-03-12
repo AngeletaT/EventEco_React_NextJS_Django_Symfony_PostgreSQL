@@ -44,7 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
                 try {
                     const user = await loginClientService({ email, password });
                     dispatch(loginSuccess({ user }));
-                    window.location.href = "/eventeco/home";
+                    window.location.href = "/pawnity/home";
                 } finally {
                     setIsLoading(false);
                 }
@@ -53,7 +53,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
                 try {
                     const user = await loginOrganizerService({ email, password });
                     dispatch(loginSuccess({ user }));
-                    window.location.href = "/eventeco/dashboard-organizer";
+                    window.location.href = "/pawnity/dashboard-organizer";
                 } finally {
                     setIsLoading(false);
                 }
@@ -62,7 +62,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
                 try {
                     const user = await loginAdminService({ email, password });
                     dispatch(loginSuccess({ user }));
-                    window.location.href = "/eventeco/dashboard-admin";
+                    window.location.href = "/pawnity/dashboard-admin";
                 } finally {
                     setIsLoading(false);
                 }
@@ -110,7 +110,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
                 <Button
                     type="button"
                     label={isLoading ? "Cargando..." : "Iniciar Sesión"}
-                    className="p-button-success"
+                    className="p-button-info"
                     onClick={handleLogin}
                     disabled={isLoading}
                 />

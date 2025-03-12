@@ -3,7 +3,7 @@
 import React from "react";
 import { Event } from "@/types/Event";
 import { Card, Button } from "@/utils/PrimeReactComponents";
-import styles from "@/styles/eventeco/Home.module.css";
+import styles from "@/styles/pawnity/Home.module.css";
 
 interface EventGridProps {
     events: Event[];

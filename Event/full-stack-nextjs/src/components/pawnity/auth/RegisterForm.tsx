@@ -161,7 +161,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
             <Button
                 type="button"
                 label={isLoading ? "Cargando..." : "Registrarse"}
-                className="p-button-success"
+                className="p-button-info"
                 onClick={handleRegister}
                 disabled={isLoading}
             />
@@ -172,7 +172,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ userType, onSwitchToLogin }
                 header="Registro Exitoso"
                 message="Te has registrado exitosamente."
                 buttonLabel="Aceptar"
-                buttonClass="p-button-success"
+                buttonClass="p-button-info"
             />
         </div>
     );

@@ -6,7 +6,7 @@ import { Event } from "@/types/Event";
 import PawnityLayout from "@/layouts/pawnity/PawnityLayout";
 import { EventSkeleton } from "@/components/pawnity/skeletons/EventSkeleton";
 import styles from "@/styles/pawnity/EventDetails.module.css";
-const EventMap = dynamic(() => import("@/components/eventeco/event/EventMap"), { ssr: false });
+const EventMap = dynamic(() => import("@/components/pawnity/event/EventMap"), { ssr: false });
 
 const PawnityDetailsClient = ({ event }: { event: Event }) => {
     const [activeTab, setActiveTab] = useState("entradas");

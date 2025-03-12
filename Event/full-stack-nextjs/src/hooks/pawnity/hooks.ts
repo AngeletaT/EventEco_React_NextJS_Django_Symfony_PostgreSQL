@@ -1,5 +1,5 @@
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-import type { RootState, AppDispatch } from "@/store/eventeco/index";
+import type { RootState, AppDispatch } from "@/store/pawnity/index";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 

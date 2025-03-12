@@ -1,7 +1,7 @@
 "use client";
 
 import { Skeleton } from "@/utils/PrimeReactComponents";
-import styles from "@/styles/eventeco/Home.module.css";
+import styles from "@/styles/pawnity/Home.module.css";
 
 const CategorySkeleton = () => {
     return (
