@@ -39,6 +39,10 @@ services:
     App\Event\Presentation\InAdapter\:
         resource: '../src/Event/Presentation/InAdapter/'
         tags: ['controller.service_arguments']
+
+    App\Pet\Presentation\InAdapter\:
+        resource: '../src/Pet/Presentation/InAdapter/'
+        tags: ['controller.service_arguments']
     
     App\Organizer\Infrastructure\Security\RefreshTokenGenerator:
         arguments:
@@ -113,3 +117,13 @@ services:
     App\Event\Application\UseCase\InPort\CreateSubEventInterface:
         alias: App\Event\Application\UseCase\Command\CreateSubEvent\CreateSubEventService
         public: false
+    
+    App\Pet\Presentation\Assemblers\Request\CreatePetRequestAssembler:
+        autowire: true
+        autoconfigure: true
+
+    App\Pet\Presentation\InAdapter\Processors\CreatePetProcessor:
+        arguments:
+            $handler: '@App\Pet\Application\UseCase\Command\CreatePet\CreatePetCommandHandler'
+            $assembler: '@App\Pet\Presentation\Assemblers\Request\CreatePetRequestAssembler'
+        tags: ['controller.service_arguments']
