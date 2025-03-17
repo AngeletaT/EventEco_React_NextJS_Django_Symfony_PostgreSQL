@@ -151,3 +151,12 @@ services:
         autowire: true
         autoconfigure: true
         public: true
+    
+    App\Pet\Presentation\AdapterIn\Providers\GetPetsByOrganizerProvider:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    App\Pet\Application\UseCase\Query\GetPetsByOrganizer\GetPetsByOrganizerQueryHandler:
+        autowire: true
+        autoconfigure: true

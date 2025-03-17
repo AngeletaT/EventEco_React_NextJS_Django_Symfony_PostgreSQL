@@ -21,4 +21,12 @@ interface PetRepositoryInterface
      * @return Pet|null
      */
     public function findByUuid(string $uuid): ?Pet;
+
+    /**
+     * Encuentra todas las mascotas que pertenecen a un organizador.
+     *
+     * @param int $idOrg
+     * @return Pet[]
+     */
+    public function findByOrganizerId(int $idOrg): array;
 }

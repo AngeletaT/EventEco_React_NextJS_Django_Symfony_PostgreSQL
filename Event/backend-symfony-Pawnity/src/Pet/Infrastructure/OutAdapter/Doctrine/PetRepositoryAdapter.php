@@ -39,4 +39,10 @@ class PetRepositoryAdapter implements PetRepositoryInterface
         return $this->entityManager->getRepository(Pet::class)
             ->findOneBy(['uuid' => $uuid]);
     }
+
+    public function findByOrganizerId(int $idOrg): array
+    {
+        return $this->entityManager->getRepository(Pet::class)
+            ->findBy(['idOrg' => $idOrg]);
+    }
 }
