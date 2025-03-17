@@ -9,9 +9,15 @@ import { FloatLabel } from "@/utils/PrimeReactComponents";
 import { Password } from "@/utils/PrimeReactComponents";
 import { Button } from "@/utils/PrimeReactComponents";
 import { loginSuccess } from "@/store/eventeco/slices/authSlice";
+import { fetchUser } from "@/store/eventeco/slices/userSlice"; // Import fetchUser action
 import styles from "@/styles/eventeco/Auth.module.css";
 
-const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
+interface ExtendedLoginFormProps extends LoginFormProps {
+    isModal?: boolean;
+    onClose?: () => void;
+}
+
+const LoginForm: React.FC<ExtendedLoginFormProps> = ({ userType, isModal, onClose }) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -39,36 +45,35 @@ const LoginForm: React.FC<LoginFormProps> = ({ userType }) => {
         }
 
         try {
+            setIsLoading(true);
+            let user;
             if (userType === "client") {
-                setIsLoading(true);
-                try {
-                    const user = await loginClientService({ email, password });
-                    dispatch(loginSuccess({ user }));
-                    window.location.href = "/eventeco/home";
-                } finally {
-                    setIsLoading(false);
-                }
+                user = await loginClientService({ email, password });
             } else if (userType === "organizer") {
-                setIsLoading(true);
-                try {
-                    const user = await loginOrganizerService({ email, password });
-                    dispatch(loginSuccess({ user }));
-                    window.location.href = "/eventeco/dashboard-organizer";
-                } finally {
-                    setIsLoading(false);
-                }
+                user = await loginOrganizerService({ email, password });
             } else if (userType === "admin") {
-                setIsLoading(true);
-                try {
-                    const user = await loginAdminService({ email, password });
-                    dispatch(loginSuccess({ user }));
-                    window.location.href = "/eventeco/dashboard-admin";
-                } finally {
-                    setIsLoading(false);
-                }
+                user = await loginAdminService({ email, password });
+            }
+            if (user) {
+                dispatch(loginSuccess({ user }));
+                dispatch(fetchUser() as any);
+            } else {
+                setError("Error al iniciar sesión. Verifica tus credenciales.");
+            }
+            if (isModal && onClose) {
+                onClose();
+            } else {
+                window.location.href =
+                    userType === "client"
+                        ? "/eventeco/home"
+                        : userType === "organizer"
+                          ? "/eventeco/dashboard-organizer"
+                          : "/eventeco/dashboard-admin";
             }
         } catch (err) {
             setError("Error al iniciar sesión. Verifica tus credenciales.");
+        } finally {
+            setIsLoading(false);
         }
     };
 

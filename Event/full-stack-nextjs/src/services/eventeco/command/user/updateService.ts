@@ -9,7 +9,9 @@ export const updateClientService = async (updatedData: Partial<Client>): Promise
 
         const headers = { Authorization: `Bearer ${accesstoken}` };
 
+        console.log("updatedData", updatedData);
         const response = await djangoAPI_E.put("/client/profile/me/update", updatedData, { headers });
+        console.log("response", response);
         return response.data as Client;
     } catch (error) {
         console.error("Error updating user data:", error);
