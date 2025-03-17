@@ -1,5 +1,5 @@
 <?php
-// src/Pet/Domain/Repository/PetRepositoryInterface.php
+// src/Pet/Domain/OutPort/PetRepositoryInterface.php
 namespace App\Pet\Domain\OutPort;
 
 use App\Pet\Domain\Entity\Pet;
@@ -13,6 +13,12 @@ interface PetRepositoryInterface
      * @return Pet
      */
     public function save(Pet $pet): Pet;
-    
-    // Se pueden definir otros métodos como find, update, delete, etc.
+
+    /**
+     * Encuentra un pet por su UUID.
+     *
+     * @param string $uuid
+     * @return Pet|null
+     */
+    public function findByUuid(string $uuid): ?Pet;
 }

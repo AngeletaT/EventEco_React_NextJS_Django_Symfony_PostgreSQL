@@ -127,3 +127,22 @@ services:
             $handler: '@App\Pet\Application\UseCase\Command\CreatePet\CreatePetCommandHandler'
             $assembler: '@App\Pet\Presentation\Assemblers\Request\CreatePetRequestAssembler'
         tags: ['controller.service_arguments']
+    
+    App\Pet\Application\UseCase\Command\UpdatePet\UpdatePetCommandHandler:
+        autowire: true
+        autoconfigure: true
+        public: true
+        arguments:
+            $repository: '@App\Pet\Domain\OutPort\PetRepositoryInterface'
+
+    App\Pet\Domain\OutPort\PetRepositoryInterface: '@App\Pet\Infrastructure\OutAdapter\Doctrine\PetRepositoryAdapter'
+
+    App\Pet\Infrastructure\OutAdapter\Doctrine\PetRepositoryAdapter:
+        autowire: true
+        autoconfigure: true
+        public: true
+    
+    App\Pet\Presentation\Assemblers\Request\UpdatePetRequestAssembler:
+        autowire: true
+        autoconfigure: true
+        public: true

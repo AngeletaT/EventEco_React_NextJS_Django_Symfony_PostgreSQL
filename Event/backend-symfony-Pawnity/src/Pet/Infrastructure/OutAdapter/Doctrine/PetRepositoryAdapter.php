@@ -9,12 +9,12 @@ use Doctrine\ORM\EntityManagerInterface;
 class PetRepositoryAdapter implements PetRepositoryInterface
 {
     private EntityManagerInterface $entityManager;
-    
+
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
-    
+
     /**
      * Persiste la entidad Pet usando Doctrine.
      *
@@ -25,7 +25,18 @@ class PetRepositoryAdapter implements PetRepositoryInterface
     {
         $this->entityManager->persist($pet);
         $this->entityManager->flush();
-        
         return $pet;
+    }
+
+    /**
+     * Encuentra un pet por su UUID.
+     *
+     * @param string $uuid
+     * @return Pet|null
+     */
+    public function findByUuid(string $uuid): ?Pet
+    {
+        return $this->entityManager->getRepository(Pet::class)
+            ->findOneBy(['uuid' => $uuid]);
     }
 }
