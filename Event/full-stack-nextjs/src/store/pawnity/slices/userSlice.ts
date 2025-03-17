@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 import { Client, Organizer, Admin } from "@/types/User";
 import { UserState } from "@/types/UserState";
 import { getClient, getOrganizer, getAdmin } from "@/services/pawnity/queries/getUser";
@@ -14,7 +15,7 @@ const initialState: UserState = {
 
 export const fetchUser = createAsyncThunk("auth/fetchUser", async (_, { rejectWithValue }) => {
     try {
-        const userType = localStorage.getItem("userType");
+        const userType = Cookies.get("userType");
         if (!userType) throw new Error("No user type available");
 
         let user: Client | Organizer | Admin;
@@ -44,7 +45,7 @@ export const fetchUser = createAsyncThunk("auth/fetchUser", async (_, { rejectWi
 
 export const updateUser = createAsyncThunk("auth/updateUser", async (updatedData: Partial<Client | Organizer | Admin>, { rejectWithValue }) => {
     try {
-        const userType = localStorage.getItem("userType");
+        const userType = Cookies.get("userType");
         if (!userType) throw new Error("No user type available");
 
         let user: Client | Organizer | Admin;

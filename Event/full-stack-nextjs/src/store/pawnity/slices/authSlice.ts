@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 import { Client, Organizer, Admin } from "@/types/User";
 import { UserState } from "@/types/UserState";
 import { logoutClientService, logoutOrganizerService, logoutAdminService } from "@/services/pawnity/command/user/logoutService";
@@ -13,7 +14,7 @@ const initialState: UserState = {
 
 export const logoutUser = createAsyncThunk("auth/logoutUser", async (_, { rejectWithValue }) => {
     try {
-        const userType = localStorage.getItem("userType");
+        const userType = Cookies.get("userType");
         if (!userType) throw new Error("No user type available");
 
         switch (userType) {
