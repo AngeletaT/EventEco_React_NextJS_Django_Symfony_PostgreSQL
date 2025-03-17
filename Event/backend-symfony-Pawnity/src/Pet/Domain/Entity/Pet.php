@@ -11,10 +11,10 @@ class Pet
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(name: "idPet", type: "integer")]
+    #[ORM\Column(name: "idpet", type: "integer")]
     private ?int $id = null;
 
-    #[ORM\Column(name: "uuidPet", type: "uuid", unique: true)]
+    #[ORM\Column(name: "uuidpet", type: "uuid", unique: true)]
     private string $uuid;
 
     #[ORM\Column(type: "string", length: 100)]
