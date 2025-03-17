@@ -146,3 +146,8 @@ services:
         autowire: true
         autoconfigure: true
         public: true
+
+    App\Pet\Presentation\Assemblers\Request\TogglePetActiveRequestAssembler:
+        autowire: true
+        autoconfigure: true
+        public: true
