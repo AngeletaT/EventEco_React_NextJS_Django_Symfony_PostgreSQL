@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import { Subevent } from "@/types/Subevent";
 import { useToggleSubevent } from "@/hooks/eventeco/useSubevents";
 import SubeventForm from "./SubeventForm";
-import { Button } from "primereact/button";
-import { Toast } from "primereact/toast";
+import { Button, Toast } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/eventeco/Organizer/DashboardSubevent.module.css";
 import { on } from "events";
 

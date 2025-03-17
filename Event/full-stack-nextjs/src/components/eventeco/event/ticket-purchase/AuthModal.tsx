@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
+import { Dialog, Button } from "@/utils/PrimeReactComponents";
 import LoginForm from "../../auth/LoginForm";
 import RegisterForm from "../../auth/RegisterForm";
 import styles from "@/styles/eventeco/TicketPurchase.module.css";

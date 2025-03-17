@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import { Subevent } from "@/types/Subevent";
 import { useToggleSubevent } from "@/hooks/pawnity/useSubevents";
 import SubeventForm from "./SubeventForm";
-import { Button } from "primereact/button";
-import { Toast } from "primereact/toast";
+import { Button, Toast } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/pawnity/Organizer/DashboardSubevent.module.css";
 
 const SubeventCard: React.FC<{ subevent: Subevent; idevent: number; toast: React.RefObject<Toast>; refetch: () => void }> = ({

@@ -17,3 +17,4 @@ export { Menu } from "primereact/menu";
 export { Toast } from "primereact/toast";
 export { Calendar } from "primereact/calendar";
 export { Steps } from "primereact/steps";
+export { Checkbox } from "primereact/checkbox";

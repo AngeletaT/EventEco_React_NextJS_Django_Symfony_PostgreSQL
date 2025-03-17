@@ -2,8 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "primereact/button";
-import { Toast } from "primereact/toast";
+import { Button, Toast } from "@/utils/PrimeReactComponents";
 import AuthModal from "./AuthModal";
 import { Client } from "@/types/User";
 import styles from "@/styles/eventeco/TicketPurchase.module.css";
@@ -15,7 +14,6 @@ const StepBuyerInfo: React.FC<{ onNext: () => void; onPrev: () => void }> = ({ o
     const userData = useSelector((state: any) => state.user.user);
     const dispatch = useDispatch<AppDispatch>();
     const toast = useRef<Toast>(null);
-    console.log("userData", userData);
     const [authModalVisible, setAuthModalVisible] = useState(false);
 
     useEffect(() => {
@@ -72,8 +70,6 @@ const StepBuyerInfo: React.FC<{ onNext: () => void; onPrev: () => void }> = ({ o
             email: form.email.value,
             phonenumber: form.phonenumber.value,
         } as Partial<Client>;
-
-        console.log("updatedData", updatedData);
 
         try {
             await dispatch(updateUser(updatedData));

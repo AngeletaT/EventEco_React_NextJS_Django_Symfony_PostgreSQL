@@ -3,9 +3,7 @@
 import React, { useState } from "react";
 import { useComplements } from "@/hooks/eventeco/useComplements";
 import { Complement } from "@/types/Complement";
-import { Button } from "primereact/button";
-import { Checkbox } from "primereact/checkbox";
-import { Toast } from "primereact/toast";
+import { Button, Checkbox, Toast } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/eventeco/TicketPurchase.module.css";
 
 const StepSelectComplements: React.FC<{ ticketData: any; complements: Complement[]; onNext: () => void; onPrev: () => void }> = ({
@@ -15,7 +13,6 @@ const StepSelectComplements: React.FC<{ ticketData: any; complements: Complement
     onPrev,
 }) => {
     const toast = React.useRef<Toast>(null);
-    console.log("ticketData", ticketData);
 
     const [selectedComplements, setSelectedComplements] = useState<{ [key: number]: number[] }>(
         Object.fromEntries(ticketData.map((ticket: any) => [ticket.idticketinfo, []]))

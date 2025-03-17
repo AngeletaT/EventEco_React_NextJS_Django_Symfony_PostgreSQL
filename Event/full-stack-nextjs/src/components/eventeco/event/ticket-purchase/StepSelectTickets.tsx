@@ -54,8 +54,6 @@ const StepSelectTickets: React.FC<{ tickets: Ticket[]; setTicketData: (data: any
         onNext();
     };
 
-    console.log("selectedTickets", selectedTickets);
-
     return (
         <div className={styles.stepContainer}>
             <Toast ref={toast} />
