@@ -1,4 +1,6 @@
 import { Category } from "./Category";
+import { Complement } from "./Complement";
+import { Ticket } from "./Ticket";
 import { Subevent } from "./Subevent";
 
 export interface Event {
@@ -16,7 +18,9 @@ export interface Event {
     idorg: number;
     idcategory: number;
     category: Category;
-    subevents: Subevent[] | null;
+    subevents: Subevent[] | [];
+    complements: Complement[] | [];
+    tickets: Ticket[] | [];
     isactive: boolean;
     createdat: string;
     updatedat: string;

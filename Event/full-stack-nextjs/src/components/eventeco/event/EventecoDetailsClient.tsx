@@ -6,6 +6,7 @@ import { Event } from "@/types/Event";
 import EventecoLayout from "@/layouts/eventeco/EventecoLayout";
 import { EventSkeleton } from "@/components/eventeco/skeletons/EventSkeleton";
 import styles from "@/styles/eventeco/EventDetails.module.css";
+import TicketPurchaseStepper from "./ticket-purchase/TicketPurchaseStepper";
 const EventMap = dynamic(() => import("@/components/eventeco/event/EventMap"), { ssr: false });
 
 const EventecoDetailsClient = ({ event }: { event: Event }) => {
@@ -83,7 +84,7 @@ const EventecoDetailsClient = ({ event }: { event: Event }) => {
                     {activeTab === "entradas" ? (
                         <div className={styles.ticketSection}>
                             <h2>Entradas</h2>
-                            <p>Entradas a la venta próximamente.</p>
+                            <TicketPurchaseStepper event={event} />
                         </div>
                     ) : (
                         <div className={styles.eventInfoSection}>

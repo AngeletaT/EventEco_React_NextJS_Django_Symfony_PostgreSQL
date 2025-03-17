@@ -1,0 +1,324 @@
+/* Contenedor principal del paso */
+.stepContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Título del paso */
+.stepContainer h2 {
+    font-size: 24px;
+    color: #2c5042;
+    text-align: center;
+}
+
+/* Lista de entradas */
+.ticketList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Cada ticket en la lista */
+.ticketItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.ticketItem:hover {
+    transform: scale(1.02);
+}
+
+/* Información del ticket */
+.ticketInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.ticketInfo h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+
+.ticketInfo p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+/* Sección para el InputNumber */
+.ticketActions {
+    display: flex;
+    align-items: center;
+}
+
+/* Precio total */
+.totalPrice {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c5042;
+    text-align: right;
+    padding: 10px;
+}
+
+/* Botón de navegación */
+.navigationButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Contenedor principal del paso */
+.stepContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Sección de complementos */
+.complementList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Cada bloque de complementos por tipo de ticket */
+.ticketComplementSection {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.ticketComplementSection h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0 0 10px 0;
+}
+
+/* Cada complemento individual */
+.complementItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.complementItem label {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Precio total */
+.totalPrice {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c5042;
+    text-align: right;
+    padding: 10px;
+}
+
+/* Botón de navegación */
+.navigationButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.navigationNext {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Advertencia de autenticación */
+.warningCard {
+    display: flex;
+    align-items: center;
+    background-color: #fa9d9d;
+    border: 1px solid #ff4d4d;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+}
+
+.warningCard i {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.modalContainer {
+    width: 100%;
+    max-width: 350px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modalHeader {
+    font-size: 24px;
+    color: #2c5042;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.closeButton {
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.switchButton {
+    background-color: transparent;
+    color: #2c5042;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Contenedor principal del paso */
+.stepContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Título del paso */
+.stepContainer h2 {
+    font-size: 24px;
+    color: #2c5042;
+    text-align: center;
+}
+
+/* Formulario de información del comprador */
+.buyerInfoForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.formGroup label {
+    font-size: 14px;
+    color: #666;
+}
+
+.formGroup input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Botón de navegación */
+.navigationButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.navigationNext {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Advertencia de autenticación */
+.warningCard {
+    display: flex;
+    align-items: center;
+    background-color: #fa9d9d;
+    border: 1px solid #ff4d4d;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+}
+
+.warningCard i {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* Estilos del modal */
+.modalContainer {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.modalHeader {
+    font-size: 24px;
+    color: #2c5042;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.closeButton {
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.switchButton {
+    background-color: transparent;
+    color: #2c5042;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
