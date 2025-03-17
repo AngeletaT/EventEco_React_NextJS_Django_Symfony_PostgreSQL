@@ -5,7 +5,7 @@ export interface FiltersProps {
     setPageSize: (value: number) => void;
     gender: string;
     setGender: (value: string) => void;
-    idorg: number;
+    idorg: number | undefined;
     setidOrganizer: (value: number) => void;
     species: string;
     setSpecies: (value: string) => void;

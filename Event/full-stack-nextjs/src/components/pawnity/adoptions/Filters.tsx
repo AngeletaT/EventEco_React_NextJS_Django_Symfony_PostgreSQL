@@ -36,7 +36,7 @@ const Filters: React.FC<FiltersProps> = ({
                 value={idorg}
                 options={organizers.map((org) => ({ label: org.name, value: org.idorg }))}
                 onChange={(e) => setidOrganizer(e.value)}
-                placeholder="Seleccionar Categoría"
+                placeholder="Seleccionar protectora"
                 className={styles.dropdown}
             />
 

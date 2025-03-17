@@ -14,7 +14,7 @@ const PawnityAdoptionClient = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(5);
     const [gender, setGender] = useState("");
-    const [idorg, setidOrganizer] = useState<number>();
+    const [idorg, setidOrganizer] = useState<number | undefined>(undefined);
     const [species, setSpecies] = useState("");
 
     const { data: organizers, isLoading: loadingOrganizers } = useOrganizers<Organizer[]>();
@@ -22,7 +22,7 @@ const PawnityAdoptionClient = () => {
     const resetFilters = () => {
         setPageSize(5);
         setGender("");
-        setidOrganizer(1);
+        setidOrganizer(undefined);
         setSpecies("");
     };
 
@@ -65,7 +65,7 @@ const PawnityAdoptionClient = () => {
                     setPageSize={setPageSize}
                     gender={gender}
                     setGender={setGender}
-                    idorg={idorg ?? 1}
+                    idorg={idorg ?? undefined}
                     setidOrganizer={setidOrganizer}
                     species={species}
                     setSpecies={setSpecies}
