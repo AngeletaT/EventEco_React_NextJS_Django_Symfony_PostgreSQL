@@ -175,3 +175,18 @@ services:
     App\Pet\Infrastructure\OutAdapter\Doctrine\AdoptionRepositoryAdapter:
         autowire: true
         autoconfigure: true
+    
+    App\Pet\Presentation\AdapterIn\Providers\GetSponsorshipsByOrgProvider:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    App\Pet\Application\UseCase\Query\GetSponsorshipsByOrg\GetSponsorshipsByOrgQueryHandler:
+        autowire: true
+        autoconfigure: true
+
+    App\Pet\Domain\OutPort\SponsorshipRepositoryInterface: '@App\Pet\Infrastructure\OutAdapter\Doctrine\SponsorshipRepositoryAdapter'
+
+    App\Pet\Infrastructure\OutAdapter\Doctrine\SponsorshipRepositoryAdapter:
+        autowire: true
+        autoconfigure: true
