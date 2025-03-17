@@ -16,3 +16,4 @@ export { Avatar } from "primereact/avatar";
 export { Menu } from "primereact/menu";
 export { Toast } from "primereact/toast";
 export { Calendar } from "primereact/calendar";
+export { Steps } from "primereact/steps";

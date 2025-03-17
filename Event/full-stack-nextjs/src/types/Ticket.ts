@@ -1,5 +1,5 @@
 export interface Ticket {
-    idTicketInfo: number;
+    idticketinfo: number;
     eventSlug: string;
     type: string;
     price: string;

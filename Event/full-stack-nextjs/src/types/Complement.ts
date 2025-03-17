@@ -1,5 +1,5 @@
 export interface Complement {
-    idComplement: number;
+    idcomplement: number;
     name: string;
     description: string;
     price: number;
