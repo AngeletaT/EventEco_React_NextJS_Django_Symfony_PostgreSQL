@@ -322,3 +322,107 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+/* Contenedor del paso de pago */
+.stepContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Resumen del pedido */
+.orderSummary {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.orderSummary h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0 0 10px 0;
+}
+
+.complementSummary {
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+
+.complementSummary h4 {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+}
+
+.complementSummary li {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+/* Botones de navegación */
+.navigationButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Contenedor del paso de nominación */
+.stepContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Lista de entradas a nominar */
+.nominateList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Cada entrada a nominar */
+.nominateItem {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+    gap: 10px;
+    display: flex;
+}
+
+.nominateItem label {
+    font-size: 14px;
+    color: #666;
+}
+
+.nominateItem input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Botón de navegación */
+.navigationButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}

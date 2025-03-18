@@ -7,8 +7,8 @@ import { Event } from "@/types/Event";
 import StepSelectTickets from "./StepSelectTickets";
 import StepSelectComplements from "./StepSelectComplements";
 import StepBuyerInfo from "./StepBuyerInfo";
-// import StepPayment from "./StepPayment";
-// import StepNominateTickets from "./StepNominateTickets";
+import StepPayment from "./StepPayment";
+import StepNominateTickets from "./StepNominateTickets";
 import styles from "@/styles/eventeco/TicketPurchase.module.css";
 import { RootState } from "@/store/eventeco";
 
@@ -17,8 +17,14 @@ const TicketPurchaseStepper: React.FC<{ event: Event }> = ({ event }) => {
     const complements = event.complements;
     const [activeIndex, setActiveIndex] = useState(0);
     const { isAuthenticated } = useSelector((state: RootState) => state.user);
-    const [ticketData, setTicketData] = useState<any>(null);
-    const [orderId, setOrderId] = useState<number | null>(null);
+
+    const [orderData, setOrderData] = useState({
+        idevent: event.idevent,
+        tickets: [],
+    });
+
+    const [idorder, setIdorder] = useState(0);
+    const [ticketUnits, setTicketUnits] = useState<any[]>([]);
 
     const steps = [
         { label: "Seleccionar Entradas" },
@@ -48,22 +54,27 @@ const TicketPurchaseStepper: React.FC<{ event: Event }> = ({ event }) => {
             )}
 
             <div className={styles.content}>
-                {activeIndex === 0 && <StepSelectTickets tickets={tickets} setTicketData={setTicketData} onNext={handleNext} />}
+                {activeIndex === 0 && <StepSelectTickets tickets={tickets} onNext={handleNext} orderData={orderData} setOrderData={setOrderData} />}
                 {activeIndex === 1 && (
-                    <StepSelectComplements ticketData={ticketData} complements={complements} onNext={handleNext} onPrev={handlePrev} />
-                )}
-                {activeIndex === 2 && <StepBuyerInfo onNext={handleNext} onPrev={handlePrev} />}
-                {/* {activeIndex === 3 && (
-                    <StepPayment
-                        eventId={eventId}
-                        ticketData={ticketData}
-                        buyerInfo={buyerInfo}
-                        setOrderId={setOrderId}
+                    <StepSelectComplements
+                        complements={complements}
                         onNext={handleNext}
                         onPrev={handlePrev}
+                        orderData={orderData}
+                        setOrderData={setOrderData}
                     />
-                )} */}
-                {/* {activeIndex === 4 && <StepNominateTickets orderId={orderId} onPrev={handlePrev} />} */}
+                )}
+                {activeIndex === 2 && <StepBuyerInfo onNext={handleNext} onPrev={handlePrev} />}
+                {activeIndex === 3 && (
+                    <StepPayment
+                        onNext={handleNext}
+                        onPrev={handlePrev}
+                        orderData={orderData}
+                        setIdorder={setIdorder}
+                        setTicketUnits={setTicketUnits} // Pass setTicketUnits
+                    />
+                )}
+                {activeIndex === 4 && <StepNominateTickets onPrev={handlePrev} idorder={idorder} ticketUnits={ticketUnits} />}
             </div>
         </div>
     );

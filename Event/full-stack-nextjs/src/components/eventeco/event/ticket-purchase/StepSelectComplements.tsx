@@ -1,21 +1,21 @@
 "use client";
 
 import React, { useState } from "react";
-import { useComplements } from "@/hooks/eventeco/useComplements";
 import { Complement } from "@/types/Complement";
 import { Button, Checkbox, Toast } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/eventeco/TicketPurchase.module.css";
 
-const StepSelectComplements: React.FC<{ ticketData: any; complements: Complement[]; onNext: () => void; onPrev: () => void }> = ({
-    ticketData,
-    complements,
-    onNext,
-    onPrev,
-}) => {
+const StepSelectComplements: React.FC<{
+    orderData: any;
+    complements: Complement[];
+    onNext: () => void;
+    onPrev: () => void;
+    setOrderData: (data: any) => void;
+}> = ({ orderData, complements, onNext, onPrev, setOrderData }) => {
     const toast = React.useRef<Toast>(null);
 
     const [selectedComplements, setSelectedComplements] = useState<{ [key: number]: number[] }>(
-        Object.fromEntries(ticketData.map((ticket: any) => [ticket.idticketinfo, []]))
+        Object.fromEntries(orderData.tickets.map((ticket: any) => [ticket.idticketinfo, []]))
     );
 
     const handleComplementChange = (ticketId: number, complementId: number) => {
@@ -28,43 +28,59 @@ const StepSelectComplements: React.FC<{ ticketData: any; complements: Complement
         });
     };
 
-    const getTotalPrice = () => {
-        return ticketData.reduce((total: number, ticket: any) => {
-            const ticketPrice = parseFloat(ticket.price) + 5;
-            const complementsPrice =
-                selectedComplements[ticket.idticketinfo]?.reduce((sum, id) => {
-                    const comp = complements?.find((c: Complement) => c.idcomplement === id);
-                    return sum + (comp ? parseFloat(comp.price.toString()) : 0);
-                }, 0) || 0;
-            return total + ticketPrice + complementsPrice;
-        }, 0);
+    const calculateSubtotalComplements = (complementIds: number[]) => {
+        return complementIds
+            .reduce((sum, id) => {
+                const complement = complements.find((c) => c.idcomplement === id);
+                return sum + (complement ? parseFloat(complement.price.toString()) : 0);
+            }, 0)
+            .toFixed(2);
     };
 
-    const getComplementPrice = () => {
-        return ticketData.reduce((total: number, ticket: any) => {
-            return (
-                total +
-                (selectedComplements[ticket.idticketinfo]?.reduce((sum, id) => {
-                    const comp = complements?.find((c: Complement) => c.idcomplement === id);
-                    return sum + (comp ? parseFloat(comp.price.toString()) : 0);
-                }, 0) || 0)
-            );
+    function getTotalPrice() {
+        return orderData.tickets.reduce((total: number, ticket: any) => {
+            const ticketPrice = ticket.quantity * parseFloat(ticket.price);
+
+            const managementFees = ticket.quantity * 5;
+
+            const complementsPrice = (selectedComplements[ticket.idticketinfo] || []).reduce((sum: number, complementId: number) => {
+                const complement = complements.find((c) => c.idcomplement === complementId);
+                return sum + (complement ? parseFloat(complement.price.toString()) : 0);
+            }, 0);
+
+            return total + ticketPrice + managementFees + complementsPrice;
         }, 0);
-    };
+    }
 
     const handleNext = () => {
-        const updatedTicketData = ticketData.map((ticket: any) => ({
-            ...ticket,
-            entries: ticket.entries.map(() => ({
-                complements: selectedComplements[ticket.idticketinfo] || [],
+        const updatedOrderData = {
+            ...orderData,
+            tickets: orderData.tickets.map((ticket: any) => ({
+                ...ticket,
+                entries: ticket.entries.map(() => {
+                    const selected = selectedComplements[ticket.idticketinfo] || [];
+                    return {
+                        complements: selected,
+                        subtotalComplements: calculateSubtotalComplements(selected),
+                        info: selected.map((complementId) => {
+                            const complement = complements.find((c) => c.idcomplement === complementId);
+                            return {
+                                type: complement?.name || "",
+                                price: complement?.price || 0,
+                            };
+                        }),
+                    };
+                }),
             })),
-        }));
+        };
 
-        if (!updatedTicketData) {
+        setOrderData(updatedOrderData);
+
+        if (!updatedOrderData.tickets.some((ticket: any) => ticket.entries.some((entry: any) => entry.complements.length > 0))) {
             toast.current?.show({
                 severity: "warn",
                 summary: "Atención",
-                detail: "Debes seleccionar al menos un complemento antes de continuar.",
+                detail: "Debes seleccionar al menos un complemento para continuar.",
                 life: 3000,
             });
             return;
@@ -79,9 +95,9 @@ const StepSelectComplements: React.FC<{ ticketData: any; complements: Complement
             <h2>Selecciona Complementos para tus Entradas</h2>
 
             <div className={styles.complementList}>
-                {ticketData.map((ticket: any) => (
+                {orderData.tickets.map((ticket: any) => (
                     <div key={ticket.idticketinfo} className={styles.ticketComplementSection}>
-                        <h3>{`Entrada ${ticketData.indexOf(ticket) + 1} - (${ticket.type})`}</h3>
+                        <h3>{`Entrada ${orderData.tickets.indexOf(ticket) + 1} - (${ticket.type})`}</h3>
                         {complements?.map((complement: Complement) => (
                             <div key={complement.idcomplement} className={styles.complementItem}>
                                 <Checkbox
@@ -90,8 +106,7 @@ const StepSelectComplements: React.FC<{ ticketData: any; complements: Complement
                                     onChange={() => handleComplementChange(ticket.idticketinfo, complement.idcomplement)}
                                 />
                                 <label htmlFor={`comp-${ticket.idticketinfo}-${complement.idcomplement}`}>
-                                    {complement.name} - ${complement.price}
-                                    {complement.description && ` (${complement.description})`}
+                                    {complement.name} - {complement.price}€ {complement.description && ` (${complement.description})`}
                                 </label>
                             </div>
                         ))}
@@ -100,7 +115,7 @@ const StepSelectComplements: React.FC<{ ticketData: any; complements: Complement
             </div>
 
             <div className={styles.totalPrice}>
-                <h5>Complementos: {getComplementPrice().toFixed(2)}€</h5>
+                <h5>Complementos: {calculateSubtotalComplements(Object.values(selectedComplements).flat())}€</h5>
                 <h3>Total: {getTotalPrice().toFixed(2)}€</h3>
             </div>
 

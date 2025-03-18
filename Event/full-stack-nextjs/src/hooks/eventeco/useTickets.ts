@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getTickets } from "@/services/eventeco/queries/getTickets";
 import { createTicket } from "@/services/eventeco/command/tickets/createTicket";
-import { updateTicket, toggleTicket } from "@/services/eventeco/command/tickets/updateTicket";
+import { updateTicket, toggleTicket, nominateTicket } from "@/services/eventeco/command/tickets/updateTicket";
 import { Ticket } from "@/types/Ticket";
 
 export const useTickets = (eventSlug: string) => {
@@ -50,6 +50,20 @@ export const useToggleTicket = () => {
         },
         onSuccess: (idTicketInfo: number, { ticketData }: { ticketData: Partial<Ticket> }) => {
             queryClient.invalidateQueries({ queryKey: ["tickets", ticketData.eventSlug] });
+        },
+    });
+};
+
+export const useNominateTickets = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation<any, Error, { ticketunitid: number; nameassistant: string; dniassistant: string }>({
+        mutationFn: async ({ ticketunitid, nameassistant, dniassistant }: { ticketunitid: number; nameassistant: string; dniassistant: string }) => {
+            const response = await nominateTicket({ ticketunitid, nameassistant, dniassistant });
+            return response;
+        },
+        onSuccess: (ticketunitid) => {
+            queryClient.invalidateQueries({ queryKey: ["tickets", ticketunitid] });
         },
     });
 };

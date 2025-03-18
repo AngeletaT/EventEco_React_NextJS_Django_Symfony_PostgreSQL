@@ -5,9 +5,10 @@ import { Ticket } from "@/types/Ticket";
 import { Button, InputNumber, Toast } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/eventeco/TicketPurchase.module.css";
 
-const StepSelectTickets: React.FC<{ tickets: Ticket[]; setTicketData: (data: any) => void; onNext: () => void }> = ({
+const StepSelectTickets: React.FC<{ tickets: Ticket[]; orderData: any; setOrderData: (data: any) => void; onNext: () => void }> = ({
     tickets,
-    setTicketData,
+    orderData,
+    setOrderData,
     onNext,
 }) => {
     const toast = React.useRef<Toast>(null);
@@ -37,7 +38,7 @@ const StepSelectTickets: React.FC<{ tickets: Ticket[]; setTicketData: (data: any
                 type: tickets.find((ticket) => ticket.idticketinfo === Number(idticketinfo))?.type,
                 price: tickets.find((ticket) => ticket.idticketinfo === Number(idticketinfo))?.price,
                 quantity,
-                entries: Array.from({ length: quantity }, (_, index) => ({ complements: [], key: `${idticketinfo}-${index}` })),
+                entries: Array.from({ length: quantity }, () => ({ complements: [] })),
             }));
 
         if (selected.length === 0) {
@@ -50,7 +51,11 @@ const StepSelectTickets: React.FC<{ tickets: Ticket[]; setTicketData: (data: any
             return;
         }
 
-        setTicketData(selected);
+        setOrderData({
+            ...orderData,
+            tickets: selected,
+        });
+
         onNext();
     };
 

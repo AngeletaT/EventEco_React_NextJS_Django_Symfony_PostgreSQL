@@ -31,3 +31,31 @@ export const toggleTicket = async ({ idTicketInfo, ticketData }: { idTicketInfo:
         throw new Error("Failed to toggle ticket.");
     }
 };
+
+export const nominateTicket = async ({
+    ticketunitid,
+    nameassistant,
+    dniassistant,
+}: {
+    ticketunitid: number;
+    nameassistant: string;
+    dniassistant: string;
+}) => {
+    try {
+        const accesstoken = Cookies.get("accesstoken");
+        if (!accesstoken) throw new Error("No access token available");
+
+        const headers = { Authorization: `Bearer ${accesstoken}` };
+
+        console.log("ticketunitid", ticketunitid);
+        console.log("nameassistant", nameassistant);
+        console.log("dniassistant", dniassistant);
+
+        const response = await djangoAPI_E.put(`/order/ticketunit/${ticketunitid}/`, { nameassistant, dniassistant }, { headers });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error nominating ticket:", error);
+        throw new Error("Failed to nominate ticket.");
+    }
+};
