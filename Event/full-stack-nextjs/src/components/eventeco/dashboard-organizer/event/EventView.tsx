@@ -33,7 +33,7 @@ const EventView = ({
                     Configuración
                 </button>
                 <button className={activeTab === "subevents" ? styles.active : ""} onClick={() => setActiveTab("subevents")}>
-                    Subeventos
+                    Actividades
                 </button>
                 <button className={activeTab === "tickets" ? styles.active : ""} onClick={() => setActiveTab("tickets")}>
                     Tickets

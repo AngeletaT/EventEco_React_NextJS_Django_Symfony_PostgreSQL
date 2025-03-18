@@ -17,7 +17,7 @@ const SubeventList: React.FC<{ event: Event }> = ({ event }) => {
     return (
         <div className={styles.listContainer}>
             <Toast ref={toast} />
-            <Button label="Nuevo Subevento" icon="pi pi-plus" className="p-button-success" onClick={() => setCreatingNew(true)} />
+            <Button label="Nueva Actividad" icon="pi pi-plus" className="p-button-success" onClick={() => setCreatingNew(true)} />
 
             {creatingNew && (
                 <div className={styles.newSubeventForm}>
@@ -26,9 +26,9 @@ const SubeventList: React.FC<{ event: Event }> = ({ event }) => {
             )}
 
             {isLoading ? (
-                <p className={styles.loading}>Cargando subeventos...</p>
+                <p className={styles.loading}>Cargando actividades...</p>
             ) : isError ? (
-                <p className={styles.error}>Error al cargar los subeventos.</p>
+                <p className={styles.error}>Error al cargar los actividades.</p>
             ) : (
                 <div className={styles.subeventList}>
                     {subevents.length > 0 ? (
@@ -36,7 +36,7 @@ const SubeventList: React.FC<{ event: Event }> = ({ event }) => {
                             <SubeventCard key={subevent.idsubevents} subevent={subevent} idevent={event.idevent} toast={toast} refetch={refetch} />
                         ))
                     ) : (
-                        <p className={styles.noEvents}>No hay subeventos registrados.</p>
+                        <p className={styles.noEvents}>No hay actividades registradas.</p>
                     )}
                 </div>
             )}

@@ -81,12 +81,12 @@ const SubeventModal = ({
                 },
                 {
                     onSuccess: () => {
-                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Subevento actualizado correctamente", life: 3000 });
+                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Actividad actualizada correctamente", life: 3000 });
                         refetch();
                         onHide();
                     },
                     onError: () => {
-                        toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo actualizar el subevento", life: 3000 });
+                        toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo actualizar la Actividad", life: 3000 });
                     },
                 }
             );
@@ -105,12 +105,12 @@ const SubeventModal = ({
                 },
                 {
                     onSuccess: () => {
-                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Subevento creado correctamente", life: 3000 });
+                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Actividad creada correctamente", life: 3000 });
                         refetch();
                         onHide();
                     },
                     onError: () => {
-                        toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo crear el subevento", life: 3000 });
+                        toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo crear la actividad", life: 3000 });
                     },
                 }
             );
@@ -124,12 +124,12 @@ const SubeventModal = ({
             { idsubevents: subevent.id },
             {
                 onSuccess: () => {
-                    toast.current?.show({ severity: "success", summary: "Éxito", detail: "Subevento desactivado correctamente", life: 3000 });
+                    toast.current?.show({ severity: "success", summary: "Éxito", detail: "Actividad desactivada correctamente", life: 3000 });
                     refetch();
                     onHide();
                 },
                 onError: () => {
-                    toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo desactivar el subevento", life: 3000 });
+                    toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo desactivar la actividad", life: 3000 });
                 },
             }
         );
@@ -137,7 +137,7 @@ const SubeventModal = ({
 
     // #region return
     return (
-        <Dialog visible={visible} onHide={onHide} header={subevent ? "Editar Subevento" : "Crear Subevento"} modal className={styles.modal}>
+        <Dialog visible={visible} onHide={onHide} header={subevent ? "Editar Actividad" : "Crear Actividad"} modal className={styles.modal}>
             <Toast ref={toast} />
             <div className={styles.form}>
                 <label>Nombre</label>
@@ -173,7 +173,7 @@ const SubeventModal = ({
                 </div>
 
                 <div className={`p-d-flex p-jc-between ${styles.actions}`}>
-                    {subevent && <Button label="Eliminar" className="p-button-danger" onClick={handleToggle} />}
+                    {subevent && <Button label="Desactivar" className="p-button-danger" onClick={handleToggle} />}
                     <Button label="Guardar" className="p-button-primary" onClick={handleSubmit} />
                     <Button label="Cancelar" className="p-button-secondary" onClick={onHide} />
                 </div>

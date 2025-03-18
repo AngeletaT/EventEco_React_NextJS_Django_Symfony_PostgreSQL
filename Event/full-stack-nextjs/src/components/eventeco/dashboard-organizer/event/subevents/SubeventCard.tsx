@@ -6,7 +6,6 @@ import { useToggleSubevent } from "@/hooks/eventeco/useSubevents";
 import SubeventForm from "./SubeventForm";
 import { Button, Toast } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/eventeco/Organizer/DashboardSubevent.module.css";
-import { on } from "events";
 
 const SubeventCard: React.FC<{ subevent: Subevent; idevent: number; toast: React.RefObject<Toast>; refetch: () => void }> = ({
     subevent,
@@ -25,14 +24,14 @@ const SubeventCard: React.FC<{ subevent: Subevent; idevent: number; toast: React
                     toast.current?.show({
                         severity: "success",
                         summary: "Éxito",
-                        detail: `Subevento ${subevent.isactive ? "desactivado" : "activado"} correctamente`,
+                        detail: `Actividad ${subevent.isactive ? "desactivada" : "activada"} correctamente`,
                         life: 3000,
                     });
                     refetch();
                     setIsEditing(false);
                 },
                 onError: () => {
-                    toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo desactivar el subevento", life: 3000 });
+                    toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo desactivar la actividad", life: 3000 });
                 },
             }
         );

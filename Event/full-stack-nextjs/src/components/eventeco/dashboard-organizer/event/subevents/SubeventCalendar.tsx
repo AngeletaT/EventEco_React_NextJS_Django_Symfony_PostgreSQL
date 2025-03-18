@@ -137,11 +137,11 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
                 },
                 {
                     onSuccess: () => {
-                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Subevento actualizado correctamente", life: 3000 });
+                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Actividad actualizada correctamente", life: 3000 });
                         refetch();
                     },
                     onError: () => {
-                        toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo actualizar el subevento", life: 3000 });
+                        toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo actualizar la actividad", life: 3000 });
                     },
                 }
             );
@@ -180,7 +180,7 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
                         toast.current?.show({
                             severity: "success",
                             summary: "Éxito",
-                            detail: "Duración del subevento actualizada",
+                            detail: "Duración de la actividad actualizada",
                             life: 3000,
                         });
                         refetch();
@@ -189,7 +189,7 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
                         toast.current?.show({
                             severity: "error",
                             summary: "Error",
-                            detail: "No se pudo actualizar el subevento",
+                            detail: "No se pudo actualizar la actividad",
                             life: 3000,
                         });
                     },
@@ -198,8 +198,8 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
         },
     };
 
-    if (isLoading) return <p>Cargando subeventos...</p>;
-    if (isError) return <p>Error al cargar los subeventos.</p>;
+    if (isLoading) return <p>Cargando actividades...</p>;
+    if (isError) return <p>Error al cargar las actividades.</p>;
 
     // #region return
     return (

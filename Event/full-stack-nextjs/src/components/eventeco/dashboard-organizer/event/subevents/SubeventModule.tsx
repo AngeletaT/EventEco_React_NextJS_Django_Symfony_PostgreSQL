@@ -13,7 +13,7 @@ const SubeventModule: React.FC<{ event: Event }> = ({ event }) => {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h2>Gestión de Subeventos</h2>
+                <h2>Gestión de Actividades</h2>
                 <div className="card flex flex-wrap justify-content-end gap-2" style={{ marginBottom: "20px" }}>
                     {viewMode === "calendar" && (
                         <div>
@@ -24,10 +24,10 @@ const SubeventModule: React.FC<{ event: Event }> = ({ event }) => {
                                 className="p-button-rounded p-button-success"
                                 disabled
                                 tooltip={`INSTRUCCIONES DE USO DEL CALENDARIO:
-                                    \n - Haz clic en un espacio vacío para crear un nuevo subevento en la franja horaria seleccionada.
-                                    \n - Arrastra y suelta un subevento para cambiar su horario o día.
-                                    \n - Redimensiona un subevento para ajustar su duración.
-                                    \n - Haz clic en un subevento existente para editar su información.`}
+                                    \n - Haz clic en un espacio vacío para crear una nueva actividad en la franja horaria seleccionada.
+                                    \n - Arrastra y suelta una actividad para cambiar su horario o día.
+                                    \n - Redimensiona una actividad para ajustar su duración.
+                                    \n - Haz clic en una actividad existente para editar su información.`}
                                 tooltipOptions={{ position: "bottom", mouseTrack: true, mouseTrackTop: 15, showOnDisabled: true }}
                             />
                         </div>

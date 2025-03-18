@@ -15,8 +15,9 @@ const Hero: React.FC = () => {
         >
             <div className="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
                 <section>
-                    <span className="block text-6xl font-bold mb-1">Donde la música y </span>
-                    <div className="text-6xl text-green-500 font-bold mb-3">la sostenibilidad se encuentran</div>
+                    <span className="block text-6xl font-bold mb-1">
+                        Donde la música y<div className="text-6xl text-green-500 font-bold">la sostenibilidad</div> se encuentran
+                    </span>
                     <p className="mt-0 mb-4 text-700 line-height-3">
                         Música, deporte, cultura y mucho más. EventEco es un lugar donde puedes disfrutar de eventos de música, deporte, cultura y
                         mucho más, mientras ayudas a cuidar el planeta.

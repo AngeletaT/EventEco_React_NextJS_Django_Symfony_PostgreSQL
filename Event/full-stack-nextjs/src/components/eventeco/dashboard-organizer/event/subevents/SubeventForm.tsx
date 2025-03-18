@@ -56,12 +56,12 @@ const SubeventForm: React.FC<{ subevent: Subevent | null; idevent: number; onClo
                 },
                 {
                     onSuccess: () => {
-                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Subevento actualizado correctamente", life: 3000 });
+                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Actividad actualizada correctamente", life: 3000 });
                         refetch();
                         onClose();
                     },
                     onError: () => {
-                        toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo actualizar el subevento", life: 3000 });
+                        toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo actualizar la actividad", life: 3000 });
                     },
                 }
             );
@@ -79,12 +79,12 @@ const SubeventForm: React.FC<{ subevent: Subevent | null; idevent: number; onClo
                 },
                 {
                     onSuccess: () => {
-                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Subevento creado correctamente", life: 3000 });
+                        toast.current?.show({ severity: "success", summary: "Éxito", detail: "Actividad creada correctamente", life: 3000 });
                         refetch();
                         onClose();
                     },
                     onError: () => {
-                        toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo crear el subevento", life: 3000 });
+                        toast.current?.show({ severity: "error", summary: "Error", detail: "No se pudo crear la actividad", life: 3000 });
                     },
                 }
             );
@@ -94,7 +94,7 @@ const SubeventForm: React.FC<{ subevent: Subevent | null; idevent: number; onClo
     return (
         <div className={styles.subeventForm}>
             <Toast ref={toast} />
-            <label>Nombre del Subevento</label>
+            <label>Nombre de la Actividad</label>
             <InputText value={subeventData.name} onChange={(e) => handleChange("name", e.target.value)} />
 
             <label>Fecha y Hora de Inicio</label>
