@@ -71,7 +71,7 @@ const TicketPurchaseStepper: React.FC<{ event: Event }> = ({ event }) => {
                         onPrev={handlePrev}
                         orderData={orderData}
                         setIdorder={setIdorder}
-                        setTicketUnits={setTicketUnits} // Pass setTicketUnits
+                        setTicketUnits={setTicketUnits}
                     />
                 )}
                 {activeIndex === 4 && <StepNominateTickets onPrev={handlePrev} idorder={idorder} ticketUnits={ticketUnits} />}

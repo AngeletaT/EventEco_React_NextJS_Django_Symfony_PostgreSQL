@@ -7,7 +7,7 @@ import styles from "@/styles/eventeco/TicketPurchase.module.css";
 
 const StepSelectComplements: React.FC<{
     orderData: any;
-    complements: Complement[];
+    complements: Complement[] | [];
     onNext: () => void;
     onPrev: () => void;
     setOrderData: (data: any) => void;
@@ -75,16 +75,6 @@ const StepSelectComplements: React.FC<{
         };
 
         setOrderData(updatedOrderData);
-
-        if (!updatedOrderData.tickets.some((ticket: any) => ticket.entries.some((entry: any) => entry.complements.length > 0))) {
-            toast.current?.show({
-                severity: "warn",
-                summary: "Atención",
-                detail: "Debes seleccionar al menos un complemento para continuar.",
-                life: 3000,
-            });
-            return;
-        }
 
         onNext();
     };
