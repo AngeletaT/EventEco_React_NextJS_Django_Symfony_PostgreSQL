@@ -28,7 +28,6 @@ const StepBuyerInfo: React.FC<{ onNext: () => void; onPrev: () => void }> = ({ o
             if (form) {
                 form.firstname.value = userData.firstname || "";
                 form.lastname.value = userData.lastname || "";
-                form.dni.value = userData.dni || "";
                 form.email.value = userData.email || "";
             }
         }
@@ -79,7 +78,6 @@ const StepBuyerInfo: React.FC<{ onNext: () => void; onPrev: () => void }> = ({ o
                 detail: "Los datos del usuario han sido actualizados correctamente.",
                 life: 3000,
             });
-            onNext();
         } catch (error) {
             toast.current?.show({
                 severity: "error",
@@ -87,6 +85,8 @@ const StepBuyerInfo: React.FC<{ onNext: () => void; onPrev: () => void }> = ({ o
                 detail: "Hubo un error al actualizar los datos del usuario.",
                 life: 3000,
             });
+        } finally {
+            onNext();
         }
     };
 

@@ -406,6 +406,7 @@
     color: #333;
     gap: 10px;
     display: flex;
+    flex-direction: column;
 }
 
 .nominateItem label {

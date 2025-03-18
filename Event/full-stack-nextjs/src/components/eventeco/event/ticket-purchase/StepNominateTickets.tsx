@@ -2,10 +2,7 @@
 
 import React, { useState } from "react";
 import { useNominateTickets } from "@/hooks/eventeco/useTickets";
-import { Button } from "primereact/button";
-import { InputText } from "primereact/inputtext";
-import { Toast } from "primereact/toast";
-import { Dialog } from "primereact/dialog";
+import { Button, InputText, Toast, Dialog } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/eventeco/TicketPurchase.module.css";
 
 const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]; onPrev: () => void }> = ({ idorder, ticketUnits, onPrev }) => {
@@ -19,7 +16,7 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
             dniassistant: "",
         }))
     );
-    const [dialogVisible, setDialogVisible] = useState(false); // State for dialog visibility
+    const [dialogVisible, setDialogVisible] = useState(false);
 
     const handleInputChange = (index: number, field: keyof (typeof ticketAssignments)[0], value: string) => {
         setTicketAssignments((prev) => prev.map((ticket, i) => (i === index ? { ...ticket, [field]: value } : ticket)));
@@ -63,7 +60,7 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
                 detail: "Entradas nominadas correctamente.",
                 life: 3000,
             });
-            setDialogVisible(true); // Show the dialog
+            setDialogVisible(true);
         }
     };
 
@@ -97,7 +94,28 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
                 visible={dialogVisible}
                 style={{ width: "400px" }}
                 onHide={() => setDialogVisible(false)}
-                footer={<Button label="Entendido" icon="pi pi-check" className="p-button-primary" onClick={() => setDialogVisible(false)} />}
+                footer={
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <Button
+                            label="Ir al Perfil"
+                            icon="pi pi-user"
+                            className="p-button-secondary"
+                            onClick={() => {
+                                setDialogVisible(false);
+                                window.location.href = "eventeco/profile";
+                            }}
+                        />
+                        <Button
+                            label="Finalizar Compra"
+                            icon="pi pi-check"
+                            className="p-button-primary"
+                            onClick={() => {
+                                setDialogVisible(false);
+                                window.location.href = "/eventeco/home";
+                            }}
+                        />
+                    </div>
+                }
             >
                 <p>Las entradas han sido nominadas correctamente.</p>
                 <p>Recibirás las entradas por correo electrónico y por teléfono.</p>
