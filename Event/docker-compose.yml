@@ -146,14 +146,14 @@ services:
   #   command: >
   #     apache2-foreground
     
-  springboot_payment:
-    build:
-      context: ./backend-spring_boot
-    container_name: spring_boot_container
-    ports:
-      - "8079:8079"
-    command: >
-      bash -c "java -jar app.jar"
+  # springboot_payment:
+  #   build:
+  #     context: ./backend-spring_boot
+  #   container_name: spring_boot_container
+  #   ports:
+  #     - "8079:8079"
+  #   command: >
+  #     bash -c "java -jar app.jar"
 
   postgres:
     image: postgres:17

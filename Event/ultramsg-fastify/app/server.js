@@ -11,7 +11,7 @@ const fastify = Fastify({ logger: true });
 fastify.register(otpRoutes, { prefix: '/api' });
 fastify.register(paymentNotificationRoutes, { prefix: '/api' });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3011;
 
 const start = async () => {
     try {
