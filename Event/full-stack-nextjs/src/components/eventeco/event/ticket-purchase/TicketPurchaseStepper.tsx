@@ -23,7 +23,7 @@ const TicketPurchaseStepper: React.FC<{ event: Event }> = ({ event }) => {
         tickets: [],
     });
 
-    const [idorder, setIdorder] = useState(0);
+    const [idorder, setIdOrder] = useState(0);
     const [ticketUnits, setTicketUnits] = useState<any[]>([]);
 
     const steps = [
@@ -65,15 +65,7 @@ const TicketPurchaseStepper: React.FC<{ event: Event }> = ({ event }) => {
                     />
                 )}
                 {activeIndex === 2 && <StepBuyerInfo onNext={handleNext} onPrev={handlePrev} />}
-                {activeIndex === 3 && (
-                    <StepPayment
-                        onNext={handleNext}
-                        onPrev={handlePrev}
-                        orderData={orderData}
-                        setIdorder={setIdorder}
-                        setTicketUnits={setTicketUnits}
-                    />
-                )}
+                {activeIndex === 3 && <StepPayment onNext={handleNext} onPrev={handlePrev} orderData={orderData} setIdOrder={setIdOrder} />}
                 {activeIndex === 4 && <StepNominateTickets onPrev={handlePrev} idorder={idorder} ticketUnits={ticketUnits} />}
             </div>
         </div>

@@ -79,22 +79,14 @@
 /* Botón de navegación */
 .navigationButtons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     gap: 10px;
 }
 
-/* Contenedor principal del paso */
-.stepContainer {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 900px;
-    margin: 20px auto;
+.navigationNext {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 /* Sección de complementos */
@@ -132,28 +124,6 @@
     color: #666;
 }
 
-/* Precio total */
-.totalPrice {
-    font-size: 20px;
-    font-weight: bold;
-    color: #2c5042;
-    text-align: right;
-    padding: 10px;
-}
-
-/* Botón de navegación */
-.navigationButtons {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.navigationNext {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
 /* Advertencia de autenticación */
 .warningCard {
     display: flex;
@@ -172,12 +142,14 @@
     margin-right: 10px;
 }
 
+/* Estilos del modal */
 .modalContainer {
     width: 100%;
     max-width: 350px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
 
 .modalHeader {
@@ -206,27 +178,6 @@
     border: none;
     text-decoration: underline;
     cursor: pointer;
-}
-
-/* Contenedor principal del paso */
-.stepContainer {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 900px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* Título del paso */
-.stepContainer h2 {
-    font-size: 24px;
-    color: #2c5042;
-    text-align: center;
 }
 
 /* Formulario de información del comprador */
@@ -252,89 +203,6 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
-}
-
-/* Botón de navegación */
-.navigationButtons {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.navigationNext {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-/* Advertencia de autenticación */
-.warningCard {
-    display: flex;
-    align-items: center;
-    background-color: #fa9d9d;
-    border: 1px solid #ff4d4d;
-    color: #333;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    margin-top: 25px;
-}
-
-.warningCard i {
-    font-size: 18px;
-    margin-right: 10px;
-}
-
-/* Estilos del modal */
-.modalContainer {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: white;
-}
-
-.modalHeader {
-    font-size: 24px;
-    color: #2c5042;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.buttonContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.closeButton {
-    background-color: #f9f9f9;
-    color: #333;
-    border: 1px solid #ccc;
-}
-
-.switchButton {
-    background-color: transparent;
-    color: #2c5042;
-    border: none;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-/* Contenedor del paso de pago */
-.stepContainer {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 900px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 }
 
 /* Resumen del pedido */
@@ -369,25 +237,16 @@
     margin-left: 20px;
 }
 
-/* Botones de navegación */
-.navigationButtons {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-/* Contenedor del paso de nominación */
-.stepContainer {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 900px;
-    margin: 20px auto;
+.paymentSection {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+}
+
+.paymentSection h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0 0 10px 0;
 }
 
 /* Lista de entradas a nominar */
@@ -419,11 +278,4 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-/* Botón de navegación */
-.navigationButtons {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
 }

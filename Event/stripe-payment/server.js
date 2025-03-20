@@ -8,10 +8,10 @@ const app = express();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 app.use(cors({
-    origin: 'http://localhost:8085',
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
-  }));
+}));
 app.use(bodyParser.json());
 
 // Ruta para crear un Intent de Pago

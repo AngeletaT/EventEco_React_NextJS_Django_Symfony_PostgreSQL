@@ -15,3 +15,15 @@ export const djangoAPI_P = axios.create({
 export const symfonyAPI_P = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_SYMFONY_P,
 });
+
+export const ultramessage = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_ULTRAMESSAGE,
+});
+
+export const resend = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_RESEND,
+});
+
+export const stripe = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_STRIPE,
+});
