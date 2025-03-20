@@ -9,7 +9,7 @@ import { FloatLabel } from "@/utils/PrimeReactComponents";
 import { Password } from "@/utils/PrimeReactComponents";
 import { Button } from "@/utils/PrimeReactComponents";
 import { loginSuccess } from "@/store/eventeco/slices/authSlice";
-import { fetchUser } from "@/store/eventeco/slices/userSlice"; // Import fetchUser action
+import { fetchUser } from "@/store/eventeco/slices/userSlice";
 import styles from "@/styles/eventeco/Auth.module.css";
 
 interface ExtendedLoginFormProps extends LoginFormProps {

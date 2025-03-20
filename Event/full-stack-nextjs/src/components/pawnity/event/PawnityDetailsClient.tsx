@@ -6,6 +6,7 @@ import { Event } from "@/types/Event";
 import PawnityLayout from "@/layouts/pawnity/PawnityLayout";
 import { EventSkeleton } from "@/components/pawnity/skeletons/EventSkeleton";
 import styles from "@/styles/pawnity/EventDetails.module.css";
+import TicketPurchaseStepper from "./ticket-purchase/TicketPurchaseStepper";
 const EventMap = dynamic(() => import("@/components/pawnity/event/EventMap"), { ssr: false });
 
 const PawnityDetailsClient = ({ event }: { event: Event }) => {
@@ -80,7 +81,7 @@ const PawnityDetailsClient = ({ event }: { event: Event }) => {
                     {activeTab === "entradas" ? (
                         <div className={styles.ticketSection}>
                             <h2>Entradas</h2>
-                            <p>Entradas a la venta próximamente.</p>
+                            <TicketPurchaseStepper event={event} />{" "}
                         </div>
                     ) : (
                         <div className={styles.eventInfoSection}>
