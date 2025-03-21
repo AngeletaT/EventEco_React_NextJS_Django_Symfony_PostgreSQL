@@ -11,7 +11,7 @@ const sendPaymentNotification = async (request, reply) => {
     // Construir el payload con el mensaje personalizado
     const payload = {
       to: phone,
-      body: `🌟 *Restaurante QoRders* 🌟\n\nEspero que su estancia haya sido satisfactoria. 🙌\n\nSu pago ha sido completado con éxito.\n\nLe hemos enviado un correo electrónico con la confirmación y el número de transacción.\n\n¡Esperamos verte pronto! 🍽️\n\n📍 Dirección: Calle de la Buena Comida, 123, Madrid, España\n📞 Teléfono: +34 912 345 678\n📧 Email: contacto@qorders.com`
+      body: `🐶 *¡Gracias por tu compra en PaWnity!* 🐱\n\nTu pago se ha realizado con éxito y estamos ¡más felices que un perro con dos colas! 🐕\n\n📩 Te enviaremos un correo con tus entradas una vez las nomines en nuestra aplicación.\n\n🐾 www.PaWnity.com 🐾\n\n*¿Qué sigue ahora?* Prepara a tu peludito para vivir una experiencia inolvidable. \n🐕‍🦺🐈🐇🐦🐢 \n\n ¡Nos encantará veros pronto! Ya estamos preparando todo con mucho mimo y amor. 💖\n\n *Contacto*: \n📞 +34 912 345 678 \n 📧 contacto@pawnity.com\n\n ✨ Gracias por formar parte de la familia *PaWnity* ✨\n\n🐾 *Juntos por un mundo más pet-friendly* 🐾`
     };
 
     const response = await axiosInstance.post('/messages/chat', payload);
