@@ -1,4 +1,5 @@
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 import dotenv from 'dotenv';
 import otpRoutes from './src/routes/otpRoutes.js';
 import paymentNotificationRoutes from './src/routes/paymentNotificationRoutes.js';
@@ -6,6 +7,11 @@ import paymentNotificationRoutes from './src/routes/paymentNotificationRoutes.js
 dotenv.config();
 
 const fastify = Fastify({ logger: true });
+
+// Configurar CORS (permitir todos los orígenes)
+await fastify.register(cors, {
+    origin: '*', // esto permite cualquier origen
+});
 
 // Registrar rutas
 fastify.register(otpRoutes, { prefix: '/api' });
