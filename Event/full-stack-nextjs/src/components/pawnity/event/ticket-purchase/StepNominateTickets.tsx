@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]; onPrev: () => void }> = ({ idorder, ticketUnits, onPrev }) => {
     const toast = React.useRef<Toast>(null);
     const nominateTickets = useNominateTickets();
-    const user = useSelector((state: any) => state.auth);
+    const user = useSelector((state: any) => state.user);
     const [ticketAssignments, setTicketAssignments] = useState(
         ticketUnits.map((ticket) => ({
             ticketunitid: ticket.idticketunit,
@@ -50,12 +50,13 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
 
         const failedTickets = results.filter((result) => !result.success);
 
+        console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        console.log(user.email);
+
         const emailBody = {
             to: user.user.email,
             subject: "Pawnity - Detalles de la compra",
-            html: `<p>Gracias por tu compra. Aquí tienes los detalles de tu pedido.</p>
-                <p>Recibirás las entradas por correo electrónico y por teléfono.</p>
-                <p>¡Disfruta del evento!</p>`,
+            html: `<div style=\"font-family:Arial,sans-serif;color:#333;background:#fff8e7;padding:20px;border-radius:10px;\"><h2 style=\"color:#4CAF50;\">🎉 ¡Gracias por tu compra en Pawnity! 🎉</h2><p>🐶🐶 Hemos procesado tu pedido con éxito. 🐱🐱</p><p><strong>📩 Te enviaremos tus entradas por email y también las recibirás por WhatsApp.</strong></p><p style=\"margin-top:10px;\">Nos alegra tenerte en nuestra comunidad pet-friendly. ¡Esperamos que disfrutes del evento con tu peludito! 🐾</p><p style=\"margin-top:20px; font-size:14px; color:#555;\">Si tienes alguna duda, contáctanos en <a href='mailto:contacto@pawnity.com'>contacto@pawnity.com</a></p><p style=\"margin-top:30px;font-size:13px;color:#999;\"><strong>Equipo Pawnity</strong> 🐾</p></div>`,
         };
 
         const emailNotification = await sendEmail(emailBody);
