@@ -38,10 +38,6 @@
     transition: transform 0.2s ease-in-out;
 }
 
-.ticketItem:hover {
-    transform: scale(1.02);
-}
-
 /* Información del ticket */
 .ticketInfo {
     display: flex;

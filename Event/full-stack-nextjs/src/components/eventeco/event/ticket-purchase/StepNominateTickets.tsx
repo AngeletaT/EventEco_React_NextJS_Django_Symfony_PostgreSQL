@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]; onPrev: () => void }> = ({ idorder, ticketUnits, onPrev }) => {
     const toast = React.useRef<Toast>(null);
     const nominateTickets = useNominateTickets();
-    const user = useSelector((state: any) => state.auth);
+    const user = useSelector((state: any) => state.user.user);
     const [ticketAssignments, setTicketAssignments] = useState(
         ticketUnits.map((ticket) => ({
             ticketunitid: ticket.idticketunit,
@@ -50,7 +50,7 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
         const failedTickets = results.filter((result) => !result.success);
 
         const emailBody = {
-            to: user.user.email,
+            to: user.email,
             subject: "Eventeco - Detalles de la compra",
             html: `<p>Gracias por tu compra. Aquí tienes los detalles de tu pedido.</p>
                 <p>Recibirás las entradas por correo electrónico y por teléfono.</p>
@@ -80,7 +80,7 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
     return (
         <div className={styles.stepContainer}>
             <Toast ref={toast} />
-            <h2>Asigna los Nombres a las Entradas</h2>
+            <h2>Nomina las Entradas</h2>
 
             <div className={styles.nominateList}>
                 {ticketAssignments.map((ticket, index) => (
@@ -115,7 +115,7 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
                             className="p-button-secondary"
                             onClick={() => {
                                 setDialogVisible(false);
-                                window.location.href = "eventeco/profile";
+                                window.location.href = "/eventeco/profile";
                             }}
                         />
                         <Button

@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]; onPrev: () => void }> = ({ idorder, ticketUnits, onPrev }) => {
     const toast = React.useRef<Toast>(null);
     const nominateTickets = useNominateTickets();
-    const user = useSelector((state: any) => state.user);
+    const user = useSelector((state: any) => state.user.user);
     const [ticketAssignments, setTicketAssignments] = useState(
         ticketUnits.map((ticket) => ({
             ticketunitid: ticket.idticketunit,
@@ -19,7 +19,6 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
             dniassistant: "",
         }))
     );
-    console.log(ticketUnits);
     const [dialogVisible, setDialogVisible] = useState(false);
 
     const handleInputChange = (index: number, field: keyof (typeof ticketAssignments)[0], value: string) => {
@@ -50,11 +49,8 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
 
         const failedTickets = results.filter((result) => !result.success);
 
-        console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        console.log(user.email);
-
         const emailBody = {
-            to: user.user.email,
+            to: user.email,
             subject: "Pawnity - Detalles de la compra",
             html: `<div style=\"font-family:Arial,sans-serif;color:#333;background:#fff8e7;padding:20px;border-radius:10px;\"><h2 style=\"color:#4CAF50;\">🎉 ¡Gracias por tu compra en Pawnity! 🎉</h2><p>🐶🐶 Hemos procesado tu pedido con éxito. 🐱🐱</p><p><strong>📩 Te enviaremos tus entradas por email y también las recibirás por WhatsApp.</strong></p><p style=\"margin-top:10px;\">Nos alegra tenerte en nuestra comunidad pet-friendly. ¡Esperamos que disfrutes del evento con tu peludito! 🐾</p><p style=\"margin-top:20px; font-size:14px; color:#555;\">Si tienes alguna duda, contáctanos en <a href='mailto:contacto@pawnity.com'>contacto@pawnity.com</a></p><p style=\"margin-top:30px;font-size:13px;color:#999;\"><strong>Equipo Pawnity</strong> 🐾</p></div>`,
         };
@@ -82,7 +78,7 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
     return (
         <div className={styles.stepContainer}>
             <Toast ref={toast} />
-            <h2>Asigna los Nombres a las Entradas</h2>
+            <h2>Nomina las Entradas</h2>
 
             <div className={styles.nominateList}>
                 {ticketAssignments.map((ticket, index) => (
@@ -117,7 +113,7 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
                             className="p-button-secondary"
                             onClick={() => {
                                 setDialogVisible(false);
-                                window.location.href = "pawnity/profile";
+                                window.location.href = "/pawnity/profile";
                             }}
                         />
                         <Button

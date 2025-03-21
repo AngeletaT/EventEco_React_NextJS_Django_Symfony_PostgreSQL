@@ -65,7 +65,15 @@ const TicketPurchaseStepper: React.FC<{ event: Event }> = ({ event }) => {
                     />
                 )}
                 {activeIndex === 2 && <StepBuyerInfo onNext={handleNext} onPrev={handlePrev} />}
-                {activeIndex === 3 && <StepPayment onNext={handleNext} onPrev={handlePrev} orderData={orderData} setIdOrder={setIdOrder} />}
+                {activeIndex === 3 && (
+                    <StepPayment
+                        onNext={handleNext}
+                        onPrev={handlePrev}
+                        orderData={orderData}
+                        setIdOrder={setIdOrder}
+                        setTicketUnits={setTicketUnits}
+                    />
+                )}
                 {activeIndex === 4 && <StepNominateTickets onPrev={handlePrev} idorder={idorder} ticketUnits={ticketUnits} />}
             </div>
         </div>

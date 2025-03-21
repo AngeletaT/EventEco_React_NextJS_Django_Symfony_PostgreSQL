@@ -63,10 +63,10 @@ const StepBuyerInfo: React.FC<{ onNext: () => void; onPrev: () => void }> = ({ o
 
         const form = document.querySelector(".buyerInfoForm") as HTMLFormElement;
         const updatedData = {
+            ...userData,
             firstname: form.firstname.value,
             lastname: form.lastname.value,
             dni: form.dni.value,
-            email: form.email.value,
             phonenumber: form.phonenumber.value,
         } as Partial<Client>;
 

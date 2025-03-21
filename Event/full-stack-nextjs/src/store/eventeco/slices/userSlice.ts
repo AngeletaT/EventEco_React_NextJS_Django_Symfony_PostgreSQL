@@ -98,7 +98,10 @@ const userSlice = createSlice({
                 state.error = null;
             })
             .addCase(updateUser.fulfilled, (state, action: PayloadAction<{ user: Client | Organizer | Admin; userType: string }>) => {
-                state.user = action.payload.user;
+                state.user = {
+                    ...state.user,
+                    ...action.payload.user,
+                };
                 state.userType = action.payload.userType as "client" | "organizer" | "admin";
                 state.isAuthenticated = true;
                 state.isLoading = false;

@@ -145,7 +145,6 @@ const PaymentForm: React.FC<{
             <div className={styles.navigationButtons}>
                 <Button label="Atrás" icon="pi pi-chevron-left" className="p-button-secondary" onClick={onPrev} disabled={loading} />
                 <Button label="Pagar con Stripe" icon="pi pi-credit-card" className="p-button-primary" onClick={handlePayment} loading={loading} />
-                <Button label="Atrás" icon="pi pi-chevron-left" className="p-button-secondary" onClick={onNext} disabled={loading} />
             </div>
         </div>
     );

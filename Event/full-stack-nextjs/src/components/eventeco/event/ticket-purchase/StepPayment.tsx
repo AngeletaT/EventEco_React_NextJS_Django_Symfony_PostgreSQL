@@ -17,12 +17,13 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 const StepPayment: React.FC<{
     orderData: any;
     setIdOrder: (id: number) => void;
+    setTicketUnits: (ticketUnits: any[]) => void;
     onNext: () => void;
     onPrev: () => void;
-}> = ({ orderData, setIdOrder, onNext, onPrev }) => {
+}> = ({ orderData, setIdOrder, setTicketUnits, onNext, onPrev }) => {
     return (
         <Elements stripe={stripePromise}>
-            <PaymentForm orderData={orderData} setIdOrder={setIdOrder} onNext={onNext} onPrev={onPrev} />
+            <PaymentForm orderData={orderData} setIdOrder={setIdOrder} setTicketUnits={setTicketUnits} onNext={onNext} onPrev={onPrev} />
         </Elements>
     );
 };
@@ -30,9 +31,10 @@ const StepPayment: React.FC<{
 const PaymentForm: React.FC<{
     orderData: any;
     setIdOrder: (idorder: number) => void;
+    setTicketUnits: (ticketUnits: any[]) => void;
     onNext: () => void;
     onPrev: () => void;
-}> = ({ orderData, setIdOrder, onNext, onPrev }) => {
+}> = ({ orderData, setIdOrder, setTicketUnits, onNext, onPrev }) => {
     const stripe = useStripe();
     const elements = useElements();
     const toast = React.useRef<Toast>(null);
@@ -48,6 +50,7 @@ const PaymentForm: React.FC<{
             const order = await createOrder.mutateAsync(orderData);
 
             setIdOrder(order.idorder);
+            setTicketUnits(order.ticketunits);
             const paymentBody = {
                 orderId: order.idorder,
                 totalAmount: order.totalprice,
