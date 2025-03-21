@@ -8,9 +8,7 @@ interface EmailBody {
 
 export const sendWhatsapp = async (whatsappBody: any) => {
     try {
-        console.log("Sending WhatsApp notification to:", whatsappBody);
         const response = await ultramessage.post(`/payment/notification/`, whatsappBody);
-        console.log("WhatsApp notification sent:", response.data);
         return response.data;
     } catch (error) {
         console.error("Error sending the message:", error);

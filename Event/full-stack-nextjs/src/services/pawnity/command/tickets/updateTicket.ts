@@ -47,12 +47,7 @@ export const nominateTicket = async ({
 
         const headers = { Authorization: `Bearer ${accesstoken}` };
 
-        console.log("ticketunitid", ticketunitid);
-        console.log("nameassistant", nameassistant);
-        console.log("dniassistant", dniassistant);
-
         const response = await djangoAPI_P.put(`/order/ticketunit/${ticketunitid}/`, { nameassistant, dniassistant }, { headers });
-        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error("Error nominating ticket:", error);

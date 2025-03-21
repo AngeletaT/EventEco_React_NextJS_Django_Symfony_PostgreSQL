@@ -47,26 +47,21 @@ const PaymentForm: React.FC<{
         setLoading(true);
 
         try {
-            console.log("Creating order with data:", orderData);
             const order = await createOrder.mutateAsync(orderData);
-            console.log("Order created:", order);
 
             setIdOrder(order.idorder);
             setTicketUnits(order.ticketunits);
-            console.log("Order tickets:", order.ticketunits);
             const paymentBody = {
                 orderId: order.idorder,
                 totalAmount: order.totalprice,
             };
 
-            console.log("Processing payment with body:", paymentBody);
             const clientSecret = await processStripePayment(paymentBody);
 
             if (!stripe || !elements) {
                 throw new Error("Stripe no está cargado.");
             }
 
-            console.log("Confirming card payment...");
             const result = await stripe.confirmCardPayment(clientSecret as string, {
                 payment_method: {
                     card: elements.getElement(CardElement)!,
@@ -77,8 +72,6 @@ const PaymentForm: React.FC<{
                 throw new Error(result.error.message || "Error en el pago.");
             }
 
-            console.log("Sending WhatsApp notification...");
-            console.log(user.user.phonenumber);
             const whatsappBody = { phone: user.user.phonenumber };
             await sendWhatsapp(whatsappBody);
 
