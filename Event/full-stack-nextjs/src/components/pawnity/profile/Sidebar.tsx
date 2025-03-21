@@ -61,13 +61,11 @@ const Sidebar: React.FC<SidebarProps> = ({ selectedTab, setSelectedTab }) => {
                 </button>
             </nav>
             <div className={styles.profileActions}>
-                <Button
-                    label={window.innerWidth > 769 ? "Cerrar Sesión" : ""}
-                    icon={window.innerWidth <= 769 ? "pi pi-sign-out" : ""}
-                    className="p-button-secondary"
-                    onClick={handleLogout}
-                />
-            </div>{" "}
+                <button className="p-button-secondary" onClick={handleLogout}>
+                    <i className="pi pi-sign-out"></i> &nbsp;&nbsp;
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
         </aside>
     );
 };
