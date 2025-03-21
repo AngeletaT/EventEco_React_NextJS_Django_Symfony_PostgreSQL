@@ -79,15 +79,15 @@ const PaymentForm: React.FC<{
 
             console.log("Sending WhatsApp notification...");
             console.log(user.user.phonenumber);
-            // const whatsappBody = { phone: user.user.phonenumber };
-            // await sendWhatsapp(whatsappBody);
+            const whatsappBody = { phone: user.user.phonenumber };
+            await sendWhatsapp(whatsappBody);
 
-            // toast.current?.show({
-            //     severity: "success",
-            //     summary: "Pago Completado",
-            //     detail: "Tu compra ha sido confirmada. Revisa tu correo y WhatsApp para más detalles.",
-            //     life: 5000,
-            // });
+            toast.current?.show({
+                severity: "success",
+                summary: "Pago Completado",
+                detail: "Tu compra ha sido confirmada. Revisa tu correo y WhatsApp para más detalles.",
+                life: 5000,
+            });
 
             onNext();
         } catch (error) {

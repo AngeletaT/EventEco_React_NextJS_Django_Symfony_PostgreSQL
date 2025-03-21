@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useCreateOrder } from "@/hooks/eventeco/useOrders";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/eventeco";
-import { Client } from "@/types/User";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { processStripePayment } from "@/services/eventeco/command/order/processPayment";
 import { sendWhatsapp } from "@/services/eventeco/command/tickets/sendNotifications";

@@ -1,18 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { RootState } from "@/store/pawnity";
 import { useNominateTickets } from "@/hooks/pawnity/useTickets";
 import { sendEmail } from "@/services/pawnity/command/tickets/sendNotifications";
 import { Button, InputText, Toast, Dialog } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/pawnity/TicketPurchase.module.css";
 import { useSelector } from "react-redux";
-import { Client } from "@/types/User";
 
 const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]; onPrev: () => void }> = ({ idorder, ticketUnits, onPrev }) => {
     const toast = React.useRef<Toast>(null);
     const nominateTickets = useNominateTickets();
-    const user = useSelector((state: RootState) => state.user) as unknown as Client;
+    const user = useSelector((state: any) => state.auth);
     const [ticketAssignments, setTicketAssignments] = useState(
         ticketUnits.map((ticket) => ({
             ticketunitid: ticket.idticketunit,
@@ -53,8 +51,8 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
         const failedTickets = results.filter((result) => !result.success);
 
         const emailBody = {
-            to: user.email,
-            subject: "pawnity, Detalles de la compra",
+            to: user.user.email,
+            subject: "Pawnity - Detalles de la compra",
             html: `<p>Gracias por tu compra. Aquí tienes los detalles de tu pedido.</p>
                 <p>Recibirás las entradas por correo electrónico y por teléfono.</p>
                 <p>¡Disfruta del evento!</p>`,
