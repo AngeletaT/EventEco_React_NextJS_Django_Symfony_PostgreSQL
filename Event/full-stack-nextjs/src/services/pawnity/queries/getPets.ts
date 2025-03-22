@@ -1,4 +1,5 @@
 import { djangoAPI_P, symfonyAPI_P } from "@/services/api";
+import Cookies from "js-cookie";
 import { Pet } from "@/types/pawnity/Pet";
 import { GetPetsParams } from "@/types/pawnity/GetPetsParams";
 
@@ -45,4 +46,50 @@ export const getPetsPerPage = async ({
         total_pages: data.total_pages,
         count: data.count,
     };
+};
+
+export const getPetsByOrganizer = async (idOrg: number): Promise<any> => {
+    try {
+        const accesstoken = Cookies.get("accesstoken");
+        if (!accesstoken) throw new Error("No access token available");
+
+        const headers = { Authorization: `Bearer ${accesstoken}` };
+
+        const response = await symfonyAPI_P.get(`organizer/${idOrg}/pets`, { headers });
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching pets:", error);
+        throw new Error("Failed to fetch pets.");
+    }
+};
+
+export const getAdoptionsByOrganizer = async (idOrg: number): Promise<any> => {
+    try {
+        const accesstoken = Cookies.get("accesstoken");
+        if (!accesstoken) throw new Error("No access token available");
+
+        const headers = { Authorization: `Bearer ${accesstoken}` };
+
+        const response = await symfonyAPI_P.get(`organizer/${idOrg}/adoptions`, { headers });
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching adoptions:", error);
+        throw new Error("Failed to fetch adoptions.");
+    }
+};
+
+export const getSubscriptionsByOrganizer = async (idOrg: number): Promise<any> => {
+    try {
+        const accesstoken = Cookies.get("accesstoken");
+        if (!accesstoken) throw new Error("No access token available");
+
+        const headers = { Authorization: `Bearer ${accesstoken}` };
+
+        const response = await symfonyAPI_P.get(`organizer/${idOrg}/sponsorships`, { headers });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching subscriptions:", error);
+        throw new Error("Failed to fetch subscriptions.");
+    }
 };

@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import styles from "@/styles/pawnity/Organizer/DashboardOrganizer.module.css";
 
 interface SidebarProps {
-    selectedView: "metrics" | "settings" | "event";
-    setSelectedView: (view: "metrics" | "settings" | "event") => void;
+    selectedView: "metrics" | "pets" | "adoptions" | "suscriptions" | "settings" | "event";
+    setSelectedView: (view: "metrics" | "pets" | "adoptions" | "suscriptions" | "settings" | "event") => void;
     setSelectedEvent: (eventslug: string) => void;
     selectedEvent: string;
     newEventName: string;
@@ -35,6 +35,15 @@ const Sidebar: React.FC<SidebarProps> = ({
             <div className={styles.fixedTop}>
                 <button className={selectedView === "metrics" ? styles.active : ""} onClick={() => setSelectedView("metrics")}>
                     📊 Métricas
+                </button>
+                <button className={selectedView === "pets" ? styles.active : ""} onClick={() => setSelectedView("pets")}>
+                    🐶 Mascotas
+                </button>
+                <button className={selectedView === "adoptions" ? styles.active : ""} onClick={() => setSelectedView("adoptions")}>
+                    🏠 Adopciones
+                </button>
+                <button className={selectedView === "suscriptions" ? styles.active : ""} onClick={() => setSelectedView("suscriptions")}>
+                    🎟️ Suscripciones
                 </button>
                 <button className={selectedView === "settings" ? styles.active : ""} onClick={() => setSelectedView("settings")}>
                     ⚙️ Ajustes de Cuenta

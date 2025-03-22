@@ -8,6 +8,9 @@ import { Organizer } from "@/types/User";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import Metrics from "./Metrics";
+import Pets from "./pets/Pets";
+import Suscriptions from "./pets/Suscriptions";
+import Adoptions from "./pets/Adoptions";
 import OrganizerSettings from "./OrganizerSettings";
 import EventView from "./event/EventView";
 import styles from "@/styles/pawnity/Organizer/DashboardOrganizer.module.css";
@@ -21,7 +24,7 @@ const PawnityDashboardOrganizer: React.FC = () => {
         isLoading: boolean;
     };
 
-    const [selectedView, setSelectedView] = useState<"metrics" | "settings" | "event">("metrics");
+    const [selectedView, setSelectedView] = useState<"metrics" | "pets" | "adoptions" | "suscriptions" | "settings" | "event">("metrics");
     const [selectedEvent, setSelectedEvent] = useState<string>("");
     const [newEventName, setNewEventName] = useState<string>("");
     const { data: events, refetch } = useEventsByOrganizer();
@@ -67,6 +70,9 @@ const PawnityDashboardOrganizer: React.FC = () => {
                 <Topbar user={user} isLoading={isLoading} />
                 <div className={styles.content}>
                     {selectedView === "metrics" && <Metrics />}
+                    {selectedView === "pets" && <Pets idOrg={user?.idOrg ?? 0} />}
+                    {selectedView === "suscriptions" && <Suscriptions idOrg={user?.idOrg ?? 0} />}
+                    {selectedView === "adoptions" && <Adoptions idOrg={user?.idOrg ?? 0} />}
                     {selectedView === "settings" && <OrganizerSettings />}
                     {selectedView === "event" && (
                         <EventView

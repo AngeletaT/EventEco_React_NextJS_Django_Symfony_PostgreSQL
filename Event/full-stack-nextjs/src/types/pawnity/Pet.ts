@@ -2,7 +2,7 @@ import { Organizer } from "@/types/Organizer";
 
 export interface Pet {
     idpet: number;
-    uuidpet: string;
+    uuid: string;
     name: string;
     birthdate: string;
     breed: string;
