@@ -126,15 +126,17 @@ const PaymentForm: React.FC<{
                     {orderData.tickets
                         .reduce((sum: number, ticket: any) => {
                             const ticketTotal = ticket.quantity * ticket.price;
+                            const feesTotal = ticket.quantity * 5;
                             const complementsTotal = ticket.entries.reduce(
                                 (entrySum: number, entry: any) => entrySum + parseFloat(entry.subtotalComplements || 0),
                                 0
                             );
-                            return sum + ticketTotal + complementsTotal;
+                            return sum + ticketTotal + complementsTotal + feesTotal;
                         }, 0)
                         .toFixed(2)}
                     €
                 </h3>
+                <p>Gastos de Gestión: {(orderData.tickets.length * 5).toFixed(2)}€</p>
             </div>
 
             <div className={styles.paymentSection}>

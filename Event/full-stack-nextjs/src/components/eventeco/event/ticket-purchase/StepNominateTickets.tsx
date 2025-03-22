@@ -3,11 +3,20 @@
 import React, { useState } from "react";
 import { useNominateTickets } from "@/hooks/eventeco/useTickets";
 import { sendEmail } from "@/services/eventeco/command/tickets/sendNotifications";
+import QRCode from "qrcode";
 import { Button, InputText, Toast, Dialog } from "@/utils/PrimeReactComponents";
 import styles from "@/styles/eventeco/TicketPurchase.module.css";
 import { useSelector } from "react-redux";
+import { render } from "@react-email/render";
+import TicketConfirmationEmail from "./TicketConfirmationEmail";
 
-const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]; onPrev: () => void }> = ({ idorder, ticketUnits, onPrev }) => {
+const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]; onPrev: () => void; orderData: any; event: any }> = ({
+    idorder,
+    ticketUnits,
+    onPrev,
+    orderData,
+    event,
+}) => {
     const toast = React.useRef<Toast>(null);
     const nominateTickets = useNominateTickets();
     const user = useSelector((state: any) => state.user.user);
@@ -49,12 +58,35 @@ const StepNominateTickets: React.FC<{ idorder: number | null; ticketUnits: any[]
 
         const failedTickets = results.filter((result) => !result.success);
 
+        const processedTickets = await Promise.all(
+            results.map(async (result) => {
+                const { ticket } = result;
+
+                if (!result.success) return null;
+
+                const qrData = `${ticket.ticketunitcode}-${ticket.nameassistant}-${ticket.dniassistant}`;
+                // const qrImage = await QRCode.toDataURL(qrData, { width: 150, margin: 1 });
+                const qrImage = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}`;
+
+                return { ...ticket, qr: qrImage };
+            })
+        );
+
+        const filteredTickets = processedTickets.filter((ticket) => ticket !== null);
+
+        const emailData = {
+            user: user,
+            event: event,
+            order: orderData,
+            tickets: filteredTickets,
+        };
+
+        const emailHtml = await render(<TicketConfirmationEmail emailData={emailData} />);
+
         const emailBody = {
             to: user.email,
             subject: "Eventeco - Detalles de la compra",
-            html: `<p>Gracias por tu compra. Aquí tienes los detalles de tu pedido.</p>
-                <p>Recibirás las entradas por correo electrónico y por teléfono.</p>
-                <p>¡Disfruta del evento!</p>`,
+            html: emailHtml,
         };
 
         const emailNotification = await sendEmail(emailBody);
