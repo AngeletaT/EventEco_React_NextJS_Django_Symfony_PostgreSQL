@@ -1,0 +1,148 @@
+/* src/styles/pawnity/Organizer/DashboardMetrics.module.css */
+
+.container {
+     padding: 2rem;
+     display: flex;
+     flex-direction: column;
+     gap: 2.5rem;
+     background: #f9fafb;
+     min-height: 100vh;
+}
+
+.title {
+     font-size: 2.5rem;
+     font-weight: 800;
+     color: #1f2937;
+     text-align: center;
+     margin-bottom: 1rem;
+}
+
+.kpiGrid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+     gap: 1.5rem;
+}
+
+.kpiCard {
+     background: linear-gradient(135deg, #fef9c3, #fde047);
+     padding: 2rem;
+     border-radius: 1.5rem;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+     text-align: center;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kpiCard:hover {
+     transform: translateY(-4px);
+     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.kpiLabel {
+     font-size: 1.3rem;
+     font-weight: 700;
+     color: #78350f;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 0.5rem;
+     margin-bottom: 0.75rem;
+     text-transform: uppercase;
+}
+
+.kpiValue {
+     font-size: 2.5rem;
+     font-weight: 900;
+     color: #92400e;
+}
+
+.chartSection {
+     background: white;
+     padding: 2rem;
+     border-radius: 1.5rem;
+     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+     transition: box-shadow 0.3s ease;
+}
+
+.chartSection:hover {
+     box-shadow: 0 10px 30px rgba(119, 115, 115, 0.1);
+}
+
+.chartTitle {
+     font-weight: 700;
+     margin-bottom: 1rem;
+     font-size: 1.75rem;
+     text-align: center;
+     color: #1f2937;
+     padding-bottom: 0.5rem;
+}
+
+.infoGrid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+     gap: 1.5rem;
+     margin-top: 1rem;
+}
+
+.infoCard {
+     background: linear-gradient(135deg, #fef3c7, #fde68a);
+     padding: 2rem;
+     border-radius: 1.5rem;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     text-align: center;
+}
+
+.infoCard:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.infoTitle {
+     font-size: 1.1rem;
+     font-weight: 700;
+     color: #92400e;
+     margin-bottom: 0.75rem;
+     text-transform: uppercase;
+     letter-spacing: 0.5px;
+}
+
+.infoSubtitle {
+     font-size: 1.5rem;
+     font-weight: 700;
+     color: #78350f;
+}
+
+.infoValue {
+     font-size: 1.25rem;
+     color: #92400e;
+     margin-top: 0.75rem;
+     font-weight: 600;
+}
+
+.ratingCard {
+     max-width: 500px;
+     margin: 2rem auto 0 auto;
+     background: linear-gradient(135deg, #fef9c3, #fde047);
+     padding: 2rem;
+     border-radius: 1.75rem;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+     text-align: center;
+     transition: transform 0.3s ease;
+}
+
+.ratingCard:hover {
+     transform: scale(1.03);
+}
+
+.ratingName {
+     font-size: 1.75rem;
+     font-weight: 800;
+     color: #78350f;
+     margin-bottom: 0.75rem;
+}
+
+.ratingValue {
+     font-size: 2.5rem;
+     color: #f59e0b;
+     font-weight: 900;
+}
