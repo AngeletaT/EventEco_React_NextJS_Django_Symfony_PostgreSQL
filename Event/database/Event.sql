@@ -174,6 +174,106 @@ CREATE TABLE P_ProfileClient (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+INSERT INTO
+    P_ProfileClient (
+        idClient,
+        firstName,
+        lastName,
+        phoneNumber,
+        dni,
+        bio,
+        avatarUrl
+    )
+VALUES (
+        1,
+        'Lucía',
+        'Martínez',
+        '+34 612345678',
+        '12345678A',
+        'Lover of animals and nature.',
+        'https://i.pravatar.cc/150?img=1'
+    ),
+    (
+        2,
+        'Carlos',
+        'Gómez',
+        '+34 699887766',
+        '23456789B',
+        'Passionate about volunteering and helping causes.',
+        'https://i.pravatar.cc/150?img=2'
+    ),
+    (
+        3,
+        'Elena',
+        'Ruiz',
+        '+34 654321987',
+        '34567890C',
+        'Veterinary student and pet enthusiast.',
+        'https://i.pravatar.cc/150?img=3'
+    ),
+    (
+        4,
+        'Diego',
+        'López',
+        '+34 633221144',
+        '45678901D',
+        'Always ready to support animal shelters.',
+        'https://i.pravatar.cc/150?img=4'
+    ),
+    (
+        5,
+        'María',
+        'Fernández',
+        '+34 622334455',
+        '56789012E',
+        'Dog mom and coffee addict.',
+        'https://i.pravatar.cc/150?img=5'
+    ),
+    (
+        6,
+        'Javier',
+        'Sánchez',
+        '+34 611223344',
+        '67890123F',
+        'Enjoys hiking with rescued dogs.',
+        'https://i.pravatar.cc/150?img=6'
+    ),
+    (
+        7,
+        'Laura',
+        'Moreno',
+        '+34 698765432',
+        '78901234G',
+        'Creative spirit with a soft spot for cats.',
+        'https://i.pravatar.cc/150?img=7'
+    ),
+    (
+        8,
+        'Pablo',
+        'Jiménez',
+        '+34 655443322',
+        '89012345H',
+        'Proud foster parent for abandoned pets.',
+        'https://i.pravatar.cc/150?img=8'
+    ),
+    (
+        9,
+        'Sara',
+        'Navarro',
+        '+34 677889900',
+        '90123456J',
+        'Loves all things fluffy and kind-hearted.',
+        'https://i.pravatar.cc/150?img=9'
+    ),
+    (
+        10,
+        'Álvaro',
+        'Romero',
+        '+34 699112233',
+        '01234567K',
+        'Techie who volunteers on weekends.',
+        'https://i.pravatar.cc/150?img=10'
+    );
 END
 $do$;
 
@@ -1521,6 +1621,111 @@ CREATE TABLE P_Adoptions (
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     isActive BOOLEAN DEFAULT TRUE
 );
+INSERT INTO
+    P_Adoptions (
+        idClient,
+        idPet,
+        idOrg,
+        adoptionDate,
+        lastReviewDate,
+        isActive
+    )
+VALUES (
+        1,
+        1,
+        1,
+        '2024-11-10',
+        '2025-02-01',
+        TRUE
+    ),
+    (
+        2,
+        2,
+        1,
+        '2024-12-01',
+        '2025-03-01',
+        TRUE
+    ),
+    (
+        3,
+        3,
+        1,
+        '2024-10-20',
+        NULL,
+        TRUE
+    ),
+    (
+        4,
+        4,
+        1,
+        '2024-09-15',
+        '2025-01-10',
+        TRUE
+    ),
+    (
+        5,
+        5,
+        1,
+        '2024-12-22',
+        NULL,
+        TRUE
+    ),
+    (
+        6,
+        6,
+        1,
+        '2025-01-05',
+        '2025-02-15',
+        TRUE
+    ),
+    (
+        7,
+        7,
+        1,
+        '2024-11-30',
+        NULL,
+        TRUE
+    ),
+    (
+        8,
+        8,
+        1,
+        '2024-12-18',
+        NULL,
+        TRUE
+    ),
+    (
+        1,
+        2,
+        1,
+        '2025-01-20',
+        NULL,
+        TRUE
+    ),
+    (
+        2,
+        3,
+        1,
+        '2024-11-12',
+        '2025-02-10',
+        TRUE
+    ),
+    (
+        3,
+        4,
+        1,
+        '2024-12-25',
+        NULL,
+        TRUE
+    ),
+    (
+        4,
+        5,
+        1,
+        '2025-01-01',
+        '2025-03-15',
+        TRUE
+    );
 END
 $do$;
 
@@ -1538,6 +1743,95 @@ CREATE TABLE P_Sponsorships (
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     isActive BOOLEAN DEFAULT TRUE
 );
+INSERT INTO
+    P_Sponsorships (
+        idClient,
+        idOrg,
+        idPet,
+        startDate,
+        endDate,
+        isActive
+    )
+VALUES (
+        5,
+        1,
+        1,
+        '2024-09-01 10:00:00',
+        '2025-01-01 12:00:00',
+        FALSE
+    ),
+    (
+        6,
+        1,
+        2,
+        '2024-10-15 14:30:00',
+        NULL,
+        TRUE
+    ),
+    (
+        7,
+        1,
+        3,
+        '2024-11-20 09:15:00',
+        NULL,
+        TRUE
+    ),
+    (
+        8,
+        1,
+        4,
+        '2024-12-05 18:00:00',
+        '2025-03-01 08:00:00',
+        FALSE
+    ),
+    (
+        9,
+        1,
+        5,
+        '2024-12-25 12:00:00',
+        NULL,
+        TRUE
+    ),
+    (
+        10,
+        1,
+        6,
+        '2025-01-10 11:11:00',
+        NULL,
+        TRUE
+    ),
+    (
+        3,
+        1,
+        7,
+        '2024-11-11 11:11:00',
+        NULL,
+        TRUE
+    ),
+    (
+        2,
+        1,
+        8,
+        '2024-10-30 16:45:00',
+        '2025-02-15 16:00:00',
+        FALSE
+    ),
+    (
+        1,
+        1,
+        6,
+        '2024-12-12 12:12:00',
+        NULL,
+        TRUE
+    ),
+    (
+        4,
+        1,
+        2,
+        '2025-01-01 10:00:00',
+        NULL,
+        TRUE
+    );
 END
 $do$;
 

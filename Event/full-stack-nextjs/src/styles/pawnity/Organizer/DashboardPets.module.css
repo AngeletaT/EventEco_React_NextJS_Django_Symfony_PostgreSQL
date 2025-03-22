@@ -1,0 +1,262 @@
+.container {
+     padding: 2rem;
+     background-color: #eeded6;
+}
+
+.title {
+     font-size: 2.5rem;
+     text-align: center;
+     margin-bottom: 2rem;
+     color: #c14e8f;
+     font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+}
+
+.message {
+     text-align: center;
+     margin-top: 5rem;
+     font-size: 2.5rem;
+     font-weight: bold;
+     color: #d16ba5;
+     font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+     background-color: #fff0f6;
+     padding: 2rem 3rem;
+     border-radius: 2rem;
+     width: fit-content;
+     margin-left: auto;
+     margin-right: auto;
+     box-shadow: 0 10px 25px rgba(209, 107, 165, 0.2);
+     animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+     0% {
+          transform: translateY(0);
+     }
+
+     50% {
+          transform: translateY(-10px);
+     }
+
+     100% {
+          transform: translateY(0);
+     }
+}
+
+.grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+     gap: 2.5rem;
+     justify-items: center;
+}
+
+.card {
+     width: 100%;
+     max-width: 340px;
+     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+     border-radius: 2rem;
+     overflow: hidden;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     background-color: #fdf1f6;
+}
+
+.card:hover {
+     transform: translateY(-6px);
+     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.imageWrapper {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-bottom: 1rem;
+}
+
+.card p {
+     font-size: 0.95rem;
+     color: #444;
+     margin: 0.4rem 0;
+}
+
+.headerActions {
+     display: flex;
+     justify-content: center;
+     margin-bottom: 2rem;
+}
+
+.addButton {
+     background-color: #f06292;
+     border: none;
+     color: white;
+     font-weight: bold;
+     padding: 0.6rem 1.4rem;
+     border-radius: 2rem;
+     font-size: 1rem;
+     transition: background-color 0.3s ease;
+}
+
+.addButton:hover {
+     background-color: #ec407a;
+}
+
+.cardFooter {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding-top: 1rem;
+     border-top: 1px solid #eee;
+}
+
+.actions {
+     display: flex;
+     align-items: center;
+     gap: 0.75rem;
+}
+
+.toggleWrapper {
+     display: flex;
+     align-items: center;
+}
+
+.updateButton {
+     color: #555;
+     font-size: 0.9rem;
+}
+
+.card :global(.p-card-title),
+.card :global(.p-card-subtitle) {
+     text-align: center;
+}
+
+
+/* ========== ADOPTIONS (Vista horizontal y visual) ========== */
+
+.adoptionsContainer {
+     padding: 2rem;
+     background-color: #eacdbd;
+}
+
+.adoptionsTitle {
+     font-size: 2.5rem;
+     text-align: center;
+     margin-bottom: 2rem;
+     color: #c14e8f;
+     font-family: 'Comic Sans MS', 'Segoe UI', cursive;
+}
+
+.adoptionsGrid {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+     gap: 2rem;
+     justify-items: center;
+}
+
+.adoptionCard {
+     background-color: #fdf1f6;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+     border-radius: 1.5rem;
+     padding: 1.5rem;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     width: 100%;
+     max-width: 520px;
+}
+
+.adoptionCard:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.cardContent {
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+     gap: 1.5rem;
+     flex-wrap: nowrap;
+}
+
+.imageBlock img {
+     width: 120px !important;
+     /* Fuerza el nuevo tamaño */
+     height: 120px !important;
+}
+
+.imageLabel {
+     margin-top: 0.5rem;
+     font-weight: bold;
+     font-size: 1.15rem;
+     color: #c14e8f;
+     text-align: center;
+     width: 100%;
+}
+
+.phone {
+     margin-top: 0.25rem;
+     font-size: 0.95rem;
+     color: #555;
+}
+
+.heartBlock {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.heartIcon {
+     font-size: 4rem;
+     color: #e91e63;
+     margin: 0 1rem;
+     animation: pulse 1.5s infinite;
+}
+
+.euroIcon {
+     font-size: 4rem;
+     color: #d4af37;
+     /* dorado clásico */
+     margin: 0 1rem;
+     animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+     0% {
+          transform: scale(1);
+     }
+
+     50% {
+          transform: scale(1.4);
+     }
+
+     100% {
+          transform: scale(1);
+     }
+}
+
+.contactInfo {
+     margin-top: 1.5rem;
+     display: flex;
+     justify-content: center;
+     gap: 0.5rem;
+     font-size: 1rem;
+     color: #333;
+     font-weight: 500;
+}
+
+.contactLabel {
+     color: #c14e8f;
+     font-weight: bold;
+}
+
+.adoptionCard :global(.p-card-title) {
+     text-align: center;
+     width: 100%;
+     font-weight: bold;
+     color: #c14e8f;
+     font-size: 1.2rem;
+}
+
+.imageBlock {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: center;
+     width: 120px;
+     /* opcional pero ayuda a mantener simetría */
+}
