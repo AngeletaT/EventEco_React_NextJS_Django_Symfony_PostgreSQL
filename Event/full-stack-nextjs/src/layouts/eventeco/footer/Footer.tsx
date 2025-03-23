@@ -11,12 +11,12 @@ const Footer: React.FC = () => {
                     <a href="https://github.com/AngeletaT" className={styles.link}>
                         <i className="pi pi-github"></i> Àngela Torró
                     </a>
-                    <a href="https://github.com/AlvaroGarCam" className={styles.link}>
+                    {/* <a href="https://github.com/AlvaroGarCam" className={styles.link}>
                         <i className="pi pi-github"></i> Álvaro Garrido
                     </a>
                     <a href="https://github.com/CainMartinez" className={styles.link}>
                         <i className="pi pi-github"></i> Caín Martínez
-                    </a>
+                    </a> */}
                 </nav>
             </div>
             <div className={styles.copy}>&copy; {new Date().getFullYear()} EventEco. Todos los derechos reservados.</div>

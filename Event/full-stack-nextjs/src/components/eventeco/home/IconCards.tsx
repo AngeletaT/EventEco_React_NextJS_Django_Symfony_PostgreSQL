@@ -6,9 +6,21 @@ import { Card } from "@/utils/PrimeReactComponents";
 
 const IconCards: React.FC = () => {
     const cards = [
-        { icon: "pi pi-calendar", title: "Eventos Sostenibles", description: "Encuentra eventos alineados con tus valores ecológicos." },
-        { icon: "pi pi-users", title: "Conexiones Únicas", description: "Conoce a personas con intereses similares en eventos eco-friendly." },
-        { icon: "pi pi-globe", title: "Impacto Global", description: "Participa en iniciativas que apoyan un cambio positivo en el planeta." },
+        {
+            icon: "pi pi-sun",
+            title: "Energia propia",
+            description: "Nuestros eventos utilizan infraestructuras alimentadas con energía 100% renovable.",
+        },
+        {
+            icon: "pi pi-car",
+            title: "Movilidad Compartida",
+            description: "Ofrecemos transporte en autobús compartido para reducir emisiones y facilitar el acceso.",
+        },
+        {
+            icon: "pi pi-ticket",
+            title: "Entradas Digitales",
+            description: "Accede a todos tus eventos desde la app sin imprimir, de forma segura y ecológica.",
+        },
     ];
 
     return (
