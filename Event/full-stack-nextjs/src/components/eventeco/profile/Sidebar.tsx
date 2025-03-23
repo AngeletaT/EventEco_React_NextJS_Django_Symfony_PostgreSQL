@@ -8,7 +8,7 @@ import { fetchUser } from "@/store/eventeco/slices/userSlice";
 import { Button } from "@/utils/PrimeReactComponents";
 import { Client } from "@/types/User";
 import { logoutUser } from "@/store/eventeco/slices/authSlice";
-import styles from "@/styles/eventeco/Profile.module.css";
+import styles from "@/styles/eventeco/Client/Profile.module.css";
 
 interface SidebarProps {
     selectedTab: "tickets" | "orders" | "settings" | "preferences";

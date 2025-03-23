@@ -7,7 +7,7 @@ import { Client } from "@/types/User";
 import { fetchUser, updateUser } from "@/store/eventeco/slices/userSlice";
 import { Button, InputText } from "@/utils/PrimeReactComponents";
 import { Toast } from "@/utils/PrimeReactComponents";
-import styles from "@/styles/eventeco/Profile.module.css";
+import styles from "@/styles/eventeco/Client/Profile.module.css";
 
 const ProfileSettings: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();

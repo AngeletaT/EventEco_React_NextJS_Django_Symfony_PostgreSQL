@@ -18,3 +18,7 @@ export { Toast } from "primereact/toast";
 export { Calendar } from "primereact/calendar";
 export { Steps } from "primereact/steps";
 export { Checkbox } from "primereact/checkbox";
+export { Accordion } from "primereact/accordion";
+export { AccordionTab } from "primereact/accordion";
+export { Tag } from "primereact/tag";
+export { Rating } from "primereact/rating";

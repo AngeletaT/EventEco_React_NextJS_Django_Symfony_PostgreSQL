@@ -1,13 +1,14 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createOrder } from "@/services/eventeco/command/order/createOrder";
+import { getOrders } from "@/services/eventeco/queries/getOrders";
 
-// export const useOrders = (eventSlug: string) => {
-//     return useQuery({
-//         queryKey: ["orders", eventSlug],
-//         queryFn: () => getOrders(eventSlug),
-//         staleTime: 1000 * 60 * 5,
-//     });
-// };
+export const useOrdersByClient = () => {
+    return useQuery({
+        queryKey: ["orders"],
+        queryFn: () => getOrders(),
+        staleTime: 1000 * 60 * 5,
+    });
+};
 
 export const useCreateOrder = () => {
     const queryClient = useQueryClient();
