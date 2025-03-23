@@ -132,7 +132,7 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
                         endDate: newEnd,
                         description: subeventCalendar.data.description,
                         status: subeventCalendar.data.status,
-                        urlposter: subeventCalendar.data.urlposter,
+                        urlposter: `#${subeventCalendar.data.urlposter}`,
                     },
                 },
                 {
@@ -172,7 +172,7 @@ const SubeventCalendar: React.FC<{ event: Event }> = ({ event }) => {
                         endDate: subeventCalendar.end,
                         description: subeventCalendar.data.description,
                         status: subeventCalendar.data.status,
-                        urlposter: subeventCalendar.data.urlposter,
+                        urlposter: `#${subeventCalendar.data.urlposter}`,
                     },
                 },
                 {

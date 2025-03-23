@@ -43,7 +43,7 @@ const SubeventModal = ({
             description: subevent?.data.description || "",
             start: subevent?.start || selectedRange?.start || "",
             end: subevent?.end || selectedRange?.end || "",
-            urlposter: subevent?.barColor || "#000000",
+            urlposter: subevent?.barColor?.substring(1) || "000000",
         });
     }, [subevent, selectedRange]);
 
@@ -169,7 +169,7 @@ const SubeventModal = ({
                         onChange={(e) => handleChange("urlposter", e.value)}
                         style={{ marginRight: "20px" }}
                     />
-                    <span>{subeventData.urlposter}</span>
+                    <span>{`#${subeventData.urlposter}`}</span>
                 </div>
 
                 <div className={`p-d-flex p-jc-between ${styles.actions}`}>
