@@ -17,9 +17,9 @@ const PawnityProfileClient: React.FC = () => {
             <div className={styles.profileContainer}>
                 <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
                 <div className={styles.profileContent}>
+                    {selectedTab === "settings" && <ProfileSettings />}
                     {selectedTab === "tickets" && <ProfileTickets />}
                     {selectedTab === "orders" && <ProfileOrders />}
-                    {selectedTab === "settings" && <ProfileSettings />}
                     {selectedTab === "preferences" && <ProfilePreferences />}
                 </div>
             </div>
