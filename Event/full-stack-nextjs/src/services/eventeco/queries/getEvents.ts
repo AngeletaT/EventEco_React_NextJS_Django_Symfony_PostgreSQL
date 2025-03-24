@@ -50,7 +50,7 @@ export const getEventsPerPage = async ({
 
 export const getEventBySlug = async (eventslug: string): Promise<Event> => {
     try {
-        const response = await djangoAPI_E.get(`/events/details/${eventslug}`);
+        const response = await djangoAPI_E.get(`/events/details/${eventslug}/`);
         return response.data as Event;
     } catch (error) {
         console.error("Error fetching event details:", error);
