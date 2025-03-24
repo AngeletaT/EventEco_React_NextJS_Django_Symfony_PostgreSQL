@@ -24,7 +24,7 @@ const EventecoProfileClient = () => {
                 <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
                 <div className={styles.profileContent}>
                     {selectedTab === "settings" && <ProfileSettings />}
-                    {selectedTab === "tickets" && <ProfileTickets />}
+                    {selectedTab === "tickets" && <ProfileTickets activeTickets={activeTickets || []} />}
                     {selectedTab === "orders" && <ProfileOrders oldTickets={oldTickets || []} />}
                     {selectedTab === "preferences" && <ProfilePreferences />}
                 </div>
