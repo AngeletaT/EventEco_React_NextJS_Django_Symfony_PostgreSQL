@@ -84,7 +84,7 @@ const EventecoDetailsClient = ({ event }: { event: Event }) => {
                     {activeTab === "entradas" ? (
                         <div className={styles.ticketSection}>
                             <h2>Entradas</h2>
-                            <TicketPurchaseStepper event={event} />
+                            {event.tickets && event.tickets.length > 0 ? <TicketPurchaseStepper event={event} /> : <p>Entradas próximamente.</p>}
                         </div>
                     ) : (
                         <div className={styles.eventInfoSection}>
