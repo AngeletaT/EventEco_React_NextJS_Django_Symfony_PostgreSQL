@@ -1,16 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/utils/PrimeReactComponents";
 import ContactForm from "@/components/eventeco/contact/ContactForm";
 import styles from "@/styles/eventeco/Contact.module.css";
 
 const PricingPlans: React.FC = () => {
     const [selectedPlan, setSelectedPlan] = useState<string>("");
+    const formRef = useRef<HTMLDivElement>(null);
 
     const handleSelectPlan = (plan: string) => {
-        setSelectedPlan(plan); // Update the selected plan
+        setSelectedPlan(plan);
     };
+
+    useEffect(() => {
+        if (selectedPlan && formRef.current) {
+            formRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    }, [selectedPlan]);
 
     return (
         <div className={`surface-0 ${styles.container}`}>
@@ -28,7 +35,7 @@ const PricingPlans: React.FC = () => {
                             <div className="text-600">Ideal para pequeños eventos sostenibles</div>
                             <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
                             <div className="flex align-items-center">
-                                <span className="font-bold text-2xl text-900">299€</span>
+                                <span className="font-bold text-2xl text-900">799€</span>
                                 <span className="ml-2 font-medium text-600">por evento</span>
                             </div>
                             <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
@@ -56,7 +63,7 @@ const PricingPlans: React.FC = () => {
                             <div className="text-600">Para eventos de tamaño medio con soluciones energéticas</div>
                             <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
                             <div className="flex align-items-center">
-                                <span className="font-bold text-2xl text-900">749€</span>
+                                <span className="font-bold text-2xl text-900">1.249€</span>
                                 <span className="ml-2 font-medium text-600">por evento</span>
                             </div>
                             <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
@@ -85,7 +92,7 @@ const PricingPlans: React.FC = () => {
                             <div className="text-600">Para grandes eventos con despliegue ecológico total</div>
                             <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
                             <div className="flex align-items-center">
-                                <span className="font-bold text-2xl text-900">1.299€</span>
+                                <span className="font-bold text-2xl text-900">1.899€</span>
                                 <span className="ml-2 font-medium text-600">por evento</span>
                             </div>
                             <hr className="my-3 mx-0 border-top-1 border-bottom-none border-300" />
@@ -108,7 +115,11 @@ const PricingPlans: React.FC = () => {
                 </div>
             </div>
 
-            <ContactForm selectedPlan={selectedPlan} />
+            {selectedPlan && (
+                <div ref={formRef}>
+                    <ContactForm selectedPlan={selectedPlan} />
+                </div>
+            )}
         </div>
     );
 };

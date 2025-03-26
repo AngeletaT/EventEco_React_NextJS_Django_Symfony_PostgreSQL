@@ -9,7 +9,6 @@ interface ContactFormProps {
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ selectedPlan }) => {
-    console.log(selectedPlan);
     const [form, setForm] = useState({
         company: "",
         email: "",
