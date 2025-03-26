@@ -10,8 +10,8 @@ const COLORS = ["#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#82ca9d"];
 
 const Metrics: React.FC = () => {
     const { metrics } = getMetrics();
-    const [revenueMonths, setRevenueMonths] = useState(12);
-    const [ticketMonths, setTicketMonths] = useState(12);
+    const [revenueMonths, setRevenueMonths] = useState(3);
+    const [ticketMonths, setTicketMonths] = useState(3);
 
     const parseRevenue = (value: string) => {
         return parseFloat(value.replace(/\./g, "").replace(",", "."));
@@ -111,7 +111,7 @@ const Metrics: React.FC = () => {
 
                 <div className={styles.chartCard}>
                     <div className={styles.chartCardHeader}>
-                        <h3>🎟️ Tickets vendidos por mes</h3>
+                        <h3>🎟️ Tickets vendidos en los últimos {ticketMonths} meses</h3>
                         <MonthButtons current={ticketMonths} onChange={setTicketMonths} />
                     </div>
                     <ResponsiveContainer width="100%" height={250}>
@@ -146,10 +146,30 @@ const Metrics: React.FC = () => {
                     <ResponsiveContainer width="100%" height={250}>
                         <BarChart data={addonsRevenue} layout="vertical">
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis type="number" />
-                            <YAxis type="category" dataKey="name" width={100} />
-                            <Tooltip />
-                            <Bar dataKey="units" fill="#f59e0b" />
+                            <XAxis
+                                type="number"
+                                tickFormatter={(value) =>
+                                    value.toLocaleString("es-ES", {
+                                        style: "currency",
+                                        currency: "EUR",
+                                        minimumFractionDigits: 2,
+                                    })
+                                }
+                            />
+                            <YAxis type="category" dataKey="name" width={100} tickFormatter={(value) => value.toLocaleString("es-ES")} />
+                            <Tooltip
+                                formatter={(value: number, name: string) =>
+                                    name === "revenue"
+                                        ? value.toLocaleString("es-ES", {
+                                              style: "currency",
+                                              currency: "EUR",
+                                              minimumFractionDigits: 2,
+                                          })
+                                        : value.toLocaleString("es-ES")
+                                }
+                            />
+                            <Bar dataKey="revenue" fill="#f59e0b" name="Ingresos" />
+                            <Bar dataKey="units" fill="#82ca9d" name="Cantidad" />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
