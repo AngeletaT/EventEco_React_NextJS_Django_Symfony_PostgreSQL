@@ -34,12 +34,18 @@ const TicketPurchaseStepper: React.FC<{ event: Event }> = ({ event }) => {
         { label: "Asignar Nombres" },
     ];
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 250, behavior: "smooth" });
+    };
+
     const handleNext = () => {
         setActiveIndex((prev) => Math.min(prev + 1, steps.length - 1));
+        scrollToTop();
     };
 
     const handlePrev = () => {
         setActiveIndex((prev) => Math.max(prev - 1, 0));
+        scrollToTop();
     };
 
     return (

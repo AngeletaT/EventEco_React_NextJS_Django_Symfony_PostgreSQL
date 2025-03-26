@@ -8,7 +8,7 @@ import { Elements, CardElement, useStripe, useElements } from "@stripe/react-str
 import { processStripePayment } from "@/services/eventeco/command/order/processPayment";
 import { sendWhatsapp } from "@/services/eventeco/command/tickets/sendNotifications";
 import { loadStripe } from "@stripe/stripe-js";
-import { Button, Toast, Checkbox } from "@/utils/PrimeReactComponents";
+import { Button, Toast, Checkbox, InputText } from "@/utils/PrimeReactComponents";
 import LegalModal from "@/components/shared/LegalModal";
 import styles from "@/styles/eventeco/TicketPurchase.module.css";
 
@@ -84,7 +84,7 @@ const PaymentForm: React.FC<{
             }
 
             const whatsappBody = { phone: user.user.phonenumber };
-            // await sendWhatsapp(whatsappBody);
+            await sendWhatsapp(whatsappBody);
 
             toast.current?.show({
                 severity: "success",
@@ -152,6 +152,7 @@ const PaymentForm: React.FC<{
 
             <div className={styles.paymentSection}>
                 <h3>Introduce los datos de tu tarjeta</h3>
+                <InputText placeholder="Nombre del titular" className={styles.cardHolder} />
                 <CardElement className={styles.cardElement} />
             </div>
 

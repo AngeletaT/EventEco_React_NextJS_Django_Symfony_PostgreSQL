@@ -33,6 +33,10 @@ const EventecoDashboardOrganizer: React.FC = () => {
         }
     }, [dispatch, user]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [selectedView]);
+
     const handleSetSelectedEvent = (eventslug: string) => {
         setSelectedEvent(eventslug);
         setNewEventName("");

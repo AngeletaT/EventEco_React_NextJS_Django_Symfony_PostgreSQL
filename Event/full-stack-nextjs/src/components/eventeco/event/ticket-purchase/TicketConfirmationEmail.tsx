@@ -17,6 +17,7 @@ const TicketConfirmationEmail: React.FC<{ emailData: any }> = ({ emailData }) =>
                 <Container style={styles.container}>
                     {/* Header con imagen */}
                     <Section style={styles.bannerPlaceholder}>
+                        <Text style={styles.bannerText}>EVENTECO</Text>
                         <Text style={styles.bannerText}>🎟️ Confirmación de Compra</Text>
                     </Section>
 

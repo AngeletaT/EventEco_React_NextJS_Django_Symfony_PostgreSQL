@@ -103,8 +103,18 @@ const Metrics: React.FC = () => {
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="month" />
                             <YAxis />
-                            <Tooltip />
-                            <Line type="monotone" dataKey="revenue" stroke="#8884d8" strokeWidth={2} />
+                            <Tooltip
+                                formatter={(value: number, name: string) =>
+                                    name === "revenue"
+                                        ? value.toLocaleString("es-ES", {
+                                              style: "currency",
+                                              currency: "EUR",
+                                              minimumFractionDigits: 2,
+                                          })
+                                        : value
+                                }
+                            />
+                            <Line type="monotone" dataKey="revenue" stroke="#8884d8" strokeWidth={2} name="Beneficio (€)" />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
@@ -119,8 +129,18 @@ const Metrics: React.FC = () => {
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="month" />
                             <YAxis />
-                            <Tooltip />
-                            <Bar dataKey="tickets_sold" fill="#82ca9d" />
+                            <Tooltip
+                                formatter={(value: number, name: string) =>
+                                    name === "revenue"
+                                        ? value.toLocaleString("es-ES", {
+                                              style: "currency",
+                                              currency: "EUR",
+                                              minimumFractionDigits: 2,
+                                          })
+                                        : value
+                                }
+                            />
+                            <Bar dataKey="tickets_sold" fill="#82ca9d" name="Entradas Vendidas" />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
@@ -150,9 +170,8 @@ const Metrics: React.FC = () => {
                                 type="number"
                                 tickFormatter={(value) =>
                                     value.toLocaleString("es-ES", {
-                                        style: "currency",
-                                        currency: "EUR",
-                                        minimumFractionDigits: 2,
+                                        style: "decimal",
+                                        minimumFractionDigits: 0,
                                     })
                                 }
                             />
@@ -168,8 +187,8 @@ const Metrics: React.FC = () => {
                                         : value.toLocaleString("es-ES")
                                 }
                             />
-                            <Bar dataKey="revenue" fill="#f59e0b" name="Ingresos" />
-                            <Bar dataKey="units" fill="#82ca9d" name="Cantidad" />
+                            <Bar dataKey="revenue" fill="#f59e0b" name="Ingresos (€)" />
+                            <Bar dataKey="units" fill="#82ca9d" name="Unidades" />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>

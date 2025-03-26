@@ -233,6 +233,10 @@
     margin-left: 20px;
 }
 
+.privacyCheckbox {
+    color: #333;
+}
+
 .paymentSection {
     display: flex;
     flex-direction: column;
@@ -244,6 +248,12 @@
     color: #333;
     margin: 0 0 10px 0;
 }
+
+.cardHolder {
+    border: none;
+    font-size: 14px;
+}
+
 
 /* Lista de entradas a nominar */
 .nominateList {
