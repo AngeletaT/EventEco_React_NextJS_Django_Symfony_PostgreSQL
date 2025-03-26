@@ -39,15 +39,6 @@ const mapSubeventsToEvents = (subevents: Subevent[], columns: any) => {
             const subeventStartDate = format(parseISO(subevent.startdate), "dd/MM/yyyy");
             const column = columns.find((col: any) => col.name === subeventStartDate);
 
-            console.log({
-                id: subevent.idsubevents,
-                text: subevent.name,
-                start: formatEventDate(subevent.startdate),
-                end: formatEventDate(subevent.enddate),
-                barColor: subevent.urlposter,
-                description: subevent.description,
-                resource: resourceId,
-            });
             return {
                 id: subevent.idsubevents,
                 text: subevent.name,
@@ -64,7 +55,6 @@ const ReadOnlyCalendar: React.FC<ReadOnlyCalendarProps> = ({ subevents }) => {
     const firstDate = subevents[0]?.startdate;
     const lastDate = subevents[subevents.length - 1]?.enddate;
     const columns = getDays(firstDate, lastDate);
-    console.log(columns);
     const [events, setEvents] = useState<any[]>([]);
 
     useEffect(() => {
@@ -72,8 +62,6 @@ const ReadOnlyCalendar: React.FC<ReadOnlyCalendarProps> = ({ subevents }) => {
             setEvents(mapSubeventsToEvents(subevents, columns));
         }
     }, [subevents]);
-
-    console.log(events);
 
     const config: DayPilot.CalendarConfig = {
         viewType: "Resources",
@@ -92,7 +80,7 @@ const ReadOnlyCalendar: React.FC<ReadOnlyCalendarProps> = ({ subevents }) => {
     };
 
     return (
-        <div style={{ height: "600px", border: "1px solid #ccc", borderRadius: "8px" }}>
+        <div style={{ height: "600px", border: "1px solid #ccc", borderRadius: "8px", maxWidth: "100%", margin: "0 auto" }}>
             <DayPilotCalendar {...config} />
         </div>
     );

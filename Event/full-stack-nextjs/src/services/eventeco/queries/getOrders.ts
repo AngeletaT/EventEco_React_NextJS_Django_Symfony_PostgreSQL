@@ -9,7 +9,6 @@ export const getOrders = async () => {
         const headers = { Authorization: `Bearer ${accesstoken}` };
 
         const response = await djangoAPI_E.get(`/order/dashboard/`, { headers });
-        console.log("Orders fetched:", response.data);
         return response.data;
     } catch (error) {
         console.error("Error fetching categories:", error);

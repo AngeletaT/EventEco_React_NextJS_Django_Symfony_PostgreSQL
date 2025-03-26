@@ -16,7 +16,6 @@ const EventecoProfileClient = () => {
     const orders = useOrdersByClient().data as { active_orders: Order[]; old_orders: Order[] } | null;
     const activeTickets = orders?.active_orders;
     const oldTickets = orders?.old_orders;
-    console.log(oldTickets);
 
     return (
         <EventecoLayout>

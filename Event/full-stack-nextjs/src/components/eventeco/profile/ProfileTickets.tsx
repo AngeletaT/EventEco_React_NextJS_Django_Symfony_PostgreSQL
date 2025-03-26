@@ -18,8 +18,6 @@ const ProfileTickets: React.FC<ProfileTicketsProps> = ({ activeTickets }) => {
     const [event, setEvent] = useState<any>(null);
     const [subevents, setSubevents] = useState<any>(null);
     const [coordinates, setCoordinates] = useState<[number, number]>([0, 0]);
-    console.log(event);
-    console.log(subevents);
 
     useEffect(() => {
         const fetchEvent = async () => {
@@ -49,120 +47,126 @@ const ProfileTickets: React.FC<ProfileTicketsProps> = ({ activeTickets }) => {
     }
 
     return (
-        <div className={styles.container}>
-            <h2>Mis Entradas Activas</h2>
+        <div style={{ overflowX: "auto" }}>
+            <div className={styles.container}>
+                <h2>Mis Entradas Activas</h2>
 
-            {activeTickets.length === 0 ? (
-                <p>No tienes entradas activas actualmente.</p>
-            ) : (
-                <Accordion multiple>
-                    {activeTickets.map((order) => {
-                        const event = order.event;
+                {activeTickets.length === 0 ? (
+                    <p>No tienes entradas activas actualmente.</p>
+                ) : (
+                    <Accordion multiple>
+                        {activeTickets.map((order) => {
+                            const event = order.event;
 
-                        return (
-                            <AccordionTab
-                                key={order.idorder}
-                                header={
-                                    <div className={styles.header}>
-                                        <img src={event.urlposter.replace(/\\/g, "/")} alt={event.name} className={styles.poster} />
-                                        <div>
-                                            <h3>{event.name}</h3>
-                                            <p>{event.location}</p>
-                                            <p>
-                                                {formatDate(event.startdate)} - {formatDate(event.enddate)}
-                                            </p>
+                            return (
+                                <AccordionTab
+                                    key={order.idorder}
+                                    header={
+                                        <div className={styles.header}>
+                                            <img src={event.urlposter.replace(/\\/g, "/")} alt={event.name} className={styles.poster} />
+                                            <div>
+                                                <h3>{event.name}</h3>
+                                                <p>{event.location}</p>
+                                                <p>
+                                                    {formatDate(event.startdate)} - {formatDate(event.enddate)}
+                                                </p>
+                                            </div>
+                                            <div style={{ marginLeft: "auto", alignSelf: "flex-start" }}>
+                                                <Tag severity="info" value={`Faltan ${calculateDaysLeft(event.startdate)} días`} />
+                                            </div>
                                         </div>
-                                        <div style={{ marginLeft: "auto", alignSelf: "flex-start" }}>
-                                            <Tag severity="info" value={`Faltan ${calculateDaysLeft(event.startdate)} días`} />
+                                    }
+                                >
+                                    <div className={styles.content}>
+                                        <div className={styles.ticketList}>
+                                            {order.ticketunits.map((ticket) => (
+                                                <div key={ticket.idticketunit} className={styles.ticketCard}>
+                                                    <div className={styles.ticketLeft}>
+                                                        <img
+                                                            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`${ticket.code}-${ticket.dniassistant}-${ticket.nameassistant}`)}`}
+                                                            alt="Código QR"
+                                                            width="150"
+                                                            height="150"
+                                                            style={{ margin: "10px auto", display: "block" }}
+                                                        />
+                                                        <p className={styles.code}>{ticket.code}</p>
+                                                    </div>
+                                                    <div className={styles.ticketCenter}>
+                                                        <p>
+                                                            <strong>Nombre:</strong> {ticket.nameassistant}
+                                                        </p>
+                                                        <p>
+                                                            <strong>DNI:</strong> {ticket.dniassistant}
+                                                        </p>
+                                                    </div>
+                                                    <div className={styles.ticketRight}>
+                                                        <p>
+                                                            <strong> {ticket.ticketinfo.type}</strong>
+                                                        </p>
+                                                        {ticket.complements.length > 0 && (
+                                                            <div>
+                                                                <strong>Complementos:</strong>
+                                                                <ul>
+                                                                    {ticket.complements.map((c) => (
+                                                                        <li key={c.idcomplement}>{c.name}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
-                                    </div>
-                                }
-                            >
-                                <div className={styles.content}>
-                                    <div className={styles.ticketList}>
-                                        {order.ticketunits.map((ticket) => (
-                                            <div key={ticket.idticketunit} className={styles.ticketCard}>
-                                                <div className={styles.ticketLeft}>
-                                                    <img
-                                                        src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`${ticket.code}-${ticket.dniassistant}-${ticket.nameassistant}`)}`}
-                                                        alt="Código QR"
-                                                        width="150"
-                                                        height="150"
-                                                        style={{ margin: "10px auto", display: "block" }}
-                                                    />
-                                                    <p className={styles.code}>{ticket.code}</p>
-                                                </div>
-                                                <div className={styles.ticketCenter}>
-                                                    <p>
-                                                        <strong>Nombre:</strong> {ticket.nameassistant}
-                                                    </p>
-                                                    <p>
-                                                        <strong>DNI:</strong> {ticket.dniassistant}
-                                                    </p>
-                                                </div>
-                                                <div className={styles.ticketRight}>
-                                                    <p>
-                                                        <strong> {ticket.ticketinfo.type}</strong>
-                                                    </p>
-                                                    {ticket.complements.length > 0 && (
-                                                        <div>
-                                                            <strong>Complementos:</strong>
-                                                            <ul>
-                                                                {ticket.complements.map((c) => (
-                                                                    <li key={c.idcomplement}>{c.name}</li>
-                                                                ))}
-                                                            </ul>
-                                                        </div>
+
+                                        <Accordion multiple className={styles.sectionAccordion}>
+                                            <AccordionTab header="🧾 PRECIO EN DETALLE">
+                                                <ul>
+                                                    <li>Entradas: {order.subtotaltickets} €</li>
+                                                    <li>Complementos: {order.subtotalcomplements} €</li>
+                                                    <li>Comisiones: {order.subtotalcommissions} €</li>
+                                                </ul>
+                                                <p>
+                                                    <strong>Total: {order.totalprice} €</strong>
+                                                </p>
+                                            </AccordionTab>
+                                        </Accordion>
+
+                                        <Accordion multiple className={styles.sectionAccordion}>
+                                            <AccordionTab header="🎭 ACTIVIDADES">
+                                                <div className={styles.section}>
+                                                    <h4>🗓️ Actividades del Evento</h4>
+                                                    {subevents && subevents.length > 0 ? (
+                                                        <ReadOnlyCalendar subevents={subevents} />
+                                                    ) : (
+                                                        <p>Este evento no tiene actividades programadas.</p>
                                                     )}
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </div>
+                                            </AccordionTab>
+                                        </Accordion>
 
-                                    <Accordion multiple className={styles.sectionAccordion}>
-                                        <AccordionTab header="🧾 PRECIO EN DETALLE">
-                                            <ul>
-                                                <li>Entradas: {order.subtotaltickets} €</li>
-                                                <li>Complementos: {order.subtotalcomplements} €</li>
-                                                <li>Comisiones: {order.subtotalcommissions} €</li>
-                                            </ul>
+                                        <div>
+                                            <h4>📋 Instrucciones</h4>
                                             <p>
-                                                <strong>Total: {order.totalprice} €</strong>
+                                                <span style={{ color: "green", fontWeight: "bold" }}>
+                                                    No es necesario que imprimas nada, solo tienes que mostrar tu ticket Eventeco desde el móvil.
+                                                </span>
                                             </p>
-                                        </AccordionTab>
-                                    </Accordion>
+                                            <p>
+                                                Únicamente podrás validar tu ticket cuando estés con el personal del establecimiento. Una vez
+                                                validado, no podrás volver a utilizarlo sin el complemento de entrada.
+                                            </p>
+                                            <h4>Información: </h4>
+                                            <p>📍 {event.location} - Playa de la Malvarrosa</p> <p>¡Nos vemos pronto!</p>
+                                        </div>
 
-                                    <Accordion multiple className={styles.sectionAccordion}>
-                                        <AccordionTab header="🎭 ACTIVIDADES">
-                                            <div className={styles.section}>
-                                                <h4>🗓️ Actividades del Evento</h4>
-                                                {subevents && subevents.length > 0 ? (
-                                                    <ReadOnlyCalendar subevents={subevents} />
-                                                ) : (
-                                                    <p>Este evento no tiene actividades programadas.</p>
-                                                )}
-                                            </div>
-                                        </AccordionTab>
-                                    </Accordion>
-
-                                    <div>
-                                        <h4>📋 Instrucciones</h4>
-                                        <p>No es necesario que imprimas nada, solo tienes que mostrar tu ticket Eventeco desde el móvil.</p>
-                                        <p>
-                                            Únicamente podrás validar tu ticket cuando estés con el personal del establecimiento. Una vez validado, no
-                                            podrás volver a utilizarlo sin el complemento de entrada.
-                                        </p>
-                                        <h4>Información: </h4>
-                                        <p>📍 {event.location} - Playa de la Malvarrosa</p> <p>¡Nos vemos pronto!</p>
+                                        <EventMap location={event.location} coordinates={coordinates} />
                                     </div>
-
-                                    <EventMap location={event.location} coordinates={coordinates} />
-                                </div>
-                            </AccordionTab>
-                        );
-                    })}
-                </Accordion>
-            )}
+                                </AccordionTab>
+                            );
+                        })}
+                    </Accordion>
+                )}
+            </div>
         </div>
     );
 };

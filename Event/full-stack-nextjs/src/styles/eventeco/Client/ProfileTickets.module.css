@@ -80,3 +80,50 @@
     margin-bottom: 10px;
     color: #2c5042;
 }
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .poster {
+        width: 150px;
+        height: 150px;
+    }
+
+    .content {
+        padding: 10px 0;
+        gap: 20px;
+    }
+
+    .ticketCard {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .ticketLeft,
+    .ticketCenter,
+    .ticketRight {
+        width: 100%;
+        align-items: center;
+    }
+
+    .ticketLeft img {
+        margin: 0 auto;
+    }
+
+    .section {
+        padding: 10px;
+    }
+
+    .section h4 {
+        font-size: 1rem;
+    }
+}
