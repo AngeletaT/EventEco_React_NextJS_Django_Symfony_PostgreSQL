@@ -53,3 +53,7 @@
 .twocolumns {
     grid-column: 1 / span 2;
 }
+
+.privacyCheckbox {
+    grid-column: 1 / span 2;
+}

@@ -8,8 +8,8 @@ import { Elements, CardElement, useStripe, useElements } from "@stripe/react-str
 import { processStripePayment } from "@/services/eventeco/command/order/processPayment";
 import { sendWhatsapp } from "@/services/eventeco/command/tickets/sendNotifications";
 import { loadStripe } from "@stripe/stripe-js";
-import { Button } from "primereact/button";
-import { Toast } from "primereact/toast";
+import { Button, Toast, Checkbox } from "@/utils/PrimeReactComponents";
+import LegalModal from "@/components/shared/LegalModal";
 import styles from "@/styles/eventeco/TicketPurchase.module.css";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
@@ -39,6 +39,17 @@ const PaymentForm: React.FC<{
     const elements = useElements();
     const toast = React.useRef<Toast>(null);
     const [loading, setLoading] = useState(false);
+
+    const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
+    const [acceptedTerms, setAcceptedTerms] = useState(false);
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalType, setModalType] = useState<"privacy" | "terms" | null>(null);
+
+    const openModal = (type: "privacy" | "terms") => {
+        setModalType(type);
+        setShowModal(true);
+    };
 
     const createOrder = useCreateOrder();
     const user = useSelector((state: RootState) => state.user) as any;
@@ -73,7 +84,7 @@ const PaymentForm: React.FC<{
             }
 
             const whatsappBody = { phone: user.user.phonenumber };
-            await sendWhatsapp(whatsappBody);
+            // await sendWhatsapp(whatsappBody);
 
             toast.current?.show({
                 severity: "success",
@@ -144,10 +155,32 @@ const PaymentForm: React.FC<{
                 <CardElement className={styles.cardElement} />
             </div>
 
+            <div className={`field-checkbox ${styles.privacyCheckbox}`}>
+                <Checkbox inputId="privacy" checked={acceptedPrivacy} onChange={(e) => setAcceptedPrivacy(e.checked!)} />
+                <label htmlFor="privacy">
+                    He leído y acepto la{" "}
+                    <a onClick={() => openModal("privacy")} style={{ textDecoration: "underline", cursor: "pointer" }}>
+                        política de privacidad
+                    </a>
+                    .
+                </label>
+            </div>
+
             <div className={styles.navigationButtons}>
                 <Button label="Atrás" icon="pi pi-chevron-left" className="p-button-secondary" onClick={onPrev} disabled={loading} />
                 <Button label="Pagar con Stripe" icon="pi pi-credit-card" className="p-button-primary" onClick={handlePayment} loading={loading} />
             </div>
+
+            {modalType && (
+                <LegalModal
+                    visible={showModal}
+                    type={modalType}
+                    onHide={() => {
+                        setModalType(null);
+                        setShowModal(false);
+                    }}
+                />
+            )}
         </div>
     );
 };

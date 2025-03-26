@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { InputText, InputTextarea, Button, Toast } from "@/utils/PrimeReactComponents";
+import { InputText, InputTextarea, Button, Toast, Checkbox } from "@/utils/PrimeReactComponents";
+import LegalModal from "@/components/shared/LegalModal";
 import styles from "@/styles/eventeco/Contact.module.css";
 
 interface ContactFormProps {
@@ -9,6 +10,17 @@ interface ContactFormProps {
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ selectedPlan }) => {
+    const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
+    const [acceptedTerms, setAcceptedTerms] = useState(false);
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalType, setModalType] = useState<"privacy" | "terms" | null>(null);
+
+    const openModal = (type: "privacy" | "terms") => {
+        setModalType(type);
+        setShowModal(true);
+    };
+
     const [form, setForm] = useState({
         company: "",
         email: "",
@@ -28,6 +40,18 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedPlan }) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!acceptedPrivacy || !acceptedTerms) {
+            if (toastRef.current) {
+                toastRef.current.show({
+                    severity: "warn",
+                    summary: "Aviso",
+                    detail: "Debes aceptar la política de privacidad y los términos y condiciones.",
+                    life: 3000,
+                });
+            }
+            return;
+        }
 
         if (toastRef.current) {
             toastRef.current.show({
@@ -83,7 +107,38 @@ const ContactForm: React.FC<ContactFormProps> = ({ selectedPlan }) => {
                     <InputTextarea id="message" name="message" value={form.message} onChange={handleChange} rows={4} className="w-full" />
                     <label htmlFor="message">Comentarios adicionales</label>
                 </span>
+                <div className={`field-checkbox ${styles.privacyCheckbox}`}>
+                    <Checkbox inputId="privacy" checked={acceptedPrivacy} onChange={(e) => setAcceptedPrivacy(e.checked!)} />
+                    <label htmlFor="privacy">
+                        He leído y acepto la{" "}
+                        <a onClick={() => openModal("privacy")} style={{ textDecoration: "underline", cursor: "pointer" }}>
+                            política de privacidad
+                        </a>
+                        .
+                    </label>
+                </div>
+
+                <div className={`field-checkbox mt-2 ${styles.privacyCheckbox}`}>
+                    <Checkbox inputId="terms" checked={acceptedTerms} onChange={(e) => setAcceptedTerms(e.checked!)} />
+                    <label htmlFor="terms">
+                        Acepto los{" "}
+                        <a onClick={() => openModal("terms")} style={{ textDecoration: "underline", cursor: "pointer" }}>
+                            términos y condiciones
+                        </a>{" "}
+                        de uso de la plataforma.
+                    </label>
+                </div>
                 <Button type="submit" label="Enviar solicitud" className="p-button-success w-full" />
+                {modalType && (
+                    <LegalModal
+                        visible={showModal}
+                        type={modalType}
+                        onHide={() => {
+                            setModalType(null);
+                            setShowModal(false);
+                        }}
+                    />
+                )}
             </form>
         </div>
     );
